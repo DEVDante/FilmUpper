@@ -3,8 +3,9 @@
 
 class FilmUpperController {
 public:
-	FilmUpperController();
-	virtual ~FilmUpperController();
+	FilmUpperController(FilmUpperViewModel* vm);
+	~FilmUpperController();	
 private:
 	FilmUpperViewModel* _viewModel;
+	void startProcess();
 };

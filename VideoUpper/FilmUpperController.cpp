@@ -1,9 +1,13 @@
 #include "FilmUpperController.h"
 
-FilmUpperController::FilmUpperController() {
-	_viewModel = new FilmUpperViewModel();
+FilmUpperController::FilmUpperController(FilmUpperViewModel* vm) {
+	_viewModel = vm;
 }
 
 FilmUpperController::~FilmUpperController() {
-	delete _viewModel;
+	
+}
+
+void FilmUpperController::startProcess()
+{
 }

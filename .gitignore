@@ -32,3 +32,5 @@
 *.app
 
 packages/*
+*/Debug/*
+Debug/*
