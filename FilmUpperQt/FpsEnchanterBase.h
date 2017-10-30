@@ -9,5 +9,5 @@ public:
 		_frameEnchanter = frameEnchanter;
 	}
 
-	virtual Frame ReadNextFrame(){}
+	virtual VideoFrame* ReadNextFrame(){}
 };

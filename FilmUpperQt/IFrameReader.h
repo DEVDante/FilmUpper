@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
-#include "Frame.h"
+#include "VideoFrame.h"
 
 class IFrameReader
 {
 public:
 	IFrameReader(std::string inputFilePath) {}
-	virtual Frame* ReadNextFrame() {}
+	virtual VideoFrame* ReadNextFrame() {}
 	virtual ~IFrameReader() {}
 };

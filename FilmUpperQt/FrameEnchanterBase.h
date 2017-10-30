@@ -11,7 +11,7 @@ public:
 		_inputFrameStream = inputFrameReader;
 	}
 
-	virtual Frame* ReadNextEnchantedFrame() {
+	virtual VideoFrame* ReadNextEnchantedFrame() {
 
 	}
 };

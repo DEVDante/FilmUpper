@@ -5,5 +5,8 @@ FilmUpperView::FilmUpperView(FilmUpperViewModel* viewModel) {
 }
 
 FilmUpperView::~FilmUpperView() {
+}
 
+void FilmUpperView::Show() {
+	_viewModel->StartProcess();
 }
