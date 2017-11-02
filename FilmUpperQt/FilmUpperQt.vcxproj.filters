@@ -44,6 +44,9 @@
     <Filter Include="FpsEnchanters">
       <UniqueIdentifier>{971ff43f-551b-4001-a86c-8ec935cab69e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrameEnchanters\InterpolationEnchanter">
+      <UniqueIdentifier>{65b2a177-e473-456b-939b-5094bafaa95f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,6 +65,9 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="FilmUpperController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InterpolationFrameEnchanter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,5 +110,14 @@
     <ClInclude Include="IFrameReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InterpolationFrameEnchanterHeader.h">
+      <Filter>FrameEnchanters\InterpolationEnchanter</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpolationFrameEnchanter.h">
+      <Filter>FrameEnchanters\InterpolationEnchanter</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

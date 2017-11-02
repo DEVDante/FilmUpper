@@ -7,5 +7,5 @@ class IFrameEnchanterHeader
 public:
 	std::string Name;
 	std::string Description;
-	virtual FrameEnchanterBase* Enchanter(IFrameReader* inputFrameReader);
+	virtual FrameEnchanterBase* Enchanter(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo) {};
 };
