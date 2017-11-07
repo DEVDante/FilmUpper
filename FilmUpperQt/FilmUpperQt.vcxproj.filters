@@ -47,6 +47,9 @@
     <Filter Include="FrameEnchanters\InterpolationEnchanter">
       <UniqueIdentifier>{65b2a177-e473-456b-939b-5094bafaa95f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FpsEnchanters\InterpolationEnchanter">
+      <UniqueIdentifier>{01074f7b-e5cd-49ce-a5ee-175ffc100834}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +71,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InterpolationFrameEnchanter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InterpolationFpsEnchanter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -115,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="InterpolationFrameEnchanter.h">
       <Filter>FrameEnchanters\InterpolationEnchanter</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpolationFpsEnchanterHeader.h">
+      <Filter>FpsEnchanters\InterpolationEnchanter</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpolationFpsEnchanter.h">
+      <Filter>FpsEnchanters\InterpolationEnchanter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

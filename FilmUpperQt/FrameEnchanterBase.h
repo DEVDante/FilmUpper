@@ -18,4 +18,5 @@ public:
 	}
 
 	virtual VideoFrame* ReadNextEnchantedFrame() { return nullptr; };
+	FilmQualityInfo* GetSourceQuality() { return _sourceQualityInfo; };
 };

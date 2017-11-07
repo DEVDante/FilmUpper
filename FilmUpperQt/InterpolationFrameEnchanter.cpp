@@ -36,25 +36,14 @@ VideoFrame * InterpolationFrameEnchanter::ReadNextEnchantedFrame()
 
 			double pixelsVerticalRatio = calculateInterpolationRatio(verticalSourceIndex, nextVerticalIndex);
 
-			QColor* leftSample = getInterpolatedColor(
-				inputFrame->Frame[floor(horizontalSourceIndex)][ceil(verticalSourceIndex)],
-				inputFrame->Frame[floor(horizontalSourceIndex)][ceil(nextVerticalIndex)],
-				pixelsVerticalRatio);
-
-			QColor* rightSample = getInterpolatedColor(
-				inputFrame->Frame[ceil(nextHorizontalIndex)][ceil(verticalSourceIndex)],
-				inputFrame->Frame[ceil(nextHorizontalIndex)][ceil(nextVerticalIndex)],
-				pixelsVerticalRatio);
-
-			QColor* outcomeSample = getInterpolatedColor(
-				leftSample,
-				rightSample,
-				pixelsHorizontalRatio);
-			outputFrame->Frame[horizontalIndex][verticalIndex] = outcomeSample;
-
+			QColor* leftSample = getInterpolatedColor(inputFrame->Frame[floor(horizontalSourceIndex)][ceil(verticalSourceIndex)], inputFrame->Frame[floor(horizontalSourceIndex)][ceil(nextVerticalIndex)], pixelsVerticalRatio);
+			QColor* rightSample = getInterpolatedColor(inputFrame->Frame[ceil(nextHorizontalIndex)][ceil(verticalSourceIndex)],	inputFrame->Frame[ceil(nextHorizontalIndex)][ceil(nextVerticalIndex)], pixelsVerticalRatio);
+			QColor* outcomeSample = getInterpolatedColor(leftSample, rightSample, pixelsHorizontalRatio);
+			
 			delete leftSample;
 			delete rightSample;
 
+			outputFrame->Frame[horizontalIndex][verticalIndex] = outcomeSample;
 			verticalSourceIndex = nextVerticalIndex;
 		}
 
