@@ -19,4 +19,5 @@ public:
 
 	virtual VideoFrame* ReadNextEnchantedFrame() { return nullptr; };
 	FilmQualityInfo* GetSourceQuality() { return _sourceQualityInfo; };
+	virtual bool AreFramesLeft() { return _inputFrameStream->AreFramesLeft(); };
 };

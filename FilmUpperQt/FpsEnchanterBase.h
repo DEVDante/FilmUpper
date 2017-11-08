@@ -14,5 +14,7 @@ public:
 		_sourceQuality = _frameEnchanter->GetSourceQuality();
 	}
 
-	virtual VideoFrame* ReadNextFrame(){}
+	virtual VideoFrame* ReadNextFrame() { return nullptr; };
+
+	virtual bool AreFramesLeft() { return _frameEnchanter->AreFramesLeft(); };
 };

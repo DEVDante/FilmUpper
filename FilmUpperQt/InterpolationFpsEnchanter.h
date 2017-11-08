@@ -1,5 +1,6 @@
 #pragma once
 #include "FpsEnchanterBase.h"
+#include "VideoFrame.h"
 
 class InterpolationFpsEnchanter : public FpsEnchanterBase {
 public:
@@ -8,5 +9,7 @@ public:
 private:
 	VideoFrame* _currentFrame = nullptr;
 	VideoFrame* _nextFrame = nullptr;
-	double currentFrameCooficiency = 0.0f;
+	double _currentFrameCooficiency = 0.0f;
+	double _nextFrameDelta = 0.0f;
+	VideoFrame* InterpolateFrames();
 };

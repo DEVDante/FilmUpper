@@ -10,4 +10,5 @@ public:
 	virtual ~IFrameReader() {};
 	virtual VideoFrame* ReadNextFrame() {};
 	virtual FilmQualityInfo* GetVideoFormatInfo() {};
+	virtual bool AreFramesLeft() { return true; };
 };

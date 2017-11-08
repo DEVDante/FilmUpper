@@ -14,4 +14,11 @@ public:
 	}
 	
 	frameType Frame;
+
+	static QColor* BlendColors(QColor * leftColor, QColor * rightColor, double blendRatio) {
+		int red = (int)(((double)leftColor->red() * blendRatio) + ((double)rightColor->red() * (1 - blendRatio)));
+		int green = (int)(((double)leftColor->green() * blendRatio) + ((double)rightColor->green() * (1 - blendRatio)));
+		int blue = (int)(((double)leftColor->blue() * blendRatio) + ((double)rightColor->blue() * (1 - blendRatio)));
+		return new QColor(red, green, blue);
+	}
 };
