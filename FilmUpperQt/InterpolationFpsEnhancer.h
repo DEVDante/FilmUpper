@@ -1,10 +1,10 @@
 #pragma once
-#include "FpsEnchanterBase.h"
+#include "FpsEnhancerBase.h"
 #include "VideoFrame.h"
 
-class InterpolationFpsEnchanter : public FpsEnchanterBase {
+class InterpolationFpsEnhancer : public FpsEnhancerBase {
 public:
-	InterpolationFpsEnchanter(FrameEnchanterBase* frameEnchanter, FilmQualityInfo* qualityInfo);
+	InterpolationFpsEnhancer(FrameEnhancerBase* frameEnhancer, FilmQualityInfo* qualityInfo);
 	VideoFrame * ReadNextFrame() override;
 private:
 	VideoFrame* _currentFrame = nullptr;

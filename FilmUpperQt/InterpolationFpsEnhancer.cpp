@@ -1,15 +1,15 @@
-#include "InterpolationFpsEnchanter.h"
+#include "InterpolationFpsEnhancer.h"
 
-InterpolationFpsEnchanter::InterpolationFpsEnchanter(FrameEnchanterBase * frameEnchanter, FilmQualityInfo * qualityInfo): FpsEnchanterBase(frameEnchanter, qualityInfo)
+InterpolationFpsEnhancer::InterpolationFpsEnhancer(FrameEnhancerBase * frameEnhancer, FilmQualityInfo * qualityInfo): FpsEnhancerBase(frameEnhancer, qualityInfo)
 {
 	_nextFrameDelta = _targetQuality->FrameRate / _sourceQuality->FrameRate;
 }
 
-VideoFrame* InterpolationFpsEnchanter::ReadNextFrame() {
+VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
 	if (_currentFrame == nullptr)
 	{
-		_currentFrame = _frameEnchanter->ReadNextEnchantedFrame();
-		_nextFrame = _frameEnchanter->ReadNextEnchantedFrame();
+		_currentFrame = _frameEnhancer->ReadNextEnchantedFrame();
+		_nextFrame = _frameEnhancer->ReadNextEnchantedFrame();
 	}
 	
 	
@@ -19,11 +19,11 @@ VideoFrame* InterpolationFpsEnchanter::ReadNextFrame() {
 		_currentFrame = _nextFrame;
 		VideoFrame* tmpFrame = nullptr;
 		while (_currentFrameCooficiency > 1) {
-			if (_frameEnchanter->AreFramesLeft())
+			if (_frameEnhancer->AreFramesLeft())
 			{
 				if (tmpFrame != nullptr)
 					delete tmpFrame;
-				tmpFrame = _frameEnchanter->ReadNextEnchantedFrame();
+				tmpFrame = _frameEnhancer->ReadNextEnchantedFrame();
 			}
 			else
 			{
@@ -39,7 +39,7 @@ VideoFrame* InterpolationFpsEnchanter::ReadNextFrame() {
 	return resultFrame;
 }
 
-VideoFrame * InterpolationFpsEnchanter::InterpolateFrames()
+VideoFrame * InterpolationFpsEnhancer::InterpolateFrames()
 {
 	VideoFrame* resultFrame = new VideoFrame(_targetQuality->FrameSizeX, _targetQuality->FrameSizeY);
 	for (int horizontalIndex = 0; horizontalIndex < _targetQuality->FrameSizeX; ++horizontalIndex) {

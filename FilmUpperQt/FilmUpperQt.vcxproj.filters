@@ -38,17 +38,23 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="FrameEnchanters">
+    <Filter Include="FrameEnhancers">
       <UniqueIdentifier>{d84d319c-c7c2-4976-9a75-ce20562f2118}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FpsEnchanters">
+    <Filter Include="FpsEnhancers">
       <UniqueIdentifier>{971ff43f-551b-4001-a86c-8ec935cab69e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FrameEnchanters\InterpolationEnchanter">
+    <Filter Include="FpsEnhancers\InterpolationEnhancer">
+      <UniqueIdentifier>{01074f7b-e5cd-49ce-a5ee-175ffc100834}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FpsEnhancers\NOPFpsEnhancer">
+      <UniqueIdentifier>{6d9704c4-43f7-4858-b3ce-3fdbd6f326e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameEnhancers\InterpolationEnhancer">
       <UniqueIdentifier>{65b2a177-e473-456b-939b-5094bafaa95f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FpsEnchanters\InterpolationEnchanter">
-      <UniqueIdentifier>{01074f7b-e5cd-49ce-a5ee-175ffc100834}</UniqueIdentifier>
+    <Filter Include="FrameEnhancers\NOPFrameEnhancer">
+      <UniqueIdentifier>{d198c58c-95c8-4d61-a23b-ee8d53a1a05c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,10 +76,10 @@
     <ClCompile Include="FilmUpperController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InterpolationFrameEnchanter.cpp">
+    <ClCompile Include="InterpolationFpsEnhancer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InterpolationFpsEnchanter.cpp">
+    <ClCompile Include="InterpolationFrameEnhancer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,15 +98,6 @@
     <ClInclude Include="GeneratedFiles\ui_FilmUpperQt.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="IFrameEnchanterHeader.h">
-      <Filter>FrameEnchanters</Filter>
-    </ClInclude>
-    <ClInclude Include="FpsEnchanterBase.h">
-      <Filter>FpsEnchanters</Filter>
-    </ClInclude>
-    <ClInclude Include="IFpsEnchanterHeader.h">
-      <Filter>FpsEnchanters</Filter>
-    </ClInclude>
     <ClInclude Include="FilmUpperController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -110,23 +107,44 @@
     <ClInclude Include="VideoFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FrameEnchanterBase.h">
-      <Filter>FrameEnchanters</Filter>
-    </ClInclude>
     <ClInclude Include="IFrameReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InterpolationFrameEnchanterHeader.h">
-      <Filter>FrameEnchanters\InterpolationEnchanter</Filter>
+    <ClInclude Include="InterpolationFpsEnhancer.h">
+      <Filter>FpsEnhancers\InterpolationEnhancer</Filter>
     </ClInclude>
-    <ClInclude Include="InterpolationFrameEnchanter.h">
-      <Filter>FrameEnchanters\InterpolationEnchanter</Filter>
+    <ClInclude Include="InterpolationFpsEnhancerHeader.h">
+      <Filter>FpsEnhancers\InterpolationEnhancer</Filter>
     </ClInclude>
-    <ClInclude Include="InterpolationFpsEnchanterHeader.h">
-      <Filter>FpsEnchanters\InterpolationEnchanter</Filter>
+    <ClInclude Include="NOPFpsEnhancerHeader.h">
+      <Filter>FpsEnhancers\NOPFpsEnhancer</Filter>
     </ClInclude>
-    <ClInclude Include="InterpolationFpsEnchanter.h">
-      <Filter>FpsEnchanters\InterpolationEnchanter</Filter>
+    <ClInclude Include="FpsEnhancerBase.h">
+      <Filter>FpsEnhancers</Filter>
+    </ClInclude>
+    <ClInclude Include="IFpsEnhancerHeader.h">
+      <Filter>FpsEnhancers</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpolationFrameEnhancerHeader.h">
+      <Filter>FrameEnhancers\InterpolationEnhancer</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpolationFrameEnhancer.h">
+      <Filter>FrameEnhancers\InterpolationEnhancer</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameEnhancerBase.h">
+      <Filter>FrameEnhancers</Filter>
+    </ClInclude>
+    <ClInclude Include="IFrameEnhancerHeader.h">
+      <Filter>FrameEnhancers</Filter>
+    </ClInclude>
+    <ClInclude Include="NOPFrameEnhancerHeader.h">
+      <Filter>FrameEnhancers\NOPFrameEnhancer</Filter>
+    </ClInclude>
+    <ClInclude Include="NOPFrameEnhancer.h">
+      <Filter>FrameEnhancers\NOPFrameEnhancer</Filter>
+    </ClInclude>
+    <ClInclude Include="NOPFpsEnhancer.h">
+      <Filter>FpsEnhancers\NOPFpsEnhancer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,14 +1,14 @@
-#include "InterpolationFrameEnchanter.h"
+#include "InterpolationFrameEnhancer.h"
 #include <cmath>
 
-InterpolationFrameEnchanter::InterpolationFrameEnchanter(IFrameReader * inputFrameReader, FilmQualityInfo * targetQualityInfo)
-	: FrameEnchanterBase(inputFrameReader, targetQualityInfo)
+InterpolationFrameEnhancer::InterpolationFrameEnhancer(IFrameReader * inputFrameReader, FilmQualityInfo * targetQualityInfo)
+	: FrameEnhancerBase(inputFrameReader, targetQualityInfo)
 {
 	_verticalStepBetweenPixels = ((float)_sourceQualityInfo->FrameSizeY)/((float)targetQualityInfo->FrameSizeY);
 	_horizontalStepBetweenPixels = ((float)_sourceQualityInfo->FrameSizeX) / ((float)targetQualityInfo->FrameSizeX);
 }
 
-VideoFrame * InterpolationFrameEnchanter::ReadNextEnchantedFrame()
+VideoFrame * InterpolationFrameEnhancer::ReadNextEnchantedFrame()
 {
 	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->FrameSizeX, _targetQualityInfo->FrameSizeY);
 	VideoFrame* inputFrame = _inputFrameStream->ReadNextFrame();
@@ -53,12 +53,12 @@ VideoFrame * InterpolationFrameEnchanter::ReadNextEnchantedFrame()
 	return outputFrame;
 }
 
-bool InterpolationFrameEnchanter::AreFramesLeft()
+bool InterpolationFrameEnhancer::AreFramesLeft()
 {
 	return _inputFrameStream->AreFramesLeft();
 }
 
-double InterpolationFrameEnchanter::calculateInterpolationRatio(double leftValue, double rightValue)
+double InterpolationFrameEnhancer::calculateInterpolationRatio(double leftValue, double rightValue)
 {
 	return ((((leftValue + rightValue) / 2.0) - floor(leftValue))//Center of actual points
 		/ (((floor(leftValue) + ceil(rightValue)) / 2.0) - floor(leftValue))) // Center of point between indexes

@@ -82,8 +82,8 @@
     <ClCompile Include="GeneratedFiles\Release\moc_FilmUpperQt.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="InterpolationFpsEnchanter.cpp" />
-    <ClCompile Include="InterpolationFrameEnchanter.cpp" />
+    <ClCompile Include="InterpolationFpsEnhancer.cpp" />
+    <ClCompile Include="InterpolationFrameEnhancer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -113,16 +113,20 @@
   <ItemGroup>
     <ClInclude Include="FilmQualityInfo.h" />
     <ClInclude Include="FilmUpperController.h" />
-    <ClInclude Include="FpsEnchanterBase.h" />
-    <ClInclude Include="FrameEnchanterBase.h" />
-    <ClInclude Include="InterpolationFpsEnchanter.h" />
-    <ClInclude Include="InterpolationFpsEnchanterHeader.h" />
-    <ClInclude Include="InterpolationFrameEnchanter.h" />
-    <ClInclude Include="InterpolationFrameEnchanterHeader.h" />
+    <ClInclude Include="FpsEnhancerBase.h" />
+    <ClInclude Include="FrameEnhancerBase.h" />
+    <ClInclude Include="InterpolationFpsEnhancer.h" />
+    <ClInclude Include="InterpolationFpsEnhancerHeader.h" />
+    <ClInclude Include="InterpolationFrameEnhancer.h" />
+    <ClInclude Include="InterpolationFrameEnhancerHeader.h" />
+    <ClInclude Include="NOPFpsEnhancer.h" />
+    <ClInclude Include="NOPFpsEnhancerHeader.h" />
+    <ClInclude Include="NOPFrameEnhancerHeader.h" />
+    <ClInclude Include="NOPFrameEnhancer.h" />
     <ClInclude Include="VideoFrame.h" />
     <ClInclude Include="GeneratedFiles\ui_FilmUpperQt.h" />
-    <ClInclude Include="IFpsEnchanterHeader.h" />
-    <ClInclude Include="IFrameEnchanterHeader.h" />
+    <ClInclude Include="IFpsEnhancerHeader.h" />
+    <ClInclude Include="IFrameEnhancerHeader.h" />
     <ClInclude Include="IFrameReader.h" />
   </ItemGroup>
   <ItemGroup>

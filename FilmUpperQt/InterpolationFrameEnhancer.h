@@ -1,11 +1,11 @@
 #pragma once
-#include "FrameEnchanterBase.h"
+#include "FrameEnhancerBase.h"
 #include "FilmQualityInfo.h"
 #include "VideoFrame.h"
 
-class InterpolationFrameEnchanter: public FrameEnchanterBase {
+class InterpolationFrameEnhancer: public FrameEnhancerBase {
 public:
-	InterpolationFrameEnchanter(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo);
+	InterpolationFrameEnhancer(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo);
 	VideoFrame * ReadNextEnchantedFrame() override;
 	bool AreFramesLeft() override;
 private:

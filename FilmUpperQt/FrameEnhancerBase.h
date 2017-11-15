@@ -2,7 +2,7 @@
 #include "IFrameReader.h"
 #include "FilmQualityInfo.h"
 
-class FrameEnchanterBase
+class FrameEnhancerBase
 {
 protected:
 	IFrameReader* _inputFrameStream;
@@ -11,7 +11,7 @@ protected:
 
 
 public:
-	FrameEnchanterBase(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo) {
+	FrameEnhancerBase(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo) {
 		_inputFrameStream = inputFrameReader;
 		_targetQualityInfo = targetQualityInfo;
 		_sourceQualityInfo = _inputFrameStream->GetVideoFormatInfo();
