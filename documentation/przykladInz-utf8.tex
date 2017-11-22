@@ -13,7 +13,7 @@
 %% każdy autor musi mieć 4 argumenty: imię nazwisko, nr albumu, procent wkładu, opis wkładu
 \autor{Kamil Rutkowski}{112233}{50} {Struktura aplikacji, Algorytmika}
 	
-\autor{Malwina Borecka-Xsinska}{112233}{50}	{Kodowanie i dekodowanie plików, Interfejs użytkownika, Algorytmika}
+\autor{Jakub Rup}{112233}{50}	{Kodowanie i dekodowanie plików, Interfejs użytkownika, Algorytmika}
 
 	
 	
@@ -43,28 +43,28 @@
 \begin{document}
 
 
-FilmUpper jest aplikacją pozwalającą na poprawianie jakości obrazu w filmie, poprzez zwiększanie rozdzielczości oraz zwiększanie ilości klatek na sekundę w nim występójących. Dzięki takim zabiegom jakość oglądanego przez nas obrazu znacząco się poprawia, jednakże nigdy nie będzie ona tak dobra, jak jakość obrazu nagrywanego z ustawieniami na które chcemy dany film przekonwertować. 
+FilmUpper jest aplikacją pozwalającą na poprawianie jakości obrazu w filmie, poprzez zwiększanie rozdzielczości oraz zwiększanie ilości klatek na sekundę w nim występujących. Dzięki takim zabiegom jakość oglądanego przez nas obrazu znacząco się poprawia, jednakże nigdy nie będzie ona tak dobra, jak jakość obrazu nagrywanego z ustawieniami na które chcemy dany film skonwertować. 
 
 
 
 \section{Technologia}
 
 
-Przetwarzanie plików filmowych nawet w trywialny sposób jest zadaniem bardzo wymagającym wydajnościowo, dlatego wybór technologii miał kluczowe znaczenie dla wydajności całej aplikacji. Musieliśmy rozwarzyć wiele czynników które mogłyby wpłynąć na działanie programu oraz na sposób napisania go.
+Przetwarzanie plików filmowych nawet w trywialny sposób jest zadaniem bardzo wymagającym wydajnościowo, dlatego wybór technologii miał kluczowe znaczenie dla wydajności całej aplikacji. Musieliśmy rozważyć wiele czynników które mogłyby wpłynąć na działanie programu oraz na sposób napisania go.
 
 
 \subsection{Język programowania}
 
-Wybór języka programowania był dla nas kluczowy, ze względu na to, że znacząco wpływa na prędkość działania programu, dostępne narzędzia i biblioteki. Znajomość danego języka także była dla nas jednym z kluczowych czynników przy jego wyborze. Naszym rozwarzaniom poddaliśmy następujące języki programowania.
+Wybór języka programowania był dla nas kluczowy, ze względu na to, że znacząco wpływa na prędkość działania programu, dostępne narzędzia i biblioteki. Znajomość danego języka także była dla nas jednym z kluczowych czynników przy jego wyborze. Naszym rozważaniom poddaliśmy następujące języki programowania.
 
 \subsubsection{C++}
 Język C++ jest jednym z najczęściej używanych języków niskopoziomowych. Jego popularność jest skutkiem bardzo długiego czasu na rynku oraz pewnej prostoty użycia. Kolejne wersje tego wciąż rozwijanego języka dodają nowe, sprawdzone i ułatwiające tworzenie programów rozwiązania z innych języków programowania. Bardzo duża wydajność oraz mnogość dostępnych bibliotek związanych z dekodowaniem i enkodowaniem plików filmowych jest bardzo ważnym aspektem tego wyboru. Wybór ten wiązałby się także z kilkoma negatywnymi cechami tego języka, wymóg ręcznego zarządzania pamięcią, mało przejrzysta składnia przy tworzeniu rozwiązań o dużym stopniu skomplikowania oraz brak ułatwień które poznaliśmy w językach wysokopoziomowych są jednymi z nich. Biorąc pod uwagę naszą stosunkowo długą pracę z tym językiem oraz wszystkie za i przeciw oceniliśmy, że będzie on najlepszym wyborem.
 
 \subsubsection{C\#}
-Wysokopoziomowe rozwinięcie języka z rodziny C. Mimo posiadania składni podobnej do C++, język ten porzuca wiele z nieprzyjemnych jego aspektów. Poprzez automatyczne zarządzanie pamięcią, usunięcię składni charakterystycznej dla wskaźników oraz dodanie wielu nowych mechanizmów, wygląd kodu oraz prędkość tworzenia programów znacząco wzrasta. Bardzo ważnym składnikiem C\# jest także LINQ które umożliwia bardzo kompaktowe i przejrzyste działanie na kolekcjach co jest dużym plusem przy przetwarzaniu plików wideo, jako że są one kolekcjami pojedyńczych klatek złożonych z kolekcji pikseli. Wszystkie z tych udogodnień mają jednak cenę w postaci mniejszej wydajności w stosunku do C++ oraz brak wystarczającego wsparcia dla zarządzania plikami wideo jako że język ten jest stworzony z myślą o szybkim tworzeniu aplikacji biurowych. Niestety, brak bibliotek dedykowanych obróbce plików wideo w wymaganym przez nas stopniu był głównym powodem, dla którego nie wybraliśmy tego języka.
+Wysokopoziomowe rozwinięcie języka z rodziny C. Mimo posiadania składni podobnej do C++, język ten porzuca wiele z nieprzyjemnych jego aspektów. Poprzez automatyczne zarządzanie pamięcią, usunięcie składni charakterystycznej dla wskaźników oraz dodanie wielu nowych mechanizmów, wygląd kodu oraz prędkość tworzenia programów znacząco wzrasta. Bardzo ważnym składnikiem C\# jest także LINQ które umożliwia bardzo kompaktowe i przejrzyste działanie na kolekcjach co jest dużym plusem przy przetwarzaniu plików wideo, jako że są one kolekcjami pojedynczych klatek złożonych z kolekcji pikseli. Wszystkie z tych udogodnień mają jednak cenę w postaci mniejszej wydajności w stosunku do C++ oraz brak wystarczającego wsparcia dla zarządzania plikami wideo jako że język ten jest stworzony z myślą o szybkim tworzeniu aplikacji biurowych. Niestety, brak bibliotek dedykowanych obróbce plików wideo w wymaganym przez nas stopniu był głównym powodem, dla którego nie wybraliśmy tego języka.
 
 \subsubsection{Rust}
-Prędkość działania porównywalna z językiem C++, duże bezpieczeństwo pod względem zarządzania pamięcia, łatwość w konwersji programu jednowątkowego na wielowątkowy, składnia języka oraz wiele udogodnień zaciągniętych z języków wysokiego poziomu. To jedne z wielu punktów które zachęcały do wyboru tego języka. Niestety, brak lub wczesna wersja bibliotek które byłyby niezbędne przy tym projekcie oraz niewielkie doświadczenie z tym językiem sprawiły, że musieliśmy porzucić pomysł użycia go.
+Prędkość działania porównywalna z językiem C++, duże bezpieczeństwo pod względem zarządzania pamięcią, łatwość w konwersji programu jednowątkowego na wielowątkowy, składnia języka oraz wiele udogodnień zaciągniętych z języków wysokiego poziomu. To jedne z wielu punktów które zachęcały do wyboru tego języka. Niestety, brak lub wczesna wersja bibliotek które byłyby niezbędne przy tym projekcie oraz niewielkie doświadczenie z tym językiem sprawiły, że musieliśmy porzucić pomysł użycia go.
 
 
 \subsection{Dekodowanie oraz enkodowanie filmów}
@@ -73,6 +73,62 @@ Prędkość działania porównywalna z językiem C++, duże bezpieczeństwo pod 
 
 %% UWaga na \newlineTekst oraz \newlineSpis. Można też użyć \newline, działa jak %%\newlineSpis\newlineTekst
 \section{Struktura programu}
+
+Struktura w jakiej organizowalibyśmy kod programu jest bardzo istotnym zagadnieniem z punktu widzenia przejrzystości systemu oraz ergonomii pracy z nim. Chcieliśmy zachować także możliwość łatwej rozbudowy funkcjonalności polegającej na dodawaniu nowych algorytmów które mogłyby z łatwością przetwarzać obraz wideo. Struktura naszego programu dzieli się na 2 główne części: część odpowiadającą za komunikację z użytkownikiem oraz wybór odpowiednich algorytmów, oraz część polegającą na przetwarzaniu pliku wideo przez wybrane przez użytkownika algorytmy.
+
+\subsection{Komunikacja z użytkownikiem}
+Komunikacja z użytkownikiem odbywa się przy pomocy klas FilmUpperView (dalej View) i FilmUpperController (dalej controller). Początkowo chcieliśmy  stworzyć infrastrukturę MVVM oraz oprzeć interfejs użytkownika na rozwiązaniach reaktywnych. Mimo, że głównym celem systemów reaktywnych jest asynchroniczne zarządzanie zdarzeniami poprzez stosowanie strumieni zamiast tradycyjnego podejścia do danych, to reaktywne podejście do zdarzeń bardzo upraszcza ich obsługę oraz jest bardzo przejrzyste pod względem przepływu sterowania. Niestety z uwagi na to, ze rozwiązania te stosowaliśmy tylko w aplikacjach opartych na języku C\#, nie byliśmy zaznajomieni z tą technologią w językach niższego poziomu. Nasza aplikacja nie jest także na tyle rozbudowana pod względem złożoności możliwych stanów ani jej elementy nie reagują w sposób znaczny na zmiany które użytkownik wykonuje w interfejsie, więc uznaliśmy, że przy ograniczonym czasie, lepiej będzie wykorzystać prostszy model. Komunikacja między użytkownikiem a programem odbywa się pomiędzy klasami View a Controller. W klasie View zarządzamy interfejsem użytkownika, wyświetlamy możliwe do wyboru algorytmy i przekazujemy jego decyzje do Controllera. W klasie Controller następuje ustalenie jakie algorytmy są dostępne do wykorzystania przez użytkownika, obsługiwany jest proces ulepszania jakości obrazu oraz zapisywania wyniku tej operacji. Obecnie algorytmy które są dostępne do wykorzystania są wpisane na stałe w kodzie programu, przez co aby dodać kolejny algorytm należy go dopisać do odpowiedniego wektora algorytmów. Jedną z możliwych i podstawowych opcji, które rozważaliśmy do rozbudowy funkcjonalności programu jest możliwość automatycznego dodawania dostępnych algorytmów poprzez walidację zawartości odpowiednich folderów. Umożliwiało by to rozbudowę funkcjonalności programu przez społeczność go używającą, a mianowicie poprzez tworzenie bibliotek dynamicznych o odpowiedniej budowie (opartej o odpowiednie klasy bazowe) i ich automatyczne wczytywanie przy starcie programu. Dało by to bardzo dużą możliwość rozbudowy bazowej funkcjonalności, jednakże w obecnej fazie, funkcjonalność ta nie jest uważana przez nas za podstawową.
+
+\subsection{Organizacja algorytmów i sposobu przekształcania plików wideo}
+W naszym projekcie z założenia stosujemy 2 typy algorytmów. Są to algorytmy:
+\begin{itemize}
+\item wpływające na jakość pojedynczej klatki wideo
+\item wpływające na ilość klatek wideo na sekundę
+\end{itemize}
+
+Algorytmy te korzystają z klas które przechowują ważne informacje odnośnie przetwarzanego wideo. Klasami tymi są klasy VideoFrame oraz FilmQualityInfo. 
+
+Klasa VideoFrame przechowuje informację na temat pojedynczej klatki wideo.  
+
+Przy ich użyciu oraz przy użyciu klas bazowych IFrameReader i IFrameWriter (i stworzonych na ich podstawie implementacjach) przetwarzamy plik wideo w następujący sposób:
+\begin{enumerate}
+\item IFrameReader czyta kolejne klatki z pliku wejściowego
+\item FrameEnhancerBase przetwarza przeczytane klatki, zwiększając ich rozdzielczość zgodnie z zastosowanym algorytmem
+\item FpsEnhancerBase przetwarza ulepszone przez FrameEnhancerBase klatki, tworząc nowe klatki zgodnie z wybranym algorytmem
+\item IFrameWriter zapisuje otrzymane przez FpsEnhancerBase klatki
+\end{enumerate}
+
+\subsubsection{IFrameReader - odczytywanie informacji z pliku wideo}
+Ta klasa bazowa ma za zadanie odczytywać informację odnośnie klatek wideo oraz dźwięku. Utworzyliśmy ją jako klasę bazową ze względu na dwa aspekty:
+\begin{enumerate}
+\item możliwość stworzenia klasy testowej o ustalonych właściwościach - daje to bardzo dużą swobodę w prowadzeniu testów, bez względu na stan pracy nad właściwą implementacją
+\item umożliwia stosunkowo bezbolesną zmianę biblioteki dekodującej pliki wideo bez zmiany sposobu korzystania z niej, daje nam to też swobodę na przyszłość, jeśli chcielibyśmy porównać działanie 2 różnych bibliotek umożliwiających odczyt plików wideo.
+\end{enumerate}
+Możliwości jakie oferuje ta klasa bazowa są następujące:
+\begin{verbatim}
+class IFrameReader
+{
+public:
+    virtual VideoFrame* ReadNextFrame() {};
+    virtual FilmQualityInfo* GetVideoFormatInfo() {};
+    virtual bool AreFramesLeft() { return true; };
+};
+\end{verbatim}
+Dzięki tej klasie bazowej, klasy dziedziczące po niej implementują funkcjonalność taką jak:
+\begin{verbatim}
+virtual VideoFrame* ReadNextFrame() {};
+\end{verbatim}
+Dzięki tej metodzie otrzymujemy możliwość odczytania następnej klatki razem z odpowiadającymi jej próbkami dźwiękowymi.
+\begin{verbatim}
+FilmQualityInfo* GetVideoFormatInfo() {};
+\end{verbatim}
+Metoda ta informuje odnośnie formatu danych przechowywanych w pliku wideo. 
+\begin{verbatim}
+bool AreFramesLeft() { return true; };
+\end{verbatim}
+Metoda ta informuje, czy pozostały jeszcze klatki do odczytu.
+
+
 
 \section{Algorytmy}
 

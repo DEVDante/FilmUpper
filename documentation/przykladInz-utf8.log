@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.7)  7 NOV 2017 16:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.7)  22 NOV 2017 13:21
 entering extended mode
 **./przykladInz-utf8.tex
 (przykladInz-utf8.tex
@@ -556,36 +556,51 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \tf@toc=\write3
 \openout3 = `przykladInz-utf8.toc'.
 
- [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15]
-[16]
-LaTeX Font Info:    Try loading font information for OT4+lmtt on input line 95.
+ [5] [6] [7] [8] [9] [10] [11]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 85.
 
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omslmr.fd"
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 85.
+
+Overfull \hbox (0.18396pt too wide) in paragraph at lines 92--93
+[]\OT1/lmr/m/n/12 FpsEnhancerBase prze-twa-rza ulep-szo-ne przez Fra-me-En-han-
+cer-Ba-se klat-ki, two-
+ []
+
+[12]
+LaTeX Font Info:    Try loading font information for OT4+lmtt on input line 103
+.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\ot4lmtt.fd"
 File: ot4lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [17] [18] [19]
-(przykladInz-utf8.aux) ) 
+) [13] [14] [15]
+[16] [17] [18] [19] [20] [21] (przykladInz-utf8.aux) ) 
 Here is how much of TeX's memory you used:
- 1718 strings out of 493323
- 20058 string characters out of 3139066
- 80107 words of memory out of 3000000
- 5253 multiletter control sequences out of 15000+200000
+ 1735 strings out of 493323
+ 20342 string characters out of 3139066
+ 82107 words of memory out of 3000000
+ 5267 multiletter control sequences out of 15000+200000
  68628 words of font info for 44 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,12n,24p,1066b,249s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rmtt
-.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}<C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/lm/lmbxi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/l
-m/lmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmro12.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmss17.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/lm/lmtt12.pfb>
-Output written on przykladInz-utf8.pdf (23 pages, 279047 bytes).
+ 27i,12n,24p,2329b,249s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 
+2.9/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips
+/lm/lm-mathsy.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}<C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/lm/lmbxi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr
+17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+lm/lmro12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmss17.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/lm/lmtt12.pfb>
+Output written on przykladInz-utf8.pdf (25 pages, 291748 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
+ 134 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
