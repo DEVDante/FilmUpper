@@ -6,7 +6,7 @@
 class IFrameReader
 {
 public:
-	virtual VideoFrame* ReadNextFrame() {};
-	virtual FilmQualityInfo* GetVideoFormatInfo() {};
+	virtual VideoFrame* ReadNextFrame() { return new VideoFrame(1, 1); };
+	virtual FilmQualityInfo* GetVideoFormatInfo() { return new FilmQualityInfo(); };
 	virtual bool AreFramesLeft() { return true; };
 };

@@ -4,8 +4,8 @@
 InterpolationFrameEnhancer::InterpolationFrameEnhancer(IFrameReader * inputFrameReader, FilmQualityInfo * targetQualityInfo)
 	: FrameEnhancerBase(inputFrameReader, targetQualityInfo)
 {
-	_verticalStepBetweenPixels = ((float)_sourceQualityInfo->FrameSizeY)/((float)targetQualityInfo->FrameSizeY);
-	_horizontalStepBetweenPixels = ((float)_sourceQualityInfo->FrameSizeX) / ((float)targetQualityInfo->FrameSizeX);
+	_verticalStepBetweenPixels = ((double)_sourceQualityInfo->FrameSizeY)/((double)targetQualityInfo->FrameSizeY);
+	_horizontalStepBetweenPixels = ((double)_sourceQualityInfo->FrameSizeX) / ((double)targetQualityInfo->FrameSizeX);
 }
 
 VideoFrame * InterpolationFrameEnhancer::ReadNextEnchantedFrame()
@@ -25,7 +25,7 @@ VideoFrame * InterpolationFrameEnhancer::ReadNextEnchantedFrame()
 
 		double pixelsHorizontalRatio = calculateInterpolationRatio(horizontalSourceIndex, nextHorizontalIndex);
 
-		for (int verticalIndex = 0; horizontalIndex < _targetQualityInfo->FrameSizeX; ++verticalIndex)
+		for (int verticalIndex = 0; verticalIndex < _targetQualityInfo->FrameSizeX; ++verticalIndex)
 		{
 			double nextVerticalIndex = verticalSourceIndex;
 
@@ -36,8 +36,10 @@ VideoFrame * InterpolationFrameEnhancer::ReadNextEnchantedFrame()
 
 			double pixelsVerticalRatio = calculateInterpolationRatio(verticalSourceIndex, nextVerticalIndex);
 
-			QColor* leftSample = VideoFrame::BlendColors(inputFrame->Frame[floor(horizontalSourceIndex)][ceil(verticalSourceIndex)], inputFrame->Frame[floor(horizontalSourceIndex)][ceil(nextVerticalIndex)], pixelsVerticalRatio);
-			QColor* rightSample = VideoFrame::BlendColors(inputFrame->Frame[ceil(nextHorizontalIndex)][ceil(verticalSourceIndex)],	inputFrame->Frame[ceil(nextHorizontalIndex)][ceil(nextVerticalIndex)], pixelsVerticalRatio);
+			auto inFrame = inputFrame->Frame;
+
+			QColor* leftSample = VideoFrame::BlendColors(inFrame[floor(horizontalSourceIndex)][ceil(verticalSourceIndex)], inFrame[floor(horizontalSourceIndex)][ceil(nextVerticalIndex)], pixelsVerticalRatio);
+			QColor* rightSample = VideoFrame::BlendColors(inFrame[ceil(nextHorizontalIndex)][ceil(verticalSourceIndex)], inFrame[ceil(nextHorizontalIndex)][ceil(nextVerticalIndex)], pixelsVerticalRatio);
 			QColor* outcomeSample = VideoFrame::BlendColors(leftSample, rightSample, pixelsHorizontalRatio);
 			
 			delete leftSample;

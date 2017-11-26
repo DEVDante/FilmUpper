@@ -56,6 +56,9 @@
     <Filter Include="FrameEnhancers\NOPFrameEnhancer">
       <UniqueIdentifier>{d198c58c-95c8-4d61-a23b-ee8d53a1a05c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrameReaders">
+      <UniqueIdentifier>{604e12a6-ba0d-4036-b6a8-2491b637e0cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="NOPFpsEnhancer.h">
       <Filter>FpsEnhancers\NOPFpsEnhancer</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantTestFrameReader.h">
+      <Filter>FrameReaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

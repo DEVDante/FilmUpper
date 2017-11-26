@@ -111,6 +111,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConstantTestFrameReader.h" />
     <ClInclude Include="FilmQualityInfo.h" />
     <ClInclude Include="FilmUpperController.h" />
     <ClInclude Include="FpsEnhancerBase.h" />

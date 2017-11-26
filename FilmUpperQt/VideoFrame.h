@@ -7,7 +7,8 @@ typedef boost::multi_array<QColor*, 2> frameType;
 class VideoFrame {
 public:
 	VideoFrame(int sizeX, int sizeY) {
-		Frame = frameType(boost::extents[sizeX][sizeY]);
+		frameType::extent_gen ext;
+		Frame.resize(ext[sizeX][sizeY]);
 	}
 
 	~VideoFrame() {
