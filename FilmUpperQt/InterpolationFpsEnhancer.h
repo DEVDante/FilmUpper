@@ -11,5 +11,5 @@ private:
 	VideoFrame* _nextFrame = nullptr;
 	double _currentFrameCooficiency = 0.0f;
 	double _nextFrameDelta = 0.0f;
-	VideoFrame* InterpolateFrames();
+	VideoFrame* InterpolateFrames() const;
 };

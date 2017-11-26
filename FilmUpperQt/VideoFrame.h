@@ -20,6 +20,8 @@ public:
 		int red = (int)(((double)leftColor->red() * blendRatio) + ((double)rightColor->red() * (1 - blendRatio)));
 		int green = (int)(((double)leftColor->green() * blendRatio) + ((double)rightColor->green() * (1 - blendRatio)));
 		int blue = (int)(((double)leftColor->blue() * blendRatio) + ((double)rightColor->blue() * (1 - blendRatio)));
+		if ((red > 255) || (green > 255) || (blue > 255))
+			auto fail = 0;
 		return new QColor(red, green, blue);
 	}
 };

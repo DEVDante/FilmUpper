@@ -45,7 +45,7 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xutility(2372): w
           [
               T=QColor *
           ]
-  InterpolationFrameEnhancer.cpp(39): note: see reference to class template instantiation 'boost::detail::multi_array::multi_array_view<T,2>' being compiled
+  InterpolationFrameEnhancer.cpp(25): note: see reference to class template instantiation 'boost::detail::multi_array::multi_array_view<T,2>' being compiled
           with
           [
               T=QColor *

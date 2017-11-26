@@ -12,44 +12,28 @@ VideoFrame * InterpolationFrameEnhancer::ReadNextEnchantedFrame()
 {
 	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->FrameSizeX, _targetQualityInfo->FrameSizeY);
 	VideoFrame* inputFrame = _inputFrameStream->ReadNextFrame();
-	double horizontalSourceIndex = 0.0f;
+
 	for (int horizontalIndex = 0; horizontalIndex < _targetQualityInfo->FrameSizeX; ++horizontalIndex)
 	{
-		double verticalSourceIndex = 0.0f;
-
-		double nextHorizontalIndex = horizontalSourceIndex;
-		if ((horizontalSourceIndex + _horizontalStepBetweenPixels) >(_sourceQualityInfo->FrameSizeX - 1))
-			nextHorizontalIndex = _sourceQualityInfo->FrameSizeX - 1;
-		else
-			nextHorizontalIndex += _horizontalStepBetweenPixels;
-
-		double pixelsHorizontalRatio = calculateInterpolationRatio(horizontalSourceIndex, nextHorizontalIndex);
-
-		for (int verticalIndex = 0; verticalIndex < _targetQualityInfo->FrameSizeX; ++verticalIndex)
+		auto horizontalOriginPosition = static_cast<double>(horizontalIndex * (_sourceQualityInfo->FrameSizeX) ) / (_targetQualityInfo->FrameSizeX);
+		int horizontalOriginCelling = ceil(horizontalOriginPosition) > (_sourceQualityInfo->FrameSizeX - 1) ? _sourceQualityInfo->FrameSizeX - 1 : ceil(horizontalOriginPosition);
+		for (int verticalIndex = 0; verticalIndex < _targetQualityInfo->FrameSizeY; ++verticalIndex)
 		{
-			double nextVerticalIndex = verticalSourceIndex;
+			auto verticalOriginPosition = static_cast<double>(verticalIndex * (_sourceQualityInfo->FrameSizeY) ) / (_targetQualityInfo->FrameSizeY);
+			int verticalOriginCelling = ceil(verticalOriginPosition) >(_sourceQualityInfo->FrameSizeY - 1) ? _sourceQualityInfo->FrameSizeY - 1 : ceil(verticalOriginPosition);
 
-			if ((verticalSourceIndex + _verticalStepBetweenPixels) > (_sourceQualityInfo->FrameSizeY - 1))
-				nextVerticalIndex = _sourceQualityInfo->FrameSizeY - 1;
-			else
-				nextVerticalIndex += _verticalStepBetweenPixels;
+			auto frame = inputFrame->Frame;
+			QColor* leftSample = VideoFrame::BlendColors(frame[floor(horizontalOriginPosition)][floor(verticalOriginPosition)], frame[floor(horizontalOriginPosition)][verticalOriginCelling], fmod(verticalOriginPosition, 1));
+			QColor* rightSample = VideoFrame::BlendColors(frame[horizontalOriginCelling][floor(verticalOriginPosition)], frame[horizontalOriginCelling][verticalOriginCelling], fmod(verticalOriginPosition, 1));
 
-			double pixelsVerticalRatio = calculateInterpolationRatio(verticalSourceIndex, nextVerticalIndex);
+			QColor* finalSample = VideoFrame::BlendColors(leftSample, rightSample, fmod(horizontalOriginPosition, 1));
 
-			auto inFrame = inputFrame->Frame;
-
-			QColor* leftSample = VideoFrame::BlendColors(inFrame[floor(horizontalSourceIndex)][ceil(verticalSourceIndex)], inFrame[floor(horizontalSourceIndex)][ceil(nextVerticalIndex)], pixelsVerticalRatio);
-			QColor* rightSample = VideoFrame::BlendColors(inFrame[ceil(nextHorizontalIndex)][ceil(verticalSourceIndex)], inFrame[ceil(nextHorizontalIndex)][ceil(nextVerticalIndex)], pixelsVerticalRatio);
-			QColor* outcomeSample = VideoFrame::BlendColors(leftSample, rightSample, pixelsHorizontalRatio);
-			
+			if (outputFrame->Frame[horizontalIndex][verticalIndex] != nullptr)
+				delete outputFrame->Frame[horizontalIndex][verticalIndex];
+			outputFrame->Frame[horizontalIndex][verticalIndex] = finalSample;
 			delete leftSample;
 			delete rightSample;
-
-			outputFrame->Frame[horizontalIndex][verticalIndex] = outcomeSample;
-			verticalSourceIndex = nextVerticalIndex;
 		}
-
-		horizontalSourceIndex = nextHorizontalIndex;
 	}
 	delete inputFrame;
 	return outputFrame;

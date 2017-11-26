@@ -9,7 +9,7 @@ class ConstantTestFrameReader: public IFrameReader
 public:
 	VideoFrame* ReadNextFrame() override {
 		VideoFrame* frame = new VideoFrame(TEST_X_SIZE, TEST_Y_SIZE);
-		int stepSize = INT64_MAX / (TEST_X_SIZE + TEST_Y_SIZE);
+		int stepSize = 255 / (TEST_X_SIZE + TEST_Y_SIZE);
 		for(int y = 0; y < TEST_Y_SIZE; ++y)
 		{
 			for(int x = 0; x < TEST_X_SIZE; ++x)

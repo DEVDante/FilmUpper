@@ -39,7 +39,7 @@ VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
 	return resultFrame;
 }
 
-VideoFrame * InterpolationFpsEnhancer::InterpolateFrames()
+VideoFrame * InterpolationFpsEnhancer::InterpolateFrames() const
 {
 	VideoFrame* resultFrame = new VideoFrame(_targetQuality->FrameSizeX, _targetQuality->FrameSizeY);
 	for (int horizontalIndex = 0; horizontalIndex < _targetQuality->FrameSizeX; ++horizontalIndex) {

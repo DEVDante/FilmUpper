@@ -4,7 +4,8 @@
 #include "NOPFpsEnhancerHeader.h"
 #include "NOPFrameEnhancerHeader.h"
 #include <iostream>
-#include "ConstantTestFrameReader.h"
+
+#include "TestClassModule.h"
 
 FilmUpperController::FilmUpperController() {
 	FrameEnhancerHeaders.push_back(new NOPFrameEnhancerHeader());
@@ -13,21 +14,7 @@ FilmUpperController::FilmUpperController() {
 	FpsEnhancerHeaders.push_back(new NOPFpsEnhancerHeader());
 	FpsEnhancerHeaders.push_back(new InterpolationFpsEnhancerHeader());
 
-	//test case
-	IFrameReader* frameReader = new ConstantTestFrameReader();
-	FilmQualityInfo* qualityInfo = new FilmQualityInfo();
-	qualityInfo->FrameSizeX = 20;
-	qualityInfo->FrameSizeY = 40;
-	qualityInfo->FrameRate = 1;
-	FrameEnhancerBase* enhancer;
-	for (auto i: FrameEnhancerHeaders)
-	{
-		if(i->Name == "Interpolation Frame Resizer")
-		{
-			enhancer = i->Enhancer(frameReader, qualityInfo);
-		}
-	}
-	auto readFrame = enhancer->ReadNextEnchantedFrame();
+	TestClassModule::RunAllTests();
 }
 
 FilmUpperController::~FilmUpperController() {
