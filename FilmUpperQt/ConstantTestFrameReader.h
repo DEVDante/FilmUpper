@@ -39,8 +39,7 @@ public:
 			framesLeftFlag = false;
 			return true;
 		}
-		else
-			return framesLeftFlag;
+		return framesLeftFlag;
 	};
 
 private:

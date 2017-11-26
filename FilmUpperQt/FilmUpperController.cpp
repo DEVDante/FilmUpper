@@ -21,7 +21,7 @@ FilmUpperController::~FilmUpperController() {
 	
 }
 
-int FilmUpperController::startProcess(std::string filePath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo targetQuality)
+int FilmUpperController::startProcess(std::string filePath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality)
 {
 	std::cout << "Start Process";
 	return 1;
