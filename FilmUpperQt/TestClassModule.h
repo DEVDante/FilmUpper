@@ -14,6 +14,11 @@ public:
 		InterpolationFrameEnhTest();
 	}
 
+	void static RunAllToFileTests()
+	{
+		InterpolationFrameEnhTestToFile();
+	}
+
 	void static InterpolationFrameEnhTest()
 	{
 		//test case
@@ -46,6 +51,41 @@ public:
 			//saveFile << "\n";
 		}
 		//saveFile.close();
+		delete enhancer;
+		delete readFrame;
+		delete qualityInfo;
+		delete frameReader;
+	}
+
+	void static InterpolationFrameEnhTestToFile()
+	{
+		//test case
+		IFrameReader* frameReader = new ConstantTestFrameReader();
+		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
+		qualityInfo->FrameSizeX = 30;
+		qualityInfo->FrameSizeY = 60;
+		qualityInfo->FrameRate = 1;
+		FrameEnhancerBase* enhancer;
+		enhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
+		auto readFrame = enhancer->ReadNextEnchantedFrame();
+
+		//Commented lines for file output
+
+		std::ofstream saveFile;
+		saveFile.open("InterpolationFrameEnhTest.txt");
+
+		for (int x = 0; x < qualityInfo->FrameSizeX; ++x)
+		{
+			for (int y = 0; y < qualityInfo->FrameSizeY; ++y)
+			{
+				auto color = readFrame->Frame[x][y];
+				saveFile << std::to_string(color->red()) + " ";
+				saveFile << std::to_string(color->green()) + " ";
+				saveFile << std::to_string(color->blue()) + ", ";
+			}
+			saveFile << "\n";
+		}
+		saveFile.close();
 		delete enhancer;
 		delete readFrame;
 		delete qualityInfo;

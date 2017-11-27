@@ -14,7 +14,7 @@ FilmUpperController::FilmUpperController() {
 	FpsEnhancerHeaders.push_back(new NOPFpsEnhancerHeader());
 	FpsEnhancerHeaders.push_back(new InterpolationFpsEnhancerHeader());
 
-	TestClassModule::RunAllTests();
+	TestClassModule::RunAllToFileTests();
 }
 
 FilmUpperController::~FilmUpperController() {
