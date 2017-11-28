@@ -43,10 +43,3 @@ bool InterpolationFrameEnhancer::AreFramesLeft()
 {
 	return _inputFrameStream->AreFramesLeft();
 }
-
-double InterpolationFrameEnhancer::calculateInterpolationRatio(double leftValue, double rightValue)
-{
-	return ((((leftValue + rightValue) / 2.0) - floor(leftValue))//Center of actual points
-		/ (((floor(leftValue) + ceil(rightValue)) / 2.0) - floor(leftValue))) // Center of point between indexes
-		/ 2.0; //If it's nearer next cell then the outcome would be > 1 so we divide it by 2
-}

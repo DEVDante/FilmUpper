@@ -10,8 +10,5 @@ public:
 	bool AreFramesLeft() override;
 private:
 	double _verticalStepBetweenPixels;
-	double _horizontalStepBetweenPixels;
-
-	double calculateInterpolationRatio(double leftValue, double rightValue);
-	
+	double _horizontalStepBetweenPixels;	
 };
