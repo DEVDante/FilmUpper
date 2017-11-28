@@ -10,7 +10,8 @@
 \contentsline {subsection}{\numberline {2.1}\kernsubsekcyjny Komunikacja z u\IeC {\.z}ytkownikiem}{11}
 \contentsline {subsection}{\numberline {2.2}\kernsubsekcyjny Organizacja algorytm\IeC {\'o}w i sposobu przekszta\IeC {\l }cania plik\IeC {\'o}w wideo}{12}
 \contentsline {subsubsection}{\numberline {2.2.1}\kernsubsubsekcyjny IFrameReader - odczytywanie informacji z pliku wideo}{13}
-\contentsline {section}{\numberline {3}\kernsekcyjny Algorytmy}{15}
-\contentsline {section}{Rysunki}{17}
-\contentsline {section}{Programy}{19}
-\contentsline {section}{Literatura}{21}
+\contentsline {subsubsection}{\numberline {2.2.2}\kernsubsubsekcyjny FrameEnhancerBase i IFrameEnhancerHeader - ulepszanie pojedynczej klatki}{14}
+\contentsline {section}{\numberline {3}\kernsekcyjny Algorytmy}{17}
+\contentsline {section}{Rysunki}{19}
+\contentsline {section}{Programy}{21}
+\contentsline {section}{Literatura}{23}

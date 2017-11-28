@@ -128,6 +128,59 @@ bool AreFramesLeft() { return true; };
 \end{verbatim}
 Metoda ta informuje, czy pozostały jeszcze klatki do odczytu.
 
+\subsubsection{FrameEnhancerBase i IFrameEnhancerHeader - ulepszanie pojedynczej klatki}
+Zadaniem klasy bazowej FrameEnhancerBase jest przetwarzanie otrzymanej klatki w taki sposób, aby przy użyciu wybranego algorytmu zwiększyć rozdzielczość klatki wideo. Klasa bazowa IFrameEnhancerHeader jest odpowiedzialna za podstawowe informacje na temat danego FrameEnhancerBase oraz za utworzenie obiektu tej klasy. Daje nam to możliwość posiadania wszystkich wymaganych do wyświetlenia informacji bez tworzenia samych obiektów (tworzymy je dopiero w momencie w którym są potrzebne).
+
+Możliwości FrameEnhancerBase to: 
+\begin{verbatim}
+class FrameEnhancerBase
+{
+protected:
+    IFrameReader* _inputFrameStream;
+\end{verbatim}
+\_inputFrameStream zawiera obiekt implementacji IFrameReader dzięki któremu klasa ta może czytać klatki do przetworzenia.
+\begin{verbatim}
+    FilmQualityInfo* _targetQualityInfo;
+\end{verbatim}
+\_targetQualityInfo jest obiektem przechowującym informację na temat docelowego formatu wideo. Dzięki temu obiektowi jesteśmy w stanie ustalić docelowy rozmiar klatki wideo.
+\begin{verbatim}
+    FilmQualityInfo* _sourceQualityInfo;
+\end{verbatim}
+\_sourceQualityInfo jest obiektem przechowującym informację na temat źródłowego formatu wideo. Mimo tego, że mamy ciągły dostęp do tej informacji przy pomocy \_inputFrameStream, to przechowywanie tej informacji w tej postaci jest o wiele wygodniejsze. 
+\begin{verbatim}
+public:
+    FrameEnhancerBase(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo) {
+        _inputFrameStream = inputFrameReader;
+        _targetQualityInfo = targetQualityInfo;
+        _sourceQualityInfo = _inputFrameStream->GetVideoFormatInfo();
+	}
+\end{verbatim}
+Konstruktor klasy bazowej przypisuje wartości zmiennych oraz uzyskuje dane na temat formatu pliku źródłowego.
+\begin{verbatim}
+    virtual VideoFrame* ReadNextEnhancedFrame() { return nullptr; };
+\end{verbatim}
+ReadNextEnhancedFrame zwraca przetworzoną klatkę wideo wraz z dźwiękiem.
+\begin{verbatim}
+    FilmQualityInfo* GetSourceQuality() { return _sourceQualityInfo; };
+\end{verbatim}
+GetSourceQuality zwraca informacje na temat jakości pliku źródłowego.
+\begin{verbatim}
+    virtual bool AreFramesLeft() { return _inputFrameStream->AreFramesLeft(); };
+\end{verbatim}
+AreFramesLeft zwraca informacje na temat tego, czy pozostały jeszcze jakieś klatki do odczytu.
+\begin{verbatim}
+};
+
+
+\end{verbatim}
+
+
+
+
+
+
+
+
 
 
 \section{Algorytmy}

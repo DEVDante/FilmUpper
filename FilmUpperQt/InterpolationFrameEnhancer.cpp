@@ -15,11 +15,11 @@ VideoFrame * InterpolationFrameEnhancer::ReadNextEnchantedFrame()
 
 	for (int horizontalIndex = 0; horizontalIndex < _targetQualityInfo->FrameSizeX; ++horizontalIndex)
 	{
-		auto horizontalOriginPosition = static_cast<double>(horizontalIndex * (_sourceQualityInfo->FrameSizeX) ) / (_targetQualityInfo->FrameSizeX);
+		auto horizontalOriginPosition = static_cast<double>(horizontalIndex * (_sourceQualityInfo->FrameSizeX - 1) ) / (_targetQualityInfo->FrameSizeX - 1);
 		int horizontalOriginCelling = ceil(horizontalOriginPosition) > (_sourceQualityInfo->FrameSizeX - 1) ? _sourceQualityInfo->FrameSizeX - 1 : ceil(horizontalOriginPosition);
 		for (int verticalIndex = 0; verticalIndex < _targetQualityInfo->FrameSizeY; ++verticalIndex)
 		{
-			auto verticalOriginPosition = static_cast<double>(verticalIndex * (_sourceQualityInfo->FrameSizeY) ) / (_targetQualityInfo->FrameSizeY);
+			auto verticalOriginPosition = static_cast<double>(verticalIndex * (_sourceQualityInfo->FrameSizeY - 1) ) / (_targetQualityInfo->FrameSizeY - 1);
 			int verticalOriginCelling = ceil(verticalOriginPosition) >(_sourceQualityInfo->FrameSizeY - 1) ? _sourceQualityInfo->FrameSizeY - 1 : ceil(verticalOriginPosition);
 
 			auto frame = inputFrame->Frame;
