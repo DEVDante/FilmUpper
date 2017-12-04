@@ -91,6 +91,9 @@
     <ClCompile Include="NNFrameEnhancer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InterlaceFpsEnhancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FilmUpperQt.h">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="NNFrameEnhancerHeader.h">
       <Filter>FrameEnhancers\NNEnhancer</Filter>
+    </ClInclude>
+    <ClInclude Include="InterlaceFpsEnhancer.h">
+      <Filter>FpsEnhancers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

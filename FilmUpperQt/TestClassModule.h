@@ -26,8 +26,8 @@ public:
 	{
 		IFrameReader* frameReader = new ConstantTestFrameReader();
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
-		qualityInfo->FrameSizeX = 20;
-		qualityInfo->FrameSizeY = 40;
+		qualityInfo->FrameSizeX = 30;
+		qualityInfo->FrameSizeY = 60;
 		qualityInfo->FrameRate = 1;
 		FrameEnhancerBase* enhancer;
 		enhancer = new NNFrameEnhancer(frameReader, qualityInfo);

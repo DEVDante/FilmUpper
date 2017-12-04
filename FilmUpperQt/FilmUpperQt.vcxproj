@@ -82,6 +82,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_FilmUpperQt.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="InterlaceFpsEnhancer.cpp" />
     <ClCompile Include="InterpolationFpsEnhancer.cpp" />
     <ClCompile Include="InterpolationFrameEnhancer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="FilmUpperController.h" />
     <ClInclude Include="FpsEnhancerBase.h" />
     <ClInclude Include="FrameEnhancerBase.h" />
+    <ClInclude Include="InterlaceFpsEnhancer.h" />
     <ClInclude Include="InterpolationFpsEnhancer.h" />
     <ClInclude Include="InterpolationFpsEnhancerHeader.h" />
     <ClInclude Include="InterpolationFrameEnhancer.h" />

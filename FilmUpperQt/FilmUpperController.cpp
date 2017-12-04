@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "TestClassModule.h"
+#include "InterlaceFpsEnhancerHeader.h"
 
 FilmUpperController::FilmUpperController() {
 	FrameEnhancerHeaders.push_back(new NOPFrameEnhancerHeader());
@@ -15,6 +16,7 @@ FilmUpperController::FilmUpperController() {
 
 	FpsEnhancerHeaders.push_back(new NOPFpsEnhancerHeader());
 	FpsEnhancerHeaders.push_back(new InterpolationFpsEnhancerHeader());
+	FpsEnhancerHeaders.push_back(new InterlaceFpsEnhancerHeader());
 
 	TestClassModule::RunAllToFileTests();
 }

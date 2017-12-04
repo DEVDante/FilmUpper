@@ -1,4 +1,4 @@
-﻿  NNFrameEnhancer.cpp
+﻿  InterlaceFpsEnhancer.cpp
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\algorithm(1065): warning C4996: 'std::transform::_Unchecked_iterators::_Deprecate': Call to 'std::transform' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
   C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\algorithm(1064): note: see declaration of 'std::transform::_Unchecked_iterators::_Deprecate'
   D:\Studia\Inzynierka\FilmUpper\packages\boost.1.65.1.0\lib\native\include\boost\multi_array.hpp(419): note: see reference to function template instantiation '_OutIt *std::transform<unsigned __int64*,unsigned __int64*,unsigned __int64*,const unsigned __int64&(__cdecl *)(const unsigned __int64 &,const unsigned __int64 &)>(_InIt1,_InIt1,_InIt2,_OutIt,_Fn2)' being compiled
@@ -19,7 +19,7 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\algorithm(1065): 
           [
               T=QColor *
           ]
-  d:\studia\inzynierka\filmupper\filmupperqt\VideoFrame.h(17): note: see reference to class template instantiation 'boost::multi_array<QColor *,2,std::allocator<T>>' being compiled
+  d:\studia\inzynierka\filmupper\filmupperqt\VideoFrame.h(19): note: see reference to class template instantiation 'boost::multi_array<QColor *,2,std::allocator<T>>' being compiled
           with
           [
               T=QColor *
@@ -45,7 +45,7 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xutility(2372): w
           [
               T=QColor *
           ]
-  NNFrameEnhancer.cpp(17): note: see reference to class template instantiation 'boost::detail::multi_array::multi_array_view<T,2>' being compiled
+  D:\Studia\Inzynierka\FilmUpper\packages\boost.1.65.1.0\lib\native\include\boost\multi_array.hpp(406): note: see reference to class template instantiation 'boost::detail::multi_array::multi_array_view<T,2>' being compiled
           with
           [
               T=QColor *
