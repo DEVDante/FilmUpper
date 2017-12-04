@@ -62,6 +62,9 @@
     <Filter Include="FrameEnhancers\NNEnhancer">
       <UniqueIdentifier>{141ba490-9f28-4a93-9126-1b7a3f9ca689}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FpsEnhancers\InterlaceEnhancer">
+      <UniqueIdentifier>{b1194926-b87f-4c75-851c-2c72f89fffdc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -171,7 +174,10 @@
       <Filter>FrameEnhancers\NNEnhancer</Filter>
     </ClInclude>
     <ClInclude Include="InterlaceFpsEnhancer.h">
-      <Filter>FpsEnhancers</Filter>
+      <Filter>FpsEnhancers\InterlaceEnhancer</Filter>
+    </ClInclude>
+    <ClInclude Include="InterlaceFpsEnhancerHeader.h">
+      <Filter>FpsEnhancers\InterlaceEnhancer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

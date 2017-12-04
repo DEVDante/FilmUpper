@@ -118,6 +118,7 @@
     <ClInclude Include="FilmUpperController.h" />
     <ClInclude Include="FpsEnhancerBase.h" />
     <ClInclude Include="FrameEnhancerBase.h" />
+    <ClInclude Include="InterlaceFpsEnhancerHeader.h" />
     <ClInclude Include="InterlaceFpsEnhancer.h" />
     <ClInclude Include="InterpolationFpsEnhancer.h" />
     <ClInclude Include="InterpolationFpsEnhancerHeader.h" />
