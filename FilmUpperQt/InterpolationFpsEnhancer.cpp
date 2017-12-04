@@ -8,8 +8,8 @@ InterpolationFpsEnhancer::InterpolationFpsEnhancer(FrameEnhancerBase * frameEnha
 VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
 	if (_currentFrame == nullptr)
 	{
-		_currentFrame = _frameEnhancer->ReadNextEnchantedFrame();
-		_nextFrame = _frameEnhancer->ReadNextEnchantedFrame();
+		_currentFrame = _frameEnhancer->ReadNextEnhancedFrame();
+		_nextFrame = _frameEnhancer->ReadNextEnhancedFrame();
 	}
 	
 	
@@ -23,7 +23,7 @@ VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
 			{
 				if (tmpFrame != nullptr)
 					delete tmpFrame;
-				tmpFrame = _frameEnhancer->ReadNextEnchantedFrame();
+				tmpFrame = _frameEnhancer->ReadNextEnhancedFrame();
 			}
 			else
 			{

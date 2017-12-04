@@ -6,9 +6,6 @@
 class InterpolationFrameEnhancer: public FrameEnhancerBase {
 public:
 	InterpolationFrameEnhancer(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo);
-	VideoFrame * ReadNextEnchantedFrame() override;
+	VideoFrame * ReadNextEnhancedFrame() override;
 	bool AreFramesLeft() override;
-private:
-	double _verticalStepBetweenPixels;
-	double _horizontalStepBetweenPixels;	
 };

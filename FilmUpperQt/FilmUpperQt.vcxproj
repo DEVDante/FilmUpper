@@ -85,6 +85,7 @@
     <ClCompile Include="InterpolationFpsEnhancer.cpp" />
     <ClCompile Include="InterpolationFrameEnhancer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NNFrameEnhancer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FilmUpperQt.h">
@@ -120,6 +121,8 @@
     <ClInclude Include="InterpolationFpsEnhancerHeader.h" />
     <ClInclude Include="InterpolationFrameEnhancer.h" />
     <ClInclude Include="InterpolationFrameEnhancerHeader.h" />
+    <ClInclude Include="NNFrameEnhancer.h" />
+    <ClInclude Include="NNFrameEnhancerHeader.h" />
     <ClInclude Include="NOPFpsEnhancer.h" />
     <ClInclude Include="NOPFpsEnhancerHeader.h" />
     <ClInclude Include="NOPFrameEnhancerHeader.h" />

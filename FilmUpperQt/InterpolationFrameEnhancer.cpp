@@ -4,11 +4,9 @@
 InterpolationFrameEnhancer::InterpolationFrameEnhancer(IFrameReader * inputFrameReader, FilmQualityInfo * targetQualityInfo)
 	: FrameEnhancerBase(inputFrameReader, targetQualityInfo)
 {
-	_verticalStepBetweenPixels = ((double)_sourceQualityInfo->FrameSizeY)/((double)targetQualityInfo->FrameSizeY);
-	_horizontalStepBetweenPixels = ((double)_sourceQualityInfo->FrameSizeX) / ((double)targetQualityInfo->FrameSizeX);
 }
 
-VideoFrame * InterpolationFrameEnhancer::ReadNextEnchantedFrame()
+VideoFrame * InterpolationFrameEnhancer::ReadNextEnhancedFrame()
 {
 	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->FrameSizeX, _targetQualityInfo->FrameSizeY);
 	VideoFrame* inputFrame = _inputFrameStream->ReadNextFrame();

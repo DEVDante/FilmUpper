@@ -9,6 +9,6 @@ public:
 		
 	};
 
-	VideoFrame* ReadNextFrame() override { return _frameEnhancer->ReadNextEnchantedFrame(); };
+	VideoFrame* ReadNextFrame() override { return _frameEnhancer->ReadNextEnhancedFrame(); };
 	bool AreFramesLeft() override { return _frameEnhancer->AreFramesLeft(); };
 };

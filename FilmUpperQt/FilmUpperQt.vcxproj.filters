@@ -59,6 +59,9 @@
     <Filter Include="FrameReaders">
       <UniqueIdentifier>{604e12a6-ba0d-4036-b6a8-2491b637e0cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrameEnhancers\NNEnhancer">
+      <UniqueIdentifier>{141ba490-9f28-4a93-9126-1b7a3f9ca689}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -83,6 +86,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InterpolationFrameEnhancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NNFrameEnhancer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -154,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="TestClassModule.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NNFrameEnhancer.h">
+      <Filter>FrameEnhancers\NNEnhancer</Filter>
+    </ClInclude>
+    <ClInclude Include="NNFrameEnhancerHeader.h">
+      <Filter>FrameEnhancers\NNEnhancer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

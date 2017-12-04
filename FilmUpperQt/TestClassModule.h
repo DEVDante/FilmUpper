@@ -2,6 +2,7 @@
 #include "FrameEnhancerBase.h"
 #include "ConstantTestFrameReader.h"
 #include "InterpolationFrameEnhancer.h"
+#include "NNFrameEnhancer.h"
 #include <stdexcept>
 #include <fstream>
 
@@ -11,46 +12,42 @@ public:
 
 	void static RunAllTests()
 	{
-		InterpolationFrameEnhTest();
+		
 	}
 
 	void static RunAllToFileTests()
 	{
 		InterpolationFrameEnhTestToFile();
+		NNFrameEnhToFileTest();
 	}
 
-	void static InterpolationFrameEnhTest()
+
+	void static NNFrameEnhToFileTest()
 	{
-		//test case
 		IFrameReader* frameReader = new ConstantTestFrameReader();
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
 		qualityInfo->FrameSizeX = 20;
 		qualityInfo->FrameSizeY = 40;
 		qualityInfo->FrameRate = 1;
 		FrameEnhancerBase* enhancer;
-		enhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
-		auto readFrame = enhancer->ReadNextEnchantedFrame();
+		enhancer = new NNFrameEnhancer(frameReader, qualityInfo);
+		auto readFrame = enhancer->ReadNextEnhancedFrame();
 
-		//Commented lines for file output
-
-		//std::ofstream saveFile;
-		//saveFile.open("InterpolationFrameEnhTest.txt");
-
+		std::ofstream saveFile;
+		saveFile.open("NNFrameEnhTest.txt");
 		for (int x = 0; x < qualityInfo->FrameSizeX; ++x)
 		{
 			for (int y = 0; y < qualityInfo->FrameSizeY; ++y)
 			{
 				auto color = readFrame->Frame[x][y];
-				int colorShouldBe = ((x == (qualityInfo->FrameSizeX - 1) ? x-1: x) + (y == (qualityInfo->FrameSizeY - 1) ? y - 1 : y)) * 4;
-				if (color->red() != colorShouldBe)
-					throw std::logic_error("Value of color should be: " + std::to_string(colorShouldBe) + ", was: " + std::to_string(color->red()));
-				//saveFile << std::to_string(color->red()) + " ";
-				//saveFile << std::to_string(color->green()) + " ";
-				//saveFile << std::to_string(color->blue()) + ", ";
+
+				saveFile << std::to_string(color->red()) + " ";
+				saveFile << std::to_string(color->green()) + " ";
+				saveFile << std::to_string(color->blue()) + ", ";
 			}
-			//saveFile << "\n";
+			saveFile << "\n";
 		}
-		//saveFile.close();
+		saveFile.close();
 		delete enhancer;
 		delete readFrame;
 		delete qualityInfo;
@@ -59,7 +56,6 @@ public:
 
 	void static InterpolationFrameEnhTestToFile()
 	{
-		//test case
 		IFrameReader* frameReader = new ConstantTestFrameReader();
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
 		qualityInfo->FrameSizeX = 30;
@@ -67,9 +63,7 @@ public:
 		qualityInfo->FrameRate = 1;
 		FrameEnhancerBase* enhancer;
 		enhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
-		auto readFrame = enhancer->ReadNextEnchantedFrame();
-
-		//Commented lines for file output
+		auto readFrame = enhancer->ReadNextEnhancedFrame();
 
 		std::ofstream saveFile;
 		saveFile.open("InterpolationFrameEnhTest.txt");
