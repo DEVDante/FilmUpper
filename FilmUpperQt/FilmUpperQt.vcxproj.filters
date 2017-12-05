@@ -91,6 +91,9 @@
     <ClCompile Include="InterpolationFrameEnhancer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FrameReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="NNFrameEnhancer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -167,6 +170,7 @@
     <ClInclude Include="TestClassModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<<
     <ClInclude Include="NNFrameEnhancer.h">
       <Filter>FrameEnhancers\NNEnhancer</Filter>
     </ClInclude>
@@ -179,6 +183,11 @@
     <ClInclude Include="InterlaceFpsEnhancerHeader.h">
       <Filter>FpsEnhancers\InterlaceEnhancer</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="FrameReader.h">
+      <Filter>FrameReaders</Filter>
+    </ClInclude>
+>>>>>>>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
