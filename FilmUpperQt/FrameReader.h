@@ -1,8 +1,11 @@
 #pragma once
 #include "IFrameReader.h"
+extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
-#include <ffmpeg/swscale.h>
+#include <libswscale/swscale.h>
+#include <libavutil/pixfmt.h>
+}
 
 class FrameReader : public IFrameReader
 {
@@ -22,8 +25,8 @@ private:
 public:
 	FrameReader( std::string filename );
 	~FrameReader();
-	bool AreFramesLeft();
-	VideoFrame * ReadNextFrame();
-	FilmQualityInfo * GetVideoFormatInfo();
+	bool AreFramesLeft() override;
+	VideoFrame * ReadNextFrame() override;
+	FilmQualityInfo * GetVideoFormatInfo() override;
 };
 

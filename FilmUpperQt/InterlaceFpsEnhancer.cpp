@@ -8,10 +8,12 @@ VideoFrame * InterlaceFpsEnhancer::ReadNextFrame()
 	}
 	if(_wasLastFrameEven)
 	{
+		_wasLastFrameEven != _wasLastFrameEven;
 		return InterlaceFrame();
 	}
 	else
 	{
+		_wasLastFrameEven != _wasLastFrameEven;
 		return _lastFrame->Clone();
 	}
 }
