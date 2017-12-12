@@ -36,3 +36,4 @@ packages/*
 Debug/*
 *.db
 *.opendb
+/.project

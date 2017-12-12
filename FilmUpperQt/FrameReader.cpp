@@ -64,7 +64,8 @@ VideoFrame* FrameReader::ReadNextFrame()
 
     do {
         if (av_read_frame(formatCTX, &packet)>=0)
-        throw std::runtime_error("Couldn't read frame data");
+            //throw std::runtime_error("Couldn't read frame data");
+            return NULL;
         
         if(packet.stream_index==videoStream) 
             avcodec_decode_video2(codecCTX, frame, &frameFinished, &packet);
@@ -72,7 +73,19 @@ VideoFrame* FrameReader::ReadNextFrame()
 
     sws_scale(sws_ctx, (uint8_t const * const *)frame->data, frame->linesize, 0, codecCTX->height, frameRGB->data, frameRGB->linesize);
     
-    return new VideoFrame(1,1);
+    VideoFrame *outFrame = new VideoFrame(codecCTX->width, codecCTX->height);
+
+    for(int y = 0; y < codecCTX->height; y++) 
+        for(int x = 0; x < codecCTX->width; x++) 
+        {
+            int offset = x + y * c->linesize[0];
+
+            outFrame->Frame[x][y].setRed(frameRGB->data[0][offset + 0]);
+            outFrame->Frame[x][y].setGreen(frameRGB->data[0][offset + 1]);
+            outFrame->Frame[x][y].setBlue(frameRGB->data[0][offset + 2]);
+        }
+    
+    return outFrame;
 }
 
 FilmQualityInfo* FrameReader::GetVideoFormatInfo()
