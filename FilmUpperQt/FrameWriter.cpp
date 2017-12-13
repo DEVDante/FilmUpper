@@ -8,9 +8,9 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name)
 		throw std::runtime_error("Couldn't allocate output format context");
 
 
-	codec = avcodec_find_encoder(codec_id);
+	codec = avcodec_find_encoder_by_name(enc_name);
 	if (codec == NULL) 
-		throw std::runtime_error("Unsupported codec");
+		throw std::runtime_error("Couldn't find given encoder");
 
 	codecCTX = avcodec_alloc_context3(codec);
 	if (avcodec_copy_context(codecCTX, codecCtxOriginal) != 0) 
@@ -41,12 +41,8 @@ FrameReader::~FrameReader()
 	avformat_close_input(&formatCTX);
 }
 
-bool FrameReader::AreFramesLeft()
-{
-    return true;
-}
 
-VideoFrame* FrameReader::ReadNextFrame()
+void FrameReader::WriteFrame(VideoFrame *frame)
 {
     struct SwsContext *sws_ctx = NULL;
     int frameFinished;
@@ -70,24 +66,14 @@ VideoFrame* FrameReader::ReadNextFrame()
     for(int y = 0; y < codecCTX->height; y++) 
         for(int x = 0; x < codecCTX->width; x++) 
         {
-            int offset = x + y * c->linesize[0];
+            int offset = 3 * x + y * c->linesize[0];
 
-            outFrame->Frame[x][y].setRed(frameRGB->data[0][offset + 0]);
-            outFrame->Frame[x][y].setGreen(frameRGB->data[0][offset + 1]);
-            outFrame->Frame[x][y].setBlue(frameRGB->data[0][offset + 2]);
+			outFrame->Frame[x][y] = new QColor(frameRGB->data[0][offset + 0], frameRGB->data[0][offset + 1], frameRGB->data[0][offset + 2]);
+            //outFrame->Frame[x][y].setRed(frameRGB->data[0][offset + 0]);
+            //outFrame->Frame[x][y].setGreen(frameRGB->data[0][offset + 1]);
+			//outFrame->Frame[x][y].setBlue(frameRGB->data[0][offset + 2]);
         }
     
     return outFrame;
-}
-
-FilmQualityInfo* FrameReader::GetVideoFormatInfo()
-{
-    FilmQualityInfo *nfo = new FilmQualityInfo();
-
-    nfo->FrameSizeX = codecCTX->width;
-    nfo->FrameSizeY = codecCTX->height;
-	nfo->FrameRate = (codecCTX->framerate.num) / (codecCTX->framerate.den);
-
-	return nfo;
 }
 */
