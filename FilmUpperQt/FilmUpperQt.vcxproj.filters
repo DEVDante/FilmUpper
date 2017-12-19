@@ -11,6 +11,7 @@
     <ClCompile Include="InterpolationFrameEnhancer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NNFrameEnhancer.cpp" />
+    <ClCompile Include="FrameWriter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConstantTestFrameReader.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="IFpsEnhancerHeader.h" />
     <ClInclude Include="IFrameEnhancerHeader.h" />
     <ClInclude Include="IFrameReader.h" />
+    <ClInclude Include="FrameWriter.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FilmUpperQt.h" />

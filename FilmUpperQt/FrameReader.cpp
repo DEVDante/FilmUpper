@@ -78,11 +78,12 @@ VideoFrame* FrameReader::ReadNextFrame()
     for(int y = 0; y < codecCTX->height; y++) 
         for(int x = 0; x < codecCTX->width; x++) 
         {
-            int offset = x + y * c->linesize[0];
+            int offset = x + y * frameRGB->linesize[0];
 
-            outFrame->Frame[x][y].setRed(frameRGB->data[0][offset + 0]);
-            outFrame->Frame[x][y].setGreen(frameRGB->data[0][offset + 1]);
-            outFrame->Frame[x][y].setBlue(frameRGB->data[0][offset + 2]);
+			outFrame->Frame[x][y] = new QColor(frameRGB->data[0][offset + 0], frameRGB->data[0][offset + 1], frameRGB->data[0][offset + 2]);
+            //outFrame->Frame[x][y].setRed(frameRGB->data[0][offset + 0]);
+            //outFrame->Frame[x][y].setGreen(frameRGB->data[0][offset + 1]);
+            //outFrame->Frame[x][y].setBlue(frameRGB->data[0][offset + 2]);
         }
     
     return outFrame;
@@ -94,7 +95,7 @@ FilmQualityInfo* FrameReader::GetVideoFormatInfo()
 
     nfo->FrameSizeX = codecCTX->width;
     nfo->FrameSizeY = codecCTX->height;
-	nfo->FrameRate = (codecCTX->framerate.num) / (codecCTX->framerate.den);
+	nfo->FrameRate = FrameRate((codecCTX->framerate.num), (codecCTX->framerate.den));
 
 	return nfo;
 }
