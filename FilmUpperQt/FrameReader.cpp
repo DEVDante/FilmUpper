@@ -63,7 +63,7 @@ VideoFrame* FrameReader::ReadNextFrame()
     sws_ctx = sws_getContext(codecCTX->width, codecCTX->height, codecCTX->pix_fmt, codecCTX->width, codecCTX->height, AV_PIX_FMT_RGB24, SWS_BILINEAR, NULL, NULL, NULL);
 
     do {
-        if (av_read_frame(formatCTX, &packet)>=0)
+        if (av_read_frame(formatCTX, &packet)<0)
             //throw std::runtime_error("Couldn't read frame data");
             return NULL;
         
@@ -80,7 +80,9 @@ VideoFrame* FrameReader::ReadNextFrame()
         {
             int offset = x + y * frameRGB->linesize[0];
 
-			outFrame->Frame[x][y] = new QColor(frameRGB->data[0][offset + 0], frameRGB->data[0][offset + 1], frameRGB->data[0][offset + 2]);
+			outFrame->Frame[x][y][0] = frameRGB->data[0][offset + 0];
+			outFrame->Frame[x][y][1] = frameRGB->data[0][offset + 1];
+			outFrame->Frame[x][y][2] = frameRGB->data[0][offset + 2];
             //outFrame->Frame[x][y].setRed(frameRGB->data[0][offset + 0]);
             //outFrame->Frame[x][y].setGreen(frameRGB->data[0][offset + 1]);
             //outFrame->Frame[x][y].setBlue(frameRGB->data[0][offset + 2]);
@@ -95,7 +97,7 @@ FilmQualityInfo* FrameReader::GetVideoFormatInfo()
 
     nfo->FrameSizeX = codecCTX->width;
     nfo->FrameSizeY = codecCTX->height;
-	nfo->FrameRate = FrameRate((codecCTX->framerate.num), (codecCTX->framerate.den));
+	nfo->FrameRate = new FrameRate((codecCTX->framerate.num), (codecCTX->framerate.den));
 
 	return nfo;
 }

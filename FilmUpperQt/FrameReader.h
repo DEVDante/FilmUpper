@@ -10,7 +10,7 @@ extern "C" {
 class FrameReader : public IFrameReader
 {
 private:
-	AVFormatContext *formatCTX;
+	AVFormatContext *formatCTX = nullptr;
 	AVCodecContext *codecCtxOriginal;
 	AVCodecContext *codecCTX;
 	AVCodec *codec;

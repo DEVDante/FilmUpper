@@ -18,7 +18,9 @@ public:
 			for(int x = 0; x < TEST_X_SIZE; ++x)
 			{
 				int blend = stepSize * (x + y);
-				frame->Frame[x][y] = new QColor(blend, blend, blend);
+				frame->Frame[x][y][0] = blend;
+				frame->Frame[x][y][1] = blend;
+				frame->Frame[x][y][2] = blend;
 				//saveFile << std::to_string(blend) + ", ";
 			}
 			//saveFile << "\n";
@@ -28,7 +30,7 @@ public:
 	};
 	FilmQualityInfo* GetVideoFormatInfo() override {
 		auto fq = new FilmQualityInfo();
-		fq->FrameRate = 1;
+		fq->FrameRate = new FrameRate(1,1);
 		fq->FrameSizeX = TEST_X_SIZE;
 		fq->FrameSizeY = TEST_Y_SIZE;
 		return fq;

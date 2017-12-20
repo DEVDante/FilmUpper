@@ -2,13 +2,13 @@
 #include <qcolor.h>
 #include <boost\multi_array.hpp>
 
-typedef boost::multi_array<QColor*, 2> frameType;
+typedef boost::multi_array<int, 3> frameType;
 
 class VideoFrame {
 public:
 	VideoFrame(int height, int width) {
 		frameType::extent_gen ext;
-		Frame.resize(ext[height][width]);
+		Frame.resize(ext[height][width][3]);
 		_width = width;
 		_height = height;
 	}
@@ -18,11 +18,8 @@ public:
 	
 	frameType Frame;
 
-	static QColor* BlendColors(QColor * leftColor, QColor * rightColor, double blendRatio) {
-		int red = (int)(((double)leftColor->red() * blendRatio) + ((double)rightColor->red() * (1 - blendRatio)));
-		int green = (int)(((double)leftColor->green() * blendRatio) + ((double)rightColor->green() * (1 - blendRatio)));
-		int blue = (int)(((double)leftColor->blue() * blendRatio) + ((double)rightColor->blue() * (1 - blendRatio)));
-		return new QColor(red, green, blue);
+	static inline int BlendColors(int leftColor, int rightColor, double blendRatio) {
+		return (int)(((double)leftColor * blendRatio) + ((double)rightColor * (1 - blendRatio)));
 	}
 
 	VideoFrame* Clone()
@@ -32,7 +29,9 @@ public:
 		{
 			for (int w = 0; h < _width; w++)
 			{
-				retFrame->Frame[h][w] = new QColor(Frame[h][w]->rgb());
+				retFrame->Frame[h][w][0] = Frame[h][w][0];
+				retFrame->Frame[h][w][1] = Frame[h][w][1];
+				retFrame->Frame[h][w][2] = Frame[h][w][2];
 			}
 		}
 		return retFrame;

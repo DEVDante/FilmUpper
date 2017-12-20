@@ -32,8 +32,9 @@ VideoFrame * InterlaceFpsEnhancer::InterlaceFrame()
 		{
 			for (int w = 0; w < _targetQuality->FrameSizeY; ++w)
 			{
-				delete _lastFrame->Frame[h][w];
-				_lastFrame->Frame[h][w] = new QColor(nextFrame->Frame[h][w]->rgb());
+				_lastFrame->Frame[h][w][0] = nextFrame->Frame[h][w][0];
+				_lastFrame->Frame[h][w][1] = nextFrame->Frame[h][w][1];
+				_lastFrame->Frame[h][w][2] = nextFrame->Frame[h][w][2];
 			}
 		}
 		auto tmp = _lastFrame;

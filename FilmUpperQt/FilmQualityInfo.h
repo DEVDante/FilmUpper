@@ -1,12 +1,5 @@
 #pragma once
 
-class FilmQualityInfo {
-public:
-	int FrameSizeX;
-	int FrameSizeY;
-	FrameRate FrameRate;
-};
-
 class FrameRate {
 public:
 	int num;
@@ -21,3 +14,11 @@ public:
 		return num / den;
 	}
 };
+
+class FilmQualityInfo {
+public:
+	int FrameSizeX;
+	int FrameSizeY;
+	FrameRate* FrameRate;
+};
+

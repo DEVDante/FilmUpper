@@ -2,7 +2,7 @@
 
 InterpolationFpsEnhancer::InterpolationFpsEnhancer(FrameEnhancerBase * frameEnhancer, FilmQualityInfo * qualityInfo): FpsEnhancerBase(frameEnhancer, qualityInfo)
 {
-	_nextFrameDelta = _targetQuality->FrameRate / _sourceQuality->FrameRate;
+	_nextFrameDelta = _targetQuality->FrameRate->getNumericalRate() / _sourceQuality->FrameRate->getNumericalRate();
 }
 
 VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
@@ -44,7 +44,9 @@ VideoFrame * InterpolationFpsEnhancer::InterpolateFrames() const
 	VideoFrame* resultFrame = new VideoFrame(_targetQuality->FrameSizeX, _targetQuality->FrameSizeY);
 	for (int horizontalIndex = 0; horizontalIndex < _targetQuality->FrameSizeX; ++horizontalIndex) {
 		for (int verticalIndex = 0; verticalIndex < _targetQuality->FrameSizeY; ++verticalIndex) {
-			resultFrame->Frame[horizontalIndex][verticalIndex] = VideoFrame::BlendColors(_currentFrame->Frame[horizontalIndex][verticalIndex], _nextFrame->Frame[horizontalIndex][verticalIndex], _currentFrameCooficiency);
+			resultFrame->Frame[horizontalIndex][verticalIndex][0] = VideoFrame::BlendColors(_currentFrame->Frame[horizontalIndex][verticalIndex][0], _nextFrame->Frame[horizontalIndex][verticalIndex][0], _currentFrameCooficiency);
+			resultFrame->Frame[horizontalIndex][verticalIndex][1] = VideoFrame::BlendColors(_currentFrame->Frame[horizontalIndex][verticalIndex][1], _nextFrame->Frame[horizontalIndex][verticalIndex][1], _currentFrameCooficiency);
+			resultFrame->Frame[horizontalIndex][verticalIndex][2] = VideoFrame::BlendColors(_currentFrame->Frame[horizontalIndex][verticalIndex][2], _nextFrame->Frame[horizontalIndex][verticalIndex][2], _currentFrameCooficiency);
 		}
 	}
 	return resultFrame;

@@ -14,8 +14,8 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, std::st
 	codecCTX->bit_rate = 400000; //add to FQInfo instead of static
 	codecCTX->width = info->FrameSizeX;
 	codecCTX->height = info->FrameSizeY;
-	codecCTX->time_base = AVRational { info->FrameRate.den , info->FrameRate.num };
-	codecCTX->framerate = AVRational { info->FrameRate.num , info->FrameRate.den };
+	codecCTX->time_base = AVRational { info->FrameRate->den , info->FrameRate->num };
+	codecCTX->framerate = AVRational { info->FrameRate->num , info->FrameRate->den };
 	codecCTX->gop_size = 12; // group of pictures
 	codecCTX->max_b_frames = 2; // num of between frames, add check for AV_CODEC_ID_MPEG2VIDEO
 	codecCTX->mb_decision = 2; // macroblocks, add check for AV_CODEC_ID_MPEG1VIDEO
@@ -87,9 +87,9 @@ void FrameWriter::WriteFrame(VideoFrame *frameOG)
         {
             int offset = 3 * x + y * frameRGB->linesize[0];
 
-			frameRGB->data[0][offset + 0] = frameOG->Frame[x][y].red();
-			frameRGB->data[0][offset + 1] = frameOG->Frame[x][y].green();
-			frameRGB->data[0][offset + 2] = frameOG->Frame[x][y].blue();
+			frameRGB->data[0][offset + 0] = frameOG->Frame[x][y][0];
+			frameRGB->data[0][offset + 1] = frameOG->Frame[x][y][1];
+			frameRGB->data[0][offset + 2] = frameOG->Frame[x][y][2];
         }
 
 	sws_scale(sws_ctx, (uint8_t const * const *)frameRGB->data, frameRGB->linesize, 0, codecCTX->height, frame->data, frame->linesize);
