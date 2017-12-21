@@ -20,7 +20,7 @@ public:
 
 	void static RunAllToFileTests()
 	{
-		//InterpolationFrameEnhTestToFile();
+		InterpolationFrameEnhTestToFile();
 		NNFrameEnhToFileTest();
 		ReaderTest();
 		//WriterTest();
@@ -37,7 +37,7 @@ public:
 			enhancer = new NNFrameEnhancer(frameReader, qualityInfo);
 			std::ofstream saveFile;
 			saveFile.open("readTestNN.txt");
-			int iterations = 10000;
+			int iterations = 100;
 			clock_t begin = clock();
 			for (int xd = 0; xd < iterations; ++xd) {
 				delete enhancer->ReadNextEnhancedFrame();
@@ -113,49 +113,34 @@ public:
 		delete frameReader;
 	}
 
-	//void static InterpolationFrameEnhTestToFile()
-	//{
-	//	IFrameReader* frameReader = new ConstantTestFrameReader();
-	//	FilmQualityInfo* qualityInfo = new FilmQualityInfo();
-	//	qualityInfo->FrameSizeX = 30;
-	//	qualityInfo->FrameSizeY = 60;
-	//	qualityInfo->FrameRate = 1;
-	//	FrameEnhancerBase* enhancer;
-	//	enhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
-	//	auto readFrame = enhancer->ReadNextEnhancedFrame();
-
-	//	std::ofstream saveFile;
-	//	saveFile.open("InterpolationFrameEnhTest.txt");
-
-	//	for (int x = 0; x < qualityInfo->FrameSizeX; ++x)
-	//	{
-	//		for (int y = 0; y < qualityInfo->FrameSizeY; ++y)
-	//		{
-	//			auto color = readFrame->Frame[x][y];
-	//			saveFile << std::to_string(color->red()) + " ";
-	//			saveFile << std::to_string(color->green()) + " ";
-	//			saveFile << std::to_string(color->blue()) + ", ";
-	//		}
-	//		saveFile << "\n";
-	//	}
-	//	saveFile.close();
-	//	delete enhancer;
-	//	delete readFrame;
-	//	delete qualityInfo;
-	//	delete frameReader;
-	//}
-
-	/*for (int i = 0; i<h2; i++)
+	void static InterpolationFrameEnhTestToFile()
 	{
-		int* t = temp + i*w2;
-		y2 = ((i*y_ratio) >> 16);
-		int* p = pixels + y2*w1;
-		int rat = 0;
-		for (int j = 0; j<w2; j++)
+		IFrameReader* frameReader = new ConstantTestFrameReader();
+		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
+		qualityInfo->Height = 30;
+		qualityInfo->Width = 60;
+		qualityInfo->FrameRate = new FrameRate(1, 1);
+		FrameEnhancerBase* enhancer;
+		enhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
+		auto readFrame = enhancer->ReadNextEnhancedFrame();
+
+		std::ofstream saveFile;
+		saveFile.open("InterpolationFrameEnhTest.txt");
+
+		for (int y = 0; y < qualityInfo->Height; ++y)
 		{
-			x2 = (rat >> 16);
-			*t++ = p[x2];
-			rat += x_ratio;
+			for (int x = 0; x < qualityInfo->Width; ++x)
+			{
+				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3]) + " ";
+				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3 + 1]) + " ";
+				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3 + 2]) + ", ";
+			}
+			saveFile << "\n";
 		}
-	}*/
+		saveFile.close();
+		delete enhancer;
+		delete readFrame;
+		delete qualityInfo;
+		delete frameReader;
+	}
 };

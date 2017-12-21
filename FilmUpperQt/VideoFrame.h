@@ -11,7 +11,7 @@ public:
 	}
 
 	~VideoFrame() {
-		delete Frame;
+		delete[] Frame;
 	}
 	
 	int* Frame;
