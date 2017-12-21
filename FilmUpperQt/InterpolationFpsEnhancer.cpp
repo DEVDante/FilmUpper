@@ -41,12 +41,12 @@ VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
 
 VideoFrame * InterpolationFpsEnhancer::InterpolateFrames() const
 {
-	VideoFrame* resultFrame = new VideoFrame(_targetQuality->FrameSizeX, _targetQuality->FrameSizeY);
-	for (int horizontalIndex = 0; horizontalIndex < _targetQuality->FrameSizeX; ++horizontalIndex) {
-		for (int verticalIndex = 0; verticalIndex < _targetQuality->FrameSizeY; ++verticalIndex) {
-			resultFrame->Frame[horizontalIndex][verticalIndex][0] = VideoFrame::BlendColors(_currentFrame->Frame[horizontalIndex][verticalIndex][0], _nextFrame->Frame[horizontalIndex][verticalIndex][0], _currentFrameCooficiency);
-			resultFrame->Frame[horizontalIndex][verticalIndex][1] = VideoFrame::BlendColors(_currentFrame->Frame[horizontalIndex][verticalIndex][1], _nextFrame->Frame[horizontalIndex][verticalIndex][1], _currentFrameCooficiency);
-			resultFrame->Frame[horizontalIndex][verticalIndex][2] = VideoFrame::BlendColors(_currentFrame->Frame[horizontalIndex][verticalIndex][2], _nextFrame->Frame[horizontalIndex][verticalIndex][2], _currentFrameCooficiency);
+	VideoFrame* resultFrame = new VideoFrame(_targetQuality->Height, _targetQuality->Width);
+	for (int verticalIndex = 0; verticalIndex < _targetQuality->Height; ++verticalIndex) {
+		for (int horizontalIndex = 0; horizontalIndex < _targetQuality->Width; ++horizontalIndex) {
+			resultFrame->Frame[verticalIndex * _targetQuality->Width + horizontalIndex * 3] = VideoFrame::BlendColors(_currentFrame->Frame[verticalIndex * _targetQuality->Width + horizontalIndex * 3], _nextFrame->Frame[verticalIndex * _targetQuality->Width + horizontalIndex * 3], _currentFrameCooficiency);
+			resultFrame->Frame[verticalIndex * _targetQuality->Width + horizontalIndex * 3 + 1] = VideoFrame::BlendColors(_currentFrame->Frame[verticalIndex * _targetQuality->Width + horizontalIndex * 3 + 1], _nextFrame->Frame[verticalIndex * _targetQuality->Width + horizontalIndex * 3 + 1], _currentFrameCooficiency);
+			resultFrame->Frame[verticalIndex * _targetQuality->Width + horizontalIndex * 3 + 2] = VideoFrame::BlendColors(_currentFrame->Frame[verticalIndex * _targetQuality->Width + horizontalIndex * 3 + 2], _nextFrame->Frame[verticalIndex * _targetQuality->Width + horizontalIndex * 3 + 2], _currentFrameCooficiency);
 		}
 	}
 	return resultFrame;

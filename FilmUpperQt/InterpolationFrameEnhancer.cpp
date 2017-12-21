@@ -8,8 +8,8 @@ InterpolationFrameEnhancer::InterpolationFrameEnhancer(IFrameReader * inputFrame
 
 VideoFrame * InterpolationFrameEnhancer::ReadNextEnhancedFrame()
 {
-	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->FrameSizeX, _targetQualityInfo->FrameSizeY);
-	VideoFrame* inputFrame = _inputFrameStream->ReadNextFrame();
+	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Height, _targetQualityInfo->Width);
+	/*VideoFrame* inputFrame = _inputFrameStream->ReadNextFrame();
 	int leftSampleR;
 	int leftSampleG;
 	int leftSampleB;
@@ -40,7 +40,7 @@ VideoFrame * InterpolationFrameEnhancer::ReadNextEnhancedFrame()
 			outputFrame->Frame[horizontalIndex][verticalIndex][2] = VideoFrame::BlendColors(leftSampleB, rightSampleB, 1 - fmod(horizontalOriginPosition, 1));
 		}
 	}
-	delete inputFrame;
+	delete inputFrame;*/
 	return outputFrame;
 }
 

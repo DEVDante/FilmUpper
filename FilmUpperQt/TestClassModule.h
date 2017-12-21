@@ -37,13 +37,14 @@ public:
 			enhancer = new NNFrameEnhancer(frameReader, qualityInfo);
 			std::ofstream saveFile;
 			saveFile.open("readTestNN.txt");
+			int iterations = 10000;
 			clock_t begin = clock();
-			for (int xd = 0; xd < 60; ++xd) {
+			for (int xd = 0; xd < iterations; ++xd) {
 				delete enhancer->ReadNextEnhancedFrame();
 			}
 			clock_t end = clock();
-			double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-			saveFile << std::to_string(elapsed_secs) + " sekund, \n";
+			double elapsed_secs = (double(end - begin)/iterations) / CLOCKS_PER_SEC;
+			saveFile << std::to_string(elapsed_secs) + " sekund dla " + std::to_string(iterations) +" iteracji, \n";
 			auto readFrame = enhancer->ReadNextEnhancedFrame();
 
 			for (int y = 0; y < qualityInfo->Height; ++y)
