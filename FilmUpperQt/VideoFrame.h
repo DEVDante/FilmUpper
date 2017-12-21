@@ -2,21 +2,19 @@
 #include <qcolor.h>
 #include <boost\multi_array.hpp>
 
-typedef boost::multi_array<int, 3> frameType;
-
 class VideoFrame {
 public:
 	VideoFrame(int height, int width) {
-		frameType::extent_gen ext;
-		Frame.resize(ext[height][width][3]);
+		Frame = new int[height * width * 3];
 		_width = width;
 		_height = height;
 	}
 
 	~VideoFrame() {
+		delete Frame;
 	}
 	
-	frameType Frame;
+	int* Frame;
 
 	static inline int BlendColors(int leftColor, int rightColor, double blendRatio) {
 		return (int)(((double)leftColor * blendRatio) + ((double)rightColor * (1 - blendRatio)));
@@ -25,14 +23,9 @@ public:
 	VideoFrame* Clone()
 	{
 		VideoFrame* retFrame = new VideoFrame(_height, _width);
-		for(int h = 0; h < _height; h++)
+		for(int s = 0; s < _height * _width * 3; s++)
 		{
-			for (int w = 0; h < _width; w++)
-			{
-				retFrame->Frame[h][w][0] = Frame[h][w][0];
-				retFrame->Frame[h][w][1] = Frame[h][w][1];
-				retFrame->Frame[h][w][2] = Frame[h][w][2];
-			}
+			retFrame->Frame[s] = Frame[s];
 		}
 		return retFrame;
 	}

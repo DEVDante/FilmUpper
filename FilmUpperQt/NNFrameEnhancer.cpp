@@ -2,24 +2,24 @@
 
 VideoFrame* NNFrameEnhancer::ReadNextEnhancedFrame()
 {
-	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->FrameSizeX, _targetQualityInfo->FrameSizeY);
+	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Width, _targetQualityInfo->Height);
 	VideoFrame* inputFrame = _inputFrameStream->ReadNextFrame();
 
-	int horizontalRatio = (int)((_sourceQualityInfo->FrameSizeX<<16) / _targetQualityInfo->FrameSizeX) + 1;
-	int verticalRatio = (int)((_sourceQualityInfo->FrameSizeY<<16) / _targetQualityInfo->FrameSizeY) + 1;
+	double horizontalRatio = (double)_sourceQualityInfo->Width / (double)_targetQualityInfo->Width;
+	double verticalRatio = (double)_sourceQualityInfo->Height / (double)_targetQualityInfo->Height;
 
-	double horizontalOriginPosition;
-	double verticalOriginPosition;
-
-	for (int horizontalIndex = 0; horizontalIndex < _targetQualityInfo->FrameSizeX; ++horizontalIndex)
+	int horizontalOriginPosition;
+	int verticalOriginPosition;
+	for (int verticalIndex = 0; verticalIndex < _targetQualityInfo->Height; ++verticalIndex)
 	{
-		horizontalOriginPosition = ((horizontalRatio * horizontalIndex)>>16);
-		for (int verticalIndex = 0; verticalIndex < _targetQualityInfo->FrameSizeY; ++verticalIndex)
+		verticalOriginPosition = verticalRatio * verticalIndex;
+		for (int horizontalIndex = 0; horizontalIndex < _targetQualityInfo->Width; ++horizontalIndex)
 		{
-			verticalOriginPosition = ((verticalRatio * verticalIndex)>>16);
-			outputFrame->Frame[horizontalIndex][verticalIndex][0] = inputFrame->Frame[horizontalOriginPosition][verticalOriginPosition][0];
-			outputFrame->Frame[horizontalIndex][verticalIndex][1] = inputFrame->Frame[horizontalOriginPosition][verticalOriginPosition][1];
-			outputFrame->Frame[horizontalIndex][verticalIndex][2] = inputFrame->Frame[horizontalOriginPosition][verticalOriginPosition][2];			
+			horizontalOriginPosition = horizontalRatio * horizontalIndex;
+			
+			outputFrame->Frame[verticalIndex * _targetQualityInfo->Width + horizontalIndex * 3] = inputFrame->Frame[verticalOriginPosition * _sourceQualityInfo->Width + horizontalOriginPosition * 3];
+			outputFrame->Frame[verticalIndex * _targetQualityInfo->Width + horizontalIndex * 3 + 1] = inputFrame->Frame[verticalOriginPosition * _sourceQualityInfo->Width + horizontalOriginPosition * 3 + 1];
+			outputFrame->Frame[verticalIndex * _targetQualityInfo->Width + horizontalIndex * 3 + 2] = inputFrame->Frame[verticalOriginPosition * _sourceQualityInfo->Width + horizontalOriginPosition * 3 + 2];
 		}
 	}
 	delete inputFrame;

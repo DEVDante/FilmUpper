@@ -17,8 +17,8 @@ public:
 
 class FilmQualityInfo {
 public:
-	int FrameSizeX;
-	int FrameSizeY;
+	int Width;
+	int Height;
 	FrameRate* FrameRate;
 };
 
