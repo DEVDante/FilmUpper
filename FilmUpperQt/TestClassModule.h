@@ -20,13 +20,14 @@ public:
 
 	void static RunAllToFileTests()
 	{
-		InterpolationFrameEnhTestToFile();
-		NNFrameEnhToFileTest();
-		ReaderTest();
+		//InterpolationFrameEnhTestToFile();
+		//NNFrameEnhToFileTest();
+		NNSpeedTest();
+		InterpolationSpeedTest();
 		//WriterTest();
 	}
 
-	void static ReaderTest()
+	void static NNSpeedTest()
 	{
 			IFrameReader* frameReader = new FrameReader("D:/Studia/Inzynierka/big_buck_bunny_480p_surround-fix.avi");
 			FilmQualityInfo* qualityInfo = new FilmQualityInfo();
@@ -62,6 +63,44 @@ public:
 			delete readFrame;
 			delete qualityInfo;
 			delete frameReader;
+	}
+
+	void static InterpolationSpeedTest()
+	{
+		IFrameReader* frameReader = new FrameReader("D:/Studia/Inzynierka/big_buck_bunny_480p_surround-fix.avi");
+		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
+		qualityInfo->Width = 1708;
+		qualityInfo->Height = 960;
+		qualityInfo->FrameRate = new FrameRate(24, 1);
+		FrameEnhancerBase* enhancer;
+		enhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
+		std::ofstream saveFile;
+		saveFile.open("readTestInterpolation.txt");
+		int iterations = 1000;
+		clock_t begin = clock();
+		for (int xd = 0; xd < iterations; ++xd) {
+			delete enhancer->ReadNextEnhancedFrame();
+		}
+		clock_t end = clock();
+		double elapsed_secs = (double(end - begin) / iterations) / CLOCKS_PER_SEC;
+		saveFile << std::to_string(elapsed_secs) + " sekund dla " + std::to_string(iterations) + " iteracji, \n";
+		auto readFrame = enhancer->ReadNextEnhancedFrame();
+
+		for (int y = 0; y < qualityInfo->Height; ++y)
+		{
+			for (int x = 0; x < qualityInfo->Width; ++x)
+			{
+				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3]) + " ";
+				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3 + 1]) + " ";
+				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3 + 2]) + ", ";
+			}
+			saveFile << "\n";
+		}
+		saveFile.close();
+		delete enhancer;
+		delete readFrame;
+		delete qualityInfo;
+		delete frameReader;
 	}
 
 	void static WriterTest()
