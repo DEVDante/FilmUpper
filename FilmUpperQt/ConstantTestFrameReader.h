@@ -21,9 +21,9 @@ public:
 				frame->Frame[y * TEST_WIDTH + x * 3] = blend;
 				frame->Frame[y * TEST_WIDTH + x * 3 + 1] = blend;
 				frame->Frame[y * TEST_WIDTH + x * 3 + 2] = blend;
-				saveFile << std::to_string(blend) + " in " + std::to_string(y * TEST_WIDTH + x * 3) + ", ";
-				saveFile << std::to_string(blend) + " in " + std::to_string(y * TEST_WIDTH + x * 3 + 1) + ", ";
-				saveFile << std::to_string(blend) + " in " + std::to_string(y * TEST_WIDTH + x * 3 + 2) + ", ";
+				saveFile << std::to_string(frame->Frame[y * TEST_WIDTH + x * 3]) + " in " + std::to_string(y * TEST_WIDTH + x * 3) + ", ";
+				saveFile << std::to_string(frame->Frame[y * TEST_WIDTH + x * 3 + 1]) + " in " + std::to_string(y * TEST_WIDTH + x * 3 + 1) + ", ";
+				saveFile << std::to_string(frame->Frame[y * TEST_WIDTH + x * 3 + 2]) + " in " + std::to_string(y * TEST_WIDTH + x * 3 + 2) + ", ";
 			}
 			saveFile << "\n";
 		}

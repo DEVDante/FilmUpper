@@ -37,7 +37,7 @@ public:
 			enhancer = new NNFrameEnhancer(frameReader, qualityInfo);
 			std::ofstream saveFile;
 			saveFile.open("readTestNN.txt");
-			int iterations = 100;
+			int iterations = 1000;
 			clock_t begin = clock();
 			for (int xd = 0; xd < iterations; ++xd) {
 				delete enhancer->ReadNextEnhancedFrame();
