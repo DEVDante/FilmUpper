@@ -135,6 +135,7 @@
     <ClInclude Include="NOPFrameEnhancerHeader.h" />
     <ClInclude Include="NOPFrameEnhancer.h" />
     <ClInclude Include="TestClassModule.h" />
+    <ClInclude Include="VFHack.h" />
     <ClInclude Include="VideoFrame.h" />
     <ClInclude Include="GeneratedFiles\ui_FilmUpperQt.h" />
     <ClInclude Include="IFpsEnhancerHeader.h" />

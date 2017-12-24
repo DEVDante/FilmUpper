@@ -39,6 +39,9 @@
     <ClInclude Include="IFrameEnhancerHeader.h" />
     <ClInclude Include="IFrameReader.h" />
     <ClInclude Include="FrameWriter.h" />
+    <ClInclude Include="VFHack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FilmUpperQt.h" />
@@ -47,5 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
   </ItemGroup>
 </Project>

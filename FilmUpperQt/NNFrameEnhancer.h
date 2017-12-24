@@ -1,13 +1,7 @@
 #pragma once
 #include "FrameEnhancerBase.h"
 #include <thread>
-
-class VFHack
-{
-public:
-	VideoFrame* Frame;
-	VFHack() { Frame = nullptr; };
-};
+#include "VFHack.h"
 
 class NNFrameEnhancer: public FrameEnhancerBase
 {

@@ -22,7 +22,7 @@ public:
 	{
 		//InterpolationFrameEnhTestToFile();
 		//NNFrameEnhToFileTest();
-		NNSpeedTest();
+		//NNSpeedTest();
 		InterpolationSpeedTest();
 		//WriterTest();
 	}
