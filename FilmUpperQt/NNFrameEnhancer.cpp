@@ -2,11 +2,16 @@
 
 VideoFrame* NNFrameEnhancer::ReadNextEnhancedFrame()
 {
+	if (!_framesLeft)
+		return nullptr;
 	_framePrefetch.join();
 	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Width, _targetQualityInfo->Height);
 	VideoFrame* inputFrame = _nextFrame->Frame;
 
-	_framePrefetch = std::thread(PrefetchFrame, _inputFrameStream, _nextFrame);
+	if (_inputFrameStream->AreFramesLeft())
+		_framePrefetch = std::thread(PrefetchFrame, _inputFrameStream, _nextFrame);
+	else
+		_framesLeft = false;
 
 	int threads = 2;
 
@@ -55,7 +60,7 @@ void NNFrameEnhancer::PrefetchFrame(IFrameReader* frameReader, VFHack* vf)
 
 bool NNFrameEnhancer::AreFramesLeft()
 {
-	return _inputFrameStream->AreFramesLeft();
+	return _framesLeft;
 }
 
 NNFrameEnhancer::NNFrameEnhancer(IFrameReader * inputFrameReader, FilmQualityInfo * targetQualityInfo) : FrameEnhancerBase(inputFrameReader, targetQualityInfo)

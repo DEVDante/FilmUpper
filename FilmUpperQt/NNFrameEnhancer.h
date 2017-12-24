@@ -15,4 +15,5 @@ private:
 	void static PrefetchFrame(IFrameReader* frameReader, VFHack* vf);
 	std::thread _framePrefetch;
 	VFHack* _nextFrame;
+	bool _framesLeft = true;
 };

@@ -10,11 +10,16 @@ InterpolationFrameEnhancer::InterpolationFrameEnhancer(IFrameReader * inputFrame
 
 VideoFrame * InterpolationFrameEnhancer::ReadNextEnhancedFrame()
 {
+	if (!_framesLeft)
+		return nullptr;
 	_framePrefetch.join();
 	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Width, _targetQualityInfo->Height);
 	VideoFrame* inputFrame = _nextFrame->Frame;
 
-	_framePrefetch = std::thread(PrefetchFrame, _inputFrameStream, _nextFrame);
+	if (_inputFrameStream->AreFramesLeft())
+		_framePrefetch = std::thread(PrefetchFrame, _inputFrameStream, _nextFrame);
+	else
+		_framesLeft = false;
 
 	int threads = 4;
 
@@ -36,7 +41,7 @@ VideoFrame * InterpolationFrameEnhancer::ReadNextEnhancedFrame()
 
 bool InterpolationFrameEnhancer::AreFramesLeft()
 {
-	return _inputFrameStream->AreFramesLeft();
+	return _framesLeft;
 }
 
 void InterpolationFrameEnhancer::PrefetchFrame(IFrameReader* frameReader, VFHack* vf)
