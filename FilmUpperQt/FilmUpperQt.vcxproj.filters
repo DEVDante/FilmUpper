@@ -12,6 +12,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NNFrameEnhancer.cpp" />
     <ClCompile Include="FrameWriter.cpp" />
+    <ClCompile Include="BiCubicFrameEnhancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConstantTestFrameReader.h" />
@@ -42,6 +45,12 @@
     <ClInclude Include="VFHack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BiCubicFrameEnhancerHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BiCubicFrameEnhancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FilmUpperQt.h" />
@@ -55,6 +64,11 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
       <ParseFiles>true</ParseFiles>
     </Filter>
   </ItemGroup>

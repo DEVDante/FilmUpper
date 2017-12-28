@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <fstream>
 #include <time.h>
+#include "BiCubicFrameEnhancer.h"
 
 class TestClassModule {
 public:
@@ -23,8 +24,9 @@ public:
 		//InterpolationFrameEnhTestToFile();
 		//NNFrameEnhToFileTest();
 		//NNSpeedTest();
-		InterpolationSpeedTest();
-		//WriterTest();
+		//InterpolationSpeedTest();
+		WriterTest();
+		//BiCubicSpeedTest();
 	}
 
 	void static NNSpeedTest()
@@ -63,6 +65,44 @@ public:
 			delete readFrame;
 			delete qualityInfo;
 			delete frameReader;
+	}
+
+	void static BiCubicSpeedTest()
+	{
+		IFrameReader* frameReader = new FrameReader("D:/Studia/Inzynierka/big_buck_bunny_480p_surround-fix.avi");
+		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
+		qualityInfo->Width = 1708;
+		qualityInfo->Height = 960;
+		qualityInfo->FrameRate = new FrameRate(24, 1);
+		FrameEnhancerBase* enhancer;
+		enhancer = new BiCubicFrameEnhancer(frameReader, qualityInfo);
+		std::ofstream saveFile;
+		saveFile.open("readTestBiCubic.txt");
+		int iterations = 1000;
+		clock_t begin = clock();
+		for (int xd = 0; xd < iterations; ++xd) {
+			delete enhancer->ReadNextEnhancedFrame();
+		}
+		clock_t end = clock();
+		double elapsed_secs = (double(end - begin) / iterations) / CLOCKS_PER_SEC;
+		saveFile << std::to_string(elapsed_secs) + " sekund dla " + std::to_string(iterations) + " iteracji, \n";
+		auto readFrame = enhancer->ReadNextEnhancedFrame();
+
+		for (int y = 0; y < qualityInfo->Height; ++y)
+		{
+			for (int x = 0; x < qualityInfo->Width; ++x)
+			{
+				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3]) + " ";
+				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3 + 1]) + " ";
+				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3 + 2]) + ", ";
+			}
+			saveFile << "\n";
+		}
+		saveFile.close();
+		delete enhancer;
+		delete readFrame;
+		delete qualityInfo;
+		delete frameReader;
 	}
 
 	void static InterpolationSpeedTest()
@@ -111,10 +151,8 @@ public:
 		qualityInfo->Height = 960;
 		qualityInfo->FrameRate = new FrameRate(24, 1);
 		FrameEnhancerBase* frameEnhancer;
-		frameEnhancer = new NNFrameEnhancer(frameReader, qualityInfo);
-		FpsEnhancerBase* fpsEnhancer;
-		fpsEnhancer = new NOPFpsEnhancer(frameEnhancer, qualityInfo);
-		//FrameWriter frameWriter = new FrameWriter()
+		frameEnhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
+		//FrameWriter frameWriter = new FrameWriter("D:/Studia/Inzynierka/OutputInterpolation.avi",)
 
 
 		delete frameEnhancer;

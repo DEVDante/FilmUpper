@@ -5,7 +5,7 @@
 
 class InterpolationFrameEnhancerHeader: public IFrameEnhancerHeader {
 public:
-	InterpolationFrameEnhancerHeader() : IFrameEnhancerHeader("Interpolation Frame Resizer", "Enchantes visuals in resized video by interpolating source frame. Resulting video might by blury.") {};
+	InterpolationFrameEnhancerHeader() : IFrameEnhancerHeader("BiLinearInterpolation Frame Resizer", "Enchantes visuals in resized video by interpolating source frame using BiLinear method. Resulting video might by blury.") {};
 	FrameEnhancerBase* Enhancer(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo) override {
 		return new InterpolationFrameEnhancer(inputFrameReader, targetQualityInfo);
 	};

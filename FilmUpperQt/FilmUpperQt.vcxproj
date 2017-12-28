@@ -70,6 +70,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BiCubicFrameEnhancer.cpp" />
     <ClCompile Include="FilmUpperController.cpp" />
     <ClCompile Include="FilmUpperQt.cpp" />
     <ClCompile Include="FrameReader.cpp" />
@@ -115,6 +116,8 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BiCubicFrameEnhancer.h" />
+    <ClInclude Include="BiCubicFrameEnhancerHeader.h" />
     <ClInclude Include="ConstantTestFrameReader.h" />
     <ClInclude Include="FilmQualityInfo.h" />
     <ClInclude Include="FilmUpperController.h" />

@@ -37,3 +37,4 @@ Debug/*
 *.db
 *.opendb
 /.project
+*/Release/*
