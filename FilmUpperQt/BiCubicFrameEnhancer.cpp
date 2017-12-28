@@ -190,7 +190,7 @@ void BiCubicFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* 
 
 int BiCubicFrameEnhancer::calculateSplain(int a, int b, int c, int d, double ratio)
 {
-	return 1.0 / 2.0 * (
+	return 0.5 * (
 		((ratio*ratio*(2 - ratio) - ratio) * a) +
 		((ratio*ratio*(3 * ratio - 5) + 2) * b) +
 		((ratio*ratio*(4 - (3 * ratio)) + ratio) * c) +

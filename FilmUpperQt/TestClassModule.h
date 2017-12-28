@@ -25,8 +25,8 @@ public:
 		//NNFrameEnhToFileTest();
 		//NNSpeedTest();
 		//InterpolationSpeedTest();
-		WriterTest();
-		//BiCubicSpeedTest();
+		//WriterTest();
+		BiCubicSpeedTest();
 	}
 
 	void static NNSpeedTest()
