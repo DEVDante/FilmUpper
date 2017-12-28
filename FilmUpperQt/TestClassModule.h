@@ -152,9 +152,14 @@ public:
 		qualityInfo->FrameRate = new FrameRate(24, 1);
 		FrameEnhancerBase* frameEnhancer;
 		frameEnhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
-		//FrameWriter frameWriter = new FrameWriter("D:/Studia/Inzynierka/OutputInterpolation.avi",)
+		FrameWriter* frameWriter = new FrameWriter("D:/Studia/Inzynierka/OutputInterpolation.mp4", "mp4", "libx264", qualityInfo);
 
+		while(frameEnhancer->AreFramesLeft())
+		{
+			frameWriter->WriteFrame(frameEnhancer->ReadNextEnhancedFrame());
+		}
 
+		delete frameWriter;
 		delete frameEnhancer;
 		delete qualityInfo;
 		delete frameReader;

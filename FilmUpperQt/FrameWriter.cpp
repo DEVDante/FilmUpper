@@ -27,6 +27,7 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, std::st
 	if (avcodec_open2(codecCTX, codec, NULL)<0)
 		throw std::runtime_error("Couldn't open codec");
 
+	file = new std::ofstream();
 	file->open(filename, std::ios::binary | std::ios::out);
 	
 	if (!file)
