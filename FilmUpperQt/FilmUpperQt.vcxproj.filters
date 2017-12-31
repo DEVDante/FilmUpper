@@ -1,47 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="FilmUpperController.cpp" />
-    <ClCompile Include="FilmUpperQt.cpp" />
-    <ClCompile Include="FrameReader.cpp" />
-    <ClCompile Include="GeneratedFiles\Debug\moc_FilmUpperQt.cpp" />
-    <ClCompile Include="GeneratedFiles\qrc_FilmUpperQt.cpp" />
-    <ClCompile Include="InterlaceFpsEnhancer.cpp" />
-    <ClCompile Include="InterpolationFpsEnhancer.cpp" />
-    <ClCompile Include="InterpolationFrameEnhancer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="NNFrameEnhancer.cpp" />
-    <ClCompile Include="FrameWriter.cpp" />
     <ClCompile Include="BiCubicFrameEnhancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NNFrameEnhancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_FilmUpperQt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_FilmUpperQt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InterpolationFrameEnhancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InterpolationFpsEnhancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InterlaceFpsEnhancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FilmUpperQt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FilmUpperController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConstantTestFrameReader.h" />
-    <ClInclude Include="FilmQualityInfo.h" />
-    <ClInclude Include="FilmUpperController.h" />
-    <ClInclude Include="FpsEnhancerBase.h" />
-    <ClInclude Include="FrameEnhancerBase.h" />
-    <ClInclude Include="FrameReader.h" />
-    <ClInclude Include="InterlaceFpsEnhancerHeader.h" />
-    <ClInclude Include="InterlaceFpsEnhancer.h" />
-    <ClInclude Include="InterpolationFpsEnhancer.h" />
-    <ClInclude Include="InterpolationFpsEnhancerHeader.h" />
-    <ClInclude Include="InterpolationFrameEnhancer.h" />
-    <ClInclude Include="InterpolationFrameEnhancerHeader.h" />
-    <ClInclude Include="NNFrameEnhancer.h" />
-    <ClInclude Include="NNFrameEnhancerHeader.h" />
-    <ClInclude Include="NOPFpsEnhancer.h" />
-    <ClInclude Include="NOPFpsEnhancerHeader.h" />
-    <ClInclude Include="NOPFrameEnhancerHeader.h" />
-    <ClInclude Include="NOPFrameEnhancer.h" />
-    <ClInclude Include="TestClassModule.h" />
-    <ClInclude Include="VideoFrame.h" />
-    <ClInclude Include="GeneratedFiles\ui_FilmUpperQt.h" />
-    <ClInclude Include="IFpsEnhancerHeader.h" />
-    <ClInclude Include="IFrameEnhancerHeader.h" />
-    <ClInclude Include="IFrameReader.h" />
-    <ClInclude Include="FrameWriter.h" />
     <ClInclude Include="VFHack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -51,11 +46,88 @@
     <ClInclude Include="BiCubicFrameEnhancer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConstantTestFrameReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FilmQualityInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FilmUpperController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FpsEnhancerBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameEnhancerBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IFpsEnhancerHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IFrameEnhancerHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IFrameReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterlaceFpsEnhancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_FilmUpperQt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestClassModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NOPFrameEnhancerHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NOPFrameEnhancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NOPFpsEnhancerHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NOPFpsEnhancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NNFrameEnhancerHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NNFrameEnhancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpolationFrameEnhancerHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpolationFrameEnhancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpolationFpsEnhancerHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpolationFpsEnhancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterlaceFpsEnhancerHeader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="FilmUpperQt.h" />
     <CustomBuild Include="FilmUpperQt.ui" />
     <CustomBuild Include="FilmUpperQt.qrc" />
+    <CustomBuild Include="FilmUpperQt.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

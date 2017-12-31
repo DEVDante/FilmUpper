@@ -4,15 +4,23 @@
 \contentsline {subsubsection}{\numberline {1.1.1}\kernsubsubsekcyjny C++}{9}
 \contentsline {subsubsection}{\numberline {1.1.2}\kernsubsubsekcyjny C\#}{10}
 \contentsline {subsubsection}{\numberline {1.1.3}\kernsubsubsekcyjny Rust}{10}
-\contentsline {subsubsection}{\numberline {1.1.4}\kernsubsubsekcyjny Wyb\IeC {\'o}r j\IeC {\k e}zyka programowania}{10}
-\contentsline {section}{\numberline {2}\kernsekcyjny Dekodowanie oraz enkodowanie film\IeC {\'o}w}{11}
-\contentsline {section}{\numberline {3}\kernsekcyjny Interfejs u\IeC {\.z}ytkownika}{13}
-\contentsline {section}{\numberline {4}\kernsekcyjny Struktura programu}{15}
-\contentsline {subsection}{\numberline {4.1}\kernsubsekcyjny Komunikacja z u\IeC {\.z}ytkownikiem}{15}
-\contentsline {subsection}{\numberline {4.2}\kernsubsekcyjny Organizacja algorytm\IeC {\'o}w i sposobu przekszta\IeC {\l }cania plik\IeC {\'o}w wideo}{16}
-\contentsline {subsubsection}{\numberline {4.2.1}\kernsubsubsekcyjny IFrameReader - odczytywanie informacji z pliku wideo}{17}
-\contentsline {subsubsection}{\numberline {4.2.2}\kernsubsubsekcyjny FrameEnhancerBase i IFrameEnhancerHeader - ulepszanie pojedynczej klatki}{18}
-\contentsline {section}{\numberline {5}\kernsekcyjny Algorytmy}{21}
-\contentsline {section}{Rysunki}{23}
-\contentsline {section}{Programy}{25}
-\contentsline {section}{Literatura}{27}
+\contentsline {subsubsection}{\numberline {1.1.4}\kernsubsubsekcyjny Python}{10}
+\contentsline {subsubsection}{\numberline {1.1.5}\kernsubsubsekcyjny Wyb\IeC {\'o}r j\IeC {\k e}zyka programowania}{10}
+\contentsline {section}{\numberline {2}\kernsekcyjny Dekodowanie oraz enkodowanie film\IeC {\'o}w}{13}
+\contentsline {section}{\numberline {3}\kernsekcyjny Interfejs u\IeC {\.z}ytkownika}{15}
+\contentsline {section}{\numberline {4}\kernsekcyjny Struktura programu}{17}
+\contentsline {subsection}{\numberline {4.1}\kernsubsekcyjny Komunikacja z u\IeC {\.z}ytkownikiem}{17}
+\contentsline {subsection}{\numberline {4.2}\kernsubsekcyjny Organizacja algorytm\IeC {\'o}w i sposobu przekszta\IeC {\l }cania plik\IeC {\'o}w wideo}{18}
+\contentsline {subsubsection}{\numberline {4.2.1}\kernsubsubsekcyjny IFrameReader - odczytywanie informacji z pliku wideo}{19}
+\contentsline {subsubsection}{\numberline {4.2.2}\kernsubsubsekcyjny FrameEnhancerBase i IFrameEnhancerHeader - ulepszanie pojedynczej klatki}{20}
+\contentsline {subsubsection}{\numberline {4.2.3}\kernsubsubsekcyjny FpsEnhancerBase i IFpsEnhancerHeader - tworzenie nowych klatek po\IeC {\'s}rednich}{23}
+\contentsline {section}{\numberline {5}\kernsekcyjny Algorytmy}{25}
+\contentsline {subsection}{\numberline {5.1}\kernsubsekcyjny Ulepszanie pojedynczej klatki}{25}
+\contentsline {subsubsection}{\numberline {5.1.1}\kernsubsubsekcyjny Algorytm najbli\IeC {\.z}szego s\IeC {\k a}siada}{25}
+\contentsline {subsubsection}{\numberline {5.1.2}\kernsubsubsekcyjny Algorytm interpolacji dwuliniowej}{26}
+\contentsline {subsubsection}{\numberline {5.1.3}\kernsubsubsekcyjny Algorytm interpolacji bikubicznej}{28}
+\contentsline {subsection}{\numberline {5.2}\kernsubsekcyjny Zwi\IeC {\k e}kszanie ilo\IeC {\'s}ci klatek na sekund\IeC {\k e}}{28}
+\contentsline {subsubsection}{\numberline {5.2.1}\kernsubsubsekcyjny Algorytm interpolacji}{28}
+\contentsline {subsubsection}{\numberline {5.2.2}\kernsubsubsekcyjny Algorytm przeplotu}{29}
+\contentsline {section}{\numberline {6}\kernsekcyjny Optymalizacja}{31}
+\contentsline {section}{Literatura}{33}

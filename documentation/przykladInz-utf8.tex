@@ -1,6 +1,8 @@
 \documentclass[twoside]{projektInzynierskiMS}
 \usepackage{polski}
 \usepackage{lmodern}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 %\drukJednostronny
@@ -66,6 +68,9 @@ Wysokopoziomowe rozwinięcie języka z rodziny C. Mimo posiadania składni podob
 \subsubsection{Rust}
 Prędkość działania porównywalna z językiem C++, duże bezpieczeństwo pod względem zarządzania pamięcią, łatwość w konwersji programu jednowątkowego na wielowątkowy, składnia języka oraz wiele udogodnień zaciągniętych z języków wysokiego poziomu. To jedne z wielu punktów które zachęcały do wyboru tego języka. Niestety, z uwagi na to, że jest to język stosunkowo młody zauważalny jest brak lub wczesna wersja bibliotek umożliwiających przyjemną pracę na plikach filmowych. Jest to także język z którym nie mamy dużego doświadczenia.
 
+\subsubsection{Python}
+Python mimo bycia językiem wysokopoziomowym ma duże możliwości w przetwarzaniu ogromnych ilości danych dzięki bibliotece numpy. Jest to bardzo szybka biblioteka zaimplementowana w języku niskiego poziomu. Mieliśmy także styczności z tym językiem podczas naszych studiów. Dużym minusem jest dla nas brak silnych statycznych typów który znacząco ułatwia naukę nowych rozwiązań.
+
 \subsubsection{Wybór języka programowania}
 Rozważając cechy każdego z języków, nasze umiejętności w posługiwaniu się nimi oraz specyfikę programu który chcemy napisać wybraliśmy język C++. Kluczowymi cechami które przekonały nas do wyboru tego języka były: mnogość bibliotek związanych z tematem projektu lub uniwersalnie wspomagających często napotykane problemy, prędkość działania oraz duża znajomość samego języka.
 
@@ -91,7 +96,7 @@ W naszym projekcie z założenia stosujemy dwa typy algorytmów. Są to algorytm
 
 Algorytmy te korzystają z klas które przechowują ważne informacje odnośnie przetwarzanego wideo. Klasami tymi są klasy VideoFrame oraz FilmQualityInfo. 
 
-Klasa VideoFrame przechowuje informację na temat pojedynczej klatki wideo.  
+Klasa VideoFrame przechowuje informację na temat pojedynczej klatki wideo, FilmQualityInfo przechowuje natomiast informację odnośnie parametrów pliku wideo. 
 
 Przy ich użyciu oraz przy użyciu klas bazowych IFrameReader i IFrameWriter (i stworzonych na ich podstawie implementacjach) przetwarzamy plik wideo w następujący sposób:
 \begin{enumerate}
@@ -230,13 +235,190 @@ Dostarcza ona następującą funkcjonalność:
 \end{verbatim} 
  - zwraca nowo utworzony obiekt klasy ulepszającej jakość klatki wideo.
 
+\subsubsection{FpsEnhancerBase i IFpsEnhancerHeader - tworzenie nowych klatek pośrednich}
+Zadaniem klasy bazowej FpsEnhancerBase jest przetworzenie otrzymanych klatek w taki sposób aby zwiększyć ilość klatek wynikowych poprzez tworzenie klatek pośrednich na podstawie otrzymanych od IFrameEnhancerBase, ulepszonych klatek. IFpsEnhancerHeader przechowuje informacje na temat odpowiadającego mu FpsEnhancerBase oraz umożliwia utworzenie obiektu tej klasy.
+
+Możliwości FpsEnhancerBase to:
+
+\begin{verbatim}
+class FpsEnhancerBase {
+protected:
+    FrameEnhancerBase* _frameEnhancer;
+    FilmQualityInfo* _targetQuality;
+    FilmQualityInfo* _sourceQuality;
+public:
+    FpsEnhancerBase(FrameEnhancerBase* frameEnhancer,
+     FilmQualityInfo* targetQuality) {
+        _frameEnhancer = frameEnhancer;
+        _targetQuality = targetQuality;
+        _sourceQuality = _frameEnhancer->GetSourceQuality();
+    }
+
+    virtual VideoFrame* ReadNextFrame() { return nullptr; };
+
+    virtual bool AreFramesLeft() { return _frameEnhancer->AreFramesLeft(); };
+};
+\end{verbatim}
+
+\begin{verbatim}
+* FrameEnhancerBase* _frameEnhancer;
+\end{verbatim}
+- przechowuje obiekt klasy przetwarzającej klatki źródłowe,
+
+\begin{verbatim}
+* FilmQualityInfo* _targetQuality;
+\end{verbatim}
+- przechowuje format docelowy filmu,
+
+\begin{verbatim}
+* FilmQualityInfo* _sourceQuality;
+\end{verbatim}
+- przechowuje format źródłowy filmu,
+
+\begin{verbatim}
+* virtual VideoFrame* ReadNextFrame() { return nullptr; };
+\end{verbatim}
+- zwraca następną wynikową klatkę wideo
+
+\begin{verbatim}
+* virtual bool AreFramesLeft() { return _frameEnhancer->AreFramesLeft(); };
+\end{verbatim}
+- informuje, czy pozostały jeszcze klatki do odczytania.
 
 
+Możliwości klasy IFpsEnhancerHeader są następujące:
 
+\begin{verbatim}
+class IFpsEnhancerHeader {
+public:
+    IFpsEnhancerHeader(std::string name, std::string description)
+    {
+    	Name = name;
+    	Description = description;
+    }
+    std::string Name;
+    std::string Description;
+    virtual FpsEnhancerBase* GetFpsEnhancer(FrameEnhancerBase* frameEnhancer,
+	 FilmQualityInfo* qualityInfo) {
+      return new FpsEnhancerBase(frameEnhancer, qualityInfo); 
+      };
+};
+\end{verbatim}
+
+Dostarcza ona następującą funkcjonalność:
+\begin{verbatim}
+* std::string Name;
+\end{verbatim}
+ - jest nazwą algorytmu przetwarzającego otrzymane klatki,
+ \begin{verbatim}
+* std::string Description;
+\end{verbatim}
+ - jest opisem algorytmu dla użytkownika,
+\begin{verbatim}
+* virtual FpsEnhancerBase* GetFpsEnhancer(FrameEnhancerBase* frameEnhancer,
+ FilmQualityInfo* targetQualityInfo) { 
+     return new FpsEnhancerBase(frameEnhancer, qualityInfo);
+};
+\end{verbatim} 
+ - zwraca nowo utworzony obiekt klasy tworzącej pośrednie klatki wideo.
 
 \section{Algorytmy}
+Wykorzystywane przez nas algorytmy dzielą się na dwie poprzednio wyszczególnione kategorie -- przetwarzające pojedynczą klatkę obrazu (FrameEnhancerBase) oraz tworzące nowe klatki pośrednie (FpsEnhancerBase). 
 
+\subsection{Ulepszanie pojedynczej klatki}
+Algorytmy te ulepszają jakość klatki wideo na podstawie odpowiednich algorytmów skalowania. Wykorzystane przez nas algorytmy wykorzystują informacje zawarte tylko na klatce źródłowej (nie wykorzystujemy poprzednich lub następnych klatek obrazu). Różnią się one zastosowaniem, złożonością obliczeniową oraz otrzymanym obrazem wynikowym.
 
+\subsubsection{Algorytm najbliższego sąsiada}
+Algorytm ten jest najszybszym z wykorzystanych przez nas algorytmów, jednakże sytuacje w których jego wykorzystanie da bardzo dobry efekt nie są liczne. Algorytm ten polega na wyszukaniu najbliższego piksela źródłowego odpowiadającemu aktualnie ustalanemu pikselowi wynikowemu i ustawieniu jego koloru w pikselu wynikowym. Algorytm ten nie posiada żadnego wygładzania krawędzi, przez co obraz wynikowy będzie wyglądał jak złożony z większych pikseli źródłowych. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=7cm]{NN.png}
+\caption{Wyszukiwanie wartości nowego piksela metodą najbliższego sąsiada}
+\end{figure}
+
+Na rysunku 1 przedstawiona jest sytuacja w której kolorem zielonym, czerwonym, różowym i niebieskim przedstawione są kolory pikseli z pewnego fragmentu obrazu źródłowego. Czarnym kołem oznaczony został nowy piksel umieszczony w odpowiadającym mu miejscu w źródłowej przestrzeni obrazu. Metoda najbliższego sąsiada dla tego piksela wynikowego wybierze kolor zielony (wskazany strzałką) z uwagi na to, że w przestrzeni źródłowej jest on najbliższy położeniu nowemu pikselowi.
+
+Algorytm ten można stosować z powodzeniem w skalowaniu filmów o charakterystyce tak zwanego "pixel art". Jest to stylistyka wzorująca się na wyglądzie gier komputerowych z czasów, gdy dominowały platformy ośmiobitowe. Styl ten charakteryzuje się widocznymi pojedynczymi pikselami, przez co wygładzanie przejść między pikselami wynikowymi w innych algorytmach jest efektem niepożądanym. Jest to natomiast idealna sytuacja na zastosowanie algorytmu najbliższego sąsiada, jako że ten akcentuje każdy piksel powiększając go w obrazie wynikowym.
+
+\subsubsection{Algorytm interpolacji dwuliniowej}
+Algorytm interpolacji dwuliniowej polega na obliczeniu wynikowej wartości koloru na podstawie 4 pikseli otaczających.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=7cm]{Interpolation1.png}
+\caption{Nowy piksel w przestrzeni obrazu źródłowego}
+\end{figure}
+
+Aby obliczyć wartość koloru nowo utworzonego piksela algorytm interpolacji dwuliniowej oblicza 2 nowe piksele pośrednie. Są one wynikiem zmieszania dwóch odpowiednich pikseli (krok ten można przeprowadzić parując ze sobą piksele horyzontalnie lub wertykalnie). Mieszanie kolorów tych pikseli traktujemy jako funkcję liniową której wartości zmieniają się od jednego koloru do drugiego. Wybieramy wartość funkcji w miejscu przecięcia tej funkcji z prostą prostopadłą przechodzącą przez punkt wynikowy. W naszej implementacji wybraliśmy mieszanie horyzontalne odpowiednich kolorów.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=7cm]{Interpolation2.png}
+\caption{Obliczenie wartości kolorów pośrednich}
+\end{figure}
+
+Dzięki temu, otrzymane przez nas nowe piksele pośrednie znajdują się w jednej linii z pikselem wynikowym. Możemy teraz obliczyć wartość koloru piksela wynikowego używając wartości kolorów pośrednich do utworzenia nowej funkcji liniowej i wybrania jej wartości w miejscu przecięcia się funkcji z pikselem wynikowym. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=7cm]{Interpolation3.png}
+\caption{Obliczenie wartości koloru piksela wynikowego na podstawie kolorów pośrednich}
+\end{figure}
+
+Algorytm ten jest nie jest skomplikowany obliczeniowo, ale jest zauważalnie wolniejszy od algorytmu najbliższego sąsiada. Dzięki swoim właściwością, bardzo dobrze wygładza przejścia między pikselami, przez co ma szeroką gamę zastosowań.
+
+\subsubsection{Algorytm interpolacji bikubicznej}
+Algorytm ten jest najbardziej skomplikowanym obliczeniowo algorytmem jaki zaimplementowaliśmy. Korzysta on z krzywych obliczanych na podstawie macierzy pikseli rozmiaru 4 na 4. Podobnie jak w interpolacji obliczane są wartości kolorów pikseli pośrednich obliczanych dla kolejnych wierszy macierzy dzięki którym obliczany jest splajn zgodny ze wzorem Catmulla-Roma:
+
+$sp(p_{x-1},p_x,p_{x+1},p_{x+2}) = 
+\begin{bmatrix}
+	1 & u & u^2 & u^3 \\[0.3em]
+\end{bmatrix}
+*
+\begin{bmatrix}
+	0 & 1 & 0 & 0 \\[0.3em]
+	-\frac{1}{2} & 0 & \frac{1}{2} & 0 \\[0.3em]
+	1 & -\frac{5}{2} & 2 & -\frac{1}{2} \\[0.3em]
+	-\frac{1}{2} & \frac{3}{2} & -\frac{3}{2} & \frac{1}{2} \\[0.3em]
+\end{bmatrix}
+*
+\begin{bmatrix}
+	p_{x-1} \\[0.3em]
+	p_x \\[0.3em]
+	p_{x+1} \\[0.3em]
+	p_{x+2} \\[0.3em]
+\end{bmatrix}
+$
+\\
+gdzie $u$ jest stosunkiem umiejscowienia nowego punktu na splajnie, a punkty $p_x$ są kolejnymi punktami z macierzy tworzącymi splain.
+
+Obliczone na podstawie powyższego wzoru punkty wykorzystujemy do obliczenia ostatecznej krzywej która w miejscu przecięcia się z punktem końcowym daje nam ostateczną wartość koloru. 
+
+\subsection{Zwiększanie ilości klatek na sekundę}
+Algorytmy zwiększające ilość klatek obrazu na sekundę są zwykle o wiele bardziej skomplikowane od algorytmów ulepszających pojedynczą klatkę obrazu. Aby stworzyć nową klatkę obrazu z dużym oddaniem tego, jak by wyglądała w rzeczywistości wymagana by była złożona analiza wielu obrazów oraz rozwiązania korzystające z systemów opartych o sztuczną inteligencję. Stworzenie pojedynczego systemu takiego rodzaju mogłoby być tematem na osobna pracę naukową. Postanowiliśmy więc skupić się na dwóch podstawowych algorytmach które dają zadowalający efekt przy użyciu prostych technik oraz niedoskonałości ludzkiego zmysłu wzroku.
+
+\subsubsection{Algorytm interpolacji}
+Algorytm interpolacji polega na tym, że klatki pośrednie tworzone są na podstawie oryginalnych klatek poprzez porównywanie dwóch klatek pomiędzy którymi ma znajdować się nowo utworzona klatka. Wartość koloru w pikselach nowo utworzonej klatce obliczana jest poprzez potraktowanie pikseli klatek oryginalnych jako funkcji liniowej której parametrem jest czas. Dzięki temu każdy piksel jest obliczany na podstawie informacji kiedy (w stosunku do dwóch oryginalnych klatek) nowa klatka się pojawia.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=7cm]{FpsInterpolation.png}
+\caption{Obliczenie wartości koloru wynikowego na podstawie czasu}
+\end{figure}
+
+W szybko zmieniających się, dynamicznych scenach efekt ten może być widoczny jako wyraźne rozmycie, jednakże przy scenach na których nie ma gwałtownych zmian poprawia on płynność obrazu bez widzialnego negatywnego efektu.
+
+\subsubsection{Algorytm przeplotu}
+Algorytm przeplotu polega na oszukiwaniu ludzkiego oka poprzez wyświetlanie tylko połowy nowych linii. Wynikiem takiego algorytmu jest film z podwojoną ilością klatek na sekundę. Powinien on być stosowany tylko dla obrazów mających stosunkowo dużą ilość klatek na sekundę z uwagi na to, że im mniejsza jest ilość klatek na sekundę tym bardziej przeplot jest widoczny. Algorytm ten stosowano już w telewizji analogowej z uwagi na niską prędkość przesyłu oraz migotanie ekranu przy wyświetlaniu obrazu w 24 lub 30(29,97) klatkach na sekundę (odpowiednio standardy PAL oraz NTSC). Naprzemienne aktualizowanie wartości wierszy nieparzystych i parzystych obrazu przy odpowiedniej szybkości wyświetlania zwiększa wrażenie płynności obrazu, jednakże im mniejsza jest źródłowa ilość klatek na sekundę tym bardziej widoczny jest przeplot.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=7cm]{Interlace.png}
+\caption{Tworzenie klatek pośrednich przy użyciu algorytmu przeplotu}
+\end{figure}
+
+\section{Optymalizacja}
 %\dodatek{Mój specjalny dodatek}
 
 %Tu treść dodatku. Zwróćmy uwagę na sposób numerowania dodatku, 
@@ -244,39 +426,10 @@ Dostarcza ona następującą funkcjonalność:
           
 %% to wpisuje się do spisu treści, ale bez numeru rozdziału,
 %% można też używać \dodatek{Tytuł}, który jest numerowany, ale inaczej niż rozdziały.
-\dodatkowo{Rysunki}
+%%\dodatkowo{Rysunki}
 
-Tu rysunki
+%%Tu rysunki
 
-\dodatkowo{Programy}
-
-Tu programy
-
-\begin{verbatim}
-#include <stdio.h>
-
-int main()
-{
-   printf("Hello world\n");
-}
-\end{verbatim}
-
-\noindent
-Oraz 
-
-\bigskip
-
-\vrule\hspace{10pt}\begin{minipage}{10cm}
-\begin{verbatim*}
-<?php
-   echo "test=$test";
-?>
-\end{verbatim*}
-\end{minipage}
-
-\begin{tw}
-Twierdzenie Twierdzenie Twierdzenie Twierdzenie Twierdzenie 
-\end{tw}
 \begin{thebibliography}{12}
 
 \bibitem{PozNazwa1} Jakaś pozycja literatury

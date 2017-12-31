@@ -16,7 +16,7 @@ public:
 	
 	int* Frame;
 
-	static inline int BlendColors(int leftColor, int rightColor, double blendRatio) {
+	static int BlendColors(int leftColor, int rightColor, double blendRatio) {
 		return (int)(((double)leftColor * blendRatio) + ((double)rightColor * (1 - blendRatio)));
 	}
 
