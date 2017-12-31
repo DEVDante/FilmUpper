@@ -27,8 +27,7 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, std::st
 	if (avcodec_open2(codecCTX, codec, NULL)<0)
 		throw std::runtime_error("Couldn't open codec");
 
-	file = new std::ofstream();
-	file->open(filename, std::ios::binary | std::ios::out);
+	file = fopen(filename.c_str(), "wb");
 	
 	if (!file)
 		throw std::runtime_error("Couldn't open file");
@@ -63,10 +62,26 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, std::st
 
 FrameWriter::~FrameWriter()
 {
-	file->close();
+	int ret = avcodec_send_frame(codecCTX, NULL);
+	if (ret < 0)
+		throw std::runtime_error("Couldn't send frame to encoder");
+
+	while (ret >= 0) {
+		ret = avcodec_receive_packet(codecCTX, packet);
+		if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
+			break;
+		else if (ret < 0)
+			throw std::runtime_error("Error during decoding");
+		fwrite(packet->data, 1, packet->size, file);
+		av_packet_unref(packet);
+	}
+
+
+	fclose(file);
 	avcodec_close(codecCTX);
 	av_frame_free(&frame);
 	av_frame_free(&frameRGB);
+	av_packet_free(&packet);
 	avformat_close_input(&formatCTX);
 }
 
@@ -75,7 +90,6 @@ void FrameWriter::WriteFrame(VideoFrame *frameOG)
 {
     struct SwsContext *sws_ctx = NULL;
     int frameFinished;
-    AVPacket *packet;
 
 	packet = av_packet_alloc();
 	if (!packet)
@@ -105,8 +119,7 @@ void FrameWriter::WriteFrame(VideoFrame *frameOG)
 			break;
 		else if (ret < 0)
 			throw std::runtime_error("Error during decoding");
-		//fwrite(pkt->data, 1, pkt->size, outfile);
-		file->write((char*)packet->data, packet->size);
+		fwrite(packet->data, 1, packet->size, file);
 		av_packet_unref(packet);
 	}
 

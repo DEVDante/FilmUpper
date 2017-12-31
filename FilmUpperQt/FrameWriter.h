@@ -1,6 +1,6 @@
 #pragma once
 #include "IFrameReader.h"
-#include <fstream>
+#include <cstdio>
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
@@ -16,7 +16,8 @@ private:
 	AVCodec *codec;
 	AVFrame *frame;
 	AVFrame *frameRGB;
-	std::ofstream *file;
+	FILE *file;
+	AVPacket *packet;
 
 	int videoStream;
 	int audioStream;
