@@ -34,19 +34,13 @@ FrameReader::FrameReader( std::string filename )
     frameRGB=av_frame_alloc();
     if (frameRGB == NULL)
 		throw std::bad_alloc::bad_alloc();
-	frameRGB->format = AV_PIX_FMT_RGB24;
-	frameRGB->width = codecCTX->width;
-	frameRGB->height = codecCTX->height;
 
-	av_frame_get_buffer(frameRGB, 0);
+	numBytes = avpicture_get_size(AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
+	frameBuffer = (uint8_t *)av_malloc(numBytes * sizeof(uint8_t));
+
+	avpicture_fill((AVPicture *)frameRGB, frameBuffer, AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
 
 	sws_ctx = sws_getContext(codecCTX->width, codecCTX->height, codecCTX->pix_fmt, codecCTX->width, codecCTX->height, AV_PIX_FMT_RGB24, SWS_BILINEAR, NULL, NULL, NULL);
-
-    //numBytes=avpicture_get_size(AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
-    //frameBuffer=(uint8_t *)av_malloc(numBytes*sizeof(uint8_t));
-
-    //avpicture_fill((AVPicture *)frameRGB, frameBuffer, AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
-
 }
 
 
