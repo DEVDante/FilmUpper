@@ -35,6 +35,9 @@
     <ClCompile Include="FilmUpperController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MaskFrameEnhancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VFHack.h">
@@ -120,6 +123,12 @@
     </ClInclude>
     <ClInclude Include="InterlaceFpsEnhancerHeader.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MaskFrameEnhancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MaskFrameEnhancerHeader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

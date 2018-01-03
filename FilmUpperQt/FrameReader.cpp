@@ -74,7 +74,7 @@ VideoFrame* FrameReader::ReadNextFrame()
     
     VideoFrame *outFrame = new VideoFrame(codecCTX->width, codecCTX->height);
 
-	for (int i = 1; i < codecCTX->height * frameRGB->linesize[0]; i++)
+	for (int i = 0; i < codecCTX->height * frameRGB->linesize[0]; i++)
 	{
 		outFrame->Frame[i] = frameRGB->data[0][i];
 	}
