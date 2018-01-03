@@ -22,6 +22,8 @@ private:
     uint8_t *frameBuffer;
     int numBytes;
 
+	struct SwsContext *sws_ctx;
+
 public:
 	FrameReader( std::string filename );
 	~FrameReader();

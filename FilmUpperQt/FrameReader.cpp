@@ -1,5 +1,6 @@
 #include "FrameReader.h"
 
+
 FrameReader::FrameReader( std::string filename )
 {
 	av_register_all();
@@ -33,11 +34,18 @@ FrameReader::FrameReader( std::string filename )
     frameRGB=av_frame_alloc();
     if (frameRGB == NULL)
 		throw std::bad_alloc::bad_alloc();
+	frameRGB->format = AV_PIX_FMT_RGB24;
+	frameRGB->width = codecCTX->width;
+	frameRGB->height = codecCTX->height;
 
-    numBytes=avpicture_get_size(AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
-    frameBuffer=(uint8_t *)av_malloc(numBytes*sizeof(uint8_t));
+	av_frame_get_buffer(frameRGB, 0);
 
-    avpicture_fill((AVPicture *)frameRGB, frameBuffer, AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
+	sws_ctx = sws_getContext(codecCTX->width, codecCTX->height, codecCTX->pix_fmt, codecCTX->width, codecCTX->height, AV_PIX_FMT_RGB24, SWS_BILINEAR, NULL, NULL, NULL);
+
+    //numBytes=avpicture_get_size(AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
+    //frameBuffer=(uint8_t *)av_malloc(numBytes*sizeof(uint8_t));
+
+    //avpicture_fill((AVPicture *)frameRGB, frameBuffer, AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
 
 }
 
@@ -56,11 +64,8 @@ bool FrameReader::AreFramesLeft()
 
 VideoFrame* FrameReader::ReadNextFrame()
 {
-    struct SwsContext *sws_ctx = NULL;
     int frameFinished;
     AVPacket packet;
-
-    sws_ctx = sws_getContext(codecCTX->width, codecCTX->height, codecCTX->pix_fmt, codecCTX->width, codecCTX->height, AV_PIX_FMT_RGB24, SWS_BILINEAR, NULL, NULL, NULL);
 
     do {
         if (av_read_frame(formatCTX, &packet)<0)
@@ -75,20 +80,7 @@ VideoFrame* FrameReader::ReadNextFrame()
     
     VideoFrame *outFrame = new VideoFrame(codecCTX->width, codecCTX->height);
 
-    for(int y = 0; y < codecCTX->height; y++) 
-        for(int x = 0; x < codecCTX->width; x++) 
-        {
-            int offset = x + y * frameRGB->linesize[0];
-
-			outFrame->Frame[y * codecCTX->width + x * 3] = frameRGB->data[0][offset + 0];
-			outFrame->Frame[y * codecCTX->width + x * 3 + 1] = frameRGB->data[0][offset + 1];
-			outFrame->Frame[y * codecCTX->width + x * 3 + 2] = frameRGB->data[0][offset + 2];
-            //outFrame->Frame[x][y].setRed(frameRGB->data[0][offset + 0]);
-            //outFrame->Frame[x][y].setGreen(frameRGB->data[0][offset + 1]);
-            //outFrame->Frame[x][y].setBlue(frameRGB->data[0][offset + 2]);
-        }
-    
-    return outFrame;
+	memcpy(outFrame->Frame, frameRGB->data[0], sizeof(uint8_t)*codecCTX->height * frameRGB->linesize[0]);
 }
 
 FilmQualityInfo* FrameReader::GetVideoFormatInfo()
