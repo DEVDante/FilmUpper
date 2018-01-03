@@ -13,7 +13,7 @@ VideoFrame * BiCubicFrameEnhancer::ReadNextEnhancedFrame()
 	if (!_framesLeft)
 		return nullptr;
 	_framePrefetch.join();
-	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Width, _targetQualityInfo->Height);
+	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Height, _targetQualityInfo->Width);
 	VideoFrame* inputFrame = _nextFrame->Frame;
 
 	if (_inputFrameStream->AreFramesLeft())
@@ -85,13 +85,13 @@ void BiCubicFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* 
 			auto horizontalRatio = horizontalOriginPosition - horizontalOriginFloor;
 			if ((verticalOriginFloor == 0) || !(verticalOriginFloor < (sourceQ->Height - 2)) || (horizontalOriginFloor == 0) || !(horizontalOriginFloor < (sourceQ->Width - 2)))
 			{
-				output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3] = input->Frame[verticalOriginFloor * sourceQ->Width + horizontalOriginFloor * 3];
-				output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 1] = input->Frame[verticalOriginFloor * sourceQ->Width + horizontalOriginFloor * 3 + 1];
-				output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 2] = input->Frame[verticalOriginFloor * sourceQ->Width + horizontalOriginFloor * 3 + 2];
+				output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3] = input->Frame[(verticalOriginFloor * sourceQ->Width + horizontalOriginFloor) * 3];
+				output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3 + 1] = input->Frame[(verticalOriginFloor * sourceQ->Width + horizontalOriginFloor) * 3 + 1];
+				output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3 + 2] = input->Frame[(verticalOriginFloor * sourceQ->Width + horizontalOriginFloor) * 3 + 2];
 			}
 			else
 			{ 
-				firstRow = (verticalOriginFloor - 1) * sourceQ->Width + horizontalOriginFloor * 3 - 3;
+				firstRow = ((verticalOriginFloor - 1) * sourceQ->Width + horizontalOriginFloor) * 3 - 3;
 				//First curve
 				firstCurveR = calculateSplain(
 					input->Frame[firstRow],
@@ -112,7 +112,7 @@ void BiCubicFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* 
 					input->Frame[firstRow + 11],
 					horizontalRatio);
 
-				secondRow = verticalOriginFloor * sourceQ->Width + horizontalOriginFloor * 3 - 3;
+				secondRow = (verticalOriginFloor * sourceQ->Width + horizontalOriginFloor) * 3 - 3;
 				//Second curve
 				secondCurveR = calculateSplain(
 					input->Frame[secondRow],
@@ -133,7 +133,7 @@ void BiCubicFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* 
 					input->Frame[secondRow + 11],
 					horizontalRatio);
 
-				thirdRow = (verticalOriginFloor + 1) * sourceQ->Width + horizontalOriginFloor * 3 - 3;
+				thirdRow = ((verticalOriginFloor + 1) * sourceQ->Width + horizontalOriginFloor) * 3 - 3;
 				//Third curve
 				thirdCurveR = calculateSplain(
 					input->Frame[thirdRow],
@@ -154,7 +154,7 @@ void BiCubicFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* 
 					input->Frame[thirdRow + 11],
 					horizontalRatio);
 
-				fourthRow = (verticalOriginFloor + 2) * sourceQ->Width + horizontalOriginFloor * 3 - 3;
+				fourthRow = ((verticalOriginFloor + 2) * sourceQ->Width + horizontalOriginFloor) * 3 - 3;
 				//Fourth curve
 				fourthCurveR = calculateSplain(
 					input->Frame[fourthRow],
@@ -180,9 +180,9 @@ void BiCubicFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* 
 				finalB = calculateSplain(firstCurveB, secondCurveB, thirdCurveB, fourthCurveB, verticalRatio);
 
 				//Final values
-				output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3] = finalR > 255 ? 255 : (finalR < 0 ? 0 : finalR);
-				output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 1] = finalG > 255 ? 255 : (finalG < 0 ? 0 : finalG);
-				output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 2] = finalB > 255 ? 255 : (finalB < 0 ? 0 : finalB);
+				output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3] = finalR > 255 ? 255 : (finalR < 0 ? 0 : finalR);
+				output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3 + 1] = finalG > 255 ? 255 : (finalG < 0 ? 0 : finalG);
+				output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3 + 2] = finalB > 255 ? 255 : (finalB < 0 ? 0 : finalB);
 			}			
 		}
 	}
