@@ -80,7 +80,10 @@ VideoFrame* FrameReader::ReadNextFrame()
     
     VideoFrame *outFrame = new VideoFrame(codecCTX->width, codecCTX->height);
 
-	memcpy(outFrame->Frame, frameRGB->data[0], sizeof(uint8_t)*codecCTX->height * frameRGB->linesize[0]);
+	for (int i = 1; i < codecCTX->height * frameRGB->linesize[0]; i++)
+	{
+		outFrame->Frame[i] = frameRGB->data[0][i];
+	}
 
 	return outFrame;
 }
