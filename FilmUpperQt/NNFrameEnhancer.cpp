@@ -5,7 +5,7 @@ VideoFrame* NNFrameEnhancer::ReadNextEnhancedFrame()
 	if (!_framesLeft)
 		return nullptr;
 	_framePrefetch.join();
-	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Width, _targetQualityInfo->Height);
+	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Height, _targetQualityInfo->Width);
 	VideoFrame* inputFrame = _nextFrame->Frame;
 
 	if (_inputFrameStream->AreFramesLeft())
@@ -45,9 +45,9 @@ void NNFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* outpu
 		{
 			horizontalOriginPosition = horizontalRatio * horizontalIndex;
 
-			output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3] = input->Frame[verticalOriginPosition * sourceQ->Width + horizontalOriginPosition * 3];
-			output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 1] = input->Frame[verticalOriginPosition * sourceQ->Width + horizontalOriginPosition * 3 + 1];
-			output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 2] = input->Frame[verticalOriginPosition * sourceQ->Width + horizontalOriginPosition * 3 + 2];
+			output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3] = input->Frame[(verticalOriginPosition * sourceQ->Width + horizontalOriginPosition) * 3];
+			output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3 + 1] = input->Frame[(verticalOriginPosition * sourceQ->Width + horizontalOriginPosition) * 3 + 1];
+			output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3 + 2] = input->Frame[(verticalOriginPosition * sourceQ->Width + horizontalOriginPosition) * 3 + 2];
 		}
 	}
 }

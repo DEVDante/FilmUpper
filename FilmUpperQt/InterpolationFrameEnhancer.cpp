@@ -13,7 +13,7 @@ VideoFrame * InterpolationFrameEnhancer::ReadNextEnhancedFrame()
 	if (!_framesLeft)
 		return nullptr;
 	_framePrefetch.join();
-	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Width, _targetQualityInfo->Height);
+	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Height, _targetQualityInfo->Width);
 	VideoFrame* inputFrame = _nextFrame->Frame;
 
 	if (_inputFrameStream->AreFramesLeft())
@@ -63,6 +63,7 @@ void InterpolationFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoF
 	{
 		auto verticalOriginPosition = (double)(verticalIndex * (double)(sourceQ->Height - 1)) / (double)(targetQ->Height - 1);
 		int verticalOriginCelling = static_cast<int>(verticalOriginPosition + 1);
+		verticalOriginCelling = verticalOriginCelling < sourceQ->Height ? verticalOriginCelling : sourceQ->Height - 1;
 		int verticalOriginFloor = static_cast<int>(verticalOriginPosition);
 		double verticalFmod = 1 - (verticalOriginPosition - (int)verticalOriginPosition);
 		for (int horizontalIndex = 0; horizontalIndex < targetQ->Width; ++horizontalIndex)
@@ -70,19 +71,20 @@ void InterpolationFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoF
 			auto horizontalOriginPosition = (double)(horizontalIndex * (double)(sourceQ->Width - 1)) / (double)(targetQ->Width - 1);
 			int horizontalOriginCelling = static_cast<int>(horizontalOriginPosition + 1);
 			int horizontalOriginFloor = static_cast<int>(horizontalOriginPosition);
+			horizontalOriginCelling = horizontalOriginCelling < sourceQ->Width ? horizontalOriginCelling : sourceQ->Width - 1;
 			double horizontalFmod = 1 - (horizontalOriginPosition - (int)horizontalOriginPosition);
 
-			leftSampleR = VideoFrame::BlendColors(input->Frame[verticalOriginFloor * sourceQ->Width + horizontalOriginFloor * 3], input->Frame[verticalOriginFloor * sourceQ->Width + horizontalOriginCelling * 3], horizontalFmod);
-			leftSampleG = VideoFrame::BlendColors(input->Frame[verticalOriginFloor * sourceQ->Width + horizontalOriginFloor * 3 + 1], input->Frame[verticalOriginFloor * sourceQ->Width + horizontalOriginCelling * 3 + 1], horizontalFmod);
-			leftSampleB = VideoFrame::BlendColors(input->Frame[verticalOriginFloor * sourceQ->Width + horizontalOriginFloor * 3 + 2], input->Frame[verticalOriginFloor * sourceQ->Width + horizontalOriginCelling * 3 + 2], horizontalFmod);
+			leftSampleR = VideoFrame::BlendColors(input->Frame[(verticalOriginFloor * sourceQ->Width + horizontalOriginFloor) * 3], input->Frame[(verticalOriginFloor * sourceQ->Width + horizontalOriginCelling) * 3], horizontalFmod);
+			leftSampleG = VideoFrame::BlendColors(input->Frame[(verticalOriginFloor * sourceQ->Width + horizontalOriginFloor) * 3 + 1], input->Frame[(verticalOriginFloor * sourceQ->Width + horizontalOriginCelling) * 3 + 1], horizontalFmod);
+			leftSampleB = VideoFrame::BlendColors(input->Frame[(verticalOriginFloor * sourceQ->Width + horizontalOriginFloor) * 3 + 2], input->Frame[(verticalOriginFloor * sourceQ->Width + horizontalOriginCelling) * 3 + 2], horizontalFmod);
 
-			rightSampleR = VideoFrame::BlendColors(input->Frame[verticalOriginCelling * sourceQ->Width + horizontalOriginFloor * 3], input->Frame[verticalOriginCelling * sourceQ->Width + horizontalOriginCelling * 3], horizontalFmod);
-			rightSampleG = VideoFrame::BlendColors(input->Frame[verticalOriginCelling * sourceQ->Width + horizontalOriginFloor * 3 + 1], input->Frame[verticalOriginCelling * sourceQ->Width + horizontalOriginCelling * 3 + 1], horizontalFmod);
-			rightSampleB = VideoFrame::BlendColors(input->Frame[verticalOriginCelling * sourceQ->Width + horizontalOriginFloor * 3 + 2], input->Frame[verticalOriginCelling * sourceQ->Width + horizontalOriginCelling * 3 + 2], horizontalFmod);
+			rightSampleR = VideoFrame::BlendColors(input->Frame[(verticalOriginCelling * sourceQ->Width + horizontalOriginFloor) * 3], input->Frame[(verticalOriginCelling * sourceQ->Width + horizontalOriginCelling) * 3], horizontalFmod);
+			rightSampleG = VideoFrame::BlendColors(input->Frame[(verticalOriginCelling * sourceQ->Width + horizontalOriginFloor) * 3 + 1], input->Frame[(verticalOriginCelling * sourceQ->Width + horizontalOriginCelling) * 3 + 1], horizontalFmod);
+			rightSampleB = VideoFrame::BlendColors(input->Frame[(verticalOriginCelling * sourceQ->Width + horizontalOriginFloor) * 3 + 2], input->Frame[(verticalOriginCelling * sourceQ->Width + horizontalOriginCelling) * 3 + 2], horizontalFmod);
 
-			output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3] = VideoFrame::BlendColors(leftSampleR, rightSampleR, verticalFmod);
-			output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 1] = VideoFrame::BlendColors(leftSampleG, rightSampleG, verticalFmod);
-			output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 2] = VideoFrame::BlendColors(leftSampleB, rightSampleB, verticalFmod);
+			output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3] = VideoFrame::BlendColors(leftSampleR, rightSampleR, verticalFmod);
+			output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3 + 1] = VideoFrame::BlendColors(leftSampleG, rightSampleG, verticalFmod);
+			output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3 + 2] = VideoFrame::BlendColors(leftSampleB, rightSampleB, verticalFmod);
 		}
 	}
 }
