@@ -49,7 +49,7 @@ FilmUpper jest aplikacją pozwalającą na poprawianie jakości obrazu w filmie,
 
 
 
-\section{Technologia}
+\section{Technologia i język programowania}
 
 
 Przetwarzanie plików filmowych nawet w przypadku zastosowania najłatwiejszych algorytmów sposób jest zadaniem bardzo wymagającym pod względem wydajnościowym, dlatego wybór technologii ma kluczowe znaczenie, gdyż wpływa na wydajność całej aplikacji. Należy zwrócić uwagę na wiele czynników które mogą wpłynąć na działanie programu jak również na sposób jego implementacji.
@@ -418,7 +418,58 @@ Algorytm przeplotu polega na oszukiwaniu ludzkiego oka poprzez wyświetlanie tyl
 \caption{Tworzenie klatek pośrednich przy użyciu algorytmu przeplotu}
 \end{figure}
 
-\section{Optymalizacja}
+\section{Optymalizacja i testowanie}
+W implementacji algorytmów ich szybkość działania jest równie ważna co ich poprawność. W trakcie implementacji algorytmów oraz ich testowania zauważyliśmy, że ich wydajność nie była zbliżona do oczekiwanej. Przeprowadziliśmy więc szereg prac optymalizacyjnych w trakcie testowania algorytmów
+\subsection{Procedura testowania i ich organizacja}
+Procedura testowania jaką założyliśmy polegała na organizacji wszystkich testów w klasie TestClassModule. Testy przez nas przeprowadzane były przeprowadzane poprzez metodę RunAllToFileTests. Uruchamiała one wszystkie metody testujące głównie algorytmy ulepszające jakość pojedynczej klatki, z uwagi na to, że test taki jest prosty do zweryfikowania w aspekcie jego poprawności poprzez porównanie pojedynczej klatki wynikowej ze źródłową. Testowaliśmy także prędkość przetwarzanej klatki.
+
+Procedurę testowania można sprowadzić do głównej części testu skupiającej się aspekcie szybkości i następnie poprawności poprzez porównanie zapisanej klatki zgodnie z formą w jakiej chcieliśmy ją zapisać - obraz, rozpisanie pikseli na tekst oraz wyświetlenie jej przy użyciu panelu w programie.
+
+\begin{verbatim}
+    int iterations = 1000;
+    clock_t begin = clock();
+    for (int xd = 0; xd < iterations; ++xd) {
+        delete enhancer->ReadNextEnhancedFrame();
+    }
+    clock_t end = clock();
+    double elapsed_secs = (double(end - begin)/iterations) / CLOCKS_PER_SEC;
+    saveFile << std::to_string(elapsed_secs) + " sekund dla " + 
+    std::to_string(iterations) +" iteracji, \n";
+\end{verbatim} 
+
+Dla 1000 iteracji pętli testujemy prędkość algorytmu przy przetwarzaniu jednej klatki obrazu. Mierzymy czas jaki zajmuje procesorowi przetworzenie 1000 klatek i dzielimy to przez ich ilość dostając względnie dokładną estymację, jak szybko przetwarzane są klatki.
+Następnie zapisujemy tą wartość do pliku tekstowego.
+
+\subsection{Optymalizacja algorytmów i układu danych}
+Pierwszy i największy proces optymalizacji przeprowadziliśmy na klasie NNFrameEnhancer. Algorytm najbliższego sąsiada używany do skalowania klatki w tej klasie jest najszybszym zaimplementowanym przez nas algorytmem. Jednakże podczas pierwszego testu prędkość przetworzenia jednej klatki była liczona w minutach. Dzięki możliwości przechodzenia krok po kroku w programie Visual Studio oraz informacji, ile minęło od poprzedniego kroku udało nam się ustalić, że zastosowana dla uproszczenia kodu zmienna tymczasowa kopiowała pamięć klatki. Zauważyliśmy to dlatego, że operacja przypisania trwałą tam około 35 milisekund, gdy reszta pętli wykonywana była w kilka cykli procesora (ułamki milisekund). Usunięcie tej zmiennej przyśpieszyło program z około 14 sekund na jedną linię obrazu do 2 sekund na całą klatkę.
+
+Niestety dalej było to o wiele za dużo względem tego czego oczekiwaliśmy po prędkości algorytmu (oczekiwaliśmy co najmniej kilkunastu klatek na sekundę). Następnymi podjętymi przez nas krokami było uproszczenie algorytmu poprzez usunięcie niektórych niepotrzebnych obliczeń. Uzyskaliśmy dzięki temu około $40\%$ przyśpieszenie. 
+
+Następnie zmieniliśmy typ przechowywanych danych z QColor* na zwykłe wartości całkowite int. Po tych zmianach otrzymaliśmy wydajność na poziomie około 0.9 sekundy na klatkę obrazu. 
+
+Naszym następnym krokiem była zmiana struktury danych w której przechowywaliśmy dane odnośnie pikseli. Używana przez nas struktura \begin{verbatim} boost::multi_array \end{verbatim} korzystała z 3 wymiarowej indeksacji. Zgodnie z tym co przeczytaliśmy w dokumentacji, klasa ta miała przechowywać dane w jednym, ciągłym bloku pamięci. Poprzez zmianę tej struktury na zwykłą tablicę int* uzyskaliśmy 30 krotne przyśpieszenie w przetwarzaniu danych (z 0.9 s do 0.03 s na klatkę).
+
+Uzyskana przez nas prędkość przetwarzania była zgodna z naszymi oczekiwaniami. Postanowiliśmy zatem skorzystać z przetwarzania danych z użyciem wielu wątków. Poprzez podział danych do przetworzenia na części zgodne z ilością wątków uzyskaliśmy dodatkowe przyśpieszenie. Z uwagi na koszt utworzenia wątków najlepsze wyniki uzyskaliśmy dla 2 wątków (czas przetwarzania klatki wynosił około 0.025 sekundy). 
+
+\begin{verbatim}
+    int threads = 2;
+    std::thread *tt = new std::thread[threads];
+
+    for(int t = 0; t < threads; ++t)
+    {
+        tt[t] = std::thread(CalculateFramePararel, inputFrame, outputFrame,
+        (_targetQualityInfo->Height / threads) * t, 
+        (_targetQualityInfo->Height / threads) * (t + 1),
+        _sourceQualityInfo, _targetQualityInfo);
+    }
+
+    for (int t = 0; t < threads; ++t)
+    {
+        tt[t].join();
+    }
+\end{verbatim}
+
+Dodatkowo postanowiliśmy czytać następną klatkę źródłową w trakcie przetwarzania obecnej (jeśli jest to możliwe). Spowodowało to, że ostatecznie prędkość z jaką przetwarzamy klatki metodą najbliższego sąsiada wynosi około 0.02 sekundy, co daje nam możliwość przerabiania około 50 klatek na sekundę. Jest to wynik bardzo nas satysfakcjonujący.
 %\dodatek{Mój specjalny dodatek}
 
 %Tu treść dodatku. Zwróćmy uwagę na sposób numerowania dodatku, 

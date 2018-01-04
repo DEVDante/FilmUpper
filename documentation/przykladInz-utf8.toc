@@ -1,5 +1,5 @@
 \contentsline {section}{Wst\k ep}{7}
-\contentsline {section}{\numberline {1}\kernsekcyjny Technologia}{9}
+\contentsline {section}{\numberline {1}\kernsekcyjny Technologia i j\IeC {\k e}zyk programowania}{9}
 \contentsline {subsection}{\numberline {1.1}\kernsubsekcyjny J\IeC {\k e}zyk programowania}{9}
 \contentsline {subsubsection}{\numberline {1.1.1}\kernsubsubsekcyjny C++}{9}
 \contentsline {subsubsection}{\numberline {1.1.2}\kernsubsubsekcyjny C\#}{10}
@@ -22,5 +22,7 @@
 \contentsline {subsection}{\numberline {5.2}\kernsubsekcyjny Zwi\IeC {\k e}kszanie ilo\IeC {\'s}ci klatek na sekund\IeC {\k e}}{28}
 \contentsline {subsubsection}{\numberline {5.2.1}\kernsubsubsekcyjny Algorytm interpolacji}{28}
 \contentsline {subsubsection}{\numberline {5.2.2}\kernsubsubsekcyjny Algorytm przeplotu}{29}
-\contentsline {section}{\numberline {6}\kernsekcyjny Optymalizacja}{31}
-\contentsline {section}{Literatura}{33}
+\contentsline {section}{\numberline {6}\kernsekcyjny Optymalizacja i testowanie}{31}
+\contentsline {subsection}{\numberline {6.1}\kernsubsekcyjny Procedura testowania i ich organizacja}{31}
+\contentsline {subsection}{\numberline {6.2}\kernsubsekcyjny Optymalizacja algorytm\IeC {\'o}w i uk\IeC {\l }adu danych}{32}
+\contentsline {section}{Literatura}{35}

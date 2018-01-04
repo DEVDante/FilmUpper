@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.7)  31 DEC 2017 14:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.7)  4 JAN 2018 19:01
 entering extended mode
 **./przykladInz-utf8.tex
 (przykladInz-utf8.tex
@@ -642,11 +642,11 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3] [4] [1] [2] [3] [
 4]
-(przykladInz-utf8.toc)
+(przykladInz-utf8.toc [5])
 \tf@toc=\write3
 \openout3 = `przykladInz-utf8.toc'.
 
- [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15]
+ [6] [7] [8] [9] [10] [11] [12] [13] [14] [15]
 [16] [17]
 LaTeX Font Info:    Try loading font information for OMS+lmr on input line 93.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omslmr.fd"
@@ -765,8 +765,19 @@ File: images/Interlace.png Graphic file (type png)
 <use images/Interlace.png>
 Package pdftex.def Info: images/Interlace.png used on input line 417.
 (pdftex.def)             Requested size: 199.16928pt x 74.93745pt.
- [29 <./images/FpsInterpolation.png> <./images/Interlace.png>] [30] [31] [32] [
-33] (przykladInz-utf8.aux) ) 
+ [29 <./images/FpsInterpolation.png> <./images/Interlace.png>] [30]
+Overfull \hbox (43.30023pt too wide) in paragraph at lines 438--438
+[]    \OT4/lmtt/m/n/12 double elapsed_secs = (double(end - begin)/iterations) /
+ CLOCKS_PER_SEC;[] 
+ []
+
+[31] [32]
+Overfull \hbox (37.12523pt too wide) in paragraph at lines 470--470
+[]        \OT4/lmtt/m/n/12 tt[t] = std::thread(CalculateFramePararel, inputFram
+e, outputFrame,[] 
+ []
+
+[33] [34] [35] (przykladInz-utf8.aux) ) 
 Here is how much of TeX's memory you used:
  3016 strings out of 493323
  39653 string characters out of 3139066
@@ -775,26 +786,26 @@ Here is how much of TeX's memory you used:
  64410 words of font info for 43 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,12n,25p,2476b,272s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-
-mathex.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Pr
-ogram Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTe
-X 2.9/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
-ps/lm/lm-rm.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><
-C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbxi10.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/lm/lmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/
-lmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX 2
-.9/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmro12.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/lm/lmss17.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/lm/lmssbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/
-lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
-Output written on przykladInz-utf8.pdf (37 pages, 342709 bytes).
+{C:/Program Files/MiKTeX 2.9/fonts/enc/d
+vips/lm/lm-mathex.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy
+.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program 
+Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Program Files/MiKTeX 2.9/fo
+nts/enc/dvips/lm/lm-rm.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/l
+mbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbxi10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/lm/lmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lm
+ri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmro12.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/lm/lmss17.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
+Output written on przykladInz-utf8.pdf (39 pages, 352188 bytes).
 PDF statistics:
- 198 PDF objects out of 1000 (max. 8388607)
+ 204 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
