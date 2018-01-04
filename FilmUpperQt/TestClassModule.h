@@ -27,6 +27,8 @@ public:
 		//InterpolationSpeedTest();
 		//WriterTest();
 		BiCubicSpeedTest();
+		WriterTest();
+		//BiCubicSpeedTest();
 	}
 
 	void static NNSpeedTest()
@@ -145,14 +147,13 @@ public:
 
 	void static WriterTest()
 	{
-		IFrameReader* frameReader = new FrameReader("D:/Studia/Inzynierka/big_buck_bunny_480p_surround-fix.avi");
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
 		qualityInfo->Width = 1708;
 		qualityInfo->Height = 960;
 		qualityInfo->FrameRate = new FrameRate(24, 1);
 		FrameEnhancerBase* frameEnhancer;
 		frameEnhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
-		FrameWriter* frameWriter = new FrameWriter("D:/Studia/Inzynierka/OutputInterpolation.mp4", "mp4", "libx264", qualityInfo);
+		//frameEnhancer = new NOPFrameEnhancer(frameReader, qualityInfo);
 
 		while(frameEnhancer->AreFramesLeft())
 		{

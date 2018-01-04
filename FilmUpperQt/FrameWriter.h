@@ -8,6 +8,13 @@ extern "C" {
 #include <libavutil/pixfmt.h>
 }
 
+struct OutStream {
+	AVStream *stream;
+	AVCodecContext *codecCTX;
+	int64_t nextPts;
+	AVFrame *frame;
+};
+
 class FrameWriter
 {
 private:
@@ -16,7 +23,7 @@ private:
 	AVCodec *videoCodec;
 	AVCodec *audioCodec;
 	AVFrame *frameRGB;
-	//AVDictionary *dict = NULL;
+	AVDictionary *dict = NULL;
 	AVPacket *packet;
 	struct SwsContext *sws_ctx = NULL;
 
@@ -32,11 +39,4 @@ public:
 	FrameWriter(std::string, std::string, std::string, std::string, FilmQualityInfo*);
 	~FrameWriter();
 	void WriteFrame(VideoFrame*); // override;
-};
-
-struct OutStream {
-	AVStream *stream;
-	AVCodecContext *codecCTX;
-	int64_t nextPts;
-	AVFrame *frame;
 };

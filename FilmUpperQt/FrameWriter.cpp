@@ -1,5 +1,24 @@
 #include "FrameWriter.h"
 
+static int select_channel_layout(const AVCodec *codec)
+{
+	const uint64_t *p;
+	uint64_t best_ch_layout = 0;
+	int best_nb_channels = 0;
+	if (!codec->channel_layouts)
+		return AV_CH_LAYOUT_STEREO;
+	p = codec->channel_layouts;
+	while (*p) {
+		int nb_channels = av_get_channel_layout_nb_channels(*p);
+		if (nb_channels > best_nb_channels) {
+			best_ch_layout = *p;
+			best_nb_channels = nb_channels;
+		}
+		p++;
+	}
+	return best_ch_layout;
+}
+
 FrameWriter::FrameWriter( std::string filename, std::string format_name, std::string video_enc_name, std::string audio_enc_name, FilmQualityInfo *nfo)
 {
 	info = nfo;
@@ -17,6 +36,8 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, std::st
 	if (audioCodec == NULL)
 		throw std::runtime_error("Couldn't find given encoder");
 	av_format_set_audio_codec(formatCTX, audioCodec);
+
+	av_dict_set(&dict, "movflags", "faststart", 0);
 
 	if (format->video_codec != AV_CODEC_ID_NONE)
 		AddStream(&videoStream, videoCodec);
@@ -48,37 +69,44 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, std::st
 		frameRGB->width = info->Width;
 		frameRGB->height = info->Height;
 
-		if (av_frame_get_buffer(frameRGB, 32) < 0)
-			throw std::runtime_error("Couldn't allocate stream frame data");
-/*
-		int numBytes = avpicture_get_size(AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
+		//if (av_frame_get_buffer(frameRGB, 32) < 0)
+		//	throw std::runtime_error("Couldn't allocate stream frame data");
+
+		int numBytes = avpicture_get_size(AV_PIX_FMT_RGB24, videoStream.codecCTX->width, videoStream.codecCTX->height);
 		uint8_t *frameBuffer = (uint8_t *)av_malloc(numBytes * sizeof(uint8_t));
 
-		avpicture_fill((AVPicture *)frameRGB, frameBuffer, AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
-*/
+		avpicture_fill((AVPicture *)frameRGB, frameBuffer, AV_PIX_FMT_RGB24, videoStream.codecCTX->width, videoStream.codecCTX->height);
+
 	}
 	videoStream.nextPts = 0;
 
 	//aframe setup
-	if (audioStream.codecCTX)
+	//if (audioStream.codecCTX)
+	//{
+	//	if (avcodec_open2(audioStream.codecCTX, audioCodec, NULL)<0)
+	//		throw std::runtime_error("Couldn't open codec");
+
+	//	audioStream.frame = av_frame_alloc();
+	//	if (audioStream.frame == NULL)
+	//		throw std::runtime_error("Couldn't allocate stream frame");
+
+	//	audioStream.frame->channels = audioStream.codecCTX->channels;
+	//	audioStream.frame->channel_layout = audioStream.codecCTX->channel_layout;
+	//	audioStream.frame->sample_rate = audioStream.codecCTX->sample_rate;
+
+	//	if (av_frame_get_buffer(audioStream.frame, 32) < 0)
+	//		throw std::runtime_error("Couldn't allocate stream frame data");
+	//}
+	//audioStream.nextPts = 0;
+
+	if (!(format->flags & AVFMT_NOFILE))
 	{
-		if (avcodec_open2(audioStream.codecCTX, audioCodec, NULL)<0)
-			throw std::runtime_error("Couldn't open codec");
-
-		audioStream.frame = av_frame_alloc();
-		if (audioStream.frame == NULL)
-			throw std::runtime_error("Couldn't allocate stream frame");
-
-		audioStream.frame->channels = audioStream.codecCTX->channels;
-		audioStream.frame->channel_layout = audioStream.codecCTX->channel_layout;
-		audioStream.frame->sample_rate = audioStream.codecCTX->sample_rate;
-
-		if (av_frame_get_buffer(audioStream.frame, 32) < 0)
-			throw std::runtime_error("Couldn't allocate stream frame data");
+		auto ret = avio_open(&formatCTX->pb, filename.c_str(), AVIO_FLAG_WRITE);
+		if (ret < 0)
+			throw std::runtime_error("Couldn't open file");
 	}
-	audioStream.nextPts = 0;
 
-	if(avformat_write_header(formatCTX, NULL) < 0)
+	if(avformat_write_header(formatCTX, &dict) < 0)
 		throw std::runtime_error("Couldn't write header to file");
 
 	sws_ctx = sws_getContext(videoStream.codecCTX->width, videoStream.codecCTX->height, AV_PIX_FMT_RGB24, videoStream.codecCTX->width, videoStream.codecCTX->height, videoStream.codecCTX->pix_fmt, SWS_BILINEAR, NULL, NULL, NULL);
@@ -100,12 +128,12 @@ FrameWriter::~FrameWriter()
 	av_frame_free(&frameRGB);
 	sws_freeContext(sws_ctx);
 
-	//if (!(format->flags & AVFMT_NOFILE))
-	//{
-	//	auto ret = avio_closep(&formatCTX->pb);
-	//	if (ret < 0)
-	//		;
-	//}
+	////if (!(format->flags & AVFMT_NOFILE))
+	////{
+	////	auto ret = avio_closep(&formatCTX->pb);
+	////	if (ret < 0)
+	////		;
+	////}
 
 	av_packet_free(&packet);
 	avformat_close_input(&formatCTX);
@@ -196,21 +224,3 @@ void FrameWriter::AddStream(OutStream *ostream, AVCodec *codec)
 		ostream->codecCTX->flags |= AV_CODEC_FLAG_GLOBAL_HEADER;
 }
 
-static int select_channel_layout(const AVCodec *codec)
-{
-	const uint64_t *p;
-	uint64_t best_ch_layout = 0;
-	int best_nb_channels = 0;
-	if (!codec->channel_layouts)
-		return AV_CH_LAYOUT_STEREO;
-	p = codec->channel_layouts;
-	while (*p) {
-		int nb_channels = av_get_channel_layout_nb_channels(*p);
-		if (nb_channels > best_nb_channels) {
-			best_ch_layout = *p;
-			best_nb_channels = nb_channels;
-		}
-		p++;
-	}
-	return best_ch_layout;
-}
