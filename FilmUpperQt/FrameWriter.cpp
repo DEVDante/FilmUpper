@@ -1,127 +1,216 @@
 #include "FrameWriter.h"
-FrameWriter::FrameWriter( std::string filename, std::string format_name, std::string enc_name, FilmQualityInfo *info)
+
+FrameWriter::FrameWriter( std::string filename, std::string format_name, std::string video_enc_name, std::string audio_enc_name, FilmQualityInfo *nfo)
 {
+	info = nfo;
 	av_register_all();
 
 	if (avformat_alloc_output_context2(&formatCTX, NULL, format_name.c_str(), filename.c_str()) != 0)
 		throw std::runtime_error("Couldn't allocate output format context");
+	format = formatCTX->oformat;
 
-	codec = avcodec_find_encoder_by_name(enc_name.c_str());
-	if (codec == NULL) 
+	videoCodec = avcodec_find_encoder_by_name(video_enc_name.c_str());
+	if (videoCodec == NULL)
 		throw std::runtime_error("Couldn't find given encoder");
+	av_format_set_video_codec(formatCTX, videoCodec);
+	audioCodec = avcodec_find_encoder_by_name(audio_enc_name.c_str());
+	if (audioCodec == NULL)
+		throw std::runtime_error("Couldn't find given encoder");
+	av_format_set_audio_codec(formatCTX, audioCodec);
 
-	codecCTX = avcodec_alloc_context3(codec);
-	codecCTX->bit_rate = 400000; //add to FQInfo instead of static
-	codecCTX->width = info->Width;
-	codecCTX->height = info->Height;
-	codecCTX->time_base = AVRational { info->FrameRate->den , info->FrameRate->num };
-	codecCTX->framerate = AVRational { info->FrameRate->num , info->FrameRate->den };
-	codecCTX->gop_size = 12; // group of pictures
-	codecCTX->max_b_frames = 2; // num of between frames, add check for AV_CODEC_ID_MPEG2VIDEO
-	codecCTX->mb_decision = 2; // macroblocks, add check for AV_CODEC_ID_MPEG1VIDEO
-	codecCTX->pix_fmt = AV_PIX_FMT_YUV420P; // pixel format
+	if (format->video_codec != AV_CODEC_ID_NONE)
+		AddStream(&videoStream, videoCodec);
+	if (format->audio_codec != AV_CODEC_ID_NONE)
+		AddStream(&audioStream, audioCodec);
 
-	if (formatCTX->oformat->flags & AVFMT_GLOBALHEADER)
-		codecCTX->flags |= AV_CODEC_FLAG_GLOBAL_HEADER;
+	//vframe setup
+	if (videoStream.codecCTX)
+	{
+		if (avcodec_open2(videoStream.codecCTX, videoCodec, NULL)<0)
+			throw std::runtime_error("Couldn't open codec");
 
-	if (avcodec_open2(codecCTX, codec, NULL)<0)
-		throw std::runtime_error("Couldn't open codec");
+		videoStream.frame = av_frame_alloc();
+		if (videoStream.frame == NULL)
+			throw std::runtime_error("Couldn't allocate stream frame");
 
-	file = fopen(filename.c_str(), "wb");
-	
-	if (!file)
-		throw std::runtime_error("Couldn't open file");
+		videoStream.frame->format = videoStream.codecCTX->pix_fmt;
+		videoStream.frame->width = info->Width;
+		videoStream.frame->height = info->Height;
 
+		if (av_frame_get_buffer(videoStream.frame, 32) < 0)
+			throw std::runtime_error("Couldn't allocate stream frame data");
 
-    frame=av_frame_alloc();
-    if (frame == NULL)
-        throw std::bad_alloc::bad_alloc();
-    frameRGB=av_frame_alloc();
-    if (frameRGB == NULL)
-		throw std::bad_alloc::bad_alloc();
+		frameRGB = av_frame_alloc();
+		if (frameRGB == NULL)
+			throw std::bad_alloc::bad_alloc();
 
-    int numBytes=avpicture_get_size(AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
-	uint8_t *frameBuffer=(uint8_t *)av_malloc(numBytes*sizeof(uint8_t));
+		frameRGB->format = videoStream.codecCTX->pix_fmt;
+		frameRGB->width = info->Width;
+		frameRGB->height = info->Height;
 
-    avpicture_fill((AVPicture *)frameRGB, frameBuffer, AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
+		if (av_frame_get_buffer(frameRGB, 32) < 0)
+			throw std::runtime_error("Couldn't allocate stream frame data");
+/*
+		int numBytes = avpicture_get_size(AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
+		uint8_t *frameBuffer = (uint8_t *)av_malloc(numBytes * sizeof(uint8_t));
 
-	numBytes = avpicture_get_size(AV_PIX_FMT_YUV420P, codecCTX->width, codecCTX->height);
-	frameBuffer = (uint8_t *)av_malloc(numBytes * sizeof(uint8_t));
+		avpicture_fill((AVPicture *)frameRGB, frameBuffer, AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height);
+*/
+	}
+	videoStream.nextPts = 0;
 
-	avpicture_fill((AVPicture *)frame, frameBuffer, AV_PIX_FMT_YUV420P, codecCTX->width, codecCTX->height);
+	//aframe setup
+	if (audioStream.codecCTX)
+	{
+		if (avcodec_open2(audioStream.codecCTX, audioCodec, NULL)<0)
+			throw std::runtime_error("Couldn't open codec");
 
+		audioStream.frame = av_frame_alloc();
+		if (audioStream.frame == NULL)
+			throw std::runtime_error("Couldn't allocate stream frame");
 
-	if (!(formatCTX->oformat->flags & AVFMT_NOFILE)) 
-		if (avio_open(&formatCTX->pb, filename.c_str(), AVIO_FLAG_WRITE) < 0) 
-			throw std::runtime_error("Couldn't open file");
+		audioStream.frame->channels = audioStream.codecCTX->channels;
+		audioStream.frame->channel_layout = audioStream.codecCTX->channel_layout;
+		audioStream.frame->sample_rate = audioStream.codecCTX->sample_rate;
 
-	if (avformat_write_header(formatCTX, NULL) < 0)
+		if (av_frame_get_buffer(audioStream.frame, 32) < 0)
+			throw std::runtime_error("Couldn't allocate stream frame data");
+	}
+	audioStream.nextPts = 0;
+
+	if(avformat_write_header(formatCTX, NULL) < 0)
 		throw std::runtime_error("Couldn't write header to file");
+
+	sws_ctx = sws_getContext(videoStream.codecCTX->width, videoStream.codecCTX->height, AV_PIX_FMT_RGB24, videoStream.codecCTX->width, videoStream.codecCTX->height, videoStream.codecCTX->pix_fmt, SWS_BILINEAR, NULL, NULL, NULL);
 }
 
 
 FrameWriter::~FrameWriter()
 {
-	int ret = avcodec_send_frame(codecCTX, NULL);
-	if (ret < 0)
-		throw std::runtime_error("Couldn't send frame to encoder");
+	av_frame_free(&(videoStream.frame));
+	av_frame_free(&(audioStream.frame));
 
-	while (ret >= 0) {
-		ret = avcodec_receive_packet(codecCTX, packet);
-		if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
-			break;
-		else if (ret < 0)
-			throw std::runtime_error("Error during decoding");
-		fwrite(packet->data, 1, packet->size, file);
-		av_packet_unref(packet);
-	}
+	Encode(&videoStream);
+	//Encode(&audioStream);
+	av_packet_unref(packet);
+	av_write_trailer(formatCTX);
 
-
-	fclose(file);
-	avcodec_close(codecCTX);
-	av_frame_free(&frame);
+	avcodec_free_context(&videoStream.codecCTX);
+	avcodec_free_context(&audioStream.codecCTX);
 	av_frame_free(&frameRGB);
+	sws_freeContext(sws_ctx);
+
+	//if (!(format->flags & AVFMT_NOFILE))
+	//{
+	//	auto ret = avio_closep(&formatCTX->pb);
+	//	if (ret < 0)
+	//		;
+	//}
+
 	av_packet_free(&packet);
 	avformat_close_input(&formatCTX);
 }
 
 
-void FrameWriter::WriteFrame(VideoFrame *frameOG)
+void FrameWriter::WriteFrame(VideoFrame *frame)
 {
-    struct SwsContext *sws_ctx = NULL;
     int frameFinished;
 
 	packet = av_packet_alloc();
 	if (!packet)
 		throw std::bad_alloc();
+	av_init_packet(packet);
 
-    sws_ctx = sws_getContext(codecCTX->width, codecCTX->height, AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height, codecCTX->pix_fmt, SWS_BILINEAR, NULL, NULL, NULL);
 
-    for(int y = 0; y < codecCTX->height; y++) 
-        for(int x = 0; x < codecCTX->width; x++) 
-        {
-            int offset = 3 * x + y * frameRGB->linesize[0];
+	for (int i = 0; i < frame->GetBufferSize(); i++)
+		frameRGB->data[0][i] = frame->Frame[i];
 
-			frameRGB->data[0][offset + 0] = frameOG->Frame[y * codecCTX->width + x * 3];
-			frameRGB->data[0][offset + 1] = frameOG->Frame[y * codecCTX->width + x * 3 + 1];
-			frameRGB->data[0][offset + 2] = frameOG->Frame[y * codecCTX->width + x * 3 + 2];
-        }
+	//(uint8_t const * const *)
+	sws_scale(sws_ctx, frameRGB->data, frameRGB->linesize, 0, videoStream.codecCTX->height, videoStream.frame->data, videoStream.frame->linesize);
 
-	sws_scale(sws_ctx, (uint8_t const * const *)frameRGB->data, frameRGB->linesize, 0, codecCTX->height, frame->data, frame->linesize);
+	Encode(&videoStream);
+	//Encode(&audioStream);
 
-	int ret = avcodec_send_frame(codecCTX, frame);
+	av_packet_free(&packet);
+}
+
+void FrameWriter::Encode(struct OutStream *ostream)
+{
+	ostream->frame->pts = ostream->nextPts++;
+	int ret = avcodec_send_frame(ostream->codecCTX, ostream->frame);
 	if (ret < 0)
 		throw std::runtime_error("Couldn't send frame to encoder");
 
 	while (ret >= 0) {
-		ret = avcodec_receive_packet(codecCTX, packet);
+		ret = avcodec_receive_packet(ostream->codecCTX, packet);
 		if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
 			break;
 		else if (ret < 0)
-			throw std::runtime_error("Error during decoding");
-		fwrite(packet->data, 1, packet->size, file);
-		av_packet_unref(packet);
+			throw std::runtime_error("Error during encoding");
 	}
 
-	av_packet_free(&packet);
+	av_packet_rescale_ts(packet, ostream->codecCTX->time_base, ostream->stream->time_base);
+	packet->stream_index = ostream->stream->index;
+	if(av_interleaved_write_frame(formatCTX, packet))
+		throw std::runtime_error("Couldn't write packet to file");
+	av_packet_unref(packet);
+}
+
+void FrameWriter::AddStream(OutStream *ostream, AVCodec *codec)
+{
+	ostream->stream = avformat_new_stream(formatCTX, NULL);
+	if(!ostream->stream)
+		throw std::runtime_error("Couldn't add new stream");
+	//codec->type;
+
+	ostream->stream->id = formatCTX->nb_streams - 1;
+	ostream->codecCTX = avcodec_alloc_context3(videoCodec);
+	if(!ostream->codecCTX)
+		throw std::runtime_error("Couldn't allocate codec context");
+
+	//ostream->codecCTX->codec_id =
+	ostream->codecCTX->time_base = AVRational{ info->FrameRate->den , info->FrameRate->num };
+	ostream->codecCTX->framerate = AVRational{ info->FrameRate->num , info->FrameRate->den };
+	if (codec->type == AVMEDIA_TYPE_VIDEO)
+	{
+		ostream->codecCTX->width = info->Width;
+		ostream->codecCTX->height = info->Height;
+		ostream->codecCTX->gop_size = 10;
+		ostream->codecCTX->max_b_frames = 1;
+		ostream->codecCTX->pix_fmt = AV_PIX_FMT_YUV420P;
+		ostream->codecCTX->bit_rate = 30000000; //yt recommended for high fps 2k, check for alternative/variable in program?
+	} else
+		if (codec->type == AVMEDIA_TYPE_AUDIO)
+		{
+			ostream->codecCTX->bit_rate = 512000; //yt recommended for 5.1 audio - see upper comment
+			ostream->codecCTX->sample_fmt = AV_SAMPLE_FMT_U8;
+			ostream->codecCTX->channel_layout = select_channel_layout(audioCodec);
+			ostream->codecCTX->channels = av_get_channel_layout_nb_channels(ostream->codecCTX->channel_layout);
+			ostream->codecCTX->sample_rate = info->SampleRate;
+		}
+
+	//av_opt_set(VideoSt.Ctx->priv_data, "cq", TCHAR_TO_ANSI(*H264Crf), 0);
+	//av_opt_set(VideoSt.Ctx->priv_data, "gpu", TCHAR_TO_ANSI(*DeviceNum), 0); --see if needed;
+
+	if(formatCTX->oformat->flags & AVFMT_GLOBALHEADER)
+		ostream->codecCTX->flags |= AV_CODEC_FLAG_GLOBAL_HEADER;
+}
+
+static int select_channel_layout(const AVCodec *codec)
+{
+	const uint64_t *p;
+	uint64_t best_ch_layout = 0;
+	int best_nb_channels = 0;
+	if (!codec->channel_layouts)
+		return AV_CH_LAYOUT_STEREO;
+	p = codec->channel_layouts;
+	while (*p) {
+		int nb_channels = av_get_channel_layout_nb_channels(*p);
+		if (nb_channels > best_nb_channels) {
+			best_ch_layout = *p;
+			best_nb_channels = nb_channels;
+		}
+		p++;
+	}
+	return best_ch_layout;
 }

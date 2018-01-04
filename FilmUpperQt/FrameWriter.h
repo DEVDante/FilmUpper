@@ -12,18 +12,31 @@ class FrameWriter
 {
 private:
 	AVFormatContext *formatCTX;
-	AVCodecContext *codecCTX;
-	AVCodec *codec;
-	AVFrame *frame;
+	AVOutputFormat *format;
+	AVCodec *videoCodec;
+	AVCodec *audioCodec;
 	AVFrame *frameRGB;
-	FILE *file;
+	//AVDictionary *dict = NULL;
 	AVPacket *packet;
+	struct SwsContext *sws_ctx = NULL;
 
-	int videoStream;
-	int audioStream;
+	OutStream videoStream = { 0 };
+	OutStream audioStream = { 0 };
+	int gotOutput;
+	FilmQualityInfo *info;
+
+	void AddStream(struct OutStream*, AVCodec*);
+	void Encode(struct OutStream*);
 
 public:
-	FrameWriter(std::string, std::string, std::string, FilmQualityInfo*);
+	FrameWriter(std::string, std::string, std::string, std::string, FilmQualityInfo*);
 	~FrameWriter();
 	void WriteFrame(VideoFrame*); // override;
+};
+
+struct OutStream {
+	AVStream *stream;
+	AVCodecContext *codecCTX;
+	int64_t nextPts;
+	AVFrame *frame;
 };

@@ -20,5 +20,6 @@ public:
 	int Width;
 	int Height;
 	FrameRate* FrameRate;
+	int SampleRate;
 };
 

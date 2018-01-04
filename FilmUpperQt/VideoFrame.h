@@ -20,6 +20,10 @@ public:
 		return (int)(((double)leftColor * blendRatio) + ((double)rightColor * (1 - blendRatio)));
 	}
 
+	int GetBufferSize() {
+		return _width * _height * 3;
+	}
+
 	VideoFrame* Clone()
 	{
 		VideoFrame* retFrame = new VideoFrame(_height, _width);

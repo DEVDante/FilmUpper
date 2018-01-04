@@ -46,9 +46,13 @@ FrameReader::FrameReader( std::string filename )
 
 FrameReader::~FrameReader()
 {
-	avcodec_close(codecCTX);
-	avcodec_close(codecCtxOriginal);
+	avcodec_free_context(&codecCTX);
+	avcodec_free_context(&codecCtxOriginal);
 	avformat_close_input(&formatCTX);
+	av_free(frameBuffer);
+	av_frame_free(&frame);
+	av_frame_free(&frameRGB);
+	delete sws_ctx;
 }
 
 bool FrameReader::AreFramesLeft()
@@ -75,9 +79,9 @@ VideoFrame* FrameReader::ReadNextFrame()
     VideoFrame *outFrame = new VideoFrame(codecCTX->width, codecCTX->height);
 
 	for (int i = 0; i < codecCTX->height * frameRGB->linesize[0]; i++)
-	{
 		outFrame->Frame[i] = frameRGB->data[0][i];
-	}
+
+	//av_packet_free(packet);
 
 	return outFrame;
 }
@@ -89,6 +93,7 @@ FilmQualityInfo* FrameReader::GetVideoFormatInfo()
     nfo->Width = codecCTX->width;
     nfo->Height = codecCTX->height;
 	nfo->FrameRate = new FrameRate((codecCTX->framerate.num), (codecCTX->framerate.den));
+	nfo->SampleRate = codecCTX->sample_rate;
 
 	return nfo;
 }
