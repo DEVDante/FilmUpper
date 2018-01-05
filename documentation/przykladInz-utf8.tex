@@ -13,9 +13,9 @@
 
 
 %% każdy autor musi mieć 4 argumenty: imię nazwisko, nr albumu, procent wkładu, opis wkładu
-\autor{Kamil Rutkowski}{112233}{50} {Struktura aplikacji, Algorytmika}
+\autor{Kamil Rutkowski}{112233}{55} {Struktura aplikacji, Algorytmika}
 	
-\autor{Jakub Rup}{112233}{50}	{Kodowanie i dekodowanie plików, Interfejs użytkownika, Algorytmika}
+\autor{Jakub Rup}{112233}{45}	{Kodowanie i dekodowanie plików, Interfejs użytkownika, Algorytmika}
 
 	
 	
@@ -54,6 +54,23 @@ FilmUpper jest aplikacją pozwalającą na poprawianie jakości obrazu w filmie,
 
 Przetwarzanie plików filmowych nawet w przypadku zastosowania najłatwiejszych algorytmów sposób jest zadaniem bardzo wymagającym pod względem wydajnościowym, dlatego wybór technologii ma kluczowe znaczenie, gdyż wpływa na wydajność całej aplikacji. Należy zwrócić uwagę na wiele czynników które mogą wpłynąć na działanie programu jak również na sposób jego implementacji.
 
+\subsection{Biblioteka do dekodowania oraz kodowania plików wideo}
+
+\subsubsection{FFmpeg / libav}
+Narzędzia oraz biblioteki \emph{FFmpeg} (czy też \emph{libav} będącym tak zwanym ,,forkiem'' \emph{FFmpeg}-a) są jednymi z najbardziej popularnych otwartych oprogramowań służących do dekodowania, kodowania oraz manipulacji plikami multimedialnymi. Posiadają one zbiór powszechnie używanych, ,,open-source'owych'' kodeków audio i wideo. Biblioteki te napisane są w języku C. 
+\subsubsection{OpenCV}
+\emph{OpenCV (Open Source Computer Vision)} to zbiór bibliotek napisanych w języku C++, przeznaczonych głównie do rozpoznawania obrazów w czasie rzeczywistym. Biblioteka \emph{cudacodec} zawarta w tym zbiorze pozwala na dekodowanie oraz kodowanie plików wideo. Jest ona oparta na kodekach \emph{FFmpeg}-a, do procesu przetwarzania multimediów używa karty graficznej.
+\subsubsection{DirectShow}
+Platforma programistyczna opracowana przez firmę \emph{Microsoft} dla systemów rodziny \emph{Windows}, przeznaczona do manipulacji plikami multimedialnymi. Oparta jest ona na standardzie \emph{Component Object Model (COM)}. Dzieli ona proces przetwarzania multimediów na moduły nazywane filtrami. Każdy filtr niezależnie wykonuje określone operacje na danych, przekazując je do kolejnego filtru, zapisując je lub wyświetlając na ekranie. Kodeki audio i wideo dostarczane są w formie takich filtrów.
+\subsubsection{Media Foundation}
+Następca \emph{DirectShowa} dostępny dla systemów \emph{Windows Vista} oraz nowszych. Działa na podobnej zasadzie co swój poprzednik, wspierając domyślnie większa liczbę formatów plików multimedialnych.
+\subsubsection{Wybór biblioteki do dekodowania/kodowania}
+Przy wyborze spośród narzędzi do dekodowania/kodowania kierowaliśmy się liczbą dostępnych pomocy naukowych na ich temat oraz prostotą ich używania. Początkowo wybraliśmy biblioteki \emph{FFmpeg}-a, jednakże ostatecznie przy tworzeniu projektu zastosowaliśmy rozwiązania oferowane przez \emph{OpenCV} do otrzymania danych z plików wideo oraz gotowych narzędzi \emph{FFmpeg}-a do późniejszego dodania dźwięku do otrzymanych plików multimedialnych.
+
+\subsection{Biblioteka interfejsu graficznego}
+
+\subsubsection{Qt}
+\subsubsection{gtk}
 
 \subsection{Język programowania}
 
@@ -75,7 +92,46 @@ Python mimo bycia językiem wysokopoziomowym ma duże możliwości w przetwarzan
 Rozważając cechy każdego z języków, nasze umiejętności w posługiwaniu się nimi oraz specyfikę programu który chcemy napisać wybraliśmy język C++. Kluczowymi cechami które przekonały nas do wyboru tego języka były: mnogość bibliotek związanych z tematem projektu lub uniwersalnie wspomagających często napotykane problemy, prędkość działania oraz duża znajomość samego języka.
 
 
-\section{Dekodowanie oraz enkodowanie filmów}
+\section{Dekodowanie oraz kodowanie filmów}
+
+\subsection{Format pliku wideo}
+Formatem pliku wideo nazywamy sposób reprezentacji danych wideo i audio w pamięci komputera. Na format wideo składa się kontener przechowujący strumienie między innymi audio i wideo oraz kodeki określające jak te strumienie są kodowane i kompresowane. Kontenery obsługują ściśle określone kodeki audio i wideo. Większość kontenerów jest w stanie przechowywać wyłącznie jeden strumień wideo oraz jeden strumień dźwięku, niektóre z nich mogą przechowywać informacje o napisach (przykładem kontenera pozwalającego na przechowywanie wielu strumieni takiego samego typu jest \emph{Matroska}).
+
+\subsection{Struktura pliku wideo}
+W pliku wideo wyróżnić można następujące elementy: 
+\begin{itemize}
+	\item nagłówek zawierający dane formacie pliku, jego kontenerze, zastosowanych kodekach oraz opcjonalne metadane takie jak tytuł czy też autor,
+	\item pakiety posiadające dane o pewnych określonych częściach strumieni które są zapisane w pliku.
+\end{itemize}
+W przypadku strumienia wideo pojedynczy pakiet przechowuje dane o jednej jego klatce (bądź też, w przypadku niektórych kodeków, części która uległa zmianie względem poprzedniej klatki). Dla strumieni audio pakiet przechowuję dane o pewnej ilości próbek dźwięku zależnej od zastosowanego podczas kodowania próbkowania oraz ilości klatek wyświetlanych na sekundę. Pakiety przechowują także informacje pozwalające na synchronizacje czasową strumieni danych potrzebne do poprawnego odtwarzania pliku.
+
+\subsection{Dekodowanie}
+Aby odczytać z pliku wideo pojedynczą klatkę obrazu potrzebujemy wydobyć z niego pojedynczy pakiet i zdekodować go określonym przez format tego pliku kodekiem. Zanim do tego przystąpimy musimy jednak wydzielić pakiety należące do strumienia wideo. Proces ten nazywany jest demultipleksowaniem, czyli podziałem pliku na oddzielne strumienie danych obrazu i dźwięku. Po wydzieleniu z pliku ścieżki wideo odczytujemy kolejne pakiety, które przesyłane są do dekodera. Dekoder zwraca nam przetworzoną klatkę oraz informacje o niej. 
+
+Przed przystąpieniem do przetwarzania otrzymanych danych o pikselach należy określić w jakiej przestrzeni barw zostały one zapisane w pliku. Większość formatów zapisuje piksele korzystając z modelu barw YUV, w którym składowa Y odpowiada za luminancje obrazu, a składowe UV odpowiadają za nadanie mu barwy. Dla potrzeb naszych algorytmów wymagana jest konwersja klatek do przestrzeni barw RGB. Aby tego dokonać stosuje się poniższe działanie mnożenia macierzy przez wektor:
+
+\[
+\begin{bmatrix}
+	R\\[0.3em]
+	G\\[0.3em]
+	B\\[0.3em]
+\end{bmatrix}
+=
+\begin{bmatrix}
+	1 & 0 & 1,13983\\[0.3em]
+	1 & -0,39465 & -0,58060\\[0.3em]
+	1 & 2,03211 & 0\\[0.3em]
+\end{bmatrix}
+*
+\begin{bmatrix}
+Y\\[0.3em]
+U\\[0.3em]
+V\\[0.3em]
+\end{bmatrix}
+\]
+\subsection{Kodowanie}
+Kodowanie jest procesem odwrotnym do dekodowania. Na początku tworzony jest plik do którego zapisywany jest jego nagłówek. Przetworzona przez nas klatka obrazu konwertowana jest na model przestrzeni barw obsługiwany przez format pliku docelowego. Następnie klatka ta przesyłana jest do kodera który koduje obraz i tworzy na jego podstawie pakiet. W przypadku gdy zapisujemy do formatu który zapisuje klatki pośrednie jako różnicę między klatką kluczową a obecnie zapisywaną, koder buforuje obrazy do momentu otrzymania określonej przez format jej ilości, generując różnicę między nimi i tworząc pakiety na ich podstawie. Następnie pakiety zapisywane są do pliku przechodząc przez proces multipleksowania jeżeli zapisujemy do pliku z istniejącym już strumieniem danych. Ostatecznie plik uzupełniany jest o dodatkowe dane potrzebne do jego odtworzenia i zamykany.
+
 \section{Interfejs użytkownika}
 
 
@@ -394,6 +450,35 @@ $
 gdzie $u$ jest stosunkiem umiejscowienia nowego punktu na splajnie, a punkty $p_x$ są kolejnymi punktami z macierzy tworzącymi splain.
 
 Obliczone na podstawie powyższego wzoru punkty wykorzystujemy do obliczenia ostatecznej krzywej która w miejscu przecięcia się z punktem końcowym daje nam ostateczną wartość koloru. 
+
+\subsection{Algorytm splotu}
+Algorytm splotu oblicza wartość piksela obrazu docelowego jako sumę wartości piksela znajdującego się na tej samej pozycji oraz wartości pikseli sąsiadujących z nim przemnożonych przez wartości macierzy $MxM$ zwanej maską lub kernelem. Działanie to można zapisać w następujący sposób: 
+\[p_{o}[x,y]= \sum_{a = -R}^{R}\sum_{b = -R}^{R} p_{i}[x + a, y + b]*kernel[a, b]\], gdzie:
+
+$p_{o}$ - wartość piksela obrazu wyjściowego,
+
+$p_{i}$ - wartość piksela obrazu wejściowego,
+
+$kernel$ - macierz maski,
+
+$R$ - promień maski.
+
+W naszym programie algorytm ten stosowany jest do wyostrzenia obrazu. Stosujemy do tego celu maskę: 
+\[
+\begin{bmatrix}
+	0 & -1 & 0\\[0.3em]
+	-1 & 5 & -1\\[0.3em]
+	0 & -1 & 0\\[0.3em]
+\end{bmatrix}
+\]
+
+\subsubsection{Obsługa pikseli brzegowych}
+Algorytm splotu wymaga wartości pikseli znajdujących się poza granicami obrazu źródłowego. W tym wypadku stosuję się jedno z poniższych rozwiązań
+\begin{enumerate}
+	\item Obcinanie - jeżeli algorytm wymagałby do obliczenia piksela wartości znajdujących się poza krawędziami obrazu, piksel ten jest pomijany,
+	\item Zawijanie - jeżeli wymagany jest piksel znajdujący się poza krawędziami obrazu, wartości te brane są z krawędzi przeciwnej,
+	\item Rozszerzanie - krawędzie obrazu wejściowego rozszerzane są poprzez kopiowanie wartości pikseli brzegowych tyle razy ile wymaga tego algorytm.
+\end{enumerate}
 
 \subsection{Zwiększanie ilości klatek na sekundę}
 Algorytmy zwiększające ilość klatek obrazu na sekundę są zwykle o wiele bardziej skomplikowane od algorytmów ulepszających pojedynczą klatkę obrazu. Aby stworzyć nową klatkę obrazu z dużym oddaniem tego, jak by wyglądała w rzeczywistości wymagana by była złożona analiza wielu obrazów oraz rozwiązania korzystające z systemów opartych o sztuczną inteligencję. Stworzenie pojedynczego systemu takiego rodzaju mogłoby być tematem na osobna pracę naukową. Postanowiliśmy więc skupić się na dwóch podstawowych algorytmach które dają zadowalający efekt przy użyciu prostych technik oraz niedoskonałości ludzkiego zmysłu wzroku.
