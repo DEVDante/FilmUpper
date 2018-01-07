@@ -64,6 +64,8 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, FilmQua
 
 	// DEST PIX FMT
 	frameOut = av_frame_alloc();
+	if (frameOut == NULL)
+		throw std::bad_alloc::bad_alloc();
 	frameOut->format = codecCTX->pix_fmt;
 	frameOut->height = codecCTX->height;
 	frameOut->width = codecCTX->width;
@@ -71,6 +73,8 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, FilmQua
 	av_image_alloc(frameOut->data, frameOut->linesize, codecCTX->width, codecCTX->height, codecCTX->pix_fmt, 32);
 	//RGB
 	frameRGB = av_frame_alloc();
+	if (frameRGB == NULL)
+		throw std::bad_alloc::bad_alloc();
 	frameRGB->format = AV_PIX_FMT_RGB24;
 	frameRGB->height = codecCTX->height;
 	frameRGB->width = codecCTX->width;
@@ -90,9 +94,9 @@ FrameWriter::~FrameWriter()
 
 		if (avcodec_receive_packet(codecCTX, packet) == 0) 
 		{
-			packet->dts = av_rescale_q_rnd(packet->dts, codecCTX->time_base, videoStream->time_base, (AVRounding)(AV_ROUND_NEAR_INF | AV_ROUND_PASS_MINMAX));
-			packet->pts = av_rescale_q_rnd(packet->pts, codecCTX->time_base, videoStream->time_base, (AVRounding)(AV_ROUND_NEAR_INF | AV_ROUND_PASS_MINMAX));
-			packet->duration = av_rescale_q(1, codecCTX->time_base, videoStream->time_base);
+			//packet->dts = av_rescale_q_rnd(packet->dts, codecCTX->time_base, videoStream->time_base, (AVRounding)(AV_ROUND_NEAR_INF | AV_ROUND_PASS_MINMAX));
+			//packet->pts = av_rescale_q_rnd(packet->pts, codecCTX->time_base, videoStream->time_base, (AVRounding)(AV_ROUND_NEAR_INF | AV_ROUND_PASS_MINMAX));
+			//packet->duration = av_rescale_q(1, codecCTX->time_base, videoStream->time_base);
 			av_interleaved_write_frame(formatCTX, packet);
 		}
 
@@ -120,6 +124,8 @@ void FrameWriter::WriteFrame(VideoFrame *frame)
 
 	for (int i = 0; i < frame->GetBufferSize(); i++)
 		frameRGB->data[0][i] = frame->Frame[i];
+
+	delete frame;
 
 	sws_scale(sws_ctx, frameRGB->data, frameRGB->linesize, 0, codecCTX->height, frameOut->data, frameOut->linesize);
 

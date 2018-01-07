@@ -149,14 +149,21 @@ public:
 	{
 		FrameEnhancerBase* frameEnhancer;
 		FrameReader *frameReader = new FrameReader("sample.mp4");
-		FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", frameReader->GetVideoFormatInfo());
-		//frameEnhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
+		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
+		qualityInfo->Width = 1708;
+		qualityInfo->Height = 960;
+		qualityInfo->FrameRate = new FrameRate(24, 1);
+		FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", qualityInfo);
+		frameEnhancer = new BiCubicFrameEnhancer(frameReader, qualityInfo);
 		//frameEnhancer = new NOPFrameEnhancer(frameReader, frameReader->GetVideoFormatInfo());
 
-		while (frameReader->ReadNextFrame())
+		/*while (frameReader->ReadNextFrame())
 		{
 			frameWriter->WriteFrame(frameEnhancer->ReadNextEnhancedFrame());
-		}
+		}*/
+
+		for (int i = 0; i < 100; i++)
+			frameWriter->WriteFrame(frameEnhancer->ReadNextEnhancedFrame());
 
 		delete frameWriter;
 		delete frameEnhancer;

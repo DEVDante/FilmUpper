@@ -1,6 +1,6 @@
 #pragma once
 #include "IFrameReader.h"
-#include <cstdio>
+
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>

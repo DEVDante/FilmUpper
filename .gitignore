@@ -38,3 +38,5 @@ Debug/*
 *.opendb
 /.project
 */Release/*
+*.tlog
+*.log

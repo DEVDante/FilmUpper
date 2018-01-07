@@ -63,11 +63,15 @@ bool FrameReader::AreFramesLeft()
 VideoFrame* FrameReader::ReadNextFrame()
 {
     int frameFinished;
-    AVPacket packet;
 
-	while (av_read_frame(formatCTX, &packet) >= 0) {
-		if (packet.stream_index == videoStream) {
-			avcodec_decode_video2(codecCTX, frame, &frameFinished, &packet);
+	packet = av_packet_alloc();
+	if (!packet)
+		throw std::bad_alloc();
+	av_init_packet(packet);
+
+	while (av_read_frame(formatCTX, packet) >= 0) {
+		if (packet->stream_index == videoStream) {
+			avcodec_decode_video2(codecCTX, frame, &frameFinished, packet);
 			if (frameFinished) {
 				break;
 			}
@@ -81,7 +85,7 @@ VideoFrame* FrameReader::ReadNextFrame()
 	for (int i = 0; i < codecCTX->height * frameRGB->linesize[0]; i++)
 		outFrame->Frame[i] = frameRGB->data[0][i];
 
-	//av_packet_free(packet);
+	av_packet_free(&packet);
 
 	return outFrame;
 }
