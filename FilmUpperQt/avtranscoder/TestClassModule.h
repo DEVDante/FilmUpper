@@ -26,7 +26,7 @@ public:
 		//NNSpeedTest();
 		//InterpolationSpeedTest();
 		//WriterTest();
-		//BiCubicSpeedTest();
+		BiCubicSpeedTest();
 		WriterTest();
 		//BiCubicSpeedTest();
 	}
@@ -148,12 +148,12 @@ public:
 	void static WriterTest()
 	{
 		FrameEnhancerBase* frameEnhancer;
-		FrameReader *frameReader = new FrameReader("sample.mp4");
-		FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", frameReader->GetVideoFormatInfo());
+		FrameReader *frameReader = new FrameReader("D:/Video/BTTF/sample.mp4");
+		FrameWriter *frameWriter = new FrameWriter("D:/Video/BTTF/out.mp4", "mp4", "libx264", "libmp3lame", frameReader->GetVideoFormatInfo());
 		//frameEnhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
-		//frameEnhancer = new NOPFrameEnhancer(frameReader, frameReader->GetVideoFormatInfo());
+		frameEnhancer = new NOPFrameEnhancer(frameReader, frameReader->GetVideoFormatInfo());
 
-		while (frameReader->ReadNextFrame())
+		while(frameEnhancer->AreFramesLeft())
 		{
 			frameWriter->WriteFrame(frameEnhancer->ReadNextEnhancedFrame());
 		}

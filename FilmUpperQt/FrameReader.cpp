@@ -49,7 +49,7 @@ FrameReader::~FrameReader()
 	avcodec_free_context(&codecCTX);
 	avcodec_free_context(&codecCtxOriginal);
 	avformat_close_input(&formatCTX);
-	av_free(frameBuffer);
+	//av_free(frameBuffer);
 	av_frame_free(&frame);
 	av_frame_free(&frameRGB);
 	delete sws_ctx;
