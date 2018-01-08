@@ -1,5 +1,5 @@
 #include "FrameWriter.h"
-#include <opencv2\opencv.hpp>
+//#include <opencv2\opencv.hpp>
 
 //auto a = av_string_error(ret);
 std::string av_string_error(int err)
@@ -132,9 +132,9 @@ void FrameWriter::WriteFrame(VideoFrame *frame)
 		frameRGB->data[0][i] = frame->Frame[i];
 
 	//cv::Mat mat(info->Height, info->Width, CV_8UC3, frameRGB->data[0], frameRGB->linesize[0]);
-	cv::Mat mat2(info->Height, info->Width, CV_8UC3, frame->Frame, info->Width*3);
+	//cv::Mat mat2(info->Height, info->Width, CV_8UC3, frame->Frame, info->Width*3);
 	//cv::imshow("AVFrame RGB", mat);
-	cv::imshow("Our Struct", mat2);
+	//cv::imshow("Our Struct", mat2);
 
 	delete frame;
 
