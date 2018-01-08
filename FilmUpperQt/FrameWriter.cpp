@@ -1,4 +1,5 @@
 #include "FrameWriter.h"
+#include <opencv2\opencv.hpp>
 
 //auto a = av_string_error(ret);
 std::string av_string_error(int err)
@@ -69,8 +70,10 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, FilmQua
 	frameOut->format = codecCTX->pix_fmt;
 	frameOut->height = codecCTX->height;
 	frameOut->width = codecCTX->width;
-	int bufferSize = av_image_get_buffer_size(codecCTX->pix_fmt, codecCTX->width, codecCTX->height, 1);
-	av_image_alloc(frameOut->data, frameOut->linesize, codecCTX->width, codecCTX->height, codecCTX->pix_fmt, 32);
+	//int bufferSize = av_image_get_buffer_size(codecCTX->pix_fmt, codecCTX->width, codecCTX->height, 1);
+	//av_image_alloc(frameOut->data, frameOut->linesize, codecCTX->width, codecCTX->height, codecCTX->pix_fmt, 32);
+	av_frame_make_writable(frameOut);
+	av_frame_get_buffer(frameOut, 0);
 	//RGB
 	frameRGB = av_frame_alloc();
 	if (frameRGB == NULL)
@@ -78,8 +81,11 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, FilmQua
 	frameRGB->format = AV_PIX_FMT_RGB24;
 	frameRGB->height = codecCTX->height;
 	frameRGB->width = codecCTX->width;
-	bufferSize = av_image_get_buffer_size(AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height, 1);
-	av_image_alloc(frameRGB->data, frameRGB->linesize, codecCTX->width, codecCTX->height, AV_PIX_FMT_RGB24, 32);
+	frameRGB->linesize[0] = info->Width * 3;
+	//bufferSize = av_image_get_buffer_size(AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height, 1);
+	//av_image_alloc(frameRGB->data, frameRGB->linesize, codecCTX->width, codecCTX->height, AV_PIX_FMT_RGB24, 32);
+	av_frame_make_writable(frameRGB);
+	av_frame_get_buffer(frameRGB, 0);
 
 	sws_ctx = sws_getContext(codecCTX->width, codecCTX->height, AV_PIX_FMT_RGB24, codecCTX->width, codecCTX->height, codecCTX->pix_fmt, SWS_BILINEAR, NULL, NULL, NULL);
 }
@@ -124,6 +130,11 @@ void FrameWriter::WriteFrame(VideoFrame *frame)
 
 	for (int i = 0; i < frame->GetBufferSize(); i++)
 		frameRGB->data[0][i] = frame->Frame[i];
+
+	//cv::Mat mat(info->Height, info->Width, CV_8UC3, frameRGB->data[0], frameRGB->linesize[0]);
+	cv::Mat mat2(info->Height, info->Width, CV_8UC3, frame->Frame, info->Width*3);
+	//cv::imshow("AVFrame RGB", mat);
+	cv::imshow("Our Struct", mat2);
 
 	delete frame;
 

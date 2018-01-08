@@ -1,6 +1,7 @@
 #pragma once
 #include "FrameEnhancerBase.h"
 #include <thread>
+#include <algorithm>
 #include "VFHack.h"
 
 #define KERNEL_RADIUS 1
@@ -12,6 +13,9 @@ public:
 	VideoFrame* ReadNextEnhancedFrame() override;
 	bool AreFramesLeft() override;
 	MaskFrameEnhancer(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo);
+
+	template <typename T>
+	static T clamp(const T& n, const T& lower, const T& upper);
 		
 private:
 	void static CalculateFramePararel(VideoFrame* input, VideoFrame* output, int startRow, int endRow, FilmQualityInfo* sourceQ, FilmQualityInfo* targetQ);

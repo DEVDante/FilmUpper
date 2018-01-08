@@ -1,5 +1,12 @@
 #include "MaskFrameEnhancer.h"
 
+template<typename T>
+static T MaskFrameEnhancer::clamp(const T & n, const T & lower, const T & upper)
+{
+	return std::max(lower, std::min(n, upper));
+}
+
+
 VideoFrame* MaskFrameEnhancer::ReadNextEnhancedFrame()
 {
 	if (!_framesLeft)
@@ -13,7 +20,7 @@ VideoFrame* MaskFrameEnhancer::ReadNextEnhancedFrame()
 	else
 		_framesLeft = false;
 
-	int threads = 2;
+	int threads = std::thread::hardware_concurrency() != 0 ? std::thread::hardware_concurrency() : 1;
 
 	std::thread *tt = new std::thread[threads];
 
@@ -39,20 +46,21 @@ void MaskFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* out
 
 	for (int verticalIndex = startRow; verticalIndex < endRow; ++verticalIndex)
 	{
-		if (verticalIndex < KERNEL_RADIUS || verticalIndex > sourceQ->Height- KERNEL_RADIUS)
+		if ((verticalIndex < KERNEL_RADIUS) || (verticalIndex > sourceQ->Height - KERNEL_RADIUS))
 			continue;
-		for (int horizontalIndex = KERNEL_RADIUS; horizontalIndex < (targetQ->Width- KERNEL_RADIUS); ++horizontalIndex)
+		for (int horizontalIndex = KERNEL_RADIUS; horizontalIndex < (targetQ->Width - KERNEL_RADIUS); ++horizontalIndex)
 		{
-			for (int kernelX = 0; kernelX < KERNEL_DIAMETER; kernelX++)
-				for (int kernelY = 0; kernelY < KERNEL_DIAMETER; kernelY++)
+			for (int kernelX = (-1); kernelX < KERNEL_RADIUS + 1; kernelX++)
+				for (int kernelY = (-1); kernelY < KERNEL_RADIUS + 1; kernelY++)
 				{
-					sumR = sumR + input->Frame[verticalIndex - 1 * sourceQ->Width + horizontalIndex - 1 * 3] * kernel[kernelX][kernelY];
-					sumG = sumR + input->Frame[verticalIndex - 1 * sourceQ->Width + horizontalIndex - 1 * 3 + 1] * kernel[kernelX][kernelY];
-					sumB = sumR + input->Frame[verticalIndex - 1 * sourceQ->Width + horizontalIndex - 1 * 3 + 2] * kernel[kernelX][kernelY];
+					sumR = sumR + input->Frame[(verticalIndex + kernelX) * sourceQ->Width + (horizontalIndex + kernelY) * 3] * kernel[kernelX + 1][kernelY + 1];
+					sumG = sumR + input->Frame[(verticalIndex + kernelX) * sourceQ->Width + (horizontalIndex + kernelY) * 3 + 1] * kernel[kernelX + 1][kernelY + 1];
+					sumB = sumR + input->Frame[(verticalIndex + kernelX) * sourceQ->Width + (horizontalIndex + kernelY) * 3 + 2] * kernel[kernelX + 1][kernelY + 1];
 				}
-			output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3] = sumR;
-			output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 1] = sumG;
-			output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 2] = sumB;
+			uint8_t test = output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3] = clamp(sumR, 0, 255);
+			uint8_t test2 = output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 1] = clamp(sumG, 0, 255);
+			uint8_t test3 = output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 2] = clamp(sumB, 0, 255);
+			test3;
 		}
 	}
 }

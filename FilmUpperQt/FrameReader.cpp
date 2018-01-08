@@ -65,13 +65,14 @@ bool FrameReader::AreFramesLeft()
 VideoFrame* FrameReader::ReadNextFrame()
 {
     int frameFinished;
+	int ret;
 
 	packet = av_packet_alloc();
 	if (!packet)
 		throw std::bad_alloc();
 	av_init_packet(packet);
 
-	while (av_read_frame(formatCTX, packet) >= 0) {
+	while (ret = av_read_frame(formatCTX, packet) >= 0) {
 		if (packet->stream_index == videoStream) {
 			avcodec_decode_video2(codecCTX, frame, &frameFinished, packet);
 			if (frameFinished) {
@@ -79,6 +80,8 @@ VideoFrame* FrameReader::ReadNextFrame()
 			}
 		}
 	}
+	if (ret < 0)
+		return NULL;
 
     sws_scale(sws_ctx, (uint8_t const * const *)frame->data, frame->linesize, 0, codecCTX->height, frameRGB->data, frameRGB->linesize);
     
