@@ -21,9 +21,11 @@ FrameReader::FrameReader( std::string filename )
 	if (codec == NULL) 
 		throw std::runtime_error("Unsupported codec");
 
+	AVCodecParameters *param = avcodec_parameters_alloc();
 	codecCTX = avcodec_alloc_context3(codec);
-	if (avcodec_copy_context(codecCTX, codecCtxOriginal) != 0) 
-		throw std::runtime_error("Couldn't copy codec context");
+	avcodec_parameters_from_context(param, codecCtxOriginal);
+	avcodec_parameters_to_context(codecCTX, param);
+	avcodec_parameters_free(&param);
 
 	if (avcodec_open2(codecCTX, codec, NULL)<0)
 		throw std::runtime_error("Couldn't open codec");
@@ -47,12 +49,12 @@ FrameReader::FrameReader( std::string filename )
 FrameReader::~FrameReader()
 {
 	avcodec_free_context(&codecCTX);
-	avcodec_free_context(&codecCtxOriginal);
-	avformat_close_input(&formatCTX);
+	avio_close(formatCTX->pb);
+	avformat_free_context(formatCTX);
 	//av_free(frameBuffer);
-	av_frame_free(&frame);
 	av_frame_free(&frameRGB);
-	delete sws_ctx;
+	av_frame_free(&frame);
+	sws_freeContext(sws_ctx);
 }
 
 bool FrameReader::AreFramesLeft()
