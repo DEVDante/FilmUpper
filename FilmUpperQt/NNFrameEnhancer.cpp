@@ -40,10 +40,10 @@ void NNFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* outpu
 	int verticalOriginPosition;
 	for (int verticalIndex = startRow; verticalIndex < endRow; ++verticalIndex)
 	{
-		verticalOriginPosition = verticalRatio * verticalIndex;
+		verticalOriginPosition = (double)(verticalIndex * sourceQ->Height) / targetQ->Height; //verticalRatio * verticalIndex;
 		for (int horizontalIndex = 0; horizontalIndex < targetQ->Width; ++horizontalIndex)
 		{
-			horizontalOriginPosition = horizontalRatio * horizontalIndex;
+			horizontalOriginPosition = (double)(horizontalIndex * sourceQ->Width) / targetQ->Width;//horizontalRatio * horizontalIndex;
 
 			output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3] = input->Frame[(verticalOriginPosition * sourceQ->Width + horizontalOriginPosition) * 3];
 			output->Frame[(verticalIndex * targetQ->Width + horizontalIndex) * 3 + 1] = input->Frame[(verticalOriginPosition * sourceQ->Width + horizontalOriginPosition) * 3 + 1];

@@ -5,7 +5,7 @@
 class VideoFrame {
 public:
 	VideoFrame(int height, int width) {
-		Frame = new int[height * width * 3];
+		Frame = new uint8_t[height * width * 3];
 		_width = width;
 		_height = height;
 	}
@@ -14,7 +14,7 @@ public:
 		delete[] Frame;
 	}
 	
-	int* Frame;
+	uint8_t* Frame;
 
 	static int BlendColors(int leftColor, int rightColor, double blendRatio) {
 		return (int)(((double)leftColor * blendRatio) + ((double)rightColor * (1 - blendRatio)));

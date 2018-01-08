@@ -27,6 +27,7 @@ public:
 		//InterpolationSpeedTest();
 		//WriterTest();
 		//BiCubicSpeedTest();
+		//NOPToFileTest();
 		WriterTest();
 		//BiCubicSpeedTest();
 	}
@@ -109,23 +110,23 @@ public:
 
 	void static InterpolationSpeedTest()
 	{
-		IFrameReader* frameReader = new FrameReader("D:/Studia/Inzynierka/big_buck_bunny_480p_surround-fix.avi");
+		IFrameReader* frameReader = new FrameReader("sample.mp4");
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
-		qualityInfo->Width = 1708;
-		qualityInfo->Height = 960;
+		qualityInfo->Width = 1708 / 2;
+		qualityInfo->Height = 960 / 2;
 		qualityInfo->FrameRate = new FrameRate(24, 1);
 		FrameEnhancerBase* enhancer;
 		enhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
 		std::ofstream saveFile;
 		saveFile.open("readTestInterpolation.txt");
-		int iterations = 1000;
-		clock_t begin = clock();
-		for (int xd = 0; xd < iterations; ++xd) {
-			delete enhancer->ReadNextEnhancedFrame();
-		}
-		clock_t end = clock();
-		double elapsed_secs = (double(end - begin) / iterations) / CLOCKS_PER_SEC;
-		saveFile << std::to_string(elapsed_secs) + " sekund dla " + std::to_string(iterations) + " iteracji, \n";
+		//int iterations = 1000;
+		//clock_t begin = clock();
+		//for (int xd = 0; xd < iterations; ++xd) {
+		//	delete enhancer->ReadNextEnhancedFrame();
+		//}
+		//clock_t end = clock();
+		//double elapsed_secs = (double(end - begin) / iterations) / CLOCKS_PER_SEC;
+		//saveFile << std::to_string(elapsed_secs) + " sekund dla " + std::to_string(iterations) + " iteracji, \n";
 		auto readFrame = enhancer->ReadNextEnhancedFrame();
 
 		for (int y = 0; y < qualityInfo->Height; ++y)
@@ -150,11 +151,12 @@ public:
 		FrameEnhancerBase* frameEnhancer;
 		FrameReader *frameReader = new FrameReader("sample.mp4");
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
-		qualityInfo->Width = 1708;
-		qualityInfo->Height = 960;
+		qualityInfo->Width = 1708/2;
+		qualityInfo->Height = 960/2;
 		qualityInfo->FrameRate = new FrameRate(24, 1);
 		FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", qualityInfo);
-		frameEnhancer = new BiCubicFrameEnhancer(frameReader, qualityInfo);
+		frameEnhancer = new NNFrameEnhancer(frameReader, qualityInfo);
+		//FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", frameReader->GetVideoFormatInfo());
 		//frameEnhancer = new NOPFrameEnhancer(frameReader, frameReader->GetVideoFormatInfo());
 
 		/*while (frameReader->ReadNextFrame())
@@ -167,6 +169,36 @@ public:
 
 		delete frameWriter;
 		delete frameEnhancer;
+		//delete frameReader;
+	}
+
+	void static NOPToFileTest()
+	{
+		IFrameReader* frameReader = new FrameReader("sample.mp4");
+		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
+		qualityInfo->Height = 960 / 2;
+		qualityInfo->Width = 1708 / 2;
+		qualityInfo->FrameRate = new FrameRate(24, 1);
+		FrameEnhancerBase* enhancer;
+		enhancer = new NOPFrameEnhancer(frameReader, qualityInfo);
+		auto readFrame = enhancer->ReadNextEnhancedFrame();
+
+		std::ofstream saveFile;
+		saveFile.open("NOPFrameEnhTest.txt");
+		for (int y = 0; y < qualityInfo->Height; ++y)
+		{
+			for (int x = 0; x < qualityInfo->Width; ++x)
+			{
+				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3]) + " ";
+				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3 + 1]) + " ";
+				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3 + 2]) + ", ";
+			}
+			saveFile << "\n";
+		}
+		saveFile.close();
+		delete enhancer;
+		delete readFrame;
+		delete qualityInfo;
 		delete frameReader;
 	}
 
@@ -174,8 +206,8 @@ public:
 	{
 		IFrameReader* frameReader = new ConstantTestFrameReader();
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
-		qualityInfo->Height = 30;
-		qualityInfo->Width = 60;
+		qualityInfo->Height = 300;
+		qualityInfo->Width = 600;
 		qualityInfo->FrameRate = new FrameRate(1,1);
 		FrameEnhancerBase* enhancer;
 		enhancer = new NNFrameEnhancer(frameReader, qualityInfo);
@@ -187,9 +219,9 @@ public:
 		{
 			for (int x = 0; x < qualityInfo->Width; ++x)
 			{
-				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3]) + " ";
-				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3 + 1]) + " ";
-				saveFile << std::to_string(readFrame->Frame[y * qualityInfo->Width + x * 3 + 2]) + ", ";
+				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3]) + " ";
+				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3 + 1]) + " ";
+				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3 + 2]) + ", ";
 			}
 			saveFile << "\n";
 		}
