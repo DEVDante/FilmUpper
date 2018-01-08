@@ -14,6 +14,6 @@ public:
 	}
 private:
 	bool _wasLastFrameEven = false;
-	VideoFrame* _lastFrame;
+	VideoFrame* _lastFrame = nullptr;
 	VideoFrame* InterlaceFrame();
 };
