@@ -2,15 +2,15 @@
 #include "IFrameReader.h"
 #include <fstream>
 
-#define TEST_HEIGHT 10
-#define TEST_WIDTH 20
+#define TEST_HEIGHT 100
+#define TEST_WIDTH 200
 
 class ConstantTestFrameReader: public IFrameReader
 {
 public:
 	VideoFrame* ReadNextFrame() override {
 		VideoFrame* frame = new VideoFrame(TEST_HEIGHT, TEST_WIDTH);
-		int stepSize = 255 / (TEST_HEIGHT + TEST_WIDTH);
+		double stepSize = 255.0 / (TEST_HEIGHT + TEST_WIDTH);
 		std::ofstream saveFile;
 		saveFile.open("InterpolationFrameEnhTestIn.txt");
 		for(int y = 0; y < TEST_HEIGHT; ++y)
@@ -18,12 +18,12 @@ public:
 			for(int x = 0; x < TEST_WIDTH; ++x)
 			{
 				int blend = stepSize * (x + y);
-				frame->Frame[y * TEST_WIDTH + x * 3] = blend;
-				frame->Frame[y * TEST_WIDTH + x * 3 + 1] = blend;
-				frame->Frame[y * TEST_WIDTH + x * 3 + 2] = blend;
-				saveFile << std::to_string(frame->Frame[y * TEST_WIDTH + x * 3]) + " in " + std::to_string(y * TEST_WIDTH + x * 3) + ", ";
-				saveFile << std::to_string(frame->Frame[y * TEST_WIDTH + x * 3 + 1]) + " in " + std::to_string(y * TEST_WIDTH + x * 3 + 1) + ", ";
-				saveFile << std::to_string(frame->Frame[y * TEST_WIDTH + x * 3 + 2]) + " in " + std::to_string(y * TEST_WIDTH + x * 3 + 2) + ", ";
+				frame->Frame[(y * TEST_WIDTH + x) * 3] = blend;
+				frame->Frame[(y * TEST_WIDTH + x) * 3 + 1] = blend;
+				frame->Frame[(y * TEST_WIDTH + x) * 3 + 2] = blend;
+				saveFile << std::to_string(frame->Frame[(y * TEST_WIDTH + x) * 3]) + " in " + std::to_string((y * TEST_WIDTH + x) * 3) + ", ";
+				saveFile << std::to_string(frame->Frame[(y * TEST_WIDTH + x) * 3 + 1]) + " in " + std::to_string((y * TEST_WIDTH + x) * 3 + 1) + ", ";
+				saveFile << std::to_string(frame->Frame[(y * TEST_WIDTH + x) * 3 + 2]) + " in " + std::to_string((y * TEST_WIDTH + x) * 3 + 2) + ", ";
 			}
 			saveFile << "\n";
 		}
