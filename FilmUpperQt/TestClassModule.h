@@ -9,6 +9,7 @@
 #include <fstream>
 #include <time.h>
 #include "BiCubicFrameEnhancer.h"
+#include "InterlaceFpsEnhancer.h"
 
 class TestClassModule {
 public:
@@ -151,11 +152,14 @@ public:
 		FrameEnhancerBase* frameEnhancer;
 		FrameReader *frameReader = new FrameReader("sample.mp4");
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
-		qualityInfo->Width = 1708/2;
-		qualityInfo->Height = 960/2;
-		qualityInfo->FrameRate = new FrameRate(24, 1);
+		qualityInfo->Width = 1920;//1920;//1280;
+		qualityInfo->Height = 1080;//1080;//720;
+		qualityInfo->FrameRate = new FrameRate(48, 1);
 		FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", qualityInfo);
 		frameEnhancer = new NNFrameEnhancer(frameReader, qualityInfo);
+
+		FpsEnhancerBase* fpsEnhancer = new InterlaceFpsEnhancer(frameEnhancer, qualityInfo);
+
 		//FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", frameReader->GetVideoFormatInfo());
 		//frameEnhancer = new NOPFrameEnhancer(frameReader, frameReader->GetVideoFormatInfo());
 
@@ -164,8 +168,26 @@ public:
 			frameWriter->WriteFrame(frameEnhancer->ReadNextEnhancedFrame());
 		}*/
 
-		for (int i = 0; i < 100; i++)
-			frameWriter->WriteFrame(frameEnhancer->ReadNextEnhancedFrame());
+		for (int i = 0; i < 200; i++)
+			frameWriter->WriteFrame(fpsEnhancer->ReadNextFrame());
+			//frameWriter->WriteFrame(frameEnhancer->ReadNextEnhancedFrame());
+
+		/*auto readFrame = frameEnhancer->ReadNextEnhancedFrame();
+
+		std::ofstream saveFile;
+		saveFile.open("NOPTest.txt");
+		for (int y = 0; y < qualityInfo->Height; ++y)
+		{
+			for (int x = 0; x < qualityInfo->Width; ++x)
+			{
+				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3]) + " ";
+				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3 + 1]) + " ";
+				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3 + 2]) + ", ";
+			}
+			saveFile << "\n";
+		}
+		saveFile.close();*/
+
 
 		delete frameWriter;
 		delete frameEnhancer;
@@ -206,8 +228,8 @@ public:
 	{
 		IFrameReader* frameReader = new ConstantTestFrameReader();
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
-		qualityInfo->Height = 300;
-		qualityInfo->Width = 600;
+		qualityInfo->Height = 100;
+		qualityInfo->Width = 200;
 		qualityInfo->FrameRate = new FrameRate(1,1);
 		FrameEnhancerBase* enhancer;
 		enhancer = new NNFrameEnhancer(frameReader, qualityInfo);

@@ -121,13 +121,13 @@
     <ClInclude Include="InterpolationFpsEnhancer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InterlaceFpsEnhancerHeader.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="MaskFrameEnhancer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MaskFrameEnhancerHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterlaceFpsEnhancerHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
