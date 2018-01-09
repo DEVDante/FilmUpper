@@ -9,11 +9,18 @@ InterpolationFpsEnhancer::InterpolationFpsEnhancer(FrameEnhancerBase * frameEnha
 }
 
 VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
+	if (_nextFrame == nullptr)
+		return nullptr;
 	if (_currentFrameCooficiency > 1)
 	{
 		delete _currentFrame;
 		_currentFrame = _nextFrame;
 		_nextFrame = _frameEnhancer->ReadNextEnhancedFrame();
+		if(_nextFrame == nullptr)
+		{
+			_framesLeft = false;
+			return _currentFrame;
+		}
 		_currentFrameCooficiency -= 1;
 	}
 	

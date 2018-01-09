@@ -11,7 +11,7 @@ public:
 	}
 
 	double getNumericalRate() {
-		return num / den;
+		return (double)num / (double)den;
 	}
 };
 

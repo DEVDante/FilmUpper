@@ -2,10 +2,8 @@
 
 VideoFrame * InterlaceFpsEnhancer::ReadNextFrame()
 {
-	if (_lastFrame == nullptr)
-	{
-		_lastFrame = _frameEnhancer->ReadNextEnhancedFrame();
-	}
+	if (!_framesLeft)
+		return nullptr;
 	if(_wasLastFrameEven)
 	{
 		_wasLastFrameEven = !_wasLastFrameEven;
@@ -20,7 +18,7 @@ VideoFrame * InterlaceFpsEnhancer::ReadNextFrame()
 
 bool InterlaceFpsEnhancer::AreFramesLeft()
 {
-	return (_frameEnhancer->AreFramesLeft() || !_wasLastFrameEven);
+	return _framesLeft;
 }
 
 VideoFrame * InterlaceFpsEnhancer::InterlaceFrame()
@@ -28,6 +26,11 @@ VideoFrame * InterlaceFpsEnhancer::InterlaceFrame()
 	if(_frameEnhancer->AreFramesLeft())
 	{
 		VideoFrame* nextFrame = _frameEnhancer->ReadNextEnhancedFrame();
+		if(nextFrame == nullptr)
+		{
+			_framesLeft = false;
+			return _lastFrame;
+		}
 		for(int h = 0; h < (_targetQuality->Height); h+=2)
 		{
 			for (int w = 0; w < _targetQuality->Width; ++w)

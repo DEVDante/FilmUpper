@@ -152,46 +152,30 @@ public:
 		FrameEnhancerBase* frameEnhancer;
 		FrameReader *frameReader = new FrameReader("sample.mp4");
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
-		qualityInfo->Width = 1920;//1920;//1280;
-		qualityInfo->Height = 1080;//1080;//720;
-		qualityInfo->FrameRate = new FrameRate(48, 1);
+		qualityInfo->Width = 1921;
+		qualityInfo->Height = 1080;
+		qualityInfo->FrameRate = new FrameRate(50, 1);
 		FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", qualityInfo);
-		frameEnhancer = new NNFrameEnhancer(frameReader, qualityInfo);
+		frameEnhancer = new BiCubicFrameEnhancer(frameReader, qualityInfo);
 
-		FpsEnhancerBase* fpsEnhancer = new InterlaceFpsEnhancer(frameEnhancer, qualityInfo);
+		FpsEnhancerBase* fpsEnhancer = new InterpolationFpsEnhancer(frameEnhancer, qualityInfo);
 
-		//FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", frameReader->GetVideoFormatInfo());
-		//frameEnhancer = new NOPFrameEnhancer(frameReader, frameReader->GetVideoFormatInfo());
-
-		/*while (frameReader->ReadNextFrame())
+		while (frameReader->AreFramesLeft())
 		{
-			frameWriter->WriteFrame(frameEnhancer->ReadNextEnhancedFrame());
-		}*/
-
-		for (int i = 0; i < 200; i++)
-			frameWriter->WriteFrame(fpsEnhancer->ReadNextFrame());
 			//frameWriter->WriteFrame(frameEnhancer->ReadNextEnhancedFrame());
-
-		/*auto readFrame = frameEnhancer->ReadNextEnhancedFrame();
-
-		std::ofstream saveFile;
-		saveFile.open("NOPTest.txt");
-		for (int y = 0; y < qualityInfo->Height; ++y)
-		{
-			for (int x = 0; x < qualityInfo->Width; ++x)
-			{
-				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3]) + " ";
-				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3 + 1]) + " ";
-				saveFile << std::to_string(readFrame->Frame[(y * qualityInfo->Width + x) * 3 + 2]) + ", ";
-			}
-			saveFile << "\n";
+			auto fr = fpsEnhancer->ReadNextFrame();
+			if (fr == nullptr)
+				break;
+			frameWriter->WriteFrame(fr);
 		}
-		saveFile.close();*/
+
+		//for (int i = 0; i < 200; i++)
+		//	frameWriter->WriteFrame(fpsEnhancer->ReadNextFrame());
 
 
 		delete frameWriter;
 		delete frameEnhancer;
-		//delete frameReader;
+		delete frameReader;
 	}
 
 	void static NOPToFileTest()
