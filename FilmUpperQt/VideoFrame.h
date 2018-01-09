@@ -25,10 +25,11 @@ public:
 	VideoFrame* Clone()
 	{
 		VideoFrame* retFrame = new VideoFrame(_height, _width);
-		for(int s = 0; s < _height * _width * 3; s++)
+		/*for(int s = 0; s < _height * _width * 3; s++)
 		{
 			retFrame->Frame[s] = Frame[s];
-		}
+		}*/
+		memcpy(retFrame->Frame, Frame, GetBufferSize());
 		return retFrame;
 	}
 
