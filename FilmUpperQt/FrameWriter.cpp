@@ -128,8 +128,9 @@ void FrameWriter::WriteFrame(VideoFrame *frame)
 		throw std::bad_alloc();
 	av_init_packet(packet);
 
-	for (int i = 0; i < frame->GetBufferSize(); i++)
-		frameRGB->data[0][i] = frame->Frame[i];
+	/*for (int i = 0; i < frame->GetBufferSize(); i++)
+		frameRGB->data[0][i] = frame->Frame[i];*/
+	memcpy(frameRGB->data[0], frame->Frame, frame->GetBufferSize());
 
 	//cv::Mat mat(info->Height, info->Width, CV_8UC3, frameRGB->data[0], frameRGB->linesize[0]);
 	//cv::Mat mat2(info->Height, info->Width, CV_8UC3, frame->Frame, info->Width*3);
