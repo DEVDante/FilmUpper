@@ -80,7 +80,7 @@ VideoFrame* FrameReader::ReadNextFrame()
 			}
 		}
 	}
-	if (ret < 0)
+	if (ret == 0)
 		return NULL;
 
     sws_scale(sws_ctx, (uint8_t const * const *)frame->data, frame->linesize, 0, codecCTX->height, frameRGB->data, frameRGB->linesize);
@@ -101,7 +101,8 @@ FilmQualityInfo* FrameReader::GetVideoFormatInfo()
 
     nfo->Width = codecCTX->width;
     nfo->Height = codecCTX->height;
-	nfo->FrameRate = new FrameRate((codecCTX->framerate.num), (codecCTX->framerate.den));
+	AVRational temp = av_guess_frame_rate(formatCTX, formatCTX->streams[videoStream], NULL);
+	nfo->FrameRate = new FrameRate((temp.num), (temp.den));
 	nfo->SampleRate = codecCTX->sample_rate;
 
 	return nfo;
