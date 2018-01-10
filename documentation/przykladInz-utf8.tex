@@ -150,7 +150,40 @@ V\\[0.3em]
 Kodowanie jest procesem odwrotnym do dekodowania. Na początku tworzony jest plik do którego zapisywany jest jego nagłówek. Przetworzona przez nas klatka obrazu konwertowana jest na model przestrzeni barw obsługiwany przez format pliku docelowego. Następnie klatka ta przesyłana jest do kodera który koduje obraz i tworzy na jego podstawie pakiet. W przypadku gdy zapisujemy do formatu który zapisuje klatki pośrednie jako różnicę między klatką kluczową a obecnie zapisywaną, koder buforuje obrazy do momentu otrzymania określonej przez format jej ilości, generując różnicę między nimi i tworząc pakiety na ich podstawie. Następnie pakiety zapisywane są do pliku przechodząc przez proces multipleksowania jeżeli zapisujemy do pliku z istniejącym już strumieniem danych. Ostatecznie plik uzupełniany jest o dodatkowe dane potrzebne do jego odtworzenia i zamykany.
 
 \section{Interfejs użytkownika}
+Interfejs naszej aplikacji zbudowaliśmy w oparciu o zbiór bibliotek i narzędzi programistycznych \emph{Qt}.
+\begin{figure}
+	%% add pic
+\end{figure}
+Interfejs prosi użytkownika o podanie pliku źródłowego oraz pliku docelowego. W tym celu może on skorzystać z odpowiednich pól wpisując do nich ścieżki plików, wykonując akcję ,,przeciąg-upuść'' na te pola lub  korzystając z typowego okna wyboru pliku.
+\begin{figure}
+	%% add pic
+\end{figure}
+Po wyborze parametrów obróbki filmu, użytkownik może przejść do procesu przetwarzania pliku klikając w odpowiedni przycisk. Podczas procesu obróbki program stara się wyświetlić aktualny jej postęp.
 
+Po wykonaniu procesu przetwarzania użytkownik ma opcję porównania jakości filmu źródłowego z tym otrzymanym w wyniku działania programu. Odbywa się to poprzez wyświetlenie obu filmów obok siebie w nowym oknie programu.
+\begin{figure}
+	%% add pic
+\end{figure}
+
+Do powiadamiania użytkownika o ewentualnych błędach programu zastosowaliśmy mechanizm \emph{,,sygnałów i slotów''} bibliotek \emph{Qt}. 
+\begin{verbatim}
+	public slots:
+	    void exampleSlot(int param);
+	signals:
+	    void exampleSignal(int param);
+\end{verbatim}
+Pozwala on na komunikacje oraz interakcje pomiędzy komponentami tego zbioru. Mechanizm ten działa na prostej zasadzie. W przypadku wykonania przez program pewnego działania wysyłany jest sygnał poleceniem
+\begin{verbatim}
+	emit exampleSignal( exParam );
+\end{verbatim}
+a następnie wykonywana jest funkcjonalność slotów ,,podpiętych'' wcześniej do danego sygnału. 
+\begin{verbatim}
+	QObject::connect(const QObject *sender, const char *signal, 
+	const QObject *receiver, const char *method, 
+	Qt::ConnectionType type = Qt::AutoConnection)
+\end{verbatim}
+Jeden sygnał potrafi być obsługiwany przez wiele slotów, jednakże jeden slot może być przypisany tylko do jednego sygnału - relacja $1 do N$.
+W przypadku naszego programu jeżeli program miałby zwrócić wyjątek, emitowany jest sygnał \emph{unexpected\_error} w wyniku którego wyświetlany jest komunikat z treścią wyjątku.
 
 %% UWaga na \newlineTekst oraz \newlineSpis. Można też użyć \newline, działa jak %%\newlineSpis\newlineTekst
 \section{Struktura programu}
@@ -192,12 +225,13 @@ Biblioteki \emph{FFmpeg}-a dają nam dwa sposoby dekodowania i kodowania plików
 \begin{verbatim}
 while (ret = av_read_frame(formatCTX, packet) >= 0) 
 {
-	if (packet->stream_index == videoStream) 
-	{
-		avcodec_decode_video2(codecCTX, frame, &frameFinished, packet);
-		if (frameFinished)
-			break;
-	}
+    if (packet->stream_index == videoStream) 
+    {
+        avcodec_decode_video2(codecCTX, frame, &frameFinished, 
+                              packet);
+        if (frameFinished)
+            break;
+    }
 }
 \end{verbatim}
 Pętla ta odczytuje kolejne pakiety z pliku wideo sprawdzając czy należą one do strumienia danych obrazu i dekodując je aż otrzymamy pełną klatkę. Przed zwróceniem danych o obrazie do naszych algorytmów musimy przekształcić ją tak aby była ona w modelu barw RGB. Biblioteki \emph{FFmpeg}-a dostarczają nam funkcję
@@ -228,19 +262,21 @@ Przed przystąpieniem do kodowania klatek musimy zapisać do pliku docelowego na
 Po skonwertowaniu danych klatki do modelu barw wymaganego przez wybrany format pliku kodowanie odbywa się następującym algorytmem: 
 \begin{verbatim}
 	if (ret = avcodec_send_frame(codecCTX, frameOut) < 0)
-	throw std::runtime_error("Couldn't send frame to encoder");
+	    throw std::runtime_error("Couldn't send frame to encoder");
 	
 	ret = avcodec_receive_packet(codecCTX, packet);
 	if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
-		return;
+	    return;
 	else if (ret < 0)
-		throw std::runtime_error("Couldn't recieve packet from encoder");
+	    throw std::runtime_error("Couldn't recieve packet from encoder");
 	if (av_interleaved_write_frame(formatCTX, packet) < 0)
-		throw std::runtime_error("Couldn't save packet to file");
+	    throw std::runtime_error("Couldn't save packet to file");
 \end{verbatim}
 która wysyła klatki do kodera do momentu aż jego wewnętrzny bufor zostanie wypełniony i otrzymamy pakiet który zapisać możemy do pliku.
 
 Po zapisaniu wszystkich klatek pozostaje nam jeszcze wyczyszczenie bufora kodeka poprzez wysłanie do niego wskaźnika \emph{NULL} i ewentualne zapisanie powstałego pakietu.
+
+Do otrzymanego pliku wideo dźwięk dodawany jest przy użyciu gotowego narzędzia należącego do pakietu \emph{FFmpeg}. Odbywa się to poprzez skopiowanie strumienia danych audio z pliku źródłowego do pliku docelowego.
 
 
 \subsection{Organizacja algorytmów i sposobu przekształcania plików wideo}
@@ -595,6 +631,14 @@ Algorytm splotu wymaga wartości pikseli znajdujących się poza granicami obraz
 		\caption{Obsługa pikseli brzegowych - rozszerzanie}
 	\end{figure}
 \end{enumerate}
+\subsubsection{Normalizacja}
+Wartości otrzymane przez nas w wyniku operacji splotu mogą nie zawierać się w wymaganym przez nas przedziale. Wprowadza to potrzebę ich normalizacji, czego dokonać można na 2 sposoby:
+\begin{enumerate}
+	\item Obcinanie wartości
+	Jeżeli wartość przekracza wyznaczony przez nas zakres, przyjmujemy że wynikiem operacji jest wartość graniczna tego zakresu najbliższa temu wynikowi
+	\item Normalizacja maski
+	Aby zachować jasności pikseli obrazu możemy znormalizować maskę wykorzystywaną przez nas, poprzez podzielenie każdego z jej elementów przez sumę wszystkich elementów tejże macierzy.
+\end{enumerate}
 
 \subsection{Zwiększanie ilości klatek na sekundę}
 Algorytmy zwiększające ilość klatek obrazu na sekundę są zwykle o wiele bardziej skomplikowane od algorytmów ulepszających pojedynczą klatkę obrazu. Aby stworzyć nową klatkę obrazu z dużym oddaniem tego, jak by wyglądała w rzeczywistości wymagana by była złożona analiza wielu obrazów oraz rozwiązania korzystające z systemów opartych o sztuczną inteligencję. Stworzenie pojedynczego systemu takiego rodzaju mogłoby być tematem na osobna pracę naukową. Postanowiliśmy więc skupić się na dwóch podstawowych algorytmach które dają zadowalający efekt przy użyciu prostych technik oraz niedoskonałości ludzkiego zmysłu wzroku.
@@ -676,6 +720,8 @@ Dodatkowo postanowiliśmy czytać następną klatkę źródłową w trakcie prze
 \subsection{Napotkane problemy podczas tworzenia projektu}
 \subsubsection{Problemy z wybranymi narzędziami do odczytu i zapisu plików wideo}
 Praca z bibliotekami \emph{FFmpeg}-a okazała się problematyczna. Wynikało to częściowo z faktu iż napisane one zostały w języku C - brak obiektowości wymagał tworzenia, inicjalizowania oraz zarządzania wieloma zmiennymi i wskaźnikami. Większym problemem okazał się jednakże brak rzetelnej dokumentacji oraz innych pomocy naukowych. Spora część funkcjonalności opisana jest w powierzchownie, niektóre metody posiadają braku jakichkolwiek opisów. Zbiór przykładów użycia tych bibliotek sprowadzał się do kilku plików źródłowych. W przypadku jakichkolwiek błędów, czy wyników funkcji nie będących tymi jakimi oczekiwaliśmy pomocy musieliśmy szukać na forach internetowych oraz wzorować się na kodzie źródłowym innych darmowych programów korzystających z \emph{FFmpeg}-a. Niestety ze względu an wybrany przez nas język programowania oraz używane przez nas środowisko programistyczne nie byliśmy w stanie zastosować rozwiązań konkurencyjnych.
+
+Problemem okazało się również uzyskanie niektórych danych o pliku wideo wykorzystując biblioteki \emph{FFmpeg}-a. Ze względu na różnorodność i ogrom różnych formatów filmów biblioteki te nie są wstanie określić ich w ogóle lub wyznaczyć je dokładnie. Wynika to z faktu, iż niektóre z formatów nie przechowują tych wartości. Przykładem informacji która nie może być wyznaczona w prosty sposób jest całkowita ilość klatek - może ona być uzyskana jedynie poprzez odczytanie całego pliku klatka po klatce lub estymowana na podstawie informacji o długości czasowej strumienia wideo i ilości klatek wyświetlanych na sekundę.
 
 \subsection{Wyniki działania algorytmów}
 

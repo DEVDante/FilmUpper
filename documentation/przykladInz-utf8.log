@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.4)  9 JAN 2018 23:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.5)  10 JAN 2018 11:05
 entering extended mode
 **./przykladInz-utf8.tex
 (przykladInz-utf8.tex
@@ -27,7 +27,7 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \t@mpnumer=\count89
 \c@numeracjadod=\count90
 )
-(C:\Users\Dante\AppData\Roaming\MiKTeX\2.9\tex\latex\polski\polski.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\polski\polski.sty"
 Package: polski 2017/05/04 v1.3.4 Polish language package
 
    Switching to Polish text encoding and Polish maths fonts.
@@ -37,7 +37,7 @@ File: ot4enc.def 2017/04/05 v2.0i Standard LaTeX file
 LaTeX Font Info:    Try loading font information for OT4+cmr on input line 360.
 
 
-(C:\Users\Dante\AppData\Roaming\MiKTeX\2.9\tex\latex\polski\ot4cmr.fd
+("C:\Program Files\MiKTeX 2.9\tex\latex\polski\ot4cmr.fd"
 File: ot4cmr.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
@@ -538,7 +538,7 @@ LaTeX Font Info:    Try loading font information for OT4+lmr on input line 45.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\ot4lmr.fd"
 File: ot4lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-(C:\Users\Dante\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count106
 \scratchdimen=\dimen115
@@ -639,8 +639,8 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 45.
  [1
 
-{C:/Users/Dante/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3] [4]
- [1] [2] [3] [4]
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3] [4] [1] [2] [3] [
+4]
 (przykladInz-utf8.toc [5])
 \tf@toc=\write3
 \openout3 = `przykladInz-utf8.toc'.
@@ -660,196 +660,192 @@ File: images/file_struct.png Graphic file (type png)
 <use images/file_struct.png>
 Package pdftex.def Info: images/file_struct.png  used on input line 119. on inp
 ut line 119.
-Package pdftex.def Info: Requested size: 426.79134pt x 134.3621pt on input line
- 119.
-
-Overfull \hbox (0.79134pt too wide) in paragraph at lines 119--120
- [][] 
- []
-
-[15 <./images/file_struct.png>] [16] [17] [18] [19] [20] [21]
-LaTeX Font Info:    Try loading font information for OT4+lmtt on input line 165
+Package pdftex.def Info: Requested size: 369.88582pt x 116.44334pt on input lin
+e 119.
+ [15 <./images/file_struct.png>] [16] [17] [18]
+LaTeX Font Info:    Try loading font information for OT4+lmtt on input line 169
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\ot4lmtt.fd"
 File: ot4lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [22]
-Overfull \hbox (0.18396pt too wide) in paragraph at lines 191--192
+) [19] [20] [21] [22]
+[23] [24] [25]
+Overfull \hbox (0.18396pt too wide) in paragraph at lines 297--298
 []\OT1/lmr/m/n/12 FpsEnhancerBase prze-twa-rza ulep-szo-ne przez Fra-me-En-han-
 cer-Ba-se klat-ki, two-
  []
 
-[23]
-Overfull \hbox (0.94139pt too wide) in paragraph at lines 226--227
+[26]
+Overfull \hbox (0.94139pt too wide) in paragraph at lines 332--333
 []\OT1/lmr/m/n/12 Zadaniem kla-sy ba-zo-wej Fra-me-En-han-cer-Ba-se jest prze-t
 wa-rza-nie otrzy-ma-nej klat-
  []
 
-[24]
-Overfull \hbox (111.22527pt too wide) in paragraph at lines 250--250
+
+Overfull \hbox (111.22527pt too wide) in paragraph at lines 356--356
 []\OT4/lmtt/m/n/12 FrameEnhancerBase(IFrameReader* inputFrameReader, FilmQualit
 yInfo* targetQualityInfo) {[] 
  []
 
 
-Overfull \hbox (43.30023pt too wide) in paragraph at lines 250--250
+Overfull \hbox (43.30023pt too wide) in paragraph at lines 356--356
 []\OT4/lmtt/m/n/12 virtual bool AreFramesLeft() { return _inputFrameStream->Are
 FramesLeft(); };[] 
  []
 
-[25]
-Overfull \hbox (55.65024pt too wide) in paragraph at lines 285--285
+[27]
+Overfull \hbox (55.65024pt too wide) in paragraph at lines 391--391
 []\OT4/lmtt/m/n/12 * virtual bool AreFramesLeft() { return _inputFrameStream->A
 reFramesLeft(); };[] 
  []
 
-[26]
-Overfull \hbox (30.95023pt too wide) in paragraph at lines 305--305
+[28]
+Overfull \hbox (30.95023pt too wide) in paragraph at lines 411--411
 []     \OT4/lmtt/m/n/12 return new FrameEnhancerBase(inputFrameReader, targetQu
 alityInfo); };[] 
  []
 
 
-Overfull \hbox (30.95023pt too wide) in paragraph at lines 321--321
+Overfull \hbox (30.95023pt too wide) in paragraph at lines 427--427
 []     \OT4/lmtt/m/n/12 return new FrameEnhancerBase(inputFrameReader, targetQu
 alityInfo); };[] 
  []
 
-[27]
-Overfull \hbox (49.47523pt too wide) in paragraph at lines 347--347
+[29]
+Overfull \hbox (49.47523pt too wide) in paragraph at lines 453--453
 []    \OT4/lmtt/m/n/12 virtual bool AreFramesLeft() { return _frameEnhancer->Ar
 eFramesLeft(); };[] 
  []
 
-
-Overfull \hbox (37.12523pt too wide) in paragraph at lines 371--371
+[30]
+Overfull \hbox (37.12523pt too wide) in paragraph at lines 477--477
 []\OT4/lmtt/m/n/12 * virtual bool AreFramesLeft() { return _frameEnhancer->AreF
 ramesLeft(); };[] 
  []
 
 
-Overfull \hbox (49.47523pt too wide) in paragraph at lines 392--392
+Overfull \hbox (49.47523pt too wide) in paragraph at lines 498--498
 []    \OT4/lmtt/m/n/12 virtual FpsEnhancerBase* GetFpsEnhancer(FrameEnhancerBas
 e* frameEnhancer,[] 
  []
 
-[28]
-Overfull \hbox (37.12523pt too wide) in paragraph at lines 408--408
+
+Overfull \hbox (37.12523pt too wide) in paragraph at lines 514--514
 []\OT4/lmtt/m/n/12 * virtual FpsEnhancerBase* GetFpsEnhancer(FrameEnhancerBase*
  frameEnhancer,[] 
  []
 
-[29] [30]
-<images/NN.png, id=124, 304.13625pt x 232.61906pt>
+[31] [32]
+<images/NN.png, id=130, 304.13625pt x 232.61906pt>
 File: images/NN.png Graphic file (type png)
 <use images/NN.png>
-Package pdftex.def Info: images/NN.png  used on input line 422. on input line 4
-22.
+Package pdftex.def Info: images/NN.png  used on input line 528. on input line 5
+28.
 Package pdftex.def Info: Requested size: 199.16928pt x 152.33997pt on input lin
-e 422.
- [31 <./images/NN.png>]
-<images/Interpolation1.png, id=128, 304.13625pt x 232.61906pt>
+e 528.
+ [33 <./images/NN.png>]
+<images/Interpolation1.png, id=135, 304.13625pt x 232.61906pt>
 File: images/Interpolation1.png Graphic file (type png)
 <use images/Interpolation1.png>
-Package pdftex.def Info: images/Interpolation1.png  used on input line 435. on 
-input line 435.
+Package pdftex.def Info: images/Interpolation1.png  used on input line 541. on 
+input line 541.
 Package pdftex.def Info: Requested size: 199.16928pt x 152.33997pt on input lin
-e 435.
- [32 <./images/Interpolation1.png>]
-<images/Interpolation2.png, id=132, 304.13625pt x 232.61906pt>
+e 541.
+ [34 <./images/Interpolation1.png>]
+<images/Interpolation2.png, id=139, 304.13625pt x 232.61906pt>
 File: images/Interpolation2.png Graphic file (type png)
 <use images/Interpolation2.png>
-Package pdftex.def Info: images/Interpolation2.png  used on input line 443. on 
-input line 443.
+Package pdftex.def Info: images/Interpolation2.png  used on input line 549. on 
+input line 549.
 Package pdftex.def Info: Requested size: 199.16928pt x 152.33997pt on input lin
-e 443.
-<images/Interpolation3.png, id=133, 304.13625pt x 232.61906pt>
+e 549.
+<images/Interpolation3.png, id=140, 304.13625pt x 232.61906pt>
 File: images/Interpolation3.png Graphic file (type png)
 <use images/Interpolation3.png>
-Package pdftex.def Info: images/Interpolation3.png  used on input line 451. on 
-input line 451.
+Package pdftex.def Info: images/Interpolation3.png  used on input line 557. on 
+input line 557.
 Package pdftex.def Info: Requested size: 199.16928pt x 152.33997pt on input lin
-e 451.
- [33 <./images/Interpolation2.png> <./images/Interpolation3.png>] [34]
-<images/clipping.png, id=143, 722.7pt x 722.7pt>
+e 557.
+ [35 <./images/Interpolation2.png> <./images/Interpolation3.png>] [36]
+<images/clipping.png, id=149, 722.7pt x 722.7pt>
 File: images/clipping.png Graphic file (type png)
 <use images/clipping.png>
-Package pdftex.def Info: images/clipping.png  used on input line 511. on input 
-line 511.
+Package pdftex.def Info: images/clipping.png  used on input line 617. on input 
+line 617.
 Package pdftex.def Info: Requested size: 199.16928pt x 199.16766pt on input lin
-e 511.
- [35 <./images/clipping.png>]
-<images/wrapping.png, id=149, 722.7pt x 722.7pt>
+e 617.
+ [37 <./images/clipping.png>]
+<images/wrapping.png, id=155, 722.7pt x 722.7pt>
 File: images/wrapping.png Graphic file (type png)
 <use images/wrapping.png>
-Package pdftex.def Info: images/wrapping.png  used on input line 518. on input 
-line 518.
+Package pdftex.def Info: images/wrapping.png  used on input line 624. on input 
+line 624.
 Package pdftex.def Info: Requested size: 199.16928pt x 199.16766pt on input lin
-e 518.
-<images/extending.png, id=150, 722.7pt x 722.7pt>
+e 624.
+<images/extending.png, id=156, 722.7pt x 722.7pt>
 File: images/extending.png Graphic file (type png)
 <use images/extending.png>
-Package pdftex.def Info: images/extending.png  used on input line 524. on input
- line 524.
+Package pdftex.def Info: images/extending.png  used on input line 630. on input
+ line 630.
 Package pdftex.def Info: Requested size: 199.16928pt x 199.16766pt on input lin
-e 524.
- [36 <./images/wrapping.png> <./images/extending.png>]
-<images/FpsInterpolation.png, id=156, 304.13625pt x 114.4275pt>
+e 630.
+ [38 <./images/wrapping.png> <./images/extending.png>]
+<images/FpsInterpolation.png, id=162, 304.13625pt x 114.4275pt>
 File: images/FpsInterpolation.png Graphic file (type png)
 <use images/FpsInterpolation.png>
-Package pdftex.def Info: images/FpsInterpolation.png  used on input line 537. o
-n input line 537.
+Package pdftex.def Info: images/FpsInterpolation.png  used on input line 651. o
+n input line 651.
 Package pdftex.def Info: Requested size: 199.16928pt x 74.93745pt on input line
- 537.
- [37 <./images/FpsInterpolation.png>]
-<images/Interlace.png, id=160, 304.13625pt x 114.4275pt>
+ 651.
+ [39 <./images/FpsInterpolation.png>]
+<images/Interlace.png, id=167, 304.13625pt x 114.4275pt>
 File: images/Interlace.png Graphic file (type png)
 <use images/Interlace.png>
-Package pdftex.def Info: images/Interlace.png  used on input line 548. on input
- line 548.
+Package pdftex.def Info: images/Interlace.png  used on input line 662. on input
+ line 662.
 Package pdftex.def Info: Requested size: 199.16928pt x 74.93745pt on input line
- 548.
- [38 <./images/Interlace.png>]
-Overfull \hbox (43.30023pt too wide) in paragraph at lines 569--569
+ 662.
+ [40 <./images/Interlace.png>]
+Overfull \hbox (43.30023pt too wide) in paragraph at lines 683--683
 []    \OT4/lmtt/m/n/12 double elapsed_secs = (double(end - begin)/iterations) /
  CLOCKS_PER_SEC;[] 
  []
 
-[39] [40]
-Overfull \hbox (37.12523pt too wide) in paragraph at lines 601--601
+[41] [42]
+Overfull \hbox (37.12523pt too wide) in paragraph at lines 715--715
 []        \OT4/lmtt/m/n/12 tt[t] = std::thread(CalculateFramePararel, inputFram
 e, outputFrame,[] 
  []
 
-[41] [42] [43] (przykladInz-utf8.aux) ) 
+[43] [44] [45] [46] [47] (przykladInz-utf8.aux) ) 
 Here is how much of TeX's memory you used:
  2984 strings out of 493312
- 39700 string characters out of 3138900
+ 39592 string characters out of 3138900
  101961 words of memory out of 3000000
  6451 multiletter control sequences out of 15000+200000
  68628 words of font info for 44 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,12n,25p,2476b,307s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/d
-vips/lm/lm-mathsy.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit
-.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Program Fi
-les/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Files/MiKTeX 2.9/fo
-nts/enc/dvips/lm/lm-rm.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/l
-mbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbxi10.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/lm/lmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lm
-ri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmro12.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/lm/lmss17.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
-Output written on przykladInz-utf8.pdf (47 pages, 572857 bytes).
+{C:/Program Files/MiKTeX 2.9/f
+onts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm
+/lm-mathit.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/
+Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Files/MiK
+TeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/lm/lmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbxi10.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/lm/lmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+lm/lmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmro12.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmss17.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/lm/lmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
+Output written on przykladInz-utf8.pdf (51 pages, 589079 bytes).
 PDF statistics:
- 237 PDF objects out of 1000 (max. 8388607)
+ 250 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
