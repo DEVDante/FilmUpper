@@ -24,25 +24,24 @@
 \contentsline {subsection}{\numberline {2.4}\kernsubsekcyjny Kodowanie}{18}
 \contentsline {section}{\numberline {3}\kernsekcyjny Interfejs u\IeC {\.z}ytkownika}{21}
 \contentsline {section}{\numberline {4}\kernsekcyjny Struktura programu}{23}
-\contentsline {subsection}{\numberline {4.1}\kernsubsekcyjny Komunikacja z u\IeC {\.z}ytkownikiem}{23}
-\contentsline {subsection}{\numberline {4.2}\kernsubsekcyjny Implementacja procesu dekodowania/kodowania przy pomocy bibliotek FFmpeg}{24}
-\contentsline {subsubsection}{\numberline {4.2.1}\kernsubsubsekcyjny Demultipleksowanie i dekodowanie}{24}
-\contentsline {subsubsection}{\numberline {4.2.2}\kernsubsubsekcyjny Kodowanie i multipleksowanie}{26}
-\contentsline {subsection}{\numberline {4.3}\kernsubsekcyjny Organizacja algorytm\IeC {\'o}w i sposobu przekszta\IeC {\l }cania plik\IeC {\'o}w wideo}{27}
-\contentsline {subsubsection}{\numberline {4.3.1}\kernsubsubsekcyjny IFrameReader - odczytywanie informacji z pliku wideo}{28}
-\contentsline {subsubsection}{\numberline {4.3.2}\kernsubsubsekcyjny FrameEnhancerBase i IFrameEnhancerHeader - ulepszanie pojedynczej klatki}{29}
+\contentsline {subsection}{\numberline {4.1}\kernsubsekcyjny Komunikacja z u\IeC {\.z}ytkownikiem}{24}
+\contentsline {subsection}{\numberline {4.2}\kernsubsekcyjny Implementacja procesu dekodowania/kodowania przy pomocy bibliotek FFmpeg}{25}
+\contentsline {subsubsection}{\numberline {4.2.1}\kernsubsubsekcyjny Demultipleksowanie i dekodowanie}{25}
+\contentsline {subsubsection}{\numberline {4.2.2}\kernsubsubsekcyjny Kodowanie i multipleksowanie}{27}
+\contentsline {subsection}{\numberline {4.3}\kernsubsekcyjny Organizacja algorytm\IeC {\'o}w i sposobu przekszta\IeC {\l }cania plik\IeC {\'o}w wideo}{28}
+\contentsline {subsubsection}{\numberline {4.3.1}\kernsubsubsekcyjny IFrameReader - odczytywanie informacji z pliku wideo}{29}
+\contentsline {subsubsection}{\numberline {4.3.2}\kernsubsubsekcyjny FrameEnhancerBase i IFrameEnhancerHeader - ulepszanie pojedynczej klatki}{30}
 \contentsline {subsubsection}{\numberline {4.3.3}\kernsubsubsekcyjny FpsEnhancerBase i IFpsEnhancerHeader - tworzenie nowych klatek po\IeC {\'s}rednich}{32}
 \contentsline {section}{\numberline {5}\kernsekcyjny Algorytmy}{35}
 \contentsline {subsection}{\numberline {5.1}\kernsubsekcyjny Ulepszanie pojedynczej klatki}{35}
 \contentsline {subsubsection}{\numberline {5.1.1}\kernsubsubsekcyjny Algorytm najbli\IeC {\.z}szego s\IeC {\k a}siada}{35}
 \contentsline {subsubsection}{\numberline {5.1.2}\kernsubsubsekcyjny Algorytm interpolacji dwuliniowej}{36}
 \contentsline {subsubsection}{\numberline {5.1.3}\kernsubsubsekcyjny Algorytm interpolacji bikubicznej}{38}
-\contentsline {subsection}{\numberline {5.2}\kernsubsekcyjny Algorytm splotu}{38}
-\contentsline {subsubsection}{\numberline {5.2.1}\kernsubsubsekcyjny Obs\IeC {\l }uga pikseli brzegowych}{39}
-\contentsline {subsubsection}{\numberline {5.2.2}\kernsubsubsekcyjny Normalizacja}{40}
-\contentsline {subsection}{\numberline {5.3}\kernsubsekcyjny Zwi\IeC {\k e}kszanie ilo\IeC {\'s}ci klatek na sekund\IeC {\k e}}{41}
-\contentsline {subsubsection}{\numberline {5.3.1}\kernsubsubsekcyjny Algorytm interpolacji}{41}
-\contentsline {subsubsection}{\numberline {5.3.2}\kernsubsubsekcyjny Algorytm przeplotu}{42}
+\contentsline {subsubsection}{\numberline {5.1.4}\kernsubsubsekcyjny Algorytm splotu}{38}
+\contentsline {subsubsection}{\numberline {5.1.5}\kernsubsubsekcyjny Normalizacja}{40}
+\contentsline {subsection}{\numberline {5.2}\kernsubsekcyjny Zwi\IeC {\k e}kszanie ilo\IeC {\'s}ci klatek na sekund\IeC {\k e}}{41}
+\contentsline {subsubsection}{\numberline {5.2.1}\kernsubsubsekcyjny Algorytm interpolacji}{41}
+\contentsline {subsubsection}{\numberline {5.2.2}\kernsubsubsekcyjny Algorytm przeplotu}{42}
 \contentsline {section}{\numberline {6}\kernsekcyjny Optymalizacja i testowanie}{43}
 \contentsline {subsection}{\numberline {6.1}\kernsubsekcyjny Procedura testowania i ich organizacja}{43}
 \contentsline {subsection}{\numberline {6.2}\kernsubsekcyjny Optymalizacja algorytm\IeC {\'o}w i uk\IeC {\l }adu danych}{44}

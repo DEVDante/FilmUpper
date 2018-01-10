@@ -44,12 +44,11 @@
 
 \begin{document}
 
-Technologia nagrywania obrazów ruchomych jest powszechnie używana przez dużą liczbę ludzi.
-FilmUpper jest aplikacją pozwalającą na poprawianie jakości obrazu w filmie, poprzez zwiększanie rozdzielczości oraz zwiększanie ilości klatek na sekundę w nim występujących. Dzięki takim zabiegom jakość oglądanego przez nas obrazu znacząco się poprawia, jednakże nigdy nie będzie ona tak dobra, jak jakość obrazu nagrywanego z ustawieniami na które chcemy dany film skonwertować. 
+Od końca dziewiętnastego wieku sztuka filmowa towarzyszyła człowiekowi. Uważany za pierwszy film pokazany publicznie, stworzony przez braci Lumière  film ,,Wyjście robotników z fabryki'' trwał 46 sekund przy 16 klatkach na sekundę o stosunku klatki 1.33:1. Od tamtej pory ludzkość przeszła proces cyfryzacji, zmieniały się aspekty ekranów i kręconych filmów (standardowe w telewizorach kineskopowych 4:3, współczesne 16:9 a także szerokoekranowe 21:9). Zmianą podlegał także aspekt prędkości wyświetlanych klatek na sekundę, które dzisiaj najczęściej wynoszą 25, 30, 50 oraz 60 klatek na sekundę. Obsługiwane są także standardy pozwalające na wyświetlanie nawet 300 klatek na sekundę.
 
-Celem naszego projektu było stworzenie wydajnej aplikacji pozwalające na szybkie, łatwe i proste polepszenie jakości pliku wideo, poprzez dostarczenie użytkownikowi  zbioru algorytmów przetwarzania obrazu i łatwego w obsłudze interfejsu graficzne pozwalającego je zastosować. 
+Celem naszej aplikacji jest możliwość zapewnienia prostego narzędzia umożliwiającego większej liczbie ludzi ulepszenia jakości posiadanych przez nich filmów. Poprzez implementację i dostarczenie użytkownikowi zbioru algorytmów wraz z opisami, będzie on w stanie zmienić rozdzielczość filmu ulepszając przy tym jego jakość w zależności od użytego algorytmu. Będzie mógł on także zwiększyć ilość klatek na sekundę w filmie, przez co oglądany przez niego obraz zyska na wrażeniu płynności. Żaden z tych algorytmów nie da wyglądu jaki posiadałby oryginał kręcony w docelowej jakości, jednakże różnica między filmem nieprzetworzonym a ulepszonym przez nasz program będzie zauważalna.
 
-Przed przystąpieniem do realizacji projektu spędziliśmy sporo czasu rozważając potencjalne rozwiązania postawionego przed nami problemu oraz decydując o tym jakiej technologi użyjemy do jego utworzenia.
+Aby sprostać założeniom projektu musieliśmy rozważyć różne jego aspekty zaczynając od technologii i języka programowania poprzez strukturę programu w jakiej chcemy pracować finalnie kończąc na algorytmach które chcieliśmy zaimplementować.
 
 
 \section{Technologia i język programowania}
@@ -60,7 +59,7 @@ Przetwarzanie plików filmowych nawet w przypadku zastosowania najłatwiejszych 
 \subsection{Biblioteka do dekodowania oraz kodowania plików wideo}
 Od wyboru narzędzi do dekodowania/kodowania zależało powodzenie wykonania przez nas projektu. Szukając dostępnych rozwiązań pozwalających na wykonywanie tychże czynności zwracaliśmy szczególną uwagę na ich szybkość, niezawodność i opinie społeczności. W ostatecznym rozrachunku pod uwagę braliśmy następujące biblioteki programistyczne.
 \subsubsection{FFmpeg / libav}
-Narzędzia oraz biblioteki \emph{FFmpeg} (czy też \emph{libav} będącym tak zwanym ,,forkiem'' \emph{FFmpeg}-a) są jednymi z najbardziej popularnych otwartych oprogramowań służących do dekodowania, kodowania oraz manipulacji plikami multimedialnymi. Posiadają one zbiór powszechnie używanych, ,,open-source'owych'' kodeków audio i wideo. Biblioteki te napisane są w języku C. 
+Narzędzia oraz biblioteki \emph{FFmpeg} (czy też \emph{libav} będącym jej odgałęzieniem) są jednymi z najbardziej popularnych otwartych oprogramowań służących do dekodowania, kodowania oraz manipulacji plikami multimedialnymi. Posiadają one zbiór powszechnie używanych kodeków audio i wideo. Biblioteki te napisane są w języku C. 
 \subsubsection{OpenCV}
 \emph{OpenCV (Open Source Computer Vision)} to zbiór bibliotek napisanych w języku C++, przeznaczonych głównie do rozpoznawania obrazów w czasie rzeczywistym. Biblioteka \emph{cudacodec} zawarta w tym zbiorze pozwala na dekodowanie oraz kodowanie plików wideo. Jest ona oparta na kodekach \emph{FFmpeg}-a, do procesu przetwarzania multimediów używa karty graficznej.
 \subsubsection{DirectShow}
@@ -195,6 +194,12 @@ W przypadku naszego programu jeżeli program miałby zwrócić wyjątek, emitowa
 
 Głównym celem projektu jest takie zaprojektować naszą aplikację, aby możliwa była dalsza jej rozbudowa polegająca na dodawaniu nowych algorytmów. Struktura w jakiej organizowalibyśmy kod programu jest bardzo istotnym zagadnieniem z punktu widzenia przejrzystości systemu oraz ergonomii pracy z nim. Struktura naszego programu dzieli się na 2 główne części: część odpowiadającą za komunikację z użytkownikiem oraz wybór odpowiednich algorytmów, oraz część polegającą na przetwarzaniu pliku wideo przez wybrane przez użytkownika algorytmy. Tworzyliśmy architekturę naszej aplikacji zgodnie z paradygmatem odwrócenia sterowania (IoC), polegającym na przekazywaniu gotowych obiektów do klas ich potrzebujących. Znacząco ułatwiło to projektowanie całej aplikacji a zwłaszcza jej testowanie.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=12cm]{UML.png}
+\caption{Główna struktura programu}
+\end{figure}
+
 \subsection{Komunikacja z użytkownikiem}
 Do komunikacji z użytkownikiem stosujemy klasy FilmUpperView (dalej View) i FilmUpperController (dalej controller). Jest to uproszczona wersja wzorca projektowego MVC(Model, View, Controller) Początkowo chcieliśmy  stworzyć infrastrukturę opartą na bardzo podobnym w założeniach wzorcu MVVM (Model, View Model, Controller) oraz zastosować rozwiązania reaktywne w kontakcie z użytkownikiem. Mimo, że głównym celem systemów reaktywnych jest asynchroniczne zarządzanie zdarzeniami poprzez stosowanie strumieni zamiast tradycyjnego podejścia do danych, to reaktywne podejście do zdarzeń bardzo upraszcza ich obsługę oraz jest bardzo przejrzyste pod względem przepływu sterowania. Niestety z uwagi na to, ze rozwiązania te stosowaliśmy tylko w aplikacjach opartych na języku C\#, nie byliśmy zaznajomieni z tą technologią w językach niższego poziomu. Nasza aplikacja nie jest także na tyle rozbudowana pod względem złożoności możliwych stanów ani jej elementy nie reagują w sposób znaczny na zmiany które użytkownik wykonuje w interfejsie, więc zauważyliśmy, że lepszym rozwiązaniem będzie zastosowanie prostszego modelu. Komunikacja między użytkownikiem a programem odbywa się pomiędzy klasami View a Controller. W klasie View zarządzamy interfejsem użytkownika, wyświetlającym możliwe do wyboru algorytmy i przekazujemy jego decyzje do Controllera. W klasie Controller następuje ustalenie jakie algorytmy są dostępne do wykorzystania przez użytkownika, obsługiwany jest proces ulepszania jakości obrazu oraz zapisywania wyniku tej operacji. Obecnie algorytmy które są dostępne do wykorzystania są wpisane na stałe w kodzie programu, przez co aby dodać kolejny algorytm należy go dopisać do odpowiedniego wektora algorytmów. Jedną z możliwych i podstawowych opcji, które rozważaliśmy do rozbudowy funkcjonalności programu jest możliwość automatycznego dodawania dostępnych algorytmów poprzez walidację zawartości odpowiednich folderów. Umożliwiało by to rozbudowę funkcjonalności programu przez następnych użytkowników, a mianowicie poprzez tworzenie bibliotek dynamicznych o odpowiedniej budowie (opartej o odpowiednie klasy bazowe) i ich automatyczne wczytywanie przy starcie programu. Dało by to bardzo dużą możliwość rozbudowy bazowej funkcjonalności, jednakże w obecnej fazie, funkcjonalność ta nie jest uważana przez nas za podstawową.
 
@@ -214,7 +219,7 @@ gdzie jako parametr przekażemy wybrane przez nas formaty. Następnie poleceniem
 avformat_open_input(AVFormatContext** formatContext, 
 const char* filename, AVInputFormat* fmt, AVDictionary** options);	
 \end{verbatim}
-otwieramy plik \emph{filename} zapisując informacje o nim w strukturze \emph{formatContext}. Struktura ta posiada informacje między innymi o formacie pliku, dostępnych strumieniach audio/wideo oraz sposobie ich kodowania. Wskaźniki do strumieni danych zawarte są w tablicy \emph{streams} będącej polem struktury \emph{formatContext}. Aby odnaleźć strumień obrazu wideo użyliśmy polecenia
+otwieramy plik znajdujący się pod ścieżką podaną w parametrze \emph{filename} zapisując informacje o nim w strukturze \emph{formatContext}. Struktura ta posiada informacje między innymi o formacie pliku, dostępnych strumieniach audio/wideo oraz sposobie ich kodowania. Wskaźniki do strumieni danych zawarte są w tablicy \emph{streams} będącej polem struktury \emph{formatContext}. Aby odnaleźć strumień obrazu wideo użyliśmy polecenia
 \begin{verbatim}
 av_find_best_stream(AVFormatContext* formatContext, 
 enum AVMediaType type, int wanted_stream_nb, int related_stream, 
@@ -246,6 +251,7 @@ enum AVPixelFormat sourceFormat, int destinationWidth,
 int destinationHeight, enum AVPixelFormat destinationFormat, 
 int flags, SwsFilter* srcFilter, SwsFilter* dstFilter, 
 const double* param);
+
 sws_scale(struct SwsContext* context, uint8_t* const sourceData[], 
 const int sourceStride[], int srcSliceY, int srcSliceH, 
 uint8_t* const destinationData[], const int destinationStride[]);
@@ -592,7 +598,7 @@ gdzie $u$ jest stosunkiem umiejscowienia nowego punktu na splajnie, a punkty $p_
 
 Obliczone na podstawie powyższego wzoru punkty wykorzystujemy do obliczenia ostatecznej krzywej która w miejscu przecięcia się z punktem końcowym daje nam ostateczną wartość koloru. 
 
-\subsection{Algorytm splotu}
+\subsubsection{Algorytm splotu}
 Algorytm splotu oblicza wartość piksela obrazu docelowego jako sumę wartości piksela znajdującego się na tej samej pozycji oraz wartości pikseli sąsiadujących z nim przemnożonych przez wartości macierzy $MxM$ zwanej maską lub kernelem. Działanie to można zapisać w następujący sposób: 
 \[p_{o}[x,y]= \sum_{a = -R}^{R}\sum_{b = -R}^{R} p_{i}[x + a, y + b]*kernel[a, b]\], gdzie:
 
@@ -613,8 +619,7 @@ W naszym programie algorytm ten stosowany jest do wyostrzenia obrazu. Stosujemy 
 \end{bmatrix}
 \]
 
-\subsubsection{Obsługa pikseli brzegowych}
-Algorytm splotu wymaga wartości pikseli znajdujących się poza granicami obrazu źródłowego. W tym wypadku stosuję się jedno z poniższych rozwiązań
+Algorytm splotu może wymagać wartości pikseli znajdujących się poza granicami obrazu źródłowego. W tym wypadku stosuję się jedno z poniższych rozwiązań
 \begin{enumerate}
 	\item Obcinanie - jeżeli algorytm wymagałby do obliczenia piksela wartości znajdujących się poza krawędziami obrazu, piksel ten jest pomijany,
 	\begin{figure}[h]
@@ -724,16 +729,16 @@ Dodatkowo postanowiliśmy czytać następną klatkę źródłową w trakcie prze
 \section{Podsumowanie}
 \subsection{Napotkane problemy podczas tworzenia projektu}
 \subsubsection{Problemy z wybranymi narzędziami do odczytu i zapisu plików wideo}
-Praca z bibliotekami \emph{FFmpeg}-a okazała się problematyczna. Wynikało to częściowo z faktu iż napisane one zostały w języku C - brak obiektowego podejścia wymagał tworzenia, inicjalizację oraz zarządzania wieloma zmiennymi i wskaźnikami. Większym problemem okazał się jednakże brak rzetelnej dokumentacji oraz innych pomocy naukowych. Spora część funkcjonalności opisana jest powierzchownie, niektóre metody posiadają braku jakichkolwiek opisów. Zbiór przykładów użycia tych bibliotek sprowadzał się do kilku plików źródłowych. W przypadku jakichkolwiek błędów czy wyników funkcji nie będących tymi jakimi oczekiwaliśmy pomocy musieliśmy szukać na forach internetowych oraz wzorować się na kodzie źródłowym innych darmowych programów korzystających z \emph{FFmpeg}-a. Niestety ze względu an wybrany przez nas język programowania oraz używane przez nas środowisko programistyczne nie byliśmy w stanie zastosować rozwiązań konkurencyjnych.
+Praca z bibliotekami \emph{FFmpeg}-a okazała się problematyczna. Wynikało to częściowo z faktu iż napisane one zostały w języku C - brak obiektowego podejścia wymagał tworzenia, inicjalizację oraz zarządzania wieloma zmiennymi i wskaźnikami. Większym problemem okazał się jednakże brak rzetelnej dokumentacji oraz innych pomocy naukowych. Duża część funkcjonalności opisana jest powierzchownie, niektóre metody nie posiadają jakichkolwiek opisów. Zbiór przykładów użycia tych bibliotek sprowadzał się do kilku plików źródłowych. W przypadku jakichkolwiek błędów czy wyników funkcji nie będących tymi jakimi oczekiwaliśmy pomocy musieliśmy szukać na forach internetowych oraz wzorować się na kodzie źródłowym innych darmowych programów korzystających z \emph{FFmpeg}-a. Niestety ze względu an wybrany przez nas język programowania oraz używane przez nas środowisko programistyczne nie byliśmy w stanie zastosować rozwiązań konkurencyjnych.
 
 Problemem okazało się również uzyskanie niektórych danych o pliku wideo wykorzystując biblioteki \emph{FFmpeg}-a. Ze względu na różnorodność i ogrom różnych formatów filmów biblioteki te nie są wstanie określić ich w ogóle lub wyznaczyć je dokładnie. Wynika to z faktu, iż niektóre z formatów nie przechowują tych wartości. Przykładem informacji która nie może być wyznaczona w prosty sposób jest całkowita ilość klatek - może ona być uzyskana jedynie poprzez odczytanie całego pliku klatka po klatce lub estymowana na podstawie informacji o długości czasowej strumienia wideo i ilości klatek wyświetlanych na sekundę.
 
 \subsubsection{Problemy z technologią}
-Użyty przez nas język $C++$ jest językiem którego cechy były nam dobrze znane. Pomimo naszej znajomości języka musieliśmy być bardzo uważni w momencie gdy ręcznie zarządzaliśmy pamięcią. Brak wspomagania od strony języka odnośnie możliwych wycieków pamięci powodował mozolne poszukiwania miejsc, które mogły powodować problemy z pamięcią. 
+Użyty przez nas język $C++$ jest językiem którego cechy były nam dobrze znane. Pomimo naszej znajomości języka musieliśmy być bardzo uważni w momencie gdy ręcznie zarządzaliśmy pamięcią. Brak wspomagania od strony języka odnośnie możliwych wycieków pamięci powodował mozolne poszukiwania miejsc, które mogły powodować problemy z ewentualnymi wyciekami pamięci. 
 
-Kolejną problematyczną częścią języka jest sposób komunikowania o występujących błędach. W nowoczesnych językach wiadomości odnośnie występujących błędów dają o nich bardzo dużą ilość informacji takich jak wartość przez którą wystąpił błąd, wartość, która była oczekiwana oraz możliwe rozwiązanie problemu. Wiadomości które otrzymujemy w języku $C++$ są mało przydatne, ponieważ dostajemy tylko informację odnośnie adresu pamięci pod którym wystąpił błąd i jakiego typu był to błąd. Oprócz typu błędu, informacja o adresie pod którym on wystąpił nie była dla nas przydatna.
+Kolejną problematyczną częścią języka jest sposób komunikowania o występujących błędach. W nowoczesnych językach wiadomości odnośnie występujących błędów dają o nich bardzo dużą ilość informacji takich jak wartość przez którą wystąpił błąd, wartość która była oczekiwana oraz możliwe rozwiązanie problemu. Wiadomości które otrzymujemy w języku $C++$ są mało przydatne, ponieważ dostajemy tylko informację odnośnie adresu pamięci pod którym wystąpił błąd i jakiego typu był to błąd.
 
-Problemem wynikającym z działań optymalizacyjnych był problem z odwoływaniem się do właściwych komórek pamięci w tablicy jednowymiarowej. W tablicy wielowymiarowej wybieranie właściwej komórki pamięci jest proste i intuicyjne. W przypadku tablicy jednowymiarowej prawidłowe odwoływanie się do właściwych komórek pamięci wymagało obliczania właściwego indeksu.
+Problemem wynikającym z działań optymalizacyjnych był problem z odwoływaniem się do właściwych komórek pamięci w tablicy jednowymiarowej. W tablicy wielowymiarowej wybieranie właściwej komórki pamięci jest proste i intuicyjne. W przypadku tablicy jednowymiarowej prawidłowe odwoływanie się do właściwych komórek pamięci wymagało obliczania właściwego indeksu, co przy z założenia wielowymiarowych danych było problematyczne.
 
 \subsubsection{Problemy z algorytmami}
 Algorytmy przez nas stosowane są ogólnym rozwiązaniem matematycznym, jednakże w trakcie ich implementacji napotkaliśmy pewne problemy. Niektóre z zaimplementowanych przez nas algorytmów wymagały danych w specyficznej dziedzinie (w przypadku interpolacji bi-kubicznej wymagana była macierz źródłowa rozmiaru 4 na 4). Sprawiało to problemy w indeksach przy krawędzi, gdzie próba wyciągnięcia wartości z pamięci spowodowałaby nieprawidłowe odwołanie. Przez to musieliśmy zastosować specyficzne rozwiązania polegające na jednej z wielu możliwości: przekopiowaniu wartości źródłowych, zastosowaniu innego algorytmu lub innej, zmodyfikowanej wersji obecnego algorytmu.
@@ -762,7 +767,7 @@ Algorytmy zmieniające ilość klatek na sekundę także zwracały wyniki bliski
 
 \bibitem{KompAnPrzeOb} Tadeusiewicz R., Korohoda P., \emph{Komputerowa analiza i przetwarzanie obrazów}, Wydawnictwo Fundacji Postępu Telekomunikacji, Kraków 1997, ISBN 83-86476-15-X
 \bibitem{YUVweb} Charles Poynton - Video engineering, http://poynton.ca/Poynton-video-eng.html
-\bibitem{InnPoz} Jakaś pozycja literatury
+\bibitem{BicubicSpline} Cristian Constantin Lalescu \emph{Two hierarchies of spline interpolations.  Practical algorithms for multivariate higher order splines.}, https://arxiv.org/pdf/0905.3564.pdf
 
 \end{thebibliography}
 \end{document}
