@@ -65,12 +65,23 @@ Platforma programistyczna opracowana przez firmę \emph{Microsoft} dla systemów
 \subsubsection{Media Foundation}
 Następca \emph{DirectShowa} dostępny dla systemów \emph{Windows Vista} oraz nowszych. Działa na podobnej zasadzie co swój poprzednik, wspierając domyślnie większa liczbę formatów plików multimedialnych.
 \subsubsection{Wybór biblioteki do dekodowania/kodowania}
-Przy wyborze spośród narzędzi do dekodowania/kodowania kierowaliśmy się liczbą dostępnych pomocy naukowych na ich temat oraz prostotą ich używania. Początkowo wybraliśmy biblioteki \emph{FFmpeg}-a, jednakże ostatecznie przy tworzeniu projektu zastosowaliśmy rozwiązania oferowane przez \emph{OpenCV} do otrzymania danych z plików wideo oraz gotowych narzędzi \emph{FFmpeg}-a do późniejszego dodania dźwięku do otrzymanych plików multimedialnych.
+Przy wyborze spośród narzędzi do dekodowania/kodowania kierowaliśmy się liczbą dostępnych pomocy naukowych na ich temat oraz prostotą ich używania. Ostatecznie przy tworzeniu projektu zastosowaliśmy rozwiązania oferowane przez biblioteki \emph{FFmpeg} do otrzymania danych obrazu z plików wideo oraz gotowych narzędzi \emph{FFmpeg}-a do późniejszego dodania dźwięku do otrzymanych plików multimedialnych.
 
 \subsection{Biblioteka interfejsu graficznego}
 
 \subsubsection{Qt}
-\subsubsection{gtk}
+Zbiór narzędzi i bibliotek programistycznych przeznaczonych do tworzenia graficznych interfejsów użytkownika. \emph{Qt} jest biblioteką dostępną dla wielu systemów operacyjnych oraz języków programistycznych. Interfejs użytkownika budowany jest przy pomocy tzw. ,,widgetów''. Biblioteki te pozwalają także na operacje takie jak: 
+\begin{itemize}
+	\item zarządzanie plikami,
+	\item wyświetlanie grafiki 3D,
+	\item zarządzanie bazami danych SQL.
+\end{itemize}
+\subsubsection{GTK+}
+Zestaw bibliotek zbudowanych początkowo z myślą o programie \emph{GIMP}. Posiada on gotowe komponenty graficzne, pozwalając na łatwe i szybkie budowanie interfejsów graficznych. Biblioteki te zostały napisane w języku C, jednakże zaprojektowana została wykorzystując obiektowe paradygmaty programowania. Zestaw ten posiada także nakładkę \emph{gtkmm} pozwalającą na pracę z nim wykorzystując składnie języka C++.
+\subsubsection{FLTK}
+Multiplatformowa biblioteka przeznaczona do budowy graficznych interfejsów użytkownika napisana w języku C++. Zaprojektowana została ona tak aby programy ją wykorzystujące wyglądały tak samo na różnych platformach oraz aby były one małych rozmiarów.
+\subsubsection{Wybór biblioteki do tworzenia interfejsu graficznego}
+W naszym programie zdecydowaliśmy się zastosować biblioteki \emph{Qt} gdyż dostarczane przez nią komponenty i mechanizmy pozwalają na szybkie i łatwe tworzenie interfejsów użytkownika.
 
 \subsection{Język programowania}
 
@@ -103,6 +114,12 @@ W pliku wideo wyróżnić można następujące elementy:
 	\item nagłówek zawierający dane formacie pliku, jego kontenerze, zastosowanych kodekach oraz opcjonalne metadane takie jak tytuł czy też autor,
 	\item pakiety posiadające dane o pewnych określonych częściach strumieni które są zapisane w pliku.
 \end{itemize}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=13cm]{file_struct.png}
+	\caption{Schemat struktury pliku wideo}
+\end{figure}
+
 W przypadku strumienia wideo pojedynczy pakiet przechowuje dane o jednej jego klatce (bądź też, w przypadku niektórych kodeków, części która uległa zmianie względem poprzedniej klatki). Dla strumieni audio pakiet przechowuję dane o pewnej ilości próbek dźwięku zależnej od zastosowanego podczas kodowania próbkowania oraz ilości klatek wyświetlanych na sekundę. Pakiety przechowują także informacje pozwalające na synchronizacje czasową strumieni danych potrzebne do poprawnego odtwarzania pliku.
 
 \subsection{Dekodowanie}
@@ -142,6 +159,89 @@ Struktura w jakiej organizowalibyśmy kod programu jest bardzo istotnym zagadnie
 
 \subsection{Komunikacja z użytkownikiem}
 Do komunikacji z użytkownikiem stosujemy klasy FilmUpperView (dalej View) i FilmUpperController (dalej controller). Jest to uproszczona wersja wzorca projektowego MVC(Model, View, Controller) Początkowo chcieliśmy  stworzyć infrastrukturę opartą na bardzo podobnym w założeniach wzorcu MVVM (Model, View Model, Controller) oraz zastosować rozwiązania reaktywne w kontakcie z użytkownikiem. Mimo, że głównym celem systemów reaktywnych jest asynchroniczne zarządzanie zdarzeniami poprzez stosowanie strumieni zamiast tradycyjnego podejścia do danych, to reaktywne podejście do zdarzeń bardzo upraszcza ich obsługę oraz jest bardzo przejrzyste pod względem przepływu sterowania. Niestety z uwagi na to, ze rozwiązania te stosowaliśmy tylko w aplikacjach opartych na języku C\#, nie byliśmy zaznajomieni z tą technologią w językach niższego poziomu. Nasza aplikacja nie jest także na tyle rozbudowana pod względem złożoności możliwych stanów ani jej elementy nie reagują w sposób znaczny na zmiany które użytkownik wykonuje w interfejsie, więc zauważyliśmy, że lepszym rozwiązaniem będzie zastosowanie prostszego modelu. Komunikacja między użytkownikiem a programem odbywa się pomiędzy klasami View a Controller. W klasie View zarządzamy interfejsem użytkownika, wyświetlającym możliwe do wyboru algorytmy i przekazujemy jego decyzje do Controllera. W klasie Controller następuje ustalenie jakie algorytmy są dostępne do wykorzystania przez użytkownika, obsługiwany jest proces ulepszania jakości obrazu oraz zapisywania wyniku tej operacji. Obecnie algorytmy które są dostępne do wykorzystania są wpisane na stałe w kodzie programu, przez co aby dodać kolejny algorytm należy go dopisać do odpowiedniego wektora algorytmów. Jedną z możliwych i podstawowych opcji, które rozważaliśmy do rozbudowy funkcjonalności programu jest możliwość automatycznego dodawania dostępnych algorytmów poprzez walidację zawartości odpowiednich folderów. Umożliwiało by to rozbudowę funkcjonalności programu przez następnych użytkowników, a mianowicie poprzez tworzenie bibliotek dynamicznych o odpowiedniej budowie (opartej o odpowiednie klasy bazowe) i ich automatyczne wczytywanie przy starcie programu. Dało by to bardzo dużą możliwość rozbudowy bazowej funkcjonalności, jednakże w obecnej fazie, funkcjonalność ta nie jest uważana przez nas za podstawową.
+
+\subsection{Implementacja procesu dekodowania/kodowania przy pomocy bibliotek FFmpeg}
+\subsubsection{Demultipleksowanie i dekodowanie}
+Przed przystąpieniem do odczytu jakiegokolwiek pliku wideo przy pomocy bibliotek \emph{FFmpeg}-a musieliśmy powołać funkcję 
+\begin{verbatim}
+av_register_all();
+\end{verbatim}
+Funkcja ta inicjalizuje oraz rejestruje wszystkie możliwe multipleksery, demultipleksery oraz kodeki formatów plików wideo. Możliwy jest także wybór formatów które obsługiwać będą funkcje bibliotek poprzez wywołanie funkcji:
+\begin{verbatim}
+av_register_input_format(AVInputFormat* format);
+av_register_output_format(AVOutputFormat* format);
+\end{verbatim}
+gdzie jako parametr przekażemy wybrane przez nas formaty. Następnie poleceniem: 
+\begin{verbatim}
+avformat_open_input(AVFormatContext** formatContext, 
+const char* filename, AVInputFormat* fmt, AVDictionary** options);	
+\end{verbatim}
+otwieramy plik \emph{filename} zapisując informacje o nim w strukturze \emph{formatContext}. Struktura ta posiada informacje między innymi o formacie pliku, dostępnych strumieniach audio/wideo oraz sposobie ich kodowania. Wskaźniki do strumieni danych zawarte są w tablicy \emph{streams} będącej polem struktury \emph{formatContext}. Aby odnaleźć strumień obrazu wideo użyliśmy polecenia
+\begin{verbatim}
+av_find_best_stream(AVFormatContext* formatContext, 
+enum AVMediaType type, int wanted_stream_nb, int related_stream, 
+AVCodec** decoder_ret, intflags);
+\end{verbatim}
+które zwraca jego indeks w tablicy \emph{streams}. Następnie na podstawie pola \emph{codec\_id} znajdującego się w strukturze opisującej strumień wideo odnajdujemy dekoder i inicjalizujemy go funkcjami 
+\begin{verbatim}
+	avcodec_find_decoder(enum AVCodecID codec_id);
+	avcodec_open2(AVCodecContext* codecContext, const AVCodec* codec, 
+	AVDictionary** options);
+\end{verbatim}
+Biblioteki \emph{FFmpeg}-a dają nam dwa sposoby dekodowania i kodowania plików. W przypadku dekodowania skorzystaliśmy z metody która pozwala nam na bezpośrednie odczytanie kolejnej w strumieniu zakodowanej klatki obrazu. Dokonujemy tego poniższą pętlą while: 
+\begin{verbatim}
+while (ret = av_read_frame(formatCTX, packet) >= 0) 
+{
+	if (packet->stream_index == videoStream) 
+	{
+		avcodec_decode_video2(codecCTX, frame, &frameFinished, packet);
+		if (frameFinished)
+			break;
+	}
+}
+\end{verbatim}
+Pętla ta odczytuje kolejne pakiety z pliku wideo sprawdzając czy należą one do strumienia danych obrazu i dekodując je aż otrzymamy pełną klatkę. Przed zwróceniem danych o obrazie do naszych algorytmów musimy przekształcić ją tak aby była ona w modelu barw RGB. Biblioteki \emph{FFmpeg}-a dostarczają nam funkcję
+\begin{verbatim}
+context = sws_getContext(int sourceWidth, int sourceHeight, 
+enum AVPixelFormat sourceFormat, int destinationWidth, 
+int destinationHeight, enum AVPixelFormat destinationFormat, 
+int flags, SwsFilter* srcFilter, SwsFilter* dstFilter, 
+const double* param);
+sws_scale(struct SwsContext* context, uint8_t* const sourceData[], 
+const int sourceStride[], int srcSliceY, int srcSliceH, 
+uint8_t* const destinationData[], const int destinationStride[]);
+\end{verbatim}
+która pozwala na konwersje między modelami barw.
+\subsubsection{Kodowanie i multipleksowanie}
+Tak jak w przypadku dekodowania pliku wideo, przed przystąpieniem do kodowania i zapisu danych musimy zainicjalizować strukturę \emph{formatContext}, wypełnić ją wymaganymi danymi oraz zainicjalizować i skonfigurować koder, którego chcemy używać. Dokonujemy tego metodą
+\begin{verbatim}
+	avcodec_find_encoder(enum AVCodecID id);
+\end{verbatim}
+i wypełniając otrzymaną w jej wyniku strukturę pożądanymi przez nas parametrami zapisu (miedzy innymi ilością klatek na sekundę, rozdzielczością obrazu czy przepływność). Następnie dodajemy do struktury \emph{formatContext} nowy strumień wideo poleceniem 
+\begin{verbatim}
+	avformat_new_stream(AVFormatContext* s, const AVCodec* c) 	
+\end{verbatim}
+Przed przystąpieniem do kodowania klatek musimy zapisać do pliku docelowego nagłówek formaty funkcją
+\begin{verbatim}
+	avformat_write_header(AVFormatContext* s, AVDictionary** options) 	
+\end{verbatim}
+Po skonwertowaniu danych klatki do modelu barw wymaganego przez wybrany format pliku kodowanie odbywa się następującym algorytmem: 
+\begin{verbatim}
+	if (ret = avcodec_send_frame(codecCTX, frameOut) < 0)
+	throw std::runtime_error("Couldn't send frame to encoder");
+	
+	ret = avcodec_receive_packet(codecCTX, packet);
+	if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
+		return;
+	else if (ret < 0)
+		throw std::runtime_error("Couldn't recieve packet from encoder");
+	if (av_interleaved_write_frame(formatCTX, packet) < 0)
+		throw std::runtime_error("Couldn't save packet to file");
+\end{verbatim}
+która wysyła klatki do kodera do momentu aż jego wewnętrzny bufor zostanie wypełniony i otrzymamy pakiet który zapisać możemy do pliku.
+
+Po zapisaniu wszystkich klatek pozostaje nam jeszcze wyczyszczenie bufora kodeka poprzez wysłanie do niego wskaźnika \emph{NULL} i ewentualne zapisanie powstałego pakietu.
+
 
 \subsection{Organizacja algorytmów i sposobu przekształcania plików wideo}
 W naszym projekcie z założenia stosujemy dwa typy algorytmów. Są to algorytmy:
@@ -476,8 +576,24 @@ W naszym programie algorytm ten stosowany jest do wyostrzenia obrazu. Stosujemy 
 Algorytm splotu wymaga wartości pikseli znajdujących się poza granicami obrazu źródłowego. W tym wypadku stosuję się jedno z poniższych rozwiązań
 \begin{enumerate}
 	\item Obcinanie - jeżeli algorytm wymagałby do obliczenia piksela wartości znajdujących się poza krawędziami obrazu, piksel ten jest pomijany,
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=7cm]{clipping.png}
+		\caption{Obsługa pikseli brzegowych - obcinanie}
+	\end{figure}
 	\item Zawijanie - jeżeli wymagany jest piksel znajdujący się poza krawędziami obrazu, wartości te brane są z krawędzi przeciwnej,
+	\newpage
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=7cm]{wrapping.png}
+		\caption{Obsługa pikseli brzegowych - zawijanie}
+	\end{figure}
 	\item Rozszerzanie - krawędzie obrazu wejściowego rozszerzane są poprzez kopiowanie wartości pikseli brzegowych tyle razy ile wymaga tego algorytm.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=7cm]{extending.png}
+		\caption{Obsługa pikseli brzegowych - rozszerzanie}
+	\end{figure}
 \end{enumerate}
 
 \subsection{Zwiększanie ilości klatek na sekundę}
@@ -555,6 +671,14 @@ Uzyskana przez nas prędkość przetwarzania była zgodna z naszymi oczekiwaniam
 \end{verbatim}
 
 Dodatkowo postanowiliśmy czytać następną klatkę źródłową w trakcie przetwarzania obecnej (jeśli jest to możliwe). Spowodowało to, że ostatecznie prędkość z jaką przetwarzamy klatki metodą najbliższego sąsiada wynosi około 0.02 sekundy, co daje nam możliwość przerabiania około 50 klatek na sekundę. Jest to wynik bardzo nas satysfakcjonujący.
+
+\section{Podsumowanie}
+\subsection{Napotkane problemy podczas tworzenia projektu}
+\subsubsection{Problemy z wybranymi narzędziami do odczytu i zapisu plików wideo}
+Praca z bibliotekami \emph{FFmpeg}-a okazała się problematyczna. Wynikało to częściowo z faktu iż napisane one zostały w języku C - brak obiektowości wymagał tworzenia, inicjalizowania oraz zarządzania wieloma zmiennymi i wskaźnikami. Większym problemem okazał się jednakże brak rzetelnej dokumentacji oraz innych pomocy naukowych. Spora część funkcjonalności opisana jest w powierzchownie, niektóre metody posiadają braku jakichkolwiek opisów. Zbiór przykładów użycia tych bibliotek sprowadzał się do kilku plików źródłowych. W przypadku jakichkolwiek błędów, czy wyników funkcji nie będących tymi jakimi oczekiwaliśmy pomocy musieliśmy szukać na forach internetowych oraz wzorować się na kodzie źródłowym innych darmowych programów korzystających z \emph{FFmpeg}-a. Niestety ze względu an wybrany przez nas język programowania oraz używane przez nas środowisko programistyczne nie byliśmy w stanie zastosować rozwiązań konkurencyjnych.
+
+\subsection{Wyniki działania algorytmów}
+
 %\dodatek{Mój specjalny dodatek}
 
 %Tu treść dodatku. Zwróćmy uwagę na sposób numerowania dodatku, 
