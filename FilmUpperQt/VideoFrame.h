@@ -1,6 +1,4 @@
 #pragma once
-#include <qcolor.h>
-#include <boost\multi_array.hpp>
 
 class VideoFrame {
 public:

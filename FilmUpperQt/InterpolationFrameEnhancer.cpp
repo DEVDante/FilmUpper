@@ -15,6 +15,11 @@ VideoFrame * InterpolationFrameEnhancer::ReadNextEnhancedFrame()
 	_framePrefetch.join();
 	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Height, _targetQualityInfo->Width);
 	VideoFrame* inputFrame = _nextFrame->Frame;
+	if(inputFrame == nullptr)
+	{
+		_framesLeft = false;
+		return nullptr;
+	}
 
 	if (_inputFrameStream->AreFramesLeft())
 		_framePrefetch = std::thread(PrefetchFrame, _inputFrameStream, _nextFrame);

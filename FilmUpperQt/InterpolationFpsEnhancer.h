@@ -12,4 +12,5 @@ private:
 	double _currentFrameCooficiency = 0.0f;
 	double _nextFrameDelta = 0.0f;
 	VideoFrame* InterpolateFrames() const;
+	bool _framesLeft;
 };
