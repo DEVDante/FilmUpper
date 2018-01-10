@@ -1,3 +1,15 @@
 ﻿  BiCubicFrameEnhancer.cpp
+  FilmUpperController.cpp
+  FilmUpperQt.cpp
+  FrameReader.cpp
+  FrameWriter.cpp
+  moc_FilmUpperQt.cpp
+  InterlaceFpsEnhancer.cpp
+  InterpolationFpsEnhancer.cpp
+  InterpolationFrameEnhancer.cpp
+  MaskFrameEnhancer.cpp
+  NNFrameEnhancer.cpp
+  main.cpp
+  Generating Code...
   FilmUpperQt.vcxproj -> D:\Studia\Inzynierka\FilmUpper\x64\Debug\FilmUpperQt.exe
   FilmUpperQt.vcxproj -> D:\Studia\Inzynierka\FilmUpper\x64\Debug\FilmUpperQt.pdb (Full PDB)
