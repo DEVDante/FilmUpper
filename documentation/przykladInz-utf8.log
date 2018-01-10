@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.4)  10 JAN 2018 22:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.4)  10 JAN 2018 22:41
 entering extended mode
 **./przykladInz-utf8.tex
 (przykladInz-utf8.tex
@@ -819,14 +819,20 @@ Overfull \hbox (37.12523pt too wide) in paragraph at lines 720--720
 e, outputFrame,[] 
  []
 
-[45] [46] [47] [48] [49] [50] [51] (przykladInz-utf8.aux)
+[45] [46] [47] [48] [49] [50]
+Underfull \hbox (badness 2790) in paragraph at lines 764--765
+[]\OT1/lmr/m/n/12 Charles Poyn-ton - Vi-deo en-gi-ne-ering, http://poynton.ca/P
+oynton-video-
+ []
+
+[51] (przykladInz-utf8.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
  2972 strings out of 493312
- 39730 string characters out of 3138900
+ 39727 string characters out of 3138900
  101836 words of memory out of 3000000
  6438 multiletter control sequences out of 15000+200000
  68628 words of font info for 44 fonts, out of 3000000 for 9000
@@ -849,7 +855,7 @@ ic/lm/lmss17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Fil
 es/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/public/lm/lmtt12.pfb>
-Output written on przykladInz-utf8.pdf (53 pages, 603416 bytes).
+Output written on przykladInz-utf8.pdf (53 pages, 603502 bytes).
 PDF statistics:
  257 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
