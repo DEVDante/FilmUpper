@@ -1,29 +1,313 @@
-<UI version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>FilmUpperQtClass</class>
- <widget class="QMainWindow" name="FilmUpperQtClass" >
-  <property name="objectName" >
-   <string notr="true">FilmUpperQtClass</string>
-  </property>
-  <property name="geometry" >
+ <widget class="QMainWindow" name="FilmUpperQtClass">
+  <property name="geometry">
    <rect>
-	<x>0</x>
-	<y>0</y>
-	<width>600</width>
-	<height>400</height>
+    <x>0</x>
+    <y>0</y>
+    <width>812</width>
+    <height>275</height>
    </rect>
   </property>
-  <property name="windowTitle" >
-   <string>FilmUpperQt</string>
+  <property name="windowTitle">
+   <string>FilmUpper</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QFrame" name="groupingFrame">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>791</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <widget class="QLineEdit" name="inTBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>681</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="outTBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>681</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="inputButton">
+     <property name="geometry">
+      <rect>
+       <x>694</x>
+       <y>9</y>
+       <width>91</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Plik wejściowy</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="outputButton">
+     <property name="geometry">
+      <rect>
+       <x>694</x>
+       <y>39</y>
+       <width>91</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Plik wyjściowy</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="scalingLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>90</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Algorytm skalowania</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="fpsLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>211</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Algorytm zwiększania il. klatek na sekunde</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>714</x>
+      <y>92</y>
+      <width>81</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Przetwórz</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="resGBox">
+    <property name="geometry">
+     <rect>
+      <x>389</x>
+      <y>100</y>
+      <width>181</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Rozdzielczość</string>
+    </property>
+    <widget class="QSpinBox" name="spinBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBox_2">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>20</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="multLabel">
+     <property name="geometry">
+      <rect>
+       <x>88</x>
+       <y>21</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>x</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>161</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="fpsGBox">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>100</y>
+      <width>120</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Il. klatek na sekunde</string>
+    </property>
+    <widget class="QSpinBox" name="fpsSBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>101</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>210</y>
+      <width>691</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="scalingCBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>351</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="fpsCBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>160</y>
+      <width>351</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>812</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPlik">
+    <property name="title">
+     <string>Plik</string>
+    </property>
+    <addaction name="actionOtw_rz_plik_wej_ciowy"/>
+    <addaction name="actionOtw_rz_plik_wyj_ciowy"/>
+    <addaction name="separator"/>
+    <addaction name="actionZamknij"/>
+   </widget>
+   <widget class="QMenu" name="menuInfo">
+    <property name="title">
+     <string>Info</string>
+    </property>
+    <addaction name="actionO_programie"/>
+   </widget>
+   <addaction name="menuPlik"/>
+   <addaction name="menuInfo"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actionO_programie">
+   <property name="text">
+    <string>O programie</string>
+   </property>
+  </action>
+  <action name="actionOtw_rz_plik_wej_ciowy">
+   <property name="text">
+    <string>Otwórz plik wejściowy</string>
+   </property>
+  </action>
+  <action name="actionOtw_rz_plik_wyj_ciowy">
+   <property name="text">
+    <string>Otwórz plik wyjściowy</string>
+   </property>
+  </action>
+  <action name="actionZamknij">
+   <property name="text">
+    <string>Zamknij</string>
+   </property>
+  </action>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources>
-   <include location="FilmUpperQt.qrc"/>
+  <include location="FilmUpperQt.qrc"/>
  </resources>
  <connections/>
-</UI>
+</ui>

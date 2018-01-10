@@ -3,12 +3,12 @@
 \contentsline {subsection}{\numberline {1.1}\kernsubsekcyjny Biblioteka do dekodowania oraz kodowania plik\IeC {\'o}w wideo}{11}
 \contentsline {subsubsection}{\numberline {1.1.1}\kernsubsubsekcyjny FFmpeg / libav}{11}
 \contentsline {subsubsection}{\numberline {1.1.2}\kernsubsubsekcyjny OpenCV}{11}
-\contentsline {subsubsection}{\numberline {1.1.3}\kernsubsubsekcyjny DirectShow}{11}
+\contentsline {subsubsection}{\numberline {1.1.3}\kernsubsubsekcyjny DirectShow}{12}
 \contentsline {subsubsection}{\numberline {1.1.4}\kernsubsubsekcyjny Media Foundation}{12}
 \contentsline {subsubsection}{\numberline {1.1.5}\kernsubsubsekcyjny Wyb\IeC {\'o}r biblioteki do dekodowania/kodowania}{12}
 \contentsline {subsection}{\numberline {1.2}\kernsubsekcyjny Biblioteka interfejsu graficznego}{12}
 \contentsline {subsubsection}{\numberline {1.2.1}\kernsubsubsekcyjny Qt}{12}
-\contentsline {subsubsection}{\numberline {1.2.2}\kernsubsubsekcyjny GTK+}{12}
+\contentsline {subsubsection}{\numberline {1.2.2}\kernsubsubsekcyjny GTK+}{13}
 \contentsline {subsubsection}{\numberline {1.2.3}\kernsubsubsekcyjny FLTK}{13}
 \contentsline {subsubsection}{\numberline {1.2.4}\kernsubsubsekcyjny Wyb\IeC {\'o}r biblioteki do tworzenia interfejsu graficznego}{13}
 \contentsline {subsection}{\numberline {1.3}\kernsubsekcyjny J\IeC {\k e}zyk programowania}{13}
@@ -16,7 +16,7 @@
 \contentsline {subsubsection}{\numberline {1.3.2}\kernsubsubsekcyjny C\#}{14}
 \contentsline {subsubsection}{\numberline {1.3.3}\kernsubsubsekcyjny Rust}{14}
 \contentsline {subsubsection}{\numberline {1.3.4}\kernsubsubsekcyjny Python}{14}
-\contentsline {subsubsection}{\numberline {1.3.5}\kernsubsubsekcyjny Wyb\IeC {\'o}r j\IeC {\k e}zyka programowania}{14}
+\contentsline {subsubsection}{\numberline {1.3.5}\kernsubsubsekcyjny Wyb\IeC {\'o}r j\IeC {\k e}zyka programowania}{15}
 \contentsline {section}{\numberline {2}\kernsekcyjny Dekodowanie oraz kodowanie film\IeC {\'o}w}{17}
 \contentsline {subsection}{\numberline {2.1}\kernsubsekcyjny Format pliku wideo}{17}
 \contentsline {subsection}{\numberline {2.2}\kernsubsekcyjny Struktura pliku wideo}{17}
@@ -51,6 +51,6 @@
 \contentsline {subsubsection}{\numberline {7.1.1}\kernsubsubsekcyjny Problemy z wybranymi narz\IeC {\k e}dziami do odczytu i zapisu plik\IeC {\'o}w wideo}{47}
 \contentsline {subsubsection}{\numberline {7.1.2}\kernsubsubsekcyjny Problemy z technologi\IeC {\k a}}{47}
 \contentsline {subsubsection}{\numberline {7.1.3}\kernsubsubsekcyjny Problemy z algorytmami}{48}
-\contentsline {subsection}{\numberline {7.2}\kernsubsekcyjny Wyniki dzia\IeC {\l }ania algorytm\IeC {\'o}w}{48}
-\contentsline {subsection}{\numberline {7.3}\kernsubsekcyjny Mo\IeC {\.z}liwo\IeC {\'s}ci dalszego rozwoju}{49}
+\contentsline {subsection}{\numberline {7.2}\kernsubsekcyjny Mo\IeC {\.z}liwo\IeC {\'s}ci dalszego rozwoju}{48}
+\contentsline {subsection}{\numberline {7.3}\kernsubsekcyjny Wyniki dzia\IeC {\l }ania algorytm\IeC {\'o}w}{49}
 \contentsline {section}{Literatura}{51}

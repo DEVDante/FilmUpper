@@ -47,6 +47,9 @@
 Technologia nagrywania obrazów ruchomych jest powszechnie używana przez dużą liczbę ludzi.
 FilmUpper jest aplikacją pozwalającą na poprawianie jakości obrazu w filmie, poprzez zwiększanie rozdzielczości oraz zwiększanie ilości klatek na sekundę w nim występujących. Dzięki takim zabiegom jakość oglądanego przez nas obrazu znacząco się poprawia, jednakże nigdy nie będzie ona tak dobra, jak jakość obrazu nagrywanego z ustawieniami na które chcemy dany film skonwertować. 
 
+Celem naszego projektu było stworzenie wydajnej aplikacji pozwalające na szybkie, łatwe i proste polepszenie jakości pliku wideo, poprzez dostarczenie użytkownikowi  zbioru algorytmów przetwarzania obrazu i łatwego w obsłudze interfejsu graficzne pozwalającego je zastosować. 
+
+Przed przystąpieniem do realizacji projektu spędziliśmy sporo czasu rozważając potencjalne rozwiązania postawionego przed nami problemu oraz decydując o tym jakiej technologi użyjemy do jego utworzenia.
 
 
 \section{Technologia i język programowania}
@@ -55,7 +58,7 @@ FilmUpper jest aplikacją pozwalającą na poprawianie jakości obrazu w filmie,
 Przetwarzanie plików filmowych nawet w przypadku zastosowania najłatwiejszych algorytmów sposób jest zadaniem bardzo wymagającym pod względem wydajnościowym, dlatego wybór technologii ma kluczowe znaczenie, gdyż wpływa na wydajność całej aplikacji. Należy zwrócić uwagę na wiele czynników które mogą wpłynąć na działanie programu jak również na sposób jego implementacji.
 
 \subsection{Biblioteka do dekodowania oraz kodowania plików wideo}
-
+Od wyboru narzędzi do dekodowania/kodowania zależało powodzenie wykonania przez nas projektu. Szukając dostępnych rozwiązań pozwalających na wykonywanie tychże czynności zwracaliśmy szczególną uwagę na ich szybkość, niezawodność i opinie społeczności. W ostatecznym rozrachunku pod uwagę braliśmy następujące biblioteki programistyczne.
 \subsubsection{FFmpeg / libav}
 Narzędzia oraz biblioteki \emph{FFmpeg} (czy też \emph{libav} będącym tak zwanym ,,forkiem'' \emph{FFmpeg}-a) są jednymi z najbardziej popularnych otwartych oprogramowań służących do dekodowania, kodowania oraz manipulacji plikami multimedialnymi. Posiadają one zbiór powszechnie używanych, ,,open-source'owych'' kodeków audio i wideo. Biblioteki te napisane są w języku C. 
 \subsubsection{OpenCV}
@@ -81,7 +84,7 @@ Zestaw bibliotek zbudowanych początkowo z myślą o programie \emph{GIMP}. Posi
 \subsubsection{FLTK}
 Multiplatformowa biblioteka przeznaczona do budowy graficznych interfejsów użytkownika napisana w języku C++. Zaprojektowana została ona tak aby programy ją wykorzystujące wyglądały tak samo na różnych platformach oraz aby były one małych rozmiarów.
 \subsubsection{Wybór biblioteki do tworzenia interfejsu graficznego}
-W naszym programie zdecydowaliśmy się zastosować biblioteki \emph{Qt} gdyż dostarczane przez nią komponenty i mechanizmy pozwalają na szybkie i łatwe tworzenie interfejsów użytkownika.
+W naszym programie zdecydowaliśmy się zastosować biblioteki \emph{Qt} gdyż dostarczane przez nią komponenty i mechanizmy pozwalają na szybkie i łatwe tworzenie interfejsów użytkownika. Zdecydowanym plusem był też fakt iż mieliśmy już doświadczenie przy pracy z tą technologią.
 
 \subsection{Język programowania}
 
@@ -151,8 +154,10 @@ Kodowanie jest procesem odwrotnym do dekodowania. Na początku tworzony jest pli
 
 \section{Interfejs użytkownika}
 Interfejs naszej aplikacji zbudowaliśmy w oparciu o zbiór bibliotek i narzędzi programistycznych \emph{Qt}.
-\begin{figure}
-	%% add pic
+\begin{figure}[h]
+\centering
+\includegraphics[width=13cm]{uimain.png}
+\caption{Główny interfejs programu}
 \end{figure}
 Interfejs prosi użytkownika o podanie pliku źródłowego oraz pliku docelowego. W tym celu może on skorzystać z odpowiednich pól wpisując do nich ścieżki plików, wykonując akcję ,,przeciąg-upuść'' na te pola lub  korzystając z typowego okna wyboru pliku.
 \begin{figure}
@@ -733,21 +738,29 @@ Problemem wynikającym z działań optymalizacyjnych był problem z odwoływanie
 \subsubsection{Problemy z algorytmami}
 Algorytmy przez nas stosowane są ogólnym rozwiązaniem matematycznym, jednakże w trakcie ich implementacji napotkaliśmy pewne problemy. Niektóre z zaimplementowanych przez nas algorytmów wymagały danych w specyficznej dziedzinie (w przypadku interpolacji bi-kubicznej wymagana była macierz źródłowa rozmiaru 4 na 4). Sprawiało to problemy w indeksach przy krawędzi, gdzie próba wyciągnięcia wartości z pamięci spowodowałaby nieprawidłowe odwołanie. Przez to musieliśmy zastosować specyficzne rozwiązania polegające na jednej z wielu możliwości: przekopiowaniu wartości źródłowych, zastosowaniu innego algorytmu lub innej, zmodyfikowanej wersji obecnego algorytmu.
 
-\subsection{Wyniki działania algorytmów}
-Wyniki działania algorytmów jakie otrzymaliśmy były bliskie wynikom jakich się spodziewaliśmy. W przypadku stosunkowo niewielkiego zwiększania rozmiaru pojedynczej klatki i dużej źródłowej rozdzielczości przetwarzanych przez nas plików nie zauważyliśmy znaczących różnic między poszczególnymi algorytmami. Różnica była widoczna po bliższym przyjrzeniu się między algorytmem najbliższego sąsiada a resztą zaimplementowanych algorytmów. Różnica jakości klatki wynikowej między algorytmem interpolacji dwuliniowej a bi-kubicznej nie była widoczna. Według nas, algorytm interpolacji bi-kubicznej przez bardzo długi czas obliczeń oraz znikomą różnicę od znacznie szybszego algorytmu interpolacji dwuliniowej, nie jest on algorytmem godnym polecenia.
-
-Algorytmy zmieniające ilość klatek na sekundę także zwracały wyniki bliskie oczekiwanym. W trakcie dynamicznych scen gdzie występują gwałtowne ruchy postaci wytworzone klatki pośrednie były mocno widoczne w przypadku algorytmu interpolacji. W przypadku mniej dynamicznych scen, gdzie występują delikatne ruchy postaci klatki pośrednie nie są wyraźnie widoczne a wrażenie większej płynności obrazu jest zauważalne. W przypadku algorytmu przeplotu efekt jest bardzo delikatnie widoczny, a wytworzone klatki pośrednie nie są wyraźnie widoczne. Oba algorytmy mają swoje zastosowania, jednakże algorytm interpolacji powinien być stosowany tylko w odpowiednich warunkach.
-
 \subsection{Możliwości dalszego rozwoju}
 Mimo stworzenia aplikacji z myślą o dalszym rozwoju musieliśmy uprościć niektóre aspekty ze względu na ograniczające nas ramy czasowe. Najważniejszym zagadnieniem które rozwijalibyśmy w pierwszej kolejności byłoby stworzenie rozwiązania ładującego dostępne algorytmy na podstawie folderu z nimi, gdzie były by zamieszczone w postaci plików bibliotek dynamicznych (DLL).
 
 Kolejnym krokiem byłoby zwiększenie dostępnych algorytmów przekształcających klatki i ich ilość na sekundę.
 
+Przy pewnym nakładzie pracy algorytmy dekodowania i kodowania można by wyposażyć w odczyt i zapis dźwięku. Pozwoliło by to też na jego modyfikacje wykorzystując funkcje stosowane do polepszania dźwięku na przykład usuwanie szumu.
+
 W przyszłości moglibyśmy dodać opcjonalne atrybuty dodatkowe, które mogłyby modyfikować działanie danego algorytmu, przez co jedna implementacja mogłaby korzystać z wielu możliwych opcji umożliwiających wpływających na obraz wynikowy.
+
+Aplikację można by było zmodyfikować tak aby pozwalała na zastosowanie wielu filtrów obrazu jednocześnie.
+
+Interfejs graficzny wzbogacić można by w obsługę wieku języków.
+
+\subsection{Wyniki działania algorytmów}
+Wyniki działania algorytmów jakie otrzymaliśmy były bliskie wynikom jakich się spodziewaliśmy. W przypadku stosunkowo niewielkiego zwiększania rozmiaru pojedynczej klatki i dużej źródłowej rozdzielczości przetwarzanych przez nas plików nie zauważyliśmy znaczących różnic między poszczególnymi algorytmami. Różnica była widoczna po bliższym przyjrzeniu się między algorytmem najbliższego sąsiada a resztą zaimplementowanych algorytmów. Różnica jakości klatki wynikowej między algorytmem interpolacji dwuliniowej a bi-kubicznej nie była widoczna. Według nas, algorytm interpolacji bi-kubicznej przez bardzo długi czas obliczeń oraz znikomą różnicę od znacznie szybszego algorytmu interpolacji dwuliniowej, nie jest on algorytmem godnym polecenia.
+
+Algorytmy zmieniające ilość klatek na sekundę także zwracały wyniki bliskie oczekiwanym. W trakcie dynamicznych scen gdzie występują gwałtowne ruchy postaci wytworzone klatki pośrednie były mocno widoczne w przypadku algorytmu interpolacji. W przypadku mniej dynamicznych scen, gdzie występują delikatne ruchy postaci klatki pośrednie nie są wyraźnie widoczne a wrażenie większej płynności obrazu jest zauważalne. W przypadku algorytmu przeplotu efekt jest bardzo delikatnie widoczny, a wytworzone klatki pośrednie nie są wyraźnie widoczne. Oba algorytmy mają swoje zastosowania, jednakże algorytm interpolacji powinien być stosowany tylko w odpowiednich warunkach.
+
+
 
 \begin{thebibliography}{12}
 
-\bibitem{PozNazwa1} Jakaś pozycja literatury
+\bibitem{KompAnPrzeOb} Tadeusiewicz R., Korohoda P., \emph{Komputerowa analiza i przetwarzanie obrazów}, Wydawnictwo Fundacji Postępu Telekomunikacji, Kraków 1997, ISBN 83-86476-15-X
 \bibitem{InnPoz} Jakaś pozycja literatury
 
 \end{thebibliography}

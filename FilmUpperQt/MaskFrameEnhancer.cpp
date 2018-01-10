@@ -9,11 +9,13 @@ static T MaskFrameEnhancer::clamp(const T & n, const T & lower, const T & upper)
 
 VideoFrame* MaskFrameEnhancer::ReadNextEnhancedFrame()
 {
-	if (!_framesLeft)
-		return nullptr;
 	_framePrefetch.join();
-	VideoFrame* outputFrame = new VideoFrame(_targetQualityInfo->Width, _targetQualityInfo->Height);
 	VideoFrame* inputFrame = _nextFrame->Frame;
+
+	if (!_framesLeft || inputFrame == NULL)
+		return nullptr;
+
+	VideoFrame* outputFrame = inputFrame->Clone();
 
 	if (_inputFrameStream->AreFramesLeft())
 		_framePrefetch = std::thread(PrefetchFrame, _inputFrameStream, _nextFrame);
@@ -40,29 +42,25 @@ VideoFrame* MaskFrameEnhancer::ReadNextEnhancedFrame()
 
 void MaskFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* output, int startRow, int endRow, FilmQualityInfo* sourceQ, FilmQualityInfo* targetQ)
 {
-	int sumR = 0;
-	int sumG = 0;
-	int sumB = 0;
+	int sum = 0;
 
-	for (int verticalIndex = startRow; verticalIndex < endRow; ++verticalIndex)
-	{
-		if ((verticalIndex < KERNEL_RADIUS) || (verticalIndex > sourceQ->Height - KERNEL_RADIUS))
-			continue;
-		for (int horizontalIndex = KERNEL_RADIUS; horizontalIndex < (targetQ->Width - KERNEL_RADIUS); ++horizontalIndex)
+	for (int cChannel = 0; cChannel < 3; cChannel++)
+		for (int verticalIndex = startRow; verticalIndex < endRow; ++verticalIndex)
 		{
-			for (int kernelX = (-1); kernelX < KERNEL_RADIUS + 1; kernelX++)
-				for (int kernelY = (-1); kernelY < KERNEL_RADIUS + 1; kernelY++)
-				{
-					sumR = sumR + input->Frame[(verticalIndex + kernelX) * sourceQ->Width + (horizontalIndex + kernelY) * 3] * kernel[kernelX + 1][kernelY + 1];
-					sumG = sumR + input->Frame[(verticalIndex + kernelX) * sourceQ->Width + (horizontalIndex + kernelY) * 3 + 1] * kernel[kernelX + 1][kernelY + 1];
-					sumB = sumR + input->Frame[(verticalIndex + kernelX) * sourceQ->Width + (horizontalIndex + kernelY) * 3 + 2] * kernel[kernelX + 1][kernelY + 1];
-				}
-			uint8_t test = output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3] = clamp(sumR, 0, 255);
-			uint8_t test2 = output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 1] = clamp(sumG, 0, 255);
-			uint8_t test3 = output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + 2] = clamp(sumB, 0, 255);
-			test3;
+			if ((verticalIndex < KERNEL_RADIUS) || (verticalIndex > sourceQ->Height - KERNEL_RADIUS))
+				continue;
+			for (int horizontalIndex = KERNEL_RADIUS; horizontalIndex < (targetQ->Width - KERNEL_RADIUS); ++horizontalIndex)
+			{
+				for (int kernelX = -KERNEL_RADIUS; kernelX <= KERNEL_RADIUS; kernelX++)
+					for (int kernelY = -KERNEL_RADIUS; kernelY <= KERNEL_RADIUS; kernelY++) {
+						auto test = ((verticalIndex + kernelY) * targetQ->Width + (horizontalIndex + kernelX)) * 3;
+						sum += input->Frame[((verticalIndex + kernelY) * targetQ->Width + (horizontalIndex + kernelX)) * 3 + cChannel] * kernel[kernelX + KERNEL_RADIUS][kernelY + KERNEL_RADIUS];
+					}
+						
+
+				output->Frame[verticalIndex * targetQ->Width + horizontalIndex * 3 + cChannel] = clamp(sum, 0, 255);
+			}
 		}
-	}
 }
 
 void MaskFrameEnhancer::PrefetchFrame(IFrameReader* frameReader, VFHack* vf)
@@ -82,4 +80,4 @@ MaskFrameEnhancer::MaskFrameEnhancer(IFrameReader * inputFrameReader, FilmQualit
 	_framePrefetch = std::thread(PrefetchFrame, inputFrameReader, _nextFrame);
 }
 
-const int MaskFrameEnhancer::kernel[3][3] = { { 0, -1, 0 },{ -1, 5, -1 },{ 0, -1, 0 } };
+const int MaskFrameEnhancer::kernel[3][3] = { { 0, -1, 0 },{ -1, 9, -1 },{ 0, -1, 0 } };
