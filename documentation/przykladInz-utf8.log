@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.7)  11 JAN 2018 00:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.7)  11 JAN 2018 10:52
 entering extended mode
 **./przykladInz-utf8.tex
 (przykladInz-utf8.tex
@@ -741,103 +741,151 @@ Overfull \hbox (37.12523pt too wide) in paragraph at lines 525--525
  frameEnhancer,[] 
  []
 
-[34] <images/NN.png, id=134, 304.13625pt x 232.61906pt>
+[34] <images/HandOrginal.png, id=134, 171.64125pt x 155.07938pt>
+File: images/HandOrginal.png Graphic file (type png)
+
+<use images/HandOrginal.png>
+Package pdftex.def Info: images/HandOrginal.png used on input line 535.
+(pdftex.def)             Requested size: 284.52756pt x 257.09564pt.
+ [35 <./images/HandOrginal.png>]
+<images/NN.png, id=140, 304.13625pt x 232.61906pt>
 File: images/NN.png Graphic file (type png)
  <use images/NN.png>
-Package pdftex.def Info: images/NN.png used on input line 539.
+Package pdftex.def Info: images/NN.png used on input line 547.
 (pdftex.def)             Requested size: 199.16928pt x 152.33997pt.
+ [36 <./images/NN.png>] <images/HandNN.png, id=144, 182.18062pt x 162.6075pt>
+File: images/HandNN.png Graphic file (type png)
 
-[35 <./images/NN.png>]
-<images/Interpolation1.png, id=139, 304.13625pt x 232.61906pt>
+<use images/HandNN.png>
+Package pdftex.def Info: images/HandNN.png used on input line 558.
+(pdftex.def)             Requested size: 284.52756pt x 253.99171pt.
+
+<images/Interpolation1.png, id=145, 304.13625pt x 232.61906pt>
 File: images/Interpolation1.png Graphic file (type png)
 
 <use images/Interpolation1.png>
-Package pdftex.def Info: images/Interpolation1.png used on input line 552.
-(pdftex.def)             Requested size: 199.16928pt x 152.33997pt.
- [36 <./images/Interpolation1.png>]
-<images/Interpolation2.png, id=143, 304.13625pt x 232.61906pt>
+Package pdftex.def Info: images/Interpolation1.png used on input line 569.
+(pdftex.def)             Requested size: 170.71652pt x 130.57458pt.
+ [37 <./images/HandNN.png> <./images/Interpolation1.png>] <images/Interpolation
+2.png, id=150, 304.13625pt x 232.61906pt>
 File: images/Interpolation2.png Graphic file (type png)
 
 <use images/Interpolation2.png>
-Package pdftex.def Info: images/Interpolation2.png used on input line 560.
-(pdftex.def)             Requested size: 199.16928pt x 152.33997pt.
+Package pdftex.def Info: images/Interpolation2.png used on input line 577.
+(pdftex.def)             Requested size: 170.71652pt x 130.57458pt.
 
-<images/Interpolation3.png, id=144, 304.13625pt x 232.61906pt>
+<images/Interpolation3.png, id=151, 304.13625pt x 232.61906pt>
 File: images/Interpolation3.png Graphic file (type png)
 
 <use images/Interpolation3.png>
-Package pdftex.def Info: images/Interpolation3.png used on input line 568.
-(pdftex.def)             Requested size: 199.16928pt x 152.33997pt.
- [37 <./images/Interpolation2.png> <./images/Interpolation3.png>] [38] <images/
-clipping.png, id=153, 722.7pt x 722.7pt>
+Package pdftex.def Info: images/Interpolation3.png used on input line 585.
+(pdftex.def)             Requested size: 170.71652pt x 130.57458pt.
+
+<images/HandInterpolation.png, id=152, 175.40532pt x 163.3603pt>
+File: images/HandInterpolation.png Graphic file (type png)
+
+<use images/HandInterpolation.png>
+Package pdftex.def Info: images/HandInterpolation.png used on input line 593.
+(pdftex.def)             Requested size: 284.52756pt x 265.03357pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[38 <./images/Interpolation2.png> <./images/Interpolation3.png>]
+<images/HandBiCubic.png, id=156, 325.96782pt x 298.11375pt>
+File: images/HandBiCubic.png Graphic file (type png)
+
+<use images/HandBiCubic.png>
+Package pdftex.def Info: images/HandBiCubic.png used on input line 627.
+(pdftex.def)             Requested size: 284.52756pt x 260.23479pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[39 <./images/HandInterpolation.png>] [40 <./images/HandBiCubic.png>]
+<images/clipping.png, id=167, 722.7pt x 722.7pt>
 File: images/clipping.png Graphic file (type png)
-
-<use images/clipping.png>
-Package pdftex.def Info: images/clipping.png used on input line 627.
+ <use images/clipping.png>
+Package pdftex.def Info: images/clipping.png used on input line 658.
 (pdftex.def)             Requested size: 199.16928pt x 199.16766pt.
- [39 <./images/clipping.png>]
-<images/wrapping.png, id=158, 722.7pt x 722.7pt>
+
+[41 <./images/clipping.png>] <images/wrapping.png, id=173, 722.7pt x 722.7pt>
 File: images/wrapping.png Graphic file (type png)
- <use images/wrapping.png>
-Package pdftex.def Info: images/wrapping.png used on input line 634.
-(pdftex.def)             Requested size: 199.16928pt x 199.16766pt.
 
-<images/extending.png, id=159, 722.7pt x 722.7pt>
+<use images/wrapping.png>
+Package pdftex.def Info: images/wrapping.png used on input line 665.
+(pdftex.def)             Requested size: 199.16928pt x 199.16766pt.
+ <images/extending.png, id=174, 722.7pt x 722.7pt>
 File: images/extending.png Graphic file (type png)
- <use images/extending.png>
-Package pdftex.def Info: images/extending.png used on input line 640.
-(pdftex.def)             Requested size: 199.16928pt x 199.16766pt.
 
-[40 <./images/wrapping.png> <./images/extending.png>]
-<images/FpsInterpolation.png, id=165, 304.13625pt x 114.4275pt>
+<use images/extending.png>
+Package pdftex.def Info: images/extending.png used on input line 671.
+(pdftex.def)             Requested size: 199.16928pt x 199.16766pt.
+ [42 <./images/wrapping.png> <./images/extending.png>] <images/FpsInterpolation
+.png, id=180, 304.13625pt x 114.4275pt>
 File: images/FpsInterpolation.png Graphic file (type png)
 
 <use images/FpsInterpolation.png>
-Package pdftex.def Info: images/FpsInterpolation.png used on input line 661.
+Package pdftex.def Info: images/FpsInterpolation.png used on input line 692.
 (pdftex.def)             Requested size: 199.16928pt x 74.93745pt.
- [41 <./images/FpsInterpolation.png>]
-<images/Interlace.png, id=170, 304.13625pt x 114.4275pt>
+ [43 <./images/FpsInterpolation.png>]
+<images/FpsInterpolationBunny.png, id=184, 386.94562pt x 410.2828pt>
+File: images/FpsInterpolationBunny.png Graphic file (type png)
+
+<use images/FpsInterpolationBunny.png>
+Package pdftex.def Info: images/FpsInterpolationBunny.png used on input line 70
+0.
+(pdftex.def)             Requested size: 284.52756pt x 301.68883pt.
+
+<images/Interlace.png, id=185, 304.13625pt x 114.4275pt>
 File: images/Interlace.png Graphic file (type png)
 
 <use images/Interlace.png>
-Package pdftex.def Info: images/Interlace.png used on input line 672.
+Package pdftex.def Info: images/Interlace.png used on input line 710.
 (pdftex.def)             Requested size: 199.16928pt x 74.93745pt.
- [42 <./images/Interlace.png>]
-Overfull \hbox (43.30023pt too wide) in paragraph at lines 693--693
+ [44 <./images/FpsInterpolationBunny.png>]
+<images/InterlaceBunny.png, id=190, 427.5975pt x 368.87813pt>
+File: images/InterlaceBunny.png Graphic file (type png)
+
+<use images/InterlaceBunny.png>
+Package pdftex.def Info: images/InterlaceBunny.png used on input line 716.
+(pdftex.def)             Requested size: 284.52756pt x 245.45284pt.
+ [45 <./images/Interlace.png> <./images/InterlaceBunny.png>] [46]
+Overfull \hbox (43.30023pt too wide) in paragraph at lines 738--738
 []    \OT4/lmtt/m/n/12 double elapsed_secs = (double(end - begin)/iterations) /
  CLOCKS_PER_SEC;[] 
  []
 
-[43] [44]
-Overfull \hbox (37.12523pt too wide) in paragraph at lines 725--725
+[47] [48]
+Overfull \hbox (37.12523pt too wide) in paragraph at lines 770--770
 []        \OT4/lmtt/m/n/12 tt[t] = std::thread(CalculateFramePararel, inputFram
 e, outputFrame,[] 
  []
 
-[45] [46] [47] [48] [49] [50]
-Underfull \hbox (badness 2790) in paragraph at lines 769--770
+[49] [50] [51] [52] [53] [54]
+Underfull \hbox (badness 2790) in paragraph at lines 814--815
 []\OT1/lmr/m/n/12 Charles Poyn-ton - Vi-deo en-gi-ne-ering, http://poynton.ca/P
 oynton-video-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 770--771
+Underfull \hbox (badness 10000) in paragraph at lines 815--816
 []\OT1/lmr/m/n/12 Cristian Con-stan-tin La-le-scu \OT4/lmr/m/it/12 Two hie-rar-
 chies of spli-ne in-ter-po-la-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 770--771
+Underfull \hbox (badness 10000) in paragraph at lines 815--816
 \OT4/lmr/m/it/12 tions. Prac-ti-cal al-go-ri-thms for mul-ti-va-ria-te hi-gher 
 or-der spli-nes.\OT1/lmr/m/n/12 ,
  []
 
-[51] (przykladInz-utf8.aux) ) 
+[55] (przykladInz-utf8.aux) ) 
 Here is how much of TeX's memory you used:
- 3030 strings out of 493323
- 40232 string characters out of 3139066
- 105834 words of memory out of 3000000
- 6486 multiletter control sequences out of 15000+200000
+ 3067 strings out of 493323
+ 41150 string characters out of 3139066
+ 104901 words of memory out of 3000000
+ 6517 multiletter control sequences out of 15000+200000
  68628 words of font info for 44 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,12n,25p,2476b,307s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -858,9 +906,9 @@ MiKTeX 2.9/fonts/type1/public/lm/lmss17.pfb><C:/Program Files/MiKTeX 2.9/fonts/
 type1/public/lm/lmssbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm
 /lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
-Output written on przykladInz-utf8.pdf (53 pages, 612672 bytes).
+Output written on przykladInz-utf8.pdf (57 pages, 2007310 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
+ 284 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 91 words of extra memory for PDF output out of 10000 (max. 10000000)
 

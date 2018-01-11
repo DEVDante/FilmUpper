@@ -34,22 +34,22 @@
 \contentsline {subsubsection}{\numberline {4.3.3}\kernsubsubsekcyjny FpsEnhancerBase i IFpsEnhancerHeader - tworzenie nowych klatek po\IeC {\'s}rednich}{32}
 \contentsline {section}{\numberline {5}\kernsekcyjny Algorytmy}{35}
 \contentsline {subsection}{\numberline {5.1}\kernsubsekcyjny Ulepszanie pojedynczej klatki}{35}
-\contentsline {subsubsection}{\numberline {5.1.1}\kernsubsubsekcyjny Algorytm najbli\IeC {\.z}szego s\IeC {\k a}siada}{35}
-\contentsline {subsubsection}{\numberline {5.1.2}\kernsubsubsekcyjny Algorytm interpolacji dwuliniowej}{36}
-\contentsline {subsubsection}{\numberline {5.1.3}\kernsubsubsekcyjny Algorytm interpolacji bikubicznej}{38}
-\contentsline {subsubsection}{\numberline {5.1.4}\kernsubsubsekcyjny Algorytm splotu}{38}
-\contentsline {subsubsection}{\numberline {5.1.5}\kernsubsubsekcyjny Normalizacja}{40}
-\contentsline {subsection}{\numberline {5.2}\kernsubsekcyjny Zwi\IeC {\k e}kszanie ilo\IeC {\'s}ci klatek na sekund\IeC {\k e}}{41}
-\contentsline {subsubsection}{\numberline {5.2.1}\kernsubsubsekcyjny Algorytm interpolacji}{41}
-\contentsline {subsubsection}{\numberline {5.2.2}\kernsubsubsekcyjny Algorytm przeplotu}{42}
-\contentsline {section}{\numberline {6}\kernsekcyjny Optymalizacja i testowanie}{43}
-\contentsline {subsection}{\numberline {6.1}\kernsubsekcyjny Procedura testowania i ich organizacja}{43}
-\contentsline {subsection}{\numberline {6.2}\kernsubsekcyjny Optymalizacja algorytm\IeC {\'o}w i uk\IeC {\l }adu danych}{44}
-\contentsline {section}{\numberline {7}\kernsekcyjny Podsumowanie}{47}
-\contentsline {subsection}{\numberline {7.1}\kernsubsekcyjny Napotkane problemy podczas tworzenia projektu}{47}
-\contentsline {subsubsection}{\numberline {7.1.1}\kernsubsubsekcyjny Problemy z wybranymi narz\IeC {\k e}dziami do odczytu i zapisu plik\IeC {\'o}w wideo}{47}
-\contentsline {subsubsection}{\numberline {7.1.2}\kernsubsubsekcyjny Problemy z technologi\IeC {\k a}}{47}
-\contentsline {subsubsection}{\numberline {7.1.3}\kernsubsubsekcyjny Problemy z algorytmami}{48}
-\contentsline {subsection}{\numberline {7.2}\kernsubsekcyjny Mo\IeC {\.z}liwo\IeC {\'s}ci dalszego rozwoju}{48}
-\contentsline {subsection}{\numberline {7.3}\kernsubsekcyjny Wyniki dzia\IeC {\l }ania algorytm\IeC {\'o}w}{49}
-\contentsline {section}{Literatura}{51}
+\contentsline {subsubsection}{\numberline {5.1.1}\kernsubsubsekcyjny Algorytm najbli\IeC {\.z}szego s\IeC {\k a}siada}{36}
+\contentsline {subsubsection}{\numberline {5.1.2}\kernsubsubsekcyjny Algorytm interpolacji dwuliniowej}{37}
+\contentsline {subsubsection}{\numberline {5.1.3}\kernsubsubsekcyjny Algorytm interpolacji bikubicznej}{39}
+\contentsline {subsubsection}{\numberline {5.1.4}\kernsubsubsekcyjny Algorytm splotu}{40}
+\contentsline {subsubsection}{\numberline {5.1.5}\kernsubsubsekcyjny Normalizacja}{42}
+\contentsline {subsection}{\numberline {5.2}\kernsubsekcyjny Zwi\IeC {\k e}kszanie ilo\IeC {\'s}ci klatek na sekund\IeC {\k e}}{43}
+\contentsline {subsubsection}{\numberline {5.2.1}\kernsubsubsekcyjny Algorytm interpolacji}{43}
+\contentsline {subsubsection}{\numberline {5.2.2}\kernsubsubsekcyjny Algorytm przeplotu}{44}
+\contentsline {section}{\numberline {6}\kernsekcyjny Optymalizacja i testowanie}{47}
+\contentsline {subsection}{\numberline {6.1}\kernsubsekcyjny Procedura testowania i ich organizacja}{47}
+\contentsline {subsection}{\numberline {6.2}\kernsubsekcyjny Optymalizacja algorytm\IeC {\'o}w i uk\IeC {\l }adu danych}{48}
+\contentsline {section}{\numberline {7}\kernsekcyjny Podsumowanie}{51}
+\contentsline {subsection}{\numberline {7.1}\kernsubsekcyjny Napotkane problemy podczas tworzenia projektu}{51}
+\contentsline {subsubsection}{\numberline {7.1.1}\kernsubsubsekcyjny Problemy z wybranymi narz\IeC {\k e}dziami do odczytu i zapisu plik\IeC {\'o}w wideo}{51}
+\contentsline {subsubsection}{\numberline {7.1.2}\kernsubsubsekcyjny Problemy z technologi\IeC {\k a}}{51}
+\contentsline {subsubsection}{\numberline {7.1.3}\kernsubsubsekcyjny Problemy z algorytmami}{52}
+\contentsline {subsection}{\numberline {7.2}\kernsubsekcyjny Mo\IeC {\.z}liwo\IeC {\'s}ci dalszego rozwoju}{52}
+\contentsline {subsection}{\numberline {7.3}\kernsubsekcyjny Wyniki dzia\IeC {\l }ania algorytm\IeC {\'o}w}{53}
+\contentsline {section}{Literatura}{55}

@@ -10,6 +10,7 @@
 #include <time.h>
 #include "BiCubicFrameEnhancer.h"
 #include "InterlaceFpsEnhancer.h"
+#include "MaskFrameEnhancer.h"
 
 class TestClassModule {
 public:
@@ -152,13 +153,12 @@ public:
 		FrameEnhancerBase* frameEnhancer;
 		FrameReader *frameReader = new FrameReader("sample.mp4");
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
-		qualityInfo->Width = 1921;
-		qualityInfo->Height = 1080;
-		qualityInfo->FrameRate = new FrameRate(50, 1);
+		qualityInfo->Width = 3840;
+		qualityInfo->Height = 2160;
+		qualityInfo->FrameRate = new FrameRate(25, 1);		
+		frameEnhancer = new InterpolationFrameEnhancer(frameReader, qualityInfo);
+		FpsEnhancerBase* fpsEnhancer = new NOPFpsEnhancer(frameEnhancer, qualityInfo);
 		FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", qualityInfo);
-		frameEnhancer = new BiCubicFrameEnhancer(frameReader, qualityInfo);
-
-		FpsEnhancerBase* fpsEnhancer = new InterpolationFpsEnhancer(frameEnhancer, qualityInfo);
 
 		while (frameReader->AreFramesLeft())
 		{
@@ -175,6 +175,8 @@ public:
 
 		delete frameWriter;
 		delete frameEnhancer;
+		delete fpsEnhancer;
+		delete qualityInfo;
 		delete frameReader;
 	}
 

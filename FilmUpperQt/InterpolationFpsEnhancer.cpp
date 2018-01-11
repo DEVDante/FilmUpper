@@ -34,9 +34,9 @@ VideoFrame * InterpolationFpsEnhancer::InterpolateFrames() const
 	VideoFrame* resultFrame = new VideoFrame(_targetQuality->Height, _targetQuality->Width);
 	for (int verticalIndex = 0; verticalIndex < _targetQuality->Height; ++verticalIndex) {
 		for (int horizontalIndex = 0; horizontalIndex < _targetQuality->Width; ++horizontalIndex) {
-			resultFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3] = VideoFrame::BlendColors(_currentFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3], _nextFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3], _currentFrameCooficiency);
-			resultFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 1] = VideoFrame::BlendColors(_currentFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 1], _nextFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 1], _currentFrameCooficiency);
-			resultFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 2] = VideoFrame::BlendColors(_currentFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 2], _nextFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 2], _currentFrameCooficiency);
+			resultFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3] = VideoFrame::BlendColors(_currentFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3], _nextFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3], 1 - _currentFrameCooficiency);
+			resultFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 1] = VideoFrame::BlendColors(_currentFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 1], _nextFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 1], 1 - _currentFrameCooficiency);
+			resultFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 2] = VideoFrame::BlendColors(_currentFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 2], _nextFrame->Frame[(verticalIndex * _targetQuality->Width + horizontalIndex) * 3 + 2], 1 - _currentFrameCooficiency);
 		}
 	}
 	return resultFrame;

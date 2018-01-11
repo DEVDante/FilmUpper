@@ -526,10 +526,18 @@ Dostarcza ona następującą funkcjonalność:
  - zwraca nowo utworzony obiekt klasy tworzącej pośrednie klatki wideo.
 
 \section{Algorytmy}
-Wykorzystywane przez nas algorytmy dzielą się na dwie poprzednio wyszczególnione kategorie -- przetwarzające pojedynczą klatkę obrazu (FrameEnhancerBase) oraz tworzące nowe klatki pośrednie (FpsEnhancerBase). 
+Wykorzystywane przez nas algorytmy dzielą się na dwie poprzednio wyszczególnione kategorie -- przetwarzające pojedynczą klatkę obrazu (FrameEnhancerBase) oraz tworzące nowe klatki pośrednie (FpsEnhancerBase). Aby przedstawić efekty naszych algorytmów wykorzystaliśmy fragment filmu animowanego ,,Big Buck Bunny''.
 
 \subsection{Ulepszanie pojedynczej klatki}
 Algorytmy te ulepszają jakość klatki wideo na podstawie odpowiednich algorytmów skalowania. Wykorzystane przez nas algorytmy wykorzystują informacje zawarte tylko na klatce źródłowej (nie wykorzystujemy poprzednich lub następnych klatek obrazu). Różnią się one zastosowaniem, złożonością obliczeniową oraz otrzymanym obrazem wynikowym.
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{HandOrginal.png}
+\caption{Fragment klatki źródłowej z filmu}
+\label{fig:handOrginal}
+\end{figure}
+
+Rysunek \ref{fig:handOrginal} przedstawia fragment filmu źródłowego nagranego w rozdzielczości 1280x720. Wykorzystaliśmy nasze algorytmy do przeskalowania filmu do rozdzielczości 3840x2160 i porównaliśmy wybrany fragment.
 
 \subsubsection{Algorytm najbliższego sąsiada}
 Algorytm ten jest najszybszym z wykorzystanych przez nas algorytmów, jednakże sytuacje w których jego wykorzystanie da bardzo dobry efekt nie są liczne. Algorytm ten polega na wyszukaniu najbliższego piksela źródłowego odpowiadającemu aktualnie ustalanemu pikselowi wynikowemu i ustawieniu jego koloru w pikselu wynikowym. Algorytm ten nie posiada żadnego wygładzania krawędzi, przez co obraz wynikowy będzie wyglądał jak złożony z większych pikseli źródłowych. 
@@ -538,18 +546,27 @@ Algorytm ten jest najszybszym z wykorzystanych przez nas algorytmów, jednakże 
 \centering
 \includegraphics[width=7cm]{NN.png}
 \caption{Wyszukiwanie wartości nowego piksela metodą najbliższego sąsiada}
+\label{fig:NNalgo}
 \end{figure}
 
-Na rysunku 1 przedstawiona jest sytuacja w której kolorem zielonym, czerwonym, różowym i niebieskim przedstawione są kolory pikseli z pewnego fragmentu obrazu źródłowego. Czarnym kołem oznaczony został nowy piksel umieszczony w odpowiadającym mu miejscu w źródłowej przestrzeni obrazu. Metoda najbliższego sąsiada dla tego piksela wynikowego wybierze kolor zielony (wskazany strzałką) z uwagi na to, że w przestrzeni źródłowej jest on najbliższy położeniu nowemu pikselowi.
+Na rysunku \ref{fig:NNalgo} przedstawiona jest sytuacja w której kolorem zielonym, czerwonym, różowym i niebieskim przedstawione są kolory pikseli z pewnego fragmentu obrazu źródłowego. Czarnym kołem oznaczony został nowy piksel umieszczony w odpowiadającym mu miejscu w źródłowej przestrzeni obrazu. Metoda najbliższego sąsiada dla tego piksela wynikowego wybierze kolor zielony (wskazany strzałką) z uwagi na to, że w przestrzeni źródłowej jest on najbliższy położeniu nowemu pikselowi.
 
 Algorytm ten można stosować z powodzeniem w skalowaniu filmów o charakterystyce tak zwanego "pixel art". Jest to stylistyka wzorująca się na wyglądzie gier komputerowych z czasów, gdy dominowały platformy ośmiobitowe. Styl ten charakteryzuje się widocznymi pojedynczymi pikselami, przez co wygładzanie przejść między pikselami wynikowymi w innych algorytmach jest efektem niepożądanym. Jest to natomiast idealna sytuacja na zastosowanie algorytmu najbliższego sąsiada, jako że ten akcentuje każdy piksel powiększając go w obrazie wynikowym.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{HandNN.png}
+\caption{Wybrany fragment przetworzony algorytmem najbliższego sąsiada}
+\label{fig:handNN}
+\end{figure}
+
 
 \subsubsection{Algorytm interpolacji dwuliniowej}
 Algorytm interpolacji dwuliniowej polega na obliczeniu wynikowej wartości koloru na podstawie 4 pikseli otaczających.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=7cm]{Interpolation1.png}
+\includegraphics[width=6cm]{Interpolation1.png}
 \caption{Nowy piksel w przestrzeni obrazu źródłowego}
 \end{figure}
 
@@ -557,7 +574,7 @@ Aby obliczyć wartość koloru nowo utworzonego piksela algorytm interpolacji dw
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=7cm]{Interpolation2.png}
+\includegraphics[width=6cm]{Interpolation2.png}
 \caption{Obliczenie wartości kolorów pośrednich}
 \end{figure}
 
@@ -565,11 +582,18 @@ Dzięki temu, otrzymane przez nas nowe piksele pośrednie znajdują się w jedne
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=7cm]{Interpolation3.png}
+\includegraphics[width=6cm]{Interpolation3.png}
 \caption{Obliczenie wartości koloru piksela wynikowego na podstawie kolorów pośrednich}
 \end{figure}
 
 Algorytm ten jest nie jest skomplikowany obliczeniowo, ale jest zauważalnie wolniejszy od algorytmu najbliższego sąsiada. Dzięki swoim właściwością, bardzo dobrze wygładza przejścia między pikselami, przez co ma szeroką gamę zastosowań.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{HandInterpolation.png}
+\caption{Wybrany fragment przetworzony algorytmem interpolacji dwuliniowej}
+\label{fig:handInterpolation}
+\end{figure}
 
 \subsubsection{Algorytm interpolacji bikubicznej}
 Algorytm ten jest najbardziej skomplikowanym obliczeniowo algorytmem jaki zaimplementowaliśmy. Korzysta on z krzywych obliczanych na podstawie macierzy pikseli rozmiaru 4 na 4. Podobnie jak w interpolacji obliczane są wartości kolorów pikseli pośrednich obliczanych dla kolejnych wierszy macierzy dzięki którym obliczany jest splajn zgodny ze wzorem Catmulla-Roma:
@@ -597,6 +621,13 @@ $
 gdzie $u$ jest stosunkiem umiejscowienia nowego punktu na splajnie, a punkty $p_x$ są kolejnymi punktami z macierzy tworzącymi splain.
 
 Obliczone na podstawie powyższego wzoru punkty wykorzystujemy do obliczenia ostatecznej krzywej która w miejscu przecięcia się z punktem końcowym daje nam ostateczną wartość koloru. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{HandBiCubic.png}
+\caption{Wybrany fragment przetworzony algorytmem interpolacji bi-kubicznej}
+\label{fig:handBiCubic}
+\end{figure}
 
 \subsubsection{Algorytm splotu}
 Algorytm splotu oblicza wartość piksela obrazu docelowego jako sumę wartości piksela znajdującego się na tej samej pozycji oraz wartości pikseli sąsiadujących z nim przemnożonych przez wartości macierzy $MxM$ zwanej maską lub kernelem. Działanie to można zapisać w następujący sposób: 
@@ -664,6 +695,13 @@ Algorytm interpolacji polega na tym, że klatki pośrednie tworzone są na podst
 
 W szybko zmieniających się, dynamicznych scenach efekt ten może być widoczny jako wyraźne rozmycie, jednakże przy scenach na których nie ma gwałtownych zmian poprawia on płynność obrazu bez widzialnego negatywnego efektu.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{FpsInterpolationBunny.png}
+\caption{Fragment klatki pośredniej wytworzonej algorytmem interpolacji}
+\label{fig:fpsIntBunny}
+\end{figure}
+
 \subsubsection{Algorytm przeplotu}
 Algorytm przeplotu polega na oszukiwaniu ludzkiego oka poprzez wyświetlanie tylko połowy nowych linii. Wynikiem takiego algorytmu jest film z podwojoną ilością klatek na sekundę. Powinien on być stosowany tylko dla obrazów mających stosunkowo dużą ilość klatek na sekundę z uwagi na to, że im mniejsza jest ilość klatek na sekundę tym bardziej przeplot jest widoczny. Algorytm ten stosowano już w telewizji analogowej z uwagi na niską prędkość przesyłu oraz migotanie ekranu przy wyświetlaniu obrazu w 24 lub 30(29,97) klatkach na sekundę (odpowiednio standardy PAL oraz NTSC). Naprzemienne aktualizowanie wartości wierszy nieparzystych i parzystych obrazu przy odpowiedniej szybkości wyświetlania zwiększa wrażenie płynności obrazu, jednakże im mniejsza jest źródłowa ilość klatek na sekundę tym bardziej widoczny jest przeplot.
 
@@ -671,6 +709,13 @@ Algorytm przeplotu polega na oszukiwaniu ludzkiego oka poprzez wyświetlanie tyl
 \centering
 \includegraphics[width=7cm]{Interlace.png}
 \caption{Tworzenie klatek pośrednich przy użyciu algorytmu przeplotu}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{InterlaceBunny.png}
+\caption{Fragment klatki pośredniej wytworzonej algorytmem przeplotu}
+\label{fig:fpsInterlace}
 \end{figure}
 
 \section{Optymalizacja i testowanie}
@@ -759,7 +804,7 @@ Interfejs graficzny wzbogacić można by w obsługę wieku języków.
 \subsection{Wyniki działania algorytmów}
 Wyniki działania algorytmów jakie otrzymaliśmy były bliskie wynikom jakich się spodziewaliśmy. W przypadku stosunkowo niewielkiego zwiększania rozmiaru pojedynczej klatki i dużej źródłowej rozdzielczości przetwarzanych przez nas plików nie zauważyliśmy znaczących różnic między poszczególnymi algorytmami. Różnica była widoczna po bliższym przyjrzeniu się między algorytmem najbliższego sąsiada a resztą zaimplementowanych algorytmów. Różnica jakości klatki wynikowej między algorytmem interpolacji dwuliniowej a bi-kubicznej nie była widoczna. Według nas, algorytm interpolacji bi-kubicznej przez bardzo długi czas obliczeń oraz znikomą różnicę od znacznie szybszego algorytmu interpolacji dwuliniowej, nie jest on algorytmem godnym polecenia.
 
-Algorytmy zmieniające ilość klatek na sekundę także zwracały wyniki bliskie oczekiwanym. W trakcie dynamicznych scen gdzie występują gwałtowne ruchy postaci wytworzone klatki pośrednie były mocno widoczne w przypadku algorytmu interpolacji. W przypadku mniej dynamicznych scen, gdzie występują delikatne ruchy postaci klatki pośrednie nie są wyraźnie widoczne a wrażenie większej płynności obrazu jest zauważalne. W przypadku algorytmu przeplotu efekt jest bardzo delikatnie widoczny, a wytworzone klatki pośrednie nie są wyraźnie widoczne. Oba algorytmy mają swoje zastosowania, jednakże algorytm interpolacji powinien być stosowany tylko w odpowiednich warunkach.
+Algorytmy zmieniające ilość klatek na sekundę także zwracały wyniki bliskie oczekiwanym. W trakcie dynamicznych scen gdzie występują gwałtowne ruchy postaci wytworzone klatki pośrednie były lekko widoczne w przypadku algorytmu interpolacji. W przypadku mniej dynamicznych scen, gdzie występują delikatne ruchy postaci klatki pośrednie nie są  widoczne a wrażenie większej płynności obrazu jest zauważalne. W przypadku algorytmu przeplotu efekt jest bardzo delikatnie widoczny, a wytworzone klatki pośrednie nie są wyraźnie widoczne. Oba algorytmy mają swoje zastosowania, jednakże algorytm interpolacji powinien być stosowany w mniej dynamicznych scenach, ale efekt z jego użycia będzie bardziej odczuwalny.
 
 
 
