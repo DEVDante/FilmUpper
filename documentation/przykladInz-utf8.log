@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.7)  11 JAN 2018 11:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.7)  11 JAN 2018 11:51
 entering extended mode
 **./przykladInz-utf8.tex
 (przykladInz-utf8.tex
@@ -863,54 +863,62 @@ e, outputFrame,[]
  []
 
 [49] [50] [51] [52] [53] [54]
-Underfull \hbox (badness 2790) in paragraph at lines 814--815
-[]\OT1/lmr/m/n/12 Charles Poyn-ton - Vi-deo en-gi-ne-ering, http://poynton.ca/P
-oynton-video-
+Underfull \hbox (badness 10000) in paragraph at lines 820--821
+[]\OT1/lmr/m/n/12 Interpolacja w prze-twa-rza-niu da-nych wie-lo-wy-mia-ro-wych
+,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 815--816
+Underfull \hbox (badness 10000) in paragraph at lines 820--821
+\OT1/lmr/m/n/12 https://en.wikipedia.org/wiki/Multivariate[]interpolation [do-s
+t¦p-ne:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 821--822
 []\OT1/lmr/m/n/12 Cristian Con-stan-tin La-le-scu, \OT4/lmr/m/it/12 Two hie-rar
 -chies of spli-ne in-ter-po-la-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 815--816
+Underfull \hbox (badness 10000) in paragraph at lines 821--822
 \OT4/lmr/m/it/12 tions. Prac-ti-cal al-go-ri-thms for mul-ti-va-ria-te hi-gher 
 or-der spli-nes.\OT1/lmr/m/n/12 ,
  []
 
-[55] (przykladInz-utf8.aux)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+Underfull \hbox (badness 2790) in paragraph at lines 822--823
+[]\OT1/lmr/m/n/12 Charles Poyn-ton - Vi-deo en-gi-ne-ering, http://poynton.ca/P
+oynton-video-
+ []
 
- ) 
+[55] (przykladInz-utf8.aux) ) 
 Here is how much of TeX's memory you used:
  3073 strings out of 493323
  41227 string characters out of 3139066
- 104916 words of memory out of 3000000
+ 104919 words of memory out of 3000000
  6523 multiletter control sequences out of 15000+200000
  68628 words of font info for 44 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,12n,25p,2476b,307s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Fil
-es/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX 2.9/fon
-ts/enc/dvips/lm/lm-rmtt.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-
-mathex.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}<C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/lm/lmbxi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/lm/lmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmmi12.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmmi8.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/l
-mr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/lm/lmro12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/lm/lmss17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/lm/lmtt12.pfb>
-Output written on przykladInz-utf8.pdf (57 pages, 2010296 bytes).
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm
+-mathsy.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/P
+rogram Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Program Files/MiKTeX
+ 2.9/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dv
+ips/lm/lm-rm.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbxi10.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/lm/lmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm
+/lmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
+lic/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmro12.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/lm/lmss17.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/lm/lmssbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm
+/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
+Output written on przykladInz-utf8.pdf (57 pages, 2010332 bytes).
 PDF statistics:
  284 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
