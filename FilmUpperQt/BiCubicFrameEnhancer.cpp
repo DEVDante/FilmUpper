@@ -25,10 +25,7 @@ VideoFrame * BiCubicFrameEnhancer::ReadNextEnhancedFrame()
 		return nullptr;
 	}
 
-	if (_inputFrameStream->AreFramesLeft())
-		_framePrefetch = std::thread(PrefetchFrame, _inputFrameStream, _nextFrame);
-	else
-		_framesLeft = false;
+	_framePrefetch = std::thread(PrefetchFrame, _inputFrameStream, _nextFrame);
 
 	for (int t = 0; t < threads; ++t)
 	{

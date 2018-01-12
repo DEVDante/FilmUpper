@@ -155,12 +155,12 @@ public:
 		FilmQualityInfo* qualityInfo = new FilmQualityInfo();
 		qualityInfo->Width = 1920;
 		qualityInfo->Height = 1080;
-		qualityInfo->FrameRate = new FrameRate(50, 1);		
+		qualityInfo->FrameRate = new FrameRate(60, 1);		
 		frameEnhancer = new BiCubicFrameEnhancer(frameReader, qualityInfo);
 		FpsEnhancerBase* fpsEnhancer = new InterlaceFpsEnhancer(frameEnhancer, qualityInfo);
 		FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", qualityInfo);
 
-		while (frameReader->AreFramesLeft())
+		while (fpsEnhancer->AreFramesLeft())
 		{
 			//frameWriter->WriteFrame(frameEnhancer->ReadNextEnhancedFrame());
 			auto fr = fpsEnhancer->ReadNextFrame();

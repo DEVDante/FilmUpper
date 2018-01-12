@@ -6,13 +6,14 @@ InterpolationFpsEnhancer::InterpolationFpsEnhancer(FrameEnhancerBase * frameEnha
 	_currentFrame = _frameEnhancer->ReadNextEnhancedFrame();
 	_nextFrame = _frameEnhancer->ReadNextEnhancedFrame();
 	_currentFrameCooficiency = 0;
+	_framesLeft = true;
 
 	_nextFramePrefetch = new VFHack;
 	_framePrefetch = std::thread(PrefetchFrame, _frameEnhancer, _nextFramePrefetch);
 }
 
 VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
-	if (_nextFrame == nullptr)
+	if (!_framesLeft)
 		return nullptr;
 	if (_currentFrameCooficiency > 1)
 	{
@@ -37,6 +38,11 @@ VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
 InterpolationFpsEnhancer::~InterpolationFpsEnhancer()
 {
 	delete _nextFramePrefetch;
+}
+
+bool InterpolationFpsEnhancer::AreFramesLeft()
+{
+	return _framesLeft;
 }
 
 VideoFrame * InterpolationFpsEnhancer::InterpolateFrames() const

@@ -14,7 +14,7 @@ public:
 	
 	uint8_t* Frame;
 
-	static int BlendColors(int leftColor, int rightColor, double blendRatio) {
+	static inline int BlendColors(int leftColor, int rightColor, double blendRatio) {
 		return (int)(((double)leftColor * blendRatio) + ((double)rightColor * (1 - blendRatio)));
 	}
 

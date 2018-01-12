@@ -25,8 +25,27 @@ FilmUpperController::~FilmUpperController() {
 	
 }
 
-int FilmUpperController::startProcess(std::string filePath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality)
+int FilmUpperController::startProcess(std::string fileSourcePath, std::string fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality)
 {
-	std::cout << "Start Process";
-	return 1;
+	FrameReader *frameReader = new FrameReader(fileSourcePath);
+	FrameEnhancerBase* frameEnhancer = frameEnhancerHeader->Enhancer(frameReader, targetQuality);
+	FpsEnhancerBase* fpsEnhancer = fpsEnhancerHeader->GetFpsEnhancer(frameEnhancer, targetQuality);
+	FrameWriter *frameWriter = new FrameWriter(fileTargetPath, "avi", targetQuality);
+
+	while (fpsEnhancer->AreFramesLeft())
+	{
+		auto fr = fpsEnhancer->ReadNextFrame();
+		if (fr == nullptr)
+			break;
+		frameWriter->WriteFrame(fr);
+		//Update gui
+	}	
+
+	delete frameWriter;
+	delete frameEnhancer;
+	delete fpsEnhancer;
+	delete targetQuality;
+	delete frameReader;
+
+	return 0;
 }

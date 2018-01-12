@@ -8,7 +8,7 @@ class FilmUpperController {
 public:
 	FilmUpperController();
 	~FilmUpperController();
-	int startProcess(std::string filePath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality);
+	int startProcess(std::string fileSourcePath, std::string fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality);
 	std::vector<IFrameEnhancerHeader*> FrameEnhancerHeaders;
 	std::vector<IFpsEnhancerHeader*> FpsEnhancerHeaders;
 };
