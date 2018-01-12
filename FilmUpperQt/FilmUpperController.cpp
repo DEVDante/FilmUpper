@@ -32,12 +32,24 @@ int FilmUpperController::startProcess(std::string fileSourcePath, std::string fi
 	FpsEnhancerBase* fpsEnhancer = fpsEnhancerHeader->GetFpsEnhancer(frameEnhancer, targetQuality);
 	FrameWriter *frameWriter = new FrameWriter(fileTargetPath, "avi", targetQuality);
 
+	double targetFps = targetQuality->FrameRate->getNumericalRate();
+	long seconds = 0;
+	int frames = 0;
+
 	while (fpsEnhancer->AreFramesLeft())
 	{
 		auto fr = fpsEnhancer->ReadNextFrame();
 		if (fr == nullptr)
 			break;
 		frameWriter->WriteFrame(fr);
+
+		++frames;
+		if(frames > targetFps)
+		{
+			frames -= targetFps;
+			++seconds;
+		}
+
 		//Update gui
 	}	
 
