@@ -11,6 +11,7 @@ public:
 	BiCubicFrameEnhancer(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo);
 	VideoFrame * ReadNextEnhancedFrame() override;
 	bool AreFramesLeft() override;
+	~BiCubicFrameEnhancer() override;
 private:
 	void static CalculateFramePararel(VideoFrame* input, VideoFrame* output, int startRow, int endRow, FilmQualityInfo* sourceQ, FilmQualityInfo* targetQ);
 	void static PrefetchFrame(IFrameReader* frameReader, VFHack* vf);
@@ -18,4 +19,6 @@ private:
 	VFHack* _nextFrame;
 	bool _framesLeft = true;
 	inline static int calculateSplain(int a, int b, int c, int d, double ratio);
+	std::thread *threadPoll;
+	int threads = 4;
 };

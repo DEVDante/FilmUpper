@@ -6,6 +6,10 @@ InterpolationFrameEnhancer::InterpolationFrameEnhancer(IFrameReader * inputFrame
 {
 	_nextFrame = new VFHack;
 	_framePrefetch = std::thread(PrefetchFrame, inputFrameReader, _nextFrame);
+
+	threads = (std::thread::hardware_concurrency() / 2) + 1;
+
+	threadPoll = new std::thread[threads];
 }
 
 VideoFrame * InterpolationFrameEnhancer::ReadNextEnhancedFrame()
@@ -24,20 +28,16 @@ VideoFrame * InterpolationFrameEnhancer::ReadNextEnhancedFrame()
 	if (_inputFrameStream->AreFramesLeft())
 		_framePrefetch = std::thread(PrefetchFrame, _inputFrameStream, _nextFrame);
 	else
-		_framesLeft = false;
-
-	int threads = 4;
-
-	std::thread *tt = new std::thread[threads];
+		_framesLeft = false;	 
 
 	for (int t = 0; t < threads; ++t)
 	{
-		tt[t] = std::thread(CalculateFramePararel, inputFrame, outputFrame, (_targetQualityInfo->Height / threads) * t, (_targetQualityInfo->Height / threads) * (t + 1), _sourceQualityInfo, _targetQualityInfo);
+		threadPoll[t] = std::thread(CalculateFramePararel, inputFrame, outputFrame, (_targetQualityInfo->Height / threads) * t, (_targetQualityInfo->Height / threads) * (t + 1), _sourceQualityInfo, _targetQualityInfo);
 	}
 
 	for (int t = 0; t < threads; ++t)
 	{
-		tt[t].join();
+		threadPoll[t].join();
 	}
 
 	delete inputFrame;
@@ -47,6 +47,12 @@ VideoFrame * InterpolationFrameEnhancer::ReadNextEnhancedFrame()
 bool InterpolationFrameEnhancer::AreFramesLeft()
 {
 	return _framesLeft;
+}
+
+InterpolationFrameEnhancer::~InterpolationFrameEnhancer()
+{
+	delete[] threadPoll;
+	delete _nextFrame;
 }
 
 void InterpolationFrameEnhancer::PrefetchFrame(IFrameReader* frameReader, VFHack* vf)

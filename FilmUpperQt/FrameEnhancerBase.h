@@ -11,6 +11,10 @@ protected:
 
 
 public:
+	virtual ~FrameEnhancerBase()
+	{
+	}
+
 	FrameEnhancerBase(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo) {
 		_inputFrameStream = inputFrameReader;
 		_targetQualityInfo = targetQualityInfo;
