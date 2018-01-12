@@ -8,6 +8,10 @@ protected:
 	FilmQualityInfo* _targetQuality;
 	FilmQualityInfo* _sourceQuality;
 public:
+	virtual ~FpsEnhancerBase()
+	{
+	}
+
 	FpsEnhancerBase(FrameEnhancerBase* frameEnhancer, FilmQualityInfo* targetQuality) {
 		_frameEnhancer = frameEnhancer;
 		_targetQuality = targetQuality;

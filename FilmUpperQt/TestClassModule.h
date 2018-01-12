@@ -156,8 +156,8 @@ public:
 		qualityInfo->Width = 1920;
 		qualityInfo->Height = 1080;
 		qualityInfo->FrameRate = new FrameRate(50, 1);		
-		frameEnhancer = new NNFrameEnhancer(frameReader, qualityInfo);
-		FpsEnhancerBase* fpsEnhancer = new InterpolationFpsEnhancer(frameEnhancer, qualityInfo);
+		frameEnhancer = new BiCubicFrameEnhancer(frameReader, qualityInfo);
+		FpsEnhancerBase* fpsEnhancer = new InterlaceFpsEnhancer(frameEnhancer, qualityInfo);
 		FrameWriter *frameWriter = new FrameWriter("out.avi", "avi", qualityInfo);
 
 		while (frameReader->AreFramesLeft())

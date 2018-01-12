@@ -1,11 +1,15 @@
 #pragma once
 #include "FpsEnhancerBase.h"
+#include "FrameEnhancerBase.h"
 #include "VideoFrame.h"
+#include "VFHack.h"
+#include <thread>
 
 class InterpolationFpsEnhancer : public FpsEnhancerBase {
 public:
 	InterpolationFpsEnhancer(FrameEnhancerBase* frameEnhancer, FilmQualityInfo* qualityInfo);
 	VideoFrame * ReadNextFrame() override;
+	~InterpolationFpsEnhancer() override;
 private:
 	VideoFrame* _currentFrame = nullptr;
 	VideoFrame* _nextFrame = nullptr;
@@ -13,4 +17,7 @@ private:
 	double _nextFrameDelta = 0.0f;
 	VideoFrame* InterpolateFrames() const;
 	bool _framesLeft;
+	void static PrefetchFrame(FrameEnhancerBase* frameEnhancer, VFHack* vf);
+	std::thread _framePrefetch;
+	VFHack* _nextFramePrefetch;
 };

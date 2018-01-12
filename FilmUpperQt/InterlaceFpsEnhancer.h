@@ -1,5 +1,7 @@
 #pragma once
 #include "FpsEnhancerBase.h"
+#include "VFHack.h"
+#include <thread>
 
 class InterlaceFpsEnhancer: public FpsEnhancerBase
 {
@@ -8,14 +10,15 @@ public:
 
 	bool AreFramesLeft() override;
 
-	InterlaceFpsEnhancer(FrameEnhancerBase* frameEnhancer, FilmQualityInfo* targetQuality)
-		: FpsEnhancerBase(frameEnhancer, targetQuality)
-	{
-		_lastFrame = _frameEnhancer->ReadNextEnhancedFrame();;
-	}
+	InterlaceFpsEnhancer(FrameEnhancerBase* frameEnhancer, FilmQualityInfo* targetQuality);
+	~InterlaceFpsEnhancer();
+
 private:
-	bool _wasLastFrameEven = false;
+	bool _wasLastFrameOdd = false;
 	VideoFrame* _lastFrame = nullptr;
 	VideoFrame* InterlaceFrame();
 	bool _framesLeft = true;
+	void static PrefetchFrame(FrameEnhancerBase* frameEnhancer, VFHack* vf);
+	std::thread _framePrefetch;
+	VFHack* _nextFramePrefetch;
 };

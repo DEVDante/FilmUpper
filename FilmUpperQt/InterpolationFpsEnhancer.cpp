@@ -6,6 +6,9 @@ InterpolationFpsEnhancer::InterpolationFpsEnhancer(FrameEnhancerBase * frameEnha
 	_currentFrame = _frameEnhancer->ReadNextEnhancedFrame();
 	_nextFrame = _frameEnhancer->ReadNextEnhancedFrame();
 	_currentFrameCooficiency = 0;
+
+	_nextFramePrefetch = new VFHack;
+	_framePrefetch = std::thread(PrefetchFrame, _frameEnhancer, _nextFramePrefetch);
 }
 
 VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
@@ -15,18 +18,25 @@ VideoFrame* InterpolationFpsEnhancer::ReadNextFrame() {
 	{
 		delete _currentFrame;
 		_currentFrame = _nextFrame;
-		_nextFrame = _frameEnhancer->ReadNextEnhancedFrame();
+		_framePrefetch.join();
+		_nextFrame = _nextFramePrefetch->Frame;
 		if(_nextFrame == nullptr)
 		{
 			_framesLeft = false;
 			return _currentFrame;
 		}
+		_framePrefetch = std::thread(PrefetchFrame, _frameEnhancer, _nextFramePrefetch);
 		_currentFrameCooficiency -= 1;
 	}
 	
 	VideoFrame* resultFrame = InterpolateFrames();
 	_currentFrameCooficiency += _nextFrameDelta;
 	return resultFrame;
+}
+
+InterpolationFpsEnhancer::~InterpolationFpsEnhancer()
+{
+	delete _nextFramePrefetch;
 }
 
 VideoFrame * InterpolationFpsEnhancer::InterpolateFrames() const
@@ -40,4 +50,9 @@ VideoFrame * InterpolationFpsEnhancer::InterpolateFrames() const
 		}
 	}
 	return resultFrame;
+}
+
+void InterpolationFpsEnhancer::PrefetchFrame(FrameEnhancerBase* frameEnhancer, VFHack * vf)
+{
+	vf->Frame = frameEnhancer->ReadNextEnhancedFrame();
 }
