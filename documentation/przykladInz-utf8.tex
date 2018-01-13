@@ -44,20 +44,20 @@
 
 \begin{document}
 
-Od końca dziewiętnastego wieku sztuka filmowa towarzyszyła człowiekowi. Uważany za pierwszy film pokazany publicznie, stworzony przez braci Lumière  film ,,Wyjście robotników z fabryki'' trwał 46 sekund przy 16 klatkach na sekundę o stosunku klatki 1.33:1. Od tamtej pory ludzkość przeszła proces cyfryzacji, zmieniały się aspekty ekranów i kręconych filmów (standardowe w telewizorach kineskopowych 4:3, współczesne 16:9 a także szerokoekranowe 21:9). Zmianą podlegał także aspekt prędkości wyświetlanych klatek na sekundę, które dzisiaj najczęściej wynoszą 25, 30, 50 oraz 60 klatek na sekundę. Obsługiwane są także standardy pozwalające na wyświetlanie nawet 300 klatek na sekundę.
+Od końca dziewiętnastego wieku sztuka filmowa towarzyszyła człowiekowi. Uważany za pierwszy film pokazany publicznie, stworzony przez braci Lumière  film ,,Wyjście robotników z fabryki'' trwał 46 sekund przy 16 klatkach na sekundę o stosunku wysokości do szerokości klatki 1.33:1. Od tamtej pory ludzkość przeszła proces cyfryzacji, zmieniały się proporcje ekranów i kręconych filmów (standardowe w telewizorach kineskopowych 4:3, współczesne 16:9 a także szerokoekranowe 21:9). Zmianą podlegała także prędkości wyświetlanych klatek na sekundę, które dzisiaj najczęściej wynoszą 25, 30, 50 oraz 60 klatek na sekundę. Obsługiwane są także standardy pozwalające na wyświetlanie nawet 300 klatek na sekundę.
 
-Celem naszej aplikacji jest możliwość zapewnienia prostego narzędzia umożliwiającego większej liczbie ludzi ulepszenia jakości posiadanych przez nich filmów. Poprzez implementację i dostarczenie użytkownikowi zbioru algorytmów wraz z opisami, będzie on w stanie zmienić rozdzielczość filmu ulepszając przy tym jego jakość w zależności od użytego algorytmu. Będzie mógł on także zwiększyć ilość klatek na sekundę w filmie, przez co oglądany przez niego obraz zyska na wrażeniu płynności. Żaden z tych algorytmów nie da wyglądu jaki posiadałby oryginał kręcony w docelowej jakości, jednakże różnica między filmem nieprzetworzonym a ulepszonym przez nasz program będzie zauważalna.
+Celem naszej aplikacji jest możliwość zapewnienia prostego narzędzia umożliwiającego ulepszanie jakości filmów. Poprzez implementację i dostarczenie użytkownikowi zbioru algorytmów wraz z opisami, będzie on w stanie zmienić rozdzielczość filmu ulepszając przy tym jego jakość w zależności od użytego algorytmu. Będzie mógł on także zwiększyć ilość klatek na sekundę w filmie, przez co oglądany przez niego obraz zyska na wrażeniu płynności. Żaden z tych algorytmów nie da wyglądu jaki posiadałby oryginał kręcony w docelowej jakości, jednakże różnica między filmem nieprzetworzonym a ulepszonym przez nasz program będzie zauważalna.
 
-Aby sprostać założeniom projektu musieliśmy rozważyć różne jego aspekty zaczynając od technologii i języka programowania poprzez strukturę programu w jakiej chcemy pracować finalnie kończąc na algorytmach które chcieliśmy zaimplementować.
+Aby sprostać założeniom projektu musieliśmy rozważyć różne jego aspekty zaczynając od technologii i języka programowania poprzez strukturę programu w jakiej chcemy pracować finalnie kończąc na algorytmach, które chcieliśmy zaimplementować.
 
 
 \section{Technologia i język programowania}
 
 
-Przetwarzanie plików filmowych nawet w przypadku zastosowania najłatwiejszych algorytmów sposób jest zadaniem bardzo wymagającym pod względem wydajnościowym, dlatego wybór technologii ma kluczowe znaczenie, gdyż wpływa na wydajność całej aplikacji. Należy zwrócić uwagę na wiele czynników które mogą wpłynąć na działanie programu jak również na sposób jego implementacji.
+Przetwarzanie plików filmowych nawet w przypadku zastosowania najłatwiejszych algorytmów jest zadaniem bardzo wymagającym pod względem wydajnościowym, dlatego wybór technologii ma kluczowe znaczenie, gdyż wpływa na wydajność całej aplikacji. Należy zwrócić uwagę na wiele czynników, które mogą wpłynąć na działanie programu jak również na sposób jego implementacji.
 
 \subsection{Biblioteka do dekodowania oraz kodowania plików wideo}
-Od wyboru narzędzi do dekodowania/kodowania zależało powodzenie wykonania przez nas projektu. Szukając dostępnych rozwiązań pozwalających na wykonywanie tychże czynności zwracaliśmy szczególną uwagę na ich szybkość, niezawodność i opinie społeczności. W ostatecznym rozrachunku pod uwagę braliśmy następujące biblioteki programistyczne.
+Od wyboru narzędzi do dekodowania/kodowania zależało powodzenie wykonania przez nas projektu. Szukając dostępnych rozwiązań pozwalających na wykonywanie tychże czynności zwracaliśmy szczególną uwagę na ich szybkość, niezawodność i opinie społeczności. W ostatecznym rozrachunku pod uwagę braliśmy opisane poniżej biblioteki programistyczne.
 \subsubsection{FFmpeg / libav}
 Narzędzia oraz biblioteki \emph{FFmpeg} (czy też \emph{libav} będącym jej odgałęzieniem) są jednymi z najbardziej popularnych otwartych oprogramowań służących do dekodowania, kodowania oraz manipulacji plikami multimedialnymi. Posiadają one zbiór powszechnie używanych kodeków audio i wideo. Biblioteki te napisane są w języku C. 
 \subsubsection{OpenCV}
@@ -93,16 +93,16 @@ Wybór właściwego języka programowania jest dla nas zadaniem kluczowym, ze wz
 Język C++ jest jednym z najczęściej używanych języków niskopoziomowych. Jego popularność jest skutkiem bardzo długiego czasu na rynku oraz pewnej prostoty użycia. Kolejne wersje tego wciąż rozwijającego się języka dodają nowe, sprawdzone i ułatwiające tworzenie programów rozwiązania z innych języków programowania. Bardzo duża wydajność oraz mnogość dostępnych bibliotek związanych z dekodowaniem i enkodowaniem plików filmowych jest bardzo ważnym aspektem tego wyboru. Wybór ten wiąże się także z kilkoma negatywnymi cechami tego języka, wymóg ręcznego zarządzania pamięcią, mało przejrzysta składnia przy tworzeniu rozwiązań o dużym stopniu skomplikowania, mało czytelne komunikaty odnośnie błędów podczas kompilacji i działania programu oraz brak ułatwień które poznaliśmy w językach wysokopoziomowych są jednymi z nich. 
 
 \subsubsection{C\#}
-Wysokopoziomowe rozwinięcie języka z rodziny C. Mimo posiadania składni podobnej do C++, język ten porzuca wiele z nieprzyjemnych jego aspektów. Poprzez automatyczne zarządzanie pamięcią, usunięcie składni charakterystycznej dla wskaźników oraz dodanie wielu nowych mechanizmów, wygląd kodu oraz prędkość tworzenia programów znacząco wzrasta. Bardzo ważnym składnikiem C\# jest także LINQ które umożliwia bardzo kompaktowe i przejrzyste działanie na kolekcjach co jest dużym plusem przy przetwarzaniu plików wideo, jako że są one kolekcjami pojedynczych klatek złożonych z kolekcji pikseli. Wszystkie z tych udogodnień mają jednak cenę w postaci mniejszej wydajności w stosunku do C++ oraz brak wystarczającego wsparcia dla zarządzania plikami wideo jako że język ten jest stworzony z myślą o szybkim tworzeniu aplikacji biurowych. 
+Wysokopoziomowe rozwinięcie języka z rodziny C. Mimo posiadania składni podobnej do C++, język ten porzuca wiele z nieprzyjemnych jego aspektów. Poprzez automatyczne zarządzanie pamięcią, usunięcie składni charakterystycznej dla wskaźników oraz dodanie wielu nowych mechanizmów, wygląd kodu oraz prędkość tworzenia programów znacząco wzrasta. Bardzo ważnym składnikiem C\# jest także LINQ które umożliwia bardzo kompaktowe i przejrzyste działanie na kolekcjach co jest dużym plusem przy przetwarzaniu plików wideo, jako że są one kolekcjami pojedynczych klatek złożonych z kolekcji pikseli. Wszystkie z tych udogodnień mają jednak cenę w postaci mniejszej wydajności w stosunku do C++ oraz brak wystarczającego wsparcia dla zarządzania plikami wideo jako że język ten jest stworzony z myślą o szybkim tworzeniu aplikacji biznesowych. 
 
 \subsubsection{Rust}
-Prędkość działania porównywalna z językiem C++, duże bezpieczeństwo pod względem zarządzania pamięcią, łatwość w konwersji programu jednowątkowego na wielowątkowy, składnia języka oraz wiele udogodnień zaciągniętych z języków wysokiego poziomu. To jedne z wielu punktów które zachęcały do wyboru tego języka. Niestety, z uwagi na to, że jest to język stosunkowo młody zauważalny jest brak lub wczesna wersja bibliotek umożliwiających przyjemną pracę na plikach filmowych. Jest to także język z którym nie mamy dużego doświadczenia.
+Prędkość działania porównywalna z językiem C++, duże bezpieczeństwo pod względem zarządzania pamięcią, łatwość w konwersji programu jednowątkowego na wielowątkowy, składnia języka oraz wiele udogodnień zaczerpniętych z języków wysokiego poziomu. To jedne z wielu punktów, które zachęcały do wyboru tego języka. Niestety, z uwagi na to, że jest to język stosunkowo młody zauważalny jest brak lub wczesna wersja bibliotek umożliwiających przyjemną pracę na plikach filmowych. Jest to także język z którym nie mamy dużego doświadczenia.
 
 \subsubsection{Python}
-Python mimo bycia językiem wysokopoziomowym ma duże możliwości w przetwarzaniu ogromnych ilości danych dzięki bibliotece numpy. Jest to bardzo szybka biblioteka zaimplementowana w języku niskiego poziomu. Mieliśmy także styczności z tym językiem podczas naszych studiów. Dużym minusem jest dla nas brak silnych statycznych typów który znacząco ułatwia naukę nowych rozwiązań.
+Python mimo bycia językiem wysokopoziomowym ma duże możliwości w przetwarzaniu ogromnych ilości danych dzięki bibliotece numpy. Jest to bardzo szybka biblioteka zaimplementowana w języku niskiego poziomu. Mieliśmy także styczności z tym językiem podczas naszych studiów. Dużym minusem jest dla nas brak silnych statycznych typów które znacząco ułatwiają i przyśpieszają naukę języka i bibliotek ze względu na możliwość szybkiej dedukcji użytku danych metod i funkcjonalności.
 
 \subsubsection{Wybór języka programowania}
-Rozważając cechy każdego z języków, nasze umiejętności w posługiwaniu się nimi oraz specyfikę programu który chcemy napisać wybraliśmy język C++. Kluczowymi cechami które przekonały nas do wyboru tego języka były: mnogość bibliotek związanych z tematem projektu lub uniwersalnie wspomagających często napotykane problemy, prędkość działania oraz duża znajomość samego języka.
+Rozważając cechy każdego z języków, nasze umiejętności w posługiwaniu się nimi oraz specyfikę projektu, który chcemy zaimplementować wybraliśmy język C++. Kluczowymi cechami, które przekonały nas do wyboru tego języka były: mnogość bibliotek związanych z tematem projektu lub uniwersalnie wspomagających często napotykane problemy, prędkość działania oraz duża znajomość samego języka.
 
 
 \section{Dekodowanie oraz kodowanie filmów}
@@ -111,21 +111,22 @@ Rozważając cechy każdego z języków, nasze umiejętności w posługiwaniu si
 Formatem pliku wideo nazywamy sposób reprezentacji danych wideo i audio w pamięci komputera. Na format wideo składa się kontener przechowujący strumienie między innymi audio i wideo oraz kodeki określające jak te strumienie są kodowane i kompresowane. Kontenery obsługują ściśle określone kodeki audio i wideo. Większość kontenerów jest w stanie przechowywać wyłącznie jeden strumień wideo oraz jeden strumień dźwięku, niektóre z nich mogą przechowywać informacje o napisach (przykładem kontenera pozwalającego na przechowywanie wielu strumieni takiego samego typu jest \emph{Matroska}).
 
 \subsection{Struktura pliku wideo}
-W pliku wideo wyróżnić można następujące elementy: 
+W pliku wideo którego schemat przedstawiono na rysunku \ref{fig:fileStruckt} wyróżnić można następujące elementy: 
 \begin{itemize}
 	\item nagłówek zawierający dane formacie pliku, jego kontenerze, zastosowanych kodekach oraz opcjonalne metadane takie jak tytuł czy też autor,
-	\item pakiety posiadające dane o pewnych określonych częściach strumieni które są zapisane w pliku.
+	\item pakiety posiadające dane o pewnych określonych częściach strumieni, które są zapisane w pliku.
 \end{itemize}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=13cm]{file_struct.png}
 	\caption{Schemat struktury pliku wideo}
+	\label{fig:fileStruckt}
 \end{figure}
 
 W przypadku strumienia wideo pojedynczy pakiet przechowuje dane o jednej jego klatce (bądź też, w przypadku niektórych kodeków, części która uległa zmianie względem poprzedniej klatki). Dla strumieni audio pakiet przechowuję dane o pewnej ilości próbek dźwięku zależnej od zastosowanego podczas kodowania próbkowania oraz ilości klatek wyświetlanych na sekundę. Pakiety przechowują także informacje pozwalające na synchronizacje czasową strumieni danych potrzebne do poprawnego odtwarzania pliku.
 
 \subsection{Dekodowanie}
-Aby odczytać z pliku wideo pojedynczą klatkę obrazu potrzebujemy wydobyć z niego pojedynczy pakiet i zdekodować go określonym przez format tego pliku kodekiem. Zanim do tego przystąpimy musimy jednak wydzielić pakiety należące do strumienia wideo. Proces ten nazywany jest demultipleksowaniem, czyli podziałem pliku na oddzielne strumienie danych obrazu i dźwięku. Po wydzieleniu z pliku ścieżki wideo odczytujemy kolejne pakiety, które przesyłane są do dekodera. Dekoder zwraca nam przetworzoną klatkę oraz informacje o niej. 
+Chcąc odczytać z pliku wideo pojedynczą klatkę obrazu potrzebujemy wydobyć z niego pojedynczy pakiet i zdekodować go określonym przez format tego pliku kodekiem. Zanim do tego przystąpimy musimy jednak wydzielić pakiety należące do strumienia wideo. Proces ten nazywany jest demultipleksowaniem, czyli podziałem pliku na oddzielne strumienie danych obrazu i dźwięku. Po wydzieleniu z pliku ścieżki wideo odczytujemy kolejne pakiety, które przesyłane są do dekodera. Dekoder zwraca nam przetworzoną klatkę oraz informacje o niej. 
 
 Przed przystąpieniem do przetwarzania otrzymanych danych o pikselach należy określić w jakiej przestrzeni barw zostały one zapisane w pliku. Większość formatów zapisuje piksele korzystając z modelu barw YUV, w którym składowa Y odpowiada za luminancje obrazu, a składowe UV odpowiadają za nadanie mu barwy. Dla potrzeb naszych algorytmów wymagana jest konwersja klatek do przestrzeni barw RGB. Aby tego dokonać stosuje się poniższe działanie mnożenia macierzy przez wektor:
 
@@ -157,14 +158,15 @@ Interfejs naszej aplikacji zbudowaliśmy w oparciu o zbiór bibliotek i narzędz
 \centering
 \includegraphics[width=13cm]{uimain.png}
 \caption{Główny interfejs programu}
+\label{fig:MainInt}
 \end{figure}
-Interfejs prosi użytkownika o podanie pliku źródłowego oraz pliku docelowego. W tym celu może on skorzystać z odpowiednich pól wpisując do nich ścieżki plików, wykonując akcję ,,przeciąg-upuść'' na te pola lub  korzystając z typowego okna wyboru pliku.
+Interfejs prosi użytkownika o podanie pliku źródłowego oraz pliku docelowego (rysunek \ref{fig:MainInt}). W tym celu może on skorzystać z odpowiednich pól wpisując do nich ścieżki plików, wykonując akcję ,,przeciąg-upuść'' na te pola lub  korzystając z typowego okna wyboru pliku.
 \begin{figure}
 	%% add pic
 \end{figure}
 Po wyborze parametrów obróbki filmu, użytkownik może przejść do procesu przetwarzania pliku klikając w odpowiedni przycisk. Podczas procesu obróbki program stara się wyświetlić aktualny jej postęp.
 
-Po wykonaniu procesu przetwarzania użytkownik ma opcję porównania jakości filmu źródłowego z tym otrzymanym w wyniku działania programu. Odbywa się to poprzez wyświetlenie obu filmów obok siebie w nowym oknie programu.
+Po wykonaniu procesu przetwarzania użytkownik ma opcję porównania jakości filmu źródłowego z tym otrzymanym w wyniku działania wybranego algorytmu. W naszej aplikacji odbywa się to poprzez wyświetlenie obu filmów obok siebie w nowym oknie programu.
 \begin{figure}
 	%% add pic
 \end{figure}
@@ -180,7 +182,7 @@ Pozwala on na komunikacje oraz interakcje pomiędzy komponentami tego zbioru. Me
 \begin{verbatim}
 	emit exampleSignal( exParam );
 \end{verbatim}
-a następnie wykonywana jest funkcjonalność slotów ,,podpiętych'' wcześniej do danego sygnału. 
+a następnie wykonywana jest funkcjonalność slotów ,,podpiętych'' wcześniej do danego sygnału, co pokazano poniżej:
 \begin{verbatim}
 	QObject::connect(const QObject *sender, const char *signal, 
 	const QObject *receiver, const char *method, 
@@ -192,20 +194,21 @@ W przypadku naszego programu jeżeli program miałby zwrócić wyjątek, emitowa
 %% UWaga na \newlineTekst oraz \newlineSpis. Można też użyć \newline, działa jak %%\newlineSpis\newlineTekst
 \section{Struktura programu}
 
-Głównym celem projektu jest takie zaprojektować naszą aplikację, aby możliwa była dalsza jej rozbudowa polegająca na dodawaniu nowych algorytmów. Struktura w jakiej organizowalibyśmy kod programu jest bardzo istotnym zagadnieniem z punktu widzenia przejrzystości systemu oraz ergonomii pracy z nim. Struktura naszego programu dzieli się na 2 główne części: część odpowiadającą za komunikację z użytkownikiem oraz wybór odpowiednich algorytmów, oraz część polegającą na przetwarzaniu pliku wideo przez wybrane przez użytkownika algorytmy. Tworzyliśmy architekturę naszej aplikacji zgodnie z paradygmatem odwrócenia sterowania (IoC), polegającym na przekazywaniu gotowych obiektów do klas ich potrzebujących. Znacząco ułatwiło to projektowanie całej aplikacji a zwłaszcza jej testowanie.
+Głównym celem projektu jest takie zaprojektować naszą aplikację, aby możliwa była dalsza jej rozbudowa polegająca na dodawaniu nowych algorytmów. Struktura w jakiej organizowalibyśmy kod programu jest bardzo istotnym zagadnieniem z punktu widzenia przejrzystości systemu oraz ergonomii pracy z nim. Struktura naszego programu dzieli się na 2 główne części: część odpowiadającą za komunikację z użytkownikiem i algorytmami wybranymi przez użytkownika, oraz część polegającą na przetwarzaniu pliku wideo przez wybrane przez użytkownika algorytmy. Tworzyliśmy architekturę naszej aplikacji zgodnie z paradygmatem odwrócenia sterowania (IoC), polegającym na przekazywaniu gotowych obiektów do klas ich potrzebujących (rysunek \ref{fig:UMLStrukt}). Znacząco ułatwiło to projektowanie całej aplikacji a zwłaszcza jej testowanie.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=12cm]{UML.png}
 \caption{Główna struktura programu}
+\label{fig:UMLStrukt}
 \end{figure}
 
 \subsection{Komunikacja z użytkownikiem}
-Do komunikacji z użytkownikiem stosujemy klasy FilmUpperView (dalej View) i FilmUpperController (dalej controller). Jest to uproszczona wersja wzorca projektowego MVC(Model, View, Controller) Początkowo chcieliśmy  stworzyć infrastrukturę opartą na bardzo podobnym w założeniach wzorcu MVVM (Model, View Model, Controller) oraz zastosować rozwiązania reaktywne w kontakcie z użytkownikiem. Mimo, że głównym celem systemów reaktywnych jest asynchroniczne zarządzanie zdarzeniami poprzez stosowanie strumieni zamiast tradycyjnego podejścia do danych, to reaktywne podejście do zdarzeń bardzo upraszcza ich obsługę oraz jest bardzo przejrzyste pod względem przepływu sterowania. Niestety z uwagi na to, ze rozwiązania te stosowaliśmy tylko w aplikacjach opartych na języku C\#, nie byliśmy zaznajomieni z tą technologią w językach niższego poziomu. Nasza aplikacja nie jest także na tyle rozbudowana pod względem złożoności możliwych stanów ani jej elementy nie reagują w sposób znaczny na zmiany które użytkownik wykonuje w interfejsie, więc zauważyliśmy, że lepszym rozwiązaniem będzie zastosowanie prostszego modelu. Komunikacja między użytkownikiem a programem odbywa się pomiędzy klasami View a Controller. W klasie View zarządzamy interfejsem użytkownika, wyświetlającym możliwe do wyboru algorytmy i przekazujemy jego decyzje do Controllera. W klasie Controller następuje ustalenie jakie algorytmy są dostępne do wykorzystania przez użytkownika, obsługiwany jest proces ulepszania jakości obrazu oraz zapisywania wyniku tej operacji. Obecnie algorytmy które są dostępne do wykorzystania są wpisane na stałe w kodzie programu, przez co aby dodać kolejny algorytm należy go dopisać do odpowiedniego wektora algorytmów. Jedną z możliwych i podstawowych opcji, które rozważaliśmy do rozbudowy funkcjonalności programu jest możliwość automatycznego dodawania dostępnych algorytmów poprzez walidację zawartości odpowiednich folderów. Umożliwiało by to rozbudowę funkcjonalności programu przez następnych użytkowników, a mianowicie poprzez tworzenie bibliotek dynamicznych o odpowiedniej budowie (opartej o odpowiednie klasy bazowe) i ich automatyczne wczytywanie przy starcie programu. Dało by to bardzo dużą możliwość rozbudowy bazowej funkcjonalności, jednakże w obecnej fazie, funkcjonalność ta nie jest uważana przez nas za podstawową.
+Do komunikacji z użytkownikiem stosujemy klasy FilmUpperView (dalej View) i FilmUpperController (dalej controller). Jest to uproszczona wersja wzorca projektowego MVC(Model, View, Controller) Początkowo chcieliśmy  stworzyć infrastrukturę opartą na bardzo podobnym w założeniach wzorcu MVVM (Model, View Model, Controller) oraz zastosować rozwiązania reaktywne w kontakcie z użytkownikiem. Mimo, że głównym celem systemów reaktywnych jest asynchroniczne zarządzanie zdarzeniami poprzez stosowanie strumieni zamiast tradycyjnego podejścia do danych, to reaktywne podejście do zdarzeń bardzo upraszcza ich obsługę oraz jest bardzo przejrzyste pod względem przepływu sterowania. Niestety z uwagi na to, że rozwiązania te stosowaliśmy tylko w aplikacjach opartych na języku C\#, nie byliśmy zaznajomieni z tą technologią w językach niższego poziomu. Nasza aplikacja nie jest także na tyle rozbudowana pod względem złożoności możliwych stanów ani jej elementy nie reagują w sposób znaczny na zmiany, które użytkownik wykonuje w interfejsie, więc zauważyliśmy, że lepszym rozwiązaniem będzie zastosowanie prostszego modelu. Komunikacja między użytkownikiem a programem odbywa się pomiędzy klasami View a Controller. W klasie View zarządzamy interfejsem użytkownika, wyświetlającym możliwe do wyboru algorytmy i przekazujemy jego decyzje do Controllera. W klasie Controller następuje ustalenie jakie algorytmy są dostępne do wykorzystania przez użytkownika, obsługiwany jest proces ulepszania jakości obrazu oraz zapisywania wyniku tej operacji. Obecnie algorytmy, które są dostępne do wykorzystania są wpisane na stałe w kodzie programu, przez co aby dodać kolejny algorytm należy go dopisać do odpowiedniego wektora algorytmów. Jedną z możliwych i podstawowych opcji, które rozważaliśmy do rozbudowy funkcjonalności programu jest możliwość automatycznego dodawania dostępnych algorytmów poprzez walidację zawartości odpowiednich folderów. Umożliwiało by to rozbudowę funkcjonalności programu przez następnych użytkowników, a mianowicie poprzez tworzenie bibliotek dynamicznych o odpowiedniej budowie (opartej o odpowiednie klasy bazowe) i ich automatyczne wczytywanie przy starcie programu. Dało by to bardzo dużą możliwość rozbudowy bazowej funkcjonalności, jednakże w obecnej fazie, funkcjonalność ta nie jest uważana przez nas za podstawową.
 
 \subsection{Implementacja procesu dekodowania/kodowania przy pomocy bibliotek FFmpeg}
 \subsubsection{Demultipleksowanie i dekodowanie}
-Przed przystąpieniem do odczytu jakiegokolwiek pliku wideo przy pomocy bibliotek \emph{FFmpeg}-a musieliśmy powołać funkcję 
+Przed przystąpieniem do odczytu jakiegokolwiek pliku wideo przy pomocy bibliotek \emph{FFmpeg}-a musieliśmy wywołać funkcję 
 \begin{verbatim}
 av_register_all();
 \end{verbatim}
@@ -219,7 +222,7 @@ gdzie jako parametr przekażemy wybrane przez nas formaty. Następnie poleceniem
 avformat_open_input(AVFormatContext** formatContext, 
 const char* filename, AVInputFormat* fmt, AVDictionary** options);	
 \end{verbatim}
-otwieramy plik znajdujący się pod ścieżką podaną w parametrze \emph{filename} zapisując informacje o nim w strukturze \emph{formatContext}. Struktura ta posiada informacje między innymi o formacie pliku, dostępnych strumieniach audio/wideo oraz sposobie ich kodowania. Wskaźniki do strumieni danych zawarte są w tablicy \emph{streams} będącej polem struktury \emph{formatContext}. Aby odnaleźć strumień obrazu wideo użyliśmy polecenia
+otwieramy plik znajdujący się pod ścieżką podaną w parametrze \emph{filename} zapisując informacje o nim w strukturze \emph{formatContext}. Struktura ta posiada informacje między innymi o formacie pliku, dostępnych strumieniach audio/wideo oraz sposobie ich kodowania. Wskaźniki do strumieni danych zawarte są w tablicy \emph{streams} będącej polem struktury \emph{formatContext}. Aby odnaleźć strumień obrazu wideo użyliśmy polecenia:
 \begin{verbatim}
 av_find_best_stream(AVFormatContext* formatContext, 
 enum AVMediaType type, int wanted_stream_nb, int related_stream, 
@@ -231,7 +234,7 @@ które zwraca jego indeks w tablicy \emph{streams}. Następnie na podstawie pola
 	avcodec_open2(AVCodecContext* codecContext, const AVCodec* codec, 
 	AVDictionary** options);
 \end{verbatim}
-Biblioteki \emph{FFmpeg}-a dają nam dwa sposoby dekodowania i kodowania plików. W przypadku dekodowania skorzystaliśmy z metody która pozwala nam na bezpośrednie odczytanie kolejnej w strumieniu zakodowanej klatki obrazu. Dokonujemy tego poniższą pętlą while: 
+Biblioteki \emph{FFmpeg}-a dają nam dwa sposoby dekodowania i kodowania plików. W przypadku dekodowania skorzystaliśmy z metody, która pozwala nam na bezpośrednie odczytanie kolejnej w strumieniu zakodowanej klatki obrazu. Dokonujemy tego poniższą pętlą while: 
 \begin{verbatim}
 while (ret = av_read_frame(formatCTX, packet) >= 0) 
 {
@@ -244,7 +247,7 @@ while (ret = av_read_frame(formatCTX, packet) >= 0)
     }
 }
 \end{verbatim}
-Pętla ta odczytuje kolejne pakiety z pliku wideo sprawdzając czy należą one do strumienia danych obrazu i dekodując je aż otrzymamy pełną klatkę. Przed zwróceniem danych o obrazie do naszych algorytmów musimy przekształcić ją tak aby była ona w modelu barw RGB. Biblioteki \emph{FFmpeg}-a dostarczają nam funkcję
+Pętla ta odczytuje kolejne pakiety z pliku wideo sprawdzając czy należą one do strumienia danych obrazu i dekodując je aż otrzymamy pełną klatkę. Przed zwróceniem danych o obrazie do naszych algorytmów musimy przekształcić ją tak aby była ona w modelu barw RGB. Biblioteki \emph{FFmpeg}-a dostarczają nam funkcję:
 \begin{verbatim}
 context = sws_getContext(int sourceWidth, int sourceHeight, 
 enum AVPixelFormat sourceFormat, int destinationWidth, 
@@ -258,15 +261,15 @@ uint8_t* const destinationData[], const int destinationStride[]);
 \end{verbatim}
 która pozwala na konwersje między modelami barw.
 \subsubsection{Kodowanie i multipleksowanie}
-Tak jak w przypadku dekodowania pliku wideo, przed przystąpieniem do kodowania i zapisu danych musimy zainicjalizować strukturę \emph{formatContext}, wypełnić ją wymaganymi danymi oraz zainicjalizować i skonfigurować koder, którego chcemy używać. Dokonujemy tego metodą
+Tak jak w przypadku dekodowania pliku wideo, przed przystąpieniem do kodowania i zapisu danych musimy zainicjalizować strukturę \emph{formatContext}, wypełnić ją wymaganymi danymi oraz zainicjalizować i skonfigurować koder, którego chcemy używać. Dokonujemy tego metodą:
 \begin{verbatim}
 	avcodec_find_encoder(enum AVCodecID id);
 \end{verbatim}
-i wypełniając otrzymaną w jej wyniku strukturę pożądanymi przez nas parametrami zapisu (miedzy innymi ilością klatek na sekundę, rozdzielczością obrazu czy przepływność). Następnie dodajemy do struktury \emph{formatContext} nowy strumień wideo poleceniem 
+i wypełniając otrzymaną w jej wyniku strukturę pożądanymi przez nas parametrami zapisu (miedzy innymi ilością klatek na sekundę, rozdzielczością obrazu czy przepływność). Następnie dodajemy do struktury \emph{formatContext} nowy strumień wideo poleceniem: 
 \begin{verbatim}
 	avformat_new_stream(AVFormatContext* s, const AVCodec* c) 	
 \end{verbatim}
-Przed przystąpieniem do kodowania klatek musimy zapisać do pliku docelowego nagłówek formaty funkcją
+Przed przystąpieniem do kodowania klatek musimy zapisać do pliku docelowego nagłówek formaty funkcją:
 \begin{verbatim}
 	avformat_write_header(AVFormatContext* s, AVDictionary** options) 	
 \end{verbatim}
@@ -297,7 +300,7 @@ W naszym projekcie z założenia stosujemy dwa typy algorytmów. Są to algorytm
 \item wpływające na ilość klatek wideo na sekundę.
 \end{itemize}
 
-Algorytmy te korzystają z klas które przechowują ważne informacje odnośnie przetwarzanego wideo. Klasami tymi są klasy VideoFrame oraz FilmQualityInfo. 
+Algorytmy te korzystają z klas, które przechowują ważne informacje odnośnie przetwarzanego wideo. Klasami tymi są klasy VideoFrame oraz FilmQualityInfo. 
 
 Klasa VideoFrame przechowuje informację na temat pojedynczej klatki wideo, FilmQualityInfo przechowuje natomiast informację odnośnie parametrów pliku wideo. 
 
@@ -312,7 +315,7 @@ Przy ich użyciu oraz przy użyciu klas bazowych IFrameReader i IFrameWriter (i 
 \subsubsection{IFrameReader - odczytywanie informacji z pliku wideo}
 Ta klasa bazowa ma za zadanie odczytywać informację odnośnie klatek wideo oraz dźwięku. Utworzyliśmy ją jako klasę bazową ze względu na dwa aspekty:
 \begin{enumerate}
-\item możliwość stworzenia klasy testowej o ustalonych właściwościach - daje to bardzo dużą swobodę w prowadzeniu testów, bez względu na stan pracy nad właściwą implementacją
+\item możliwość stworzenia klasy testowej o ustalonych właściwościach - daje to bardzo dużą swobodę w prowadzeniu testów, bez względu na stan pracy nad właściwą implementacją,
 \item umożliwia stosunkowo bezbolesną zmianę biblioteki dekodującej pliki wideo bez zmiany sposobu korzystania z niej, daje nam to też swobodę na przyszłość, jeśli chcielibyśmy porównać działanie 2 różnych bibliotek umożliwiających odczyt plików wideo.
 \end{enumerate}
 Klasa ta dostarcza następującą funkcjonalność:
@@ -354,7 +357,8 @@ protected:
 
 
 public:
-	FrameEnhancerBase(IFrameReader* inputFrameReader, FilmQualityInfo* targetQualityInfo) {
+	FrameEnhancerBase(IFrameReader* inputFrameReader,
+                      FilmQualityInfo* targetQualityInfo) {
 		_inputFrameStream = inputFrameReader;
 		_targetQualityInfo = targetQualityInfo;
 		_sourceQualityInfo = _inputFrameStream->GetVideoFormatInfo();
@@ -362,7 +366,8 @@ public:
 
 	virtual VideoFrame* ReadNextEnhancedFrame() { return nullptr; };
 	FilmQualityInfo* GetSourceQuality() { return _sourceQualityInfo; };
-	virtual bool AreFramesLeft() { return _inputFrameStream->AreFramesLeft(); };
+	virtual bool AreFramesLeft() 
+	    { return _inputFrameStream->AreFramesLeft(); };
 };
 \end{verbatim}
 
@@ -385,20 +390,24 @@ Klasa ta dostarcza następującą funkcjonalność:
 FilmQualityInfo* targetQualityInfo) {
         _inputFrameStream = inputFrameReader;
         _targetQualityInfo = targetQualityInfo;
-        _sourceQualityInfo = _inputFrameStream->GetVideoFormatInfo();
+        _sourceQualityInfo = 
+            _inputFrameStream->GetVideoFormatInfo();
 }
 \end{verbatim}
 - konstruktor klasy bazowej przypisuje wartości zmiennych oraz uzyskuje dane na temat formatu pliku źródłowego,
 \begin{verbatim}
-* virtual VideoFrame* ReadNextEnhancedFrame() { return nullptr; };
+* virtual VideoFrame* ReadNextEnhancedFrame() 
+    { return nullptr; };
 \end{verbatim}
 - zwraca przetworzoną klatkę wideo wraz z dźwiękiem,
 \begin{verbatim}
-* FilmQualityInfo* GetSourceQuality() { return _sourceQualityInfo; };
+* FilmQualityInfo* GetSourceQuality() 
+    { return _sourceQualityInfo; };
 \end{verbatim}
 - zwraca informacje na temat jakości pliku źródłowego,
 \begin{verbatim}
-* virtual bool AreFramesLeft() { return _inputFrameStream->AreFramesLeft(); };
+* virtual bool AreFramesLeft() 
+    { return _inputFrameStream->AreFramesLeft(); };
 \end{verbatim}
 - zwraca informacje na temat tego, czy pozostały jeszcze jakieś klatki do odczytu.
 
@@ -408,16 +417,18 @@ Możliwości klasy IFrameEnhancerHeader są następujące:
 class IFrameEnhancerHeader
 {
 public:
-	IFrameEnhancerHeader(std::string name, std::string desription)
-	{
-		Name = name;
-		Description = desription;
-	}
-	std::string Name;
-	std::string Description;
-	virtual FrameEnhancerBase* Enhancer(IFrameReader* inputFrameReader,
-	 FilmQualityInfo* targetQualityInfo) { 
-	     return new FrameEnhancerBase(inputFrameReader, targetQualityInfo); };
+    IFrameEnhancerHeader(std::string name, std::string desription)
+    {
+        Name = name;
+        Description = desription;
+    }
+    std::string Name;
+    std::string Description;
+    virtual FrameEnhancerBase* Enhancer(
+        IFrameReader* inputFrameReader,
+        FilmQualityInfo* targetQualityInfo) { 
+            return new FrameEnhancerBase(inputFrameReader,
+        	                                targetQualityInfo); };
 };
 \end{verbatim}
 
@@ -431,15 +442,17 @@ Dostarcza ona następującą funkcjonalność:
 \end{verbatim}
  - jest opisem algorytmu dla użytkownika,
 \begin{verbatim}
-* virtual FrameEnhancerBase* Enhancer(IFrameReader* inputFrameReader,
- FilmQualityInfo* targetQualityInfo) { 
-     return new FrameEnhancerBase(inputFrameReader, targetQualityInfo); };
+* virtual FrameEnhancerBase* Enhancer(
+    IFrameReader* inputFrameReader,
+    FilmQualityInfo* targetQualityInfo) { 
+         return new FrameEnhancerBase(inputFrameReader,
+                                      targetQualityInfo); };
 };
 \end{verbatim} 
  - zwraca nowo utworzony obiekt klasy ulepszającej jakość klatki wideo.
 
 \subsubsection{FpsEnhancerBase i IFpsEnhancerHeader - tworzenie nowych klatek pośrednich}
-Zadaniem klasy bazowej FpsEnhancerBase jest przetworzenie otrzymanych klatek w taki sposób aby zwiększyć ilość klatek wynikowych poprzez tworzenie klatek pośrednich na podstawie otrzymanych od IFrameEnhancerBase, ulepszonych klatek. IFpsEnhancerHeader przechowuje informacje na temat odpowiadającego mu FpsEnhancerBase oraz umożliwia utworzenie obiektu tej klasy.
+Zadaniem klasy bazowej FpsEnhancerBase jest przetworzenie otrzymanych klatek w taki sposób, aby zwiększyć ilość klatek wynikowych poprzez tworzenie klatek pośrednich na podstawie otrzymanych od IFrameEnhancerBase, ulepszonych klatek. IFpsEnhancerHeader przechowuje informacje na temat odpowiadającego mu FpsEnhancerBase oraz umożliwia utworzenie obiektu tej klasy.
 
 Możliwości FpsEnhancerBase to:
 
@@ -459,7 +472,8 @@ public:
 
     virtual VideoFrame* ReadNextFrame() { return nullptr; };
 
-    virtual bool AreFramesLeft() { return _frameEnhancer->AreFramesLeft(); };
+    virtual bool AreFramesLeft() 
+        { return _frameEnhancer->AreFramesLeft(); };
 };
 \end{verbatim}
 
@@ -484,7 +498,8 @@ public:
 - zwraca następną wynikową klatkę wideo
 
 \begin{verbatim}
-* virtual bool AreFramesLeft() { return _frameEnhancer->AreFramesLeft(); };
+* virtual bool AreFramesLeft() 
+    { return _frameEnhancer->AreFramesLeft(); };
 \end{verbatim}
 - informuje, czy pozostały jeszcze klatki do odczytania.
 
@@ -501,10 +516,11 @@ public:
     }
     std::string Name;
     std::string Description;
-    virtual FpsEnhancerBase* GetFpsEnhancer(FrameEnhancerBase* frameEnhancer,
-	 FilmQualityInfo* qualityInfo) {
-      return new FpsEnhancerBase(frameEnhancer, qualityInfo); 
-      };
+    virtual FpsEnhancerBase* GetFpsEnhancer(
+        FrameEnhancerBase* frameEnhancer,
+        FilmQualityInfo* qualityInfo) {
+            return new FpsEnhancerBase(frameEnhancer, qualityInfo); 
+        };
 };
 \end{verbatim}
 
@@ -526,7 +542,7 @@ Dostarcza ona następującą funkcjonalność:
  - zwraca nowo utworzony obiekt klasy tworzącej pośrednie klatki wideo.
 
 \section{Algorytmy}
-Wykorzystywane przez nas algorytmy dzielą się na dwie poprzednio wyszczególnione kategorie -- przetwarzające pojedynczą klatkę obrazu (FrameEnhancerBase) oraz tworzące nowe klatki pośrednie (FpsEnhancerBase). Aby przedstawić efekty naszych algorytmów wykorzystaliśmy fragment filmu animowanego ,,Big Buck Bunny''.
+Wykorzystywane przez nas algorytmy dzielą się na dwie poprzednio wyszczególnione kategorie -- przetwarzające pojedynczą klatkę obrazu (FrameEnhancerBase) oraz tworzące nowe klatki pośrednie (FpsEnhancerBase). Aby przedstawić efekty działania naszych algorytmów wykorzystaliśmy fragment filmu animowanego ,,Big Buck Bunny'' dostępnego na licencji Creative Commons (do prezentacji działania użyliśmy fragmentu od 0:47 do 0:53).
 
 \subsection{Ulepszanie pojedynczej klatki}
 Algorytmy te ulepszają jakość klatki wideo na podstawie odpowiednich algorytmów skalowania. Wykorzystane przez nas algorytmy wykorzystują informacje zawarte tylko na klatce źródłowej (nie wykorzystujemy poprzednich lub następnych klatek obrazu). Różnią się one zastosowaniem, złożonością obliczeniową oraz otrzymanym obrazem wynikowym.
@@ -537,10 +553,10 @@ Algorytmy te ulepszają jakość klatki wideo na podstawie odpowiednich algorytm
 \label{fig:handOrginal}
 \end{figure}
 
-Rysunek \ref{fig:handOrginal} przedstawia fragment filmu źródłowego nagranego w rozdzielczości 1280x720. Wykorzystaliśmy nasze algorytmy do przeskalowania filmu do rozdzielczości 3840x2160 i porównaliśmy wybrany fragment.
+Rysunek \ref{fig:handOrginal} przedstawia fragment filmu źródłowego (w czasie 0:51) nagranego w rozdzielczości 1280x720. Wykorzystaliśmy nasze algorytmy do przeskalowania filmu do rozdzielczości 3840x2160 i porównaliśmy wybrany fragment.
 
 \subsubsection{Algorytm najbliższego sąsiada}
-Algorytm ten jest najszybszym z wykorzystanych przez nas algorytmów, jednakże sytuacje w których jego wykorzystanie da bardzo dobry efekt nie są liczne. Algorytm ten polega na wyszukaniu najbliższego piksela źródłowego odpowiadającemu aktualnie ustalanemu pikselowi wynikowemu i ustawieniu jego koloru w pikselu wynikowym. Algorytm ten nie posiada żadnego wygładzania krawędzi, przez co obraz wynikowy będzie wyglądał jak złożony z większych pikseli źródłowych. 
+Algorytm ten jest najszybszym z wykorzystanych przez nas algorytmów, jednakże sytuacje w których jego wykorzystanie da bardzo dobry efekt nie są liczne. Algorytm ten polega na wyszukaniu najbliższego piksela źródłowego odpowiadającemu aktualnie ustalanemu pikselowi wynikowemu i ustawieniu jego koloru w pikselu wynikowym (rysunek \ref{fig:NNalgo}). Algorytm ten nie posiada żadnego wygładzania krawędzi, przez co obraz wynikowy będzie wyglądał jak złożony z większych pikseli źródłowych. 
 
 \begin{figure}[h]
 \centering
@@ -560,30 +576,35 @@ Algorytm ten można stosować z powodzeniem w skalowaniu filmów o charakterysty
 \label{fig:handNN}
 \end{figure}
 
+Na rysunku \ref{fig:handNN} widać duże, wyraźne piksele po przetworzeniu obrazu źródłowego. 
+
 
 \subsubsection{Algorytm interpolacji dwuliniowej}
-Algorytm interpolacji dwuliniowej polega na obliczeniu wynikowej wartości koloru na podstawie 4 pikseli otaczających.
+Algorytm interpolacji dwuliniowej polega na obliczeniu wynikowej wartości koloru na podstawie 4 pikseli otaczających (rysunek \ref{fig:interpolation1}).
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=6cm]{Interpolation1.png}
 \caption{Nowy piksel w przestrzeni obrazu źródłowego}
+\label{fig:interpolation1}
 \end{figure}
 
-Aby obliczyć wartość koloru nowo utworzonego piksela algorytm interpolacji dwuliniowej oblicza 2 nowe piksele pośrednie. Są one wynikiem zmieszania dwóch odpowiednich pikseli (krok ten można przeprowadzić parując ze sobą piksele horyzontalnie lub wertykalnie). Mieszanie kolorów tych pikseli traktujemy jako funkcję liniową której wartości zmieniają się od jednego koloru do drugiego. Wybieramy wartość funkcji w miejscu przecięcia tej funkcji z prostą prostopadłą przechodzącą przez punkt wynikowy. W naszej implementacji wybraliśmy mieszanie horyzontalne odpowiednich kolorów.
+Aby obliczyć wartość koloru nowo utworzonego piksela algorytm interpolacji dwuliniowej oblicza 2 nowe piksele pośrednie. Są one wynikiem zmieszania dwóch odpowiednich pikseli (krok ten można przeprowadzić parując ze sobą piksele horyzontalnie lub wertykalnie). Mieszanie kolorów tych pikseli traktujemy jako funkcję liniową której wartości zmieniają się od jednego koloru do drugiego. Wybieramy wartość funkcji w miejscu przecięcia tej funkcji z prostą prostopadłą przechodzącą przez punkt wynikowy. W naszej implementacji wybraliśmy mieszanie horyzontalne odpowiednich kolorów (rysunek \ref{fig:Interpolation2}).
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=6cm]{Interpolation2.png}
 \caption{Obliczenie wartości kolorów pośrednich}
+\label{fig:Interpolation2}
 \end{figure}
 
-Dzięki temu, otrzymane przez nas nowe piksele pośrednie znajdują się w jednej linii z pikselem wynikowym. Możemy teraz obliczyć wartość koloru piksela wynikowego używając wartości kolorów pośrednich do utworzenia nowej funkcji liniowej i wybrania jej wartości w miejscu przecięcia się funkcji z pikselem wynikowym. 
+Dzięki temu, otrzymane przez nas nowe piksele pośrednie znajdują się w jednej linii z pikselem wynikowym. Możemy teraz obliczyć wartość koloru piksela wynikowego używając wartości kolorów pośrednich do utworzenia nowej funkcji liniowej i wybrania jej wartości w miejscu przecięcia się funkcji z pikselem wynikowym (rysunek \ref{fig:interpolation3}). 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=6cm]{Interpolation3.png}
 \caption{Obliczenie wartości koloru piksela wynikowego na podstawie kolorów pośrednich}
+\label{fig:interpolation3}
 \end{figure}
 
 Algorytm ten jest nie jest skomplikowany obliczeniowo, ale jest zauważalnie wolniejszy od algorytmu najbliższego sąsiada. Dzięki swoim właściwością, bardzo dobrze wygładza przejścia między pikselami, przez co ma szeroką gamę zastosowań.
@@ -595,7 +616,9 @@ Algorytm ten jest nie jest skomplikowany obliczeniowo, ale jest zauważalnie wol
 \label{fig:handInterpolation}
 \end{figure}
 
-\subsubsection{Algorytm interpolacji bikubicznej}
+Na rysunku \ref{fig:handInterpolation} widać wygładzone krawędzie i bardzo gładkie przejścia między pikselami po przetworzeniu obrazu źródłowego.
+
+\subsubsection{Algorytm interpolacji bi-kubicznej}
 Algorytm ten jest najbardziej skomplikowanym obliczeniowo algorytmem jaki zaimplementowaliśmy. Korzysta on z krzywych obliczanych na podstawie macierzy pikseli rozmiaru 4 na 4. Podobnie jak w interpolacji obliczane są wartości kolorów pikseli pośrednich obliczanych dla kolejnych wierszy macierzy dzięki którym obliczany jest splajn zgodny ze wzorem Catmulla-Roma:
 
 $sp(p_{x-1},p_x,p_{x+1},p_{x+2}) = 
@@ -629,6 +652,8 @@ Obliczone na podstawie powyższego wzoru punkty wykorzystujemy do obliczenia ost
 \label{fig:handBiCubic}
 \end{figure}
 
+Na rysunku \ref{fig:handBiCubic} widać efekt podobny do efektu uzyskanego algorytmem interpolacji dwuliniowej (\ref{fig:handInterpolation}). Obraz jest podobnie wygładzony ale krawędzie są bardziej zaakcentowane.
+
 \subsubsection{Algorytm splotu}
 Algorytm splotu oblicza wartość piksela obrazu docelowego jako sumę wartości piksela znajdującego się na tej samej pozycji oraz wartości pikseli sąsiadujących z nim przemnożonych przez wartości macierzy $MxM$ zwanej maską lub kernelem. Działanie to można zapisać w następujący sposób: 
 \[p_{o}[x,y]= \sum_{a = -R}^{R}\sum_{b = -R}^{R} p_{i}[x + a, y + b]*kernel[a, b]\], gdzie:
@@ -652,31 +677,34 @@ W naszym programie algorytm ten stosowany jest do wyostrzenia obrazu. Stosujemy 
 
 Algorytm splotu może wymagać wartości pikseli znajdujących się poza granicami obrazu źródłowego. W tym wypadku stosuję się jedno z poniższych rozwiązań
 \begin{enumerate}
-	\item Obcinanie - jeżeli algorytm wymagałby do obliczenia piksela wartości znajdujących się poza krawędziami obrazu, piksel ten jest pomijany,
+	\item Obcinanie - jeżeli algorytm wymagałby do obliczenia piksela wartości znajdujących się poza krawędziami obrazu, piksel ten jest pomijany (rysunek \ref{fig:obcinanie}),
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=7cm]{clipping.png}
 		\caption{Obsługa pikseli brzegowych - obcinanie}
+		\label{fig:obcinanie}
 	\end{figure}
-	\item Zawijanie - jeżeli wymagany jest piksel znajdujący się poza krawędziami obrazu, wartości te brane są z krawędzi przeciwnej,
+	\item Zawijanie - jeżeli wymagany jest piksel znajdujący się poza krawędziami obrazu, wartości te brane są z krawędzi przeciwnej (rysunek \ref{fig:zawijanie}),
 	\newpage
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=7cm]{wrapping.png}
 		\caption{Obsługa pikseli brzegowych - zawijanie}
+		\label{fig:zawijanie}
 	\end{figure}
-	\item Rozszerzanie - krawędzie obrazu wejściowego rozszerzane są poprzez kopiowanie wartości pikseli brzegowych tyle razy ile wymaga tego algorytm.
+	\item Rozszerzanie - krawędzie obrazu wejściowego rozszerzane są poprzez kopiowanie wartości pikseli brzegowych tyle razy ile wymaga tego algorytm (rysunek \ref{fig:rozszerzanie}).
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=7cm]{extending.png}
 		\caption{Obsługa pikseli brzegowych - rozszerzanie}
+		\label{fig:rozszerzanie}
 	\end{figure}
 \end{enumerate}
 \subsubsection{Normalizacja}
 Wartości otrzymane przez nas w wyniku operacji splotu mogą nie zawierać się w wymaganym przez nas przedziale. Wprowadza to potrzebę ich normalizacji, czego dokonać można na 2 sposoby:
 \begin{enumerate}
 	\item Obcinanie wartości
-	Jeżeli wartość przekracza wyznaczony przez nas zakres, przyjmujemy że wynikiem operacji jest wartość graniczna tego zakresu najbliższa temu wynikowi
+	Jeżeli wartość przekracza wyznaczony przez nas zakres, przyjmujemy że wynikiem operacji jest wartość graniczna tego zakresu najbliższa temu wynikowi.
 	\item Normalizacja maski
 	Aby zachować jasności pikseli obrazu możemy znormalizować maskę wykorzystywaną przez nas, poprzez podzielenie każdego z jej elementów przez sumę wszystkich elementów tejże macierzy.
 \end{enumerate}
@@ -685,12 +713,13 @@ Wartości otrzymane przez nas w wyniku operacji splotu mogą nie zawierać się 
 Algorytmy zwiększające ilość klatek obrazu na sekundę są zwykle o wiele bardziej skomplikowane od algorytmów ulepszających pojedynczą klatkę obrazu. Aby stworzyć nową klatkę obrazu z dużym oddaniem tego, jak by wyglądała w rzeczywistości wymagana by była złożona analiza wielu obrazów oraz rozwiązania korzystające z systemów opartych o sztuczną inteligencję. Stworzenie pojedynczego systemu takiego rodzaju mogłoby być tematem na osobna pracę naukową. Postanowiliśmy więc skupić się na dwóch podstawowych algorytmach które dają zadowalający efekt przy użyciu prostych technik oraz niedoskonałości ludzkiego zmysłu wzroku.
 
 \subsubsection{Algorytm interpolacji}
-Algorytm interpolacji polega na tym, że klatki pośrednie tworzone są na podstawie oryginalnych klatek poprzez porównywanie dwóch klatek pomiędzy którymi ma znajdować się nowo utworzona klatka. Wartość koloru w pikselach nowo utworzonej klatce obliczana jest poprzez potraktowanie pikseli klatek oryginalnych jako funkcji liniowej której parametrem jest czas. Dzięki temu każdy piksel jest obliczany na podstawie informacji kiedy (w stosunku do dwóch oryginalnych klatek) nowa klatka się pojawia.
+Algorytm interpolacji polega na tym, że klatki pośrednie tworzone są na podstawie oryginalnych klatek poprzez porównywanie dwóch klatek pomiędzy którymi ma znajdować się nowo utworzona klatka. Wartość koloru w pikselach nowo utworzonej klatce obliczana jest poprzez potraktowanie pikseli klatek oryginalnych jako funkcji liniowej której parametrem jest czas (rysunek \ref{fig:fpsInterpolation}). Dzięki temu każdy piksel jest obliczany na podstawie informacji kiedy (w stosunku do dwóch oryginalnych klatek) nowa klatka się pojawia.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=7cm]{FpsInterpolation.png}
 \caption{Obliczenie wartości koloru wynikowego na podstawie czasu}
+\label{fig:fpsInterpolation}
 \end{figure}
 
 W szybko zmieniających się, dynamicznych scenach efekt ten może być widoczny jako wyraźne rozmycie, jednakże przy scenach na których nie ma gwałtownych zmian poprawia on płynność obrazu bez widzialnego negatywnego efektu.
@@ -702,13 +731,16 @@ W szybko zmieniających się, dynamicznych scenach efekt ten może być widoczny
 \label{fig:fpsIntBunny}
 \end{figure}
 
+Na rysunku \ref{fig:fpsIntBunny} widać przejście między dwoma klatkami kluczowymi, które powoduje powstanie ,,ducha'' obiektu będącego w ruchu.
+
 \subsubsection{Algorytm przeplotu}
-Algorytm przeplotu polega na oszukiwaniu ludzkiego oka poprzez wyświetlanie tylko połowy nowych linii. Wynikiem takiego algorytmu jest film z podwojoną ilością klatek na sekundę. Powinien on być stosowany tylko dla obrazów mających stosunkowo dużą ilość klatek na sekundę z uwagi na to, że im mniejsza jest ilość klatek na sekundę tym bardziej przeplot jest widoczny. Algorytm ten stosowano już w telewizji analogowej z uwagi na niską prędkość przesyłu oraz migotanie ekranu przy wyświetlaniu obrazu w 24 lub 30(29,97) klatkach na sekundę (odpowiednio standardy PAL oraz NTSC). Naprzemienne aktualizowanie wartości wierszy nieparzystych i parzystych obrazu przy odpowiedniej szybkości wyświetlania zwiększa wrażenie płynności obrazu, jednakże im mniejsza jest źródłowa ilość klatek na sekundę tym bardziej widoczny jest przeplot.
+Algorytm przeplotu polega na oszukiwaniu ludzkiego oka poprzez wyświetlanie tylko połowy nowych linii. Wynikiem takiego algorytmu jest film z podwojoną ilością klatek na sekundę. Powinien on być stosowany tylko dla obrazów mających stosunkowo dużą ilość klatek na sekundę z uwagi na to, że im mniejsza jest ilość klatek na sekundę tym bardziej przeplot jest widoczny. Algorytm ten stosowano już w telewizji analogowej z uwagi na niską prędkość przesyłu oraz migotanie ekranu przy wyświetlaniu obrazu w 24 lub 30(29,97) klatkach na sekundę (odpowiednio standardy PAL oraz NTSC). Naprzemienne aktualizowanie wartości wierszy nieparzystych i parzystych obrazu (rysunek \ref{fig:przeplot}) przy odpowiedniej szybkości wyświetlania zwiększa wrażenie płynności obrazu, jednakże im mniejsza jest źródłowa ilość klatek na sekundę tym bardziej widoczny jest przeplot.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=7cm]{Interlace.png}
 \caption{Tworzenie klatek pośrednich przy użyciu algorytmu przeplotu}
+\label{fig:przeplot}
 \end{figure}
 
 \begin{figure}[h]
@@ -717,6 +749,8 @@ Algorytm przeplotu polega na oszukiwaniu ludzkiego oka poprzez wyświetlanie tyl
 \caption{Fragment klatki pośredniej wytworzonej algorytmem przeplotu}
 \label{fig:fpsInterlace}
 \end{figure}
+
+Na rysunku \ref{fig:fpsInterlace} widać efekt podobny do tego, jaki został uzyskany przy zastosowaniu algorytmu interpolacji (rysunek \ref{fig:fpsIntBunny}), jednakże zamiast stopniowej zmiany wartości pikseli na nowe, zaktualizowane zostały tylko co drugie wiersze pikseli obrazu.
 
 \section{Optymalizacja i testowanie}
 W implementacji algorytmów ich szybkość działania jest równie ważna co ich poprawność. W trakcie implementacji algorytmów oraz ich testowania zauważyliśmy, że ich wydajność nie była zbliżona do oczekiwanej. Przeprowadziliśmy więc szereg prac optymalizacyjnych w trakcie testowania algorytmów
@@ -732,24 +766,25 @@ Procedurę testowania można sprowadzić do głównej części testu skupiające
         delete enhancer->ReadNextEnhancedFrame();
     }
     clock_t end = clock();
-    double elapsed_secs = (double(end - begin)/iterations) / CLOCKS_PER_SEC;
+    double elapsed_secs = 
+        (double(end - begin)/iterations) / CLOCKS_PER_SEC;
     saveFile << std::to_string(elapsed_secs) + " sekund dla " + 
     std::to_string(iterations) +" iteracji, \n";
 \end{verbatim} 
 
-Dla 1000 iteracji pętli testujemy prędkość algorytmu przy przetwarzaniu jednej klatki obrazu. Mierzymy czas jaki zajmuje procesorowi przetworzenie 1000 klatek i dzielimy to przez ich ilość dostając względnie dokładną estymację, jak szybko przetwarzane są klatki.
+Dla 1000 iteracji pętli testujemy prędkość algorytmu przy przetwarzaniu jednej klatki obrazu. Mierzymy czas, jaki zajmuje procesorowi przetworzenie 1000 klatek i dzielimy to przez ich ilość dostając względnie dokładną estymację, jak szybko przetwarzane są klatki.
 Następnie zapisujemy tą wartość do pliku tekstowego.
 
 \subsection{Optymalizacja algorytmów i układu danych}
 Pierwszy i największy proces optymalizacji przeprowadziliśmy na klasie NNFrameEnhancer. Algorytm najbliższego sąsiada używany do skalowania klatki w tej klasie jest najszybszym zaimplementowanym przez nas algorytmem. Jednakże podczas pierwszego testu prędkość przetworzenia jednej klatki była liczona w minutach. Dzięki możliwości przechodzenia krok po kroku w programie Visual Studio oraz informacji, ile minęło od poprzedniego kroku udało nam się ustalić, że zastosowana dla uproszczenia kodu zmienna tymczasowa kopiowała pamięć klatki. Zauważyliśmy to dlatego, że operacja przypisania trwałą tam około 35 milisekund, gdy reszta pętli wykonywana była w kilka cykli procesora (ułamki milisekund). Usunięcie tej zmiennej przyśpieszyło program z około 14 sekund na jedną linię obrazu do 2 sekund na całą klatkę.
 
-Niestety dalej było to o wiele za dużo względem tego czego oczekiwaliśmy po prędkości algorytmu (oczekiwaliśmy co najmniej kilkunastu klatek na sekundę). Następnymi podjętymi przez nas krokami było uproszczenie algorytmu poprzez usunięcie niektórych niepotrzebnych obliczeń. Uzyskaliśmy dzięki temu około $40\%$ przyśpieszenie. 
+Niestety dalej było to o wiele za dużo względem tego czego oczekiwaliśmy po złożoności algorytmu (oczekiwaliśmy co najmniej kilkunastu klatek na sekundę). Następnymi podjętymi przez nas krokami było uproszczenie algorytmu poprzez usunięcie niektórych niepotrzebnych obliczeń. Uzyskaliśmy dzięki temu około $40\%$ przyśpieszenie. 
 
 Następnie zmieniliśmy typ przechowywanych danych z QColor* na zwykłe wartości całkowite int. Po tych zmianach otrzymaliśmy wydajność na poziomie około 0.9 sekundy na klatkę obrazu. 
 
-Naszym następnym krokiem była zmiana struktury danych w której przechowywaliśmy dane odnośnie pikseli. Używana przez nas struktura \begin{verbatim} boost::multi_array \end{verbatim} korzystała z 3 wymiarowej indeksacji. Zgodnie z tym co przeczytaliśmy w dokumentacji, klasa ta miała przechowywać dane w jednym, ciągłym bloku pamięci. Poprzez zmianę tej struktury na zwykłą tablicę int* uzyskaliśmy 30 krotne przyśpieszenie w przetwarzaniu danych (z 0.9 s do 0.03 s na klatkę).
+Naszym następnym krokiem była zmiana struktury danych, w której przechowywaliśmy dane odnośnie pikseli. Używana przez nas struktura \begin{verbatim} boost::multi_array \end{verbatim} korzystała z 3 wymiarowej indeksacji. Zgodnie z tym co przeczytaliśmy w dokumentacji, klasa ta miała przechowywać dane w jednym, ciągłym bloku pamięci. Poprzez zmianę tej struktury na zwykłą tablicę int* uzyskaliśmy 30 krotne przyśpieszenie w przetwarzaniu danych (z 0.9 s do 0.03 s na klatkę).
 
-Uzyskana przez nas prędkość przetwarzania była zgodna z naszymi oczekiwaniami. Postanowiliśmy zatem skorzystać z przetwarzania danych z użyciem wielu wątków. Poprzez podział danych do przetworzenia na części zgodne z ilością wątków uzyskaliśmy dodatkowe przyśpieszenie. Z uwagi na koszt utworzenia wątków najlepsze wyniki uzyskaliśmy dla 2 wątków (czas przetwarzania klatki wynosił około 0.025 sekundy). 
+Uzyskana przez nas prędkość przetwarzania była zgodna z naszymi oczekiwaniami. Postanowiliśmy zatem skorzystać z przetwarzania danych z użyciem wielu wątków. Poprzez podział danych do przetworzenia na części zgodne z ilością wątków uzyskaliśmy dodatkowe przyśpieszenie. Z uwagi na koszt utworzenia wątków najlepsze wyniki uzyskaliśmy dla 2 wątków (czas przetwarzania klatki wynosił około 0.025 sekundy). Klatki te zostały przetworzone następującym kodem:
 
 \begin{verbatim}
     int threads = 2;
@@ -769,19 +804,55 @@ Uzyskana przez nas prędkość przetwarzania była zgodna z naszymi oczekiwaniam
     }
 \end{verbatim}
 
-Dodatkowo postanowiliśmy czytać następną klatkę źródłową w trakcie przetwarzania obecnej (jeśli jest to możliwe). Spowodowało to, że ostatecznie prędkość z jaką przetwarzamy klatki metodą najbliższego sąsiada wynosi około 0.02 sekundy, co daje nam możliwość przerabiania około 50 klatek na sekundę. Jest to wynik bardzo nas satysfakcjonujący.
+Gdzie:
+\begin{verbatim}
+    int threads = 2;
+    std::thread *tt = new std::thread[threads];
+\end{verbatim}
+
+ustala liczbę wątków i tworzy ich tablicę (thread pool),
+
+\begin{verbatim}
+    for(int t = 0; t < threads; ++t)
+    {
+        tt[t] = std::thread(CalculateFramePararel, inputFrame,
+        outputFrame,
+        (_targetQualityInfo->Height / threads) * t, 
+        (_targetQualityInfo->Height / threads) * (t + 1),
+        _sourceQualityInfo, _targetQualityInfo);
+    }
+\end{verbatim}
+
+rozpoczyna na każdym z wątków zadanie przetwarzania klatki na odpowiednim zakresie - od \begin{verbatim}
+    (_targetQualityInfo->Height / threads) * t
+\end{verbatim}
+do 
+\begin{verbatim}
+    (_targetQualityInfo->Height / threads) * (t + 1))
+\end{verbatim}
+przy użyciu metody \emph{CalculateFramePararel},
+
+\begin{verbatim}
+    for (int t = 0; t < threads; ++t)
+    {
+        tt[t].join();
+    }
+\end{verbatim}
+czeka na zakończenie pracy we wszystkich wątkach.
+
+Dodatkowo postanowiliśmy czytać następną klatkę źródłową w trakcie przetwarzania obecnej (jeśli jest to możliwe). Spowodowało to, że ostatecznie prędkość z jaką przetwarzamy klatki metodą najbliższego sąsiada wynosi około 0.02 sekundy, co daje nam możliwość przerabiania około 50 klatek na sekundę. Jest to dla nas wynik satysfakcjonujący.
 
 \section{Podsumowanie}
 \subsection{Napotkane problemy podczas tworzenia projektu}
 \subsubsection{Problemy z wybranymi narzędziami do odczytu i zapisu plików wideo}
 Praca z bibliotekami \emph{FFmpeg}-a okazała się problematyczna. Wynikało to częściowo z faktu iż napisane one zostały w języku C - brak obiektowego podejścia wymagał tworzenia, inicjalizację oraz zarządzania wieloma zmiennymi i wskaźnikami. Większym problemem okazał się jednakże brak rzetelnej dokumentacji oraz innych pomocy naukowych. Duża część funkcjonalności opisana jest powierzchownie, niektóre metody nie posiadają jakichkolwiek opisów. Zbiór przykładów użycia tych bibliotek sprowadzał się do kilku plików źródłowych. W przypadku jakichkolwiek błędów czy wyników funkcji nie będących tymi jakimi oczekiwaliśmy pomocy musieliśmy szukać na forach internetowych oraz wzorować się na kodzie źródłowym innych darmowych programów korzystających z \emph{FFmpeg}-a. Niestety ze względu an wybrany przez nas język programowania oraz używane przez nas środowisko programistyczne nie byliśmy w stanie zastosować rozwiązań konkurencyjnych.
 
-Problemem okazało się również uzyskanie niektórych danych o pliku wideo wykorzystując biblioteki \emph{FFmpeg}-a. Ze względu na różnorodność i ogrom różnych formatów filmów biblioteki te nie są wstanie określić ich w ogóle lub wyznaczyć je dokładnie. Wynika to z faktu, iż niektóre z formatów nie przechowują tych wartości. Przykładem informacji która nie może być wyznaczona w prosty sposób jest całkowita ilość klatek - może ona być uzyskana jedynie poprzez odczytanie całego pliku klatka po klatce lub estymowana na podstawie informacji o długości czasowej strumienia wideo i ilości klatek wyświetlanych na sekundę.
+Problemem okazało się również uzyskanie niektórych danych o pliku wideo wykorzystując biblioteki \emph{FFmpeg}-a. Ze względu na różnorodność i ogrom różnych formatów filmów biblioteki te nie są w stanie określić ich w ogóle lub wyznaczyć je dokładnie. Wynika to z faktu, iż niektóre z formatów nie przechowują tych wartości. Przykładem informacji, która nie może być wyznaczona w prosty sposób jest całkowita ilość klatek - może ona być uzyskana jedynie poprzez odczytanie całego pliku klatka po klatce lub estymowana na podstawie informacji o długości czasowej strumienia wideo i ilości klatek wyświetlanych na sekundę.
 
 \subsubsection{Problemy z technologią}
-Użyty przez nas język $C++$ jest językiem którego cechy były nam dobrze znane. Pomimo naszej znajomości języka musieliśmy być bardzo uważni w momencie gdy ręcznie zarządzaliśmy pamięcią. Brak wspomagania od strony języka odnośnie możliwych wycieków pamięci powodował mozolne poszukiwania miejsc, które mogły powodować problemy z ewentualnymi wyciekami pamięci. 
+Użyty przez nas język $C++$ jest językiem którego cechy były nam dobrze znane. Pomimo naszej znajomości języka musieliśmy być bardzo uważni w momencie, gdy ,,ręcznie'' zarządzaliśmy pamięcią. Brak wspomagania od strony języka odnośnie możliwych wycieków pamięci powodował mozolne poszukiwania miejsc, które mogły powodować problemy z ewentualnymi wyciekami pamięci. 
 
-Kolejną problematyczną częścią języka jest sposób komunikowania o występujących błędach. W nowoczesnych językach wiadomości odnośnie występujących błędów dają o nich bardzo dużą ilość informacji takich jak wartość przez którą wystąpił błąd, wartość która była oczekiwana oraz możliwe rozwiązanie problemu. Wiadomości które otrzymujemy w języku $C++$ są mało przydatne, ponieważ dostajemy tylko informację odnośnie adresu pamięci pod którym wystąpił błąd i jakiego typu był to błąd.
+Kolejną problematyczną częścią języka jest sposób komunikowania o występujących błędach. W nowoczesnych językach wiadomości odnośnie występujących błędów dają o nich bardzo dużą ilość informacji takich jak wartość przez którą wystąpił błąd, wartość która była oczekiwana oraz możliwe rozwiązanie problemu. Wiadomości które otrzymujemy w języku $C++$ są mało przydatne, ponieważ dostajemy tylko informację odnośnie adresu pamięci, pod którym wystąpił błąd i jakiego typu był to błąd.
 
 Problemem wynikającym z działań optymalizacyjnych był problem z odwoływaniem się do właściwych komórek pamięci w tablicy jednowymiarowej. W tablicy wielowymiarowej wybieranie właściwej komórki pamięci jest proste i intuicyjne. W przypadku tablicy jednowymiarowej prawidłowe odwoływanie się do właściwych komórek pamięci wymagało obliczania właściwego indeksu, co przy z założenia wielowymiarowych danych było problematyczne.
 
@@ -789,7 +860,7 @@ Problemem wynikającym z działań optymalizacyjnych był problem z odwoływanie
 Algorytmy przez nas stosowane są ogólnym rozwiązaniem matematycznym, jednakże w trakcie ich implementacji napotkaliśmy pewne problemy. Niektóre z zaimplementowanych przez nas algorytmów wymagały danych w specyficznej dziedzinie (w przypadku interpolacji bi-kubicznej wymagana była macierz źródłowa rozmiaru 4 na 4). Sprawiało to problemy w indeksach przy krawędzi, gdzie próba wyciągnięcia wartości z pamięci spowodowałaby nieprawidłowe odwołanie. Przez to musieliśmy zastosować specyficzne rozwiązania polegające na jednej z wielu możliwości: przekopiowaniu wartości źródłowych, zastosowaniu innego algorytmu lub innej, zmodyfikowanej wersji obecnego algorytmu.
 
 \subsection{Możliwości dalszego rozwoju}
-Mimo stworzenia aplikacji z myślą o dalszym rozwoju musieliśmy uprościć niektóre aspekty ze względu na ograniczające nas ramy czasowe. Najważniejszym zagadnieniem które rozwijalibyśmy w pierwszej kolejności byłoby stworzenie rozwiązania ładującego dostępne algorytmy na podstawie folderu z nimi, gdzie były by zamieszczone w postaci plików bibliotek dynamicznych (DLL).
+Mimo stworzenia aplikacji z myślą o dalszym rozwoju musieliśmy uprościć niektóre aspekty ze względu na ograniczające nas ramy czasowe. Najważniejszym zagadnieniem, które rozwijalibyśmy w pierwszej kolejności byłoby stworzenie rozwiązania ładującego dostępne algorytmy na podstawie folderu z nimi, gdzie zamieszczone byłyby implementacje algorytmów w postaci plików bibliotek dynamicznych (DLL).
 
 Kolejnym krokiem byłoby zwiększenie dostępnych algorytmów przekształcających klatki i ich ilość na sekundę.
 
@@ -797,15 +868,12 @@ Przy pewnym nakładzie pracy algorytmy dekodowania i kodowania można by wyposa�
 
 W przyszłości moglibyśmy dodać opcjonalne atrybuty dodatkowe, które mogłyby modyfikować działanie danego algorytmu, przez co jedna implementacja mogłaby korzystać z wielu możliwych opcji umożliwiających wpływających na obraz wynikowy.
 
-Aplikację można by było zmodyfikować tak aby pozwalała na zastosowanie wielu filtrów obrazu jednocześnie.
-
-Interfejs graficzny wzbogacić można by w obsługę wieku języków.
+Aplikację można by było zmodyfikować tak, aby pozwalała na zastosowanie wielu filtrów obrazu jednocześnie.
 
 \subsection{Wyniki działania algorytmów}
 Wyniki działania algorytmów jakie otrzymaliśmy były bliskie wynikom jakich się spodziewaliśmy. W przypadku stosunkowo niewielkiego zwiększania rozmiaru pojedynczej klatki i dużej źródłowej rozdzielczości przetwarzanych przez nas plików nie zauważyliśmy znaczących różnic między poszczególnymi algorytmami. Różnica była widoczna po bliższym przyjrzeniu się między algorytmem najbliższego sąsiada a resztą zaimplementowanych algorytmów. Różnica jakości klatki wynikowej między algorytmem interpolacji dwuliniowej a bi-kubicznej nie była widoczna. Według nas, algorytm interpolacji bi-kubicznej przez bardzo długi czas obliczeń oraz znikomą różnicę od znacznie szybszego algorytmu interpolacji dwuliniowej, nie jest on algorytmem godnym polecenia.
 
-Algorytmy zmieniające ilość klatek na sekundę także zwracały wyniki bliskie oczekiwanym. W trakcie dynamicznych scen gdzie występują gwałtowne ruchy postaci wytworzone klatki pośrednie były lekko widoczne w przypadku algorytmu interpolacji. W przypadku mniej dynamicznych scen, gdzie występują delikatne ruchy postaci klatki pośrednie nie są  widoczne a wrażenie większej płynności obrazu jest zauważalne. W przypadku algorytmu przeplotu efekt jest bardzo delikatnie widoczny, a wytworzone klatki pośrednie nie są wyraźnie widoczne. Oba algorytmy mają swoje zastosowania, jednakże algorytm interpolacji powinien być stosowany w mniej dynamicznych scenach, ale efekt z jego użycia będzie bardziej odczuwalny.
-
+Algorytmy zmieniające ilość klatek na sekundę także zwracały wyniki bliskie oczekiwanym. W trakcie dynamicznych scen gdzie występują gwałtowne ruchy postaci wytworzone klatki pośrednie były lekko widoczne w przypadku algorytmu interpolacji. W przypadku mniej dynamicznych scen, gdzie występują delikatne ruchy postaci klatki pośrednie nie są  widoczne a wrażenie większej płynności obrazu jest zauważalne. W przypadku algorytmu przeplotu efekt jest bardzo delikatnie widoczny, a wytworzone klatki pośrednie nie są wyraźnie widoczne. 
 
 
 \begin{thebibliography}{12}

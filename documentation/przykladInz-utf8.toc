@@ -24,32 +24,32 @@
 \contentsline {subsection}{\numberline {2.4}\kernsubsekcyjny Kodowanie}{18}
 \contentsline {section}{\numberline {3}\kernsekcyjny Interfejs u\IeC {\.z}ytkownika}{21}
 \contentsline {section}{\numberline {4}\kernsekcyjny Struktura programu}{23}
-\contentsline {subsection}{\numberline {4.1}\kernsubsekcyjny Komunikacja z u\IeC {\.z}ytkownikiem}{24}
+\contentsline {subsection}{\numberline {4.1}\kernsubsekcyjny Komunikacja z u\IeC {\.z}ytkownikiem}{23}
 \contentsline {subsection}{\numberline {4.2}\kernsubsekcyjny Implementacja procesu dekodowania/kodowania przy pomocy bibliotek FFmpeg}{25}
 \contentsline {subsubsection}{\numberline {4.2.1}\kernsubsubsekcyjny Demultipleksowanie i dekodowanie}{25}
 \contentsline {subsubsection}{\numberline {4.2.2}\kernsubsubsekcyjny Kodowanie i multipleksowanie}{27}
 \contentsline {subsection}{\numberline {4.3}\kernsubsekcyjny Organizacja algorytm\IeC {\'o}w i sposobu przekszta\IeC {\l }cania plik\IeC {\'o}w wideo}{28}
 \contentsline {subsubsection}{\numberline {4.3.1}\kernsubsubsekcyjny IFrameReader - odczytywanie informacji z pliku wideo}{29}
 \contentsline {subsubsection}{\numberline {4.3.2}\kernsubsubsekcyjny FrameEnhancerBase i IFrameEnhancerHeader - ulepszanie pojedynczej klatki}{30}
-\contentsline {subsubsection}{\numberline {4.3.3}\kernsubsubsekcyjny FpsEnhancerBase i IFpsEnhancerHeader - tworzenie nowych klatek po\IeC {\'s}rednich}{32}
-\contentsline {section}{\numberline {5}\kernsekcyjny Algorytmy}{35}
-\contentsline {subsection}{\numberline {5.1}\kernsubsekcyjny Ulepszanie pojedynczej klatki}{35}
-\contentsline {subsubsection}{\numberline {5.1.1}\kernsubsubsekcyjny Algorytm najbli\IeC {\.z}szego s\IeC {\k a}siada}{36}
-\contentsline {subsubsection}{\numberline {5.1.2}\kernsubsubsekcyjny Algorytm interpolacji dwuliniowej}{37}
-\contentsline {subsubsection}{\numberline {5.1.3}\kernsubsubsekcyjny Algorytm interpolacji bikubicznej}{39}
-\contentsline {subsubsection}{\numberline {5.1.4}\kernsubsubsekcyjny Algorytm splotu}{40}
-\contentsline {subsubsection}{\numberline {5.1.5}\kernsubsubsekcyjny Normalizacja}{42}
-\contentsline {subsection}{\numberline {5.2}\kernsubsekcyjny Zwi\IeC {\k e}kszanie ilo\IeC {\'s}ci klatek na sekund\IeC {\k e}}{43}
-\contentsline {subsubsection}{\numberline {5.2.1}\kernsubsubsekcyjny Algorytm interpolacji}{43}
-\contentsline {subsubsection}{\numberline {5.2.2}\kernsubsubsekcyjny Algorytm przeplotu}{44}
+\contentsline {subsubsection}{\numberline {4.3.3}\kernsubsubsekcyjny FpsEnhancerBase i IFpsEnhancerHeader - tworzenie nowych klatek po\IeC {\'s}rednich}{33}
+\contentsline {section}{\numberline {5}\kernsekcyjny Algorytmy}{37}
+\contentsline {subsection}{\numberline {5.1}\kernsubsekcyjny Ulepszanie pojedynczej klatki}{37}
+\contentsline {subsubsection}{\numberline {5.1.1}\kernsubsubsekcyjny Algorytm najbli\IeC {\.z}szego s\IeC {\k a}siada}{38}
+\contentsline {subsubsection}{\numberline {5.1.2}\kernsubsubsekcyjny Algorytm interpolacji dwuliniowej}{39}
+\contentsline {subsubsection}{\numberline {5.1.3}\kernsubsubsekcyjny Algorytm interpolacji bi-kubicznej}{41}
+\contentsline {subsubsection}{\numberline {5.1.4}\kernsubsubsekcyjny Algorytm splotu}{42}
+\contentsline {subsubsection}{\numberline {5.1.5}\kernsubsubsekcyjny Normalizacja}{45}
+\contentsline {subsection}{\numberline {5.2}\kernsubsekcyjny Zwi\IeC {\k e}kszanie ilo\IeC {\'s}ci klatek na sekund\IeC {\k e}}{45}
+\contentsline {subsubsection}{\numberline {5.2.1}\kernsubsubsekcyjny Algorytm interpolacji}{45}
+\contentsline {subsubsection}{\numberline {5.2.2}\kernsubsubsekcyjny Algorytm przeplotu}{46}
 \contentsline {section}{\numberline {6}\kernsekcyjny Optymalizacja i testowanie}{47}
 \contentsline {subsection}{\numberline {6.1}\kernsubsekcyjny Procedura testowania i ich organizacja}{47}
-\contentsline {subsection}{\numberline {6.2}\kernsubsekcyjny Optymalizacja algorytm\IeC {\'o}w i uk\IeC {\l }adu danych}{48}
-\contentsline {section}{\numberline {7}\kernsekcyjny Podsumowanie}{51}
-\contentsline {subsection}{\numberline {7.1}\kernsubsekcyjny Napotkane problemy podczas tworzenia projektu}{51}
-\contentsline {subsubsection}{\numberline {7.1.1}\kernsubsubsekcyjny Problemy z wybranymi narz\IeC {\k e}dziami do odczytu i zapisu plik\IeC {\'o}w wideo}{51}
-\contentsline {subsubsection}{\numberline {7.1.2}\kernsubsubsekcyjny Problemy z technologi\IeC {\k a}}{51}
-\contentsline {subsubsection}{\numberline {7.1.3}\kernsubsubsekcyjny Problemy z algorytmami}{52}
-\contentsline {subsection}{\numberline {7.2}\kernsubsekcyjny Mo\IeC {\.z}liwo\IeC {\'s}ci dalszego rozwoju}{52}
-\contentsline {subsection}{\numberline {7.3}\kernsubsekcyjny Wyniki dzia\IeC {\l }ania algorytm\IeC {\'o}w}{53}
-\contentsline {section}{Literatura}{55}
+\contentsline {subsection}{\numberline {6.2}\kernsubsekcyjny Optymalizacja algorytm\IeC {\'o}w i uk\IeC {\l }adu danych}{49}
+\contentsline {section}{\numberline {7}\kernsekcyjny Podsumowanie}{53}
+\contentsline {subsection}{\numberline {7.1}\kernsubsekcyjny Napotkane problemy podczas tworzenia projektu}{53}
+\contentsline {subsubsection}{\numberline {7.1.1}\kernsubsubsekcyjny Problemy z wybranymi narz\IeC {\k e}dziami do odczytu i zapisu plik\IeC {\'o}w wideo}{53}
+\contentsline {subsubsection}{\numberline {7.1.2}\kernsubsubsekcyjny Problemy z technologi\IeC {\k a}}{53}
+\contentsline {subsubsection}{\numberline {7.1.3}\kernsubsubsekcyjny Problemy z algorytmami}{54}
+\contentsline {subsection}{\numberline {7.2}\kernsubsekcyjny Mo\IeC {\.z}liwo\IeC {\'s}ci dalszego rozwoju}{54}
+\contentsline {subsection}{\numberline {7.3}\kernsubsekcyjny Wyniki dzia\IeC {\l }ania algorytm\IeC {\'o}w}{55}
+\contentsline {section}{Literatura}{57}
