@@ -30,7 +30,7 @@ public:
 		//WriterTest();
 		//BiCubicSpeedTest();
 		//NOPToFileTest();
-		WriterTest();
+		//WriterTest();
 		//BiCubicSpeedTest();
 	}
 

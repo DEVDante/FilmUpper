@@ -61,3 +61,19 @@ int FilmUpperController::startProcess(std::string fileSourcePath, std::string fi
 
 	return 0;
 }
+
+uint64_t FilmUpperController::getVideoDuration(std::string fileName)
+{
+	FrameReader *frameReader = new FrameReader(fileName);
+	uint64_t temp = frameReader->getVideoDuration();
+	delete frameReader;
+	return temp;
+}
+
+int FilmUpperController::getFrameRate(std::string fileName)
+{
+	FrameReader *frameReader = new FrameReader(fileName);
+	int temp = frameReader->GetVideoFormatInfo()->FrameRate->getNumericalRate();
+	delete frameReader;
+	return temp;
+}
