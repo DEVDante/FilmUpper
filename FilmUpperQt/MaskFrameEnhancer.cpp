@@ -42,6 +42,7 @@ VideoFrame* MaskFrameEnhancer::ReadNextEnhancedFrame()
 
 void MaskFrameEnhancer::CalculateFramePararel(VideoFrame* input, VideoFrame* output, int startRow, int endRow, FilmQualityInfo* sourceQ, FilmQualityInfo* targetQ)
 {
+
 	int sum = 0;
 
 	for (int cChannel = 0; cChannel < 3; cChannel++)

@@ -62,6 +62,11 @@ bool FrameReader::AreFramesLeft()
     return true;
 }
 
+uint64_t FrameReader::getVideoDuration()
+{
+	return formatCTX->duration/AV_TIME_BASE;
+}
+
 VideoFrame* FrameReader::ReadNextFrame()
 {
     int frameFinished;

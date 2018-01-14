@@ -1,5 +1,5 @@
 #pragma once
-#include "FrameEnhancerBase.h"
+#include "InterpolationFrameEnhancer.h"
 #include <thread>
 #include <algorithm>
 #include "VFHack.h"

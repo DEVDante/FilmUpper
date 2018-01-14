@@ -31,6 +31,7 @@ public:
 	FrameReader( std::string filename );
 	~FrameReader();
 	bool AreFramesLeft() override;
+	uint64_t getVideoDuration();
 	VideoFrame * ReadNextFrame() override;
 	FilmQualityInfo * GetVideoFormatInfo() override;
 };
