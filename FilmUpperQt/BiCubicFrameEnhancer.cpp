@@ -8,6 +8,7 @@ BiCubicFrameEnhancer::BiCubicFrameEnhancer(IFrameReader * inputFrameReader, Film
 	_framePrefetch = std::thread(PrefetchFrame, inputFrameReader, _nextFrame);
 
 	_threads = std::thread::hardware_concurrency();
+	_threads = _threads > 0 ? _threads : 1;
 
 	_threadPool = new std::thread[_threads];
 }
