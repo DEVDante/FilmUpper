@@ -7,9 +7,9 @@ BiCubicFrameEnhancer::BiCubicFrameEnhancer(IFrameReader * inputFrameReader, Film
 	_nextFrame = new VFHack;
 	_framePrefetch = std::thread(PrefetchFrame, inputFrameReader, _nextFrame);
 
-	threads = std::thread::hardware_concurrency();
+	_threads = std::thread::hardware_concurrency();
 
-	threadPoll = new std::thread[threads];
+	_threadPool = new std::thread[_threads];
 }
 
 VideoFrame * BiCubicFrameEnhancer::ReadNextEnhancedFrame()
@@ -27,14 +27,14 @@ VideoFrame * BiCubicFrameEnhancer::ReadNextEnhancedFrame()
 
 	_framePrefetch = std::thread(PrefetchFrame, _inputFrameStream, _nextFrame);
 
-	for (int t = 0; t < threads; ++t)
+	for (int t = 0; t < _threads; ++t)
 	{
-		threadPoll[t] = std::thread(CalculateFramePararel, inputFrame, outputFrame, (_targetQualityInfo->Height / threads) * t, (_targetQualityInfo->Height / threads) * (t + 1), _sourceQualityInfo, _targetQualityInfo);
+		_threadPool[t] = std::thread(CalculateFramePararel, inputFrame, outputFrame, (_targetQualityInfo->Height / _threads) * t, (_targetQualityInfo->Height / _threads) * (t + 1), _sourceQualityInfo, _targetQualityInfo);
 	}
 
-	for (int t = 0; t < threads; ++t)
+	for (int t = 0; t < _threads; ++t)
 	{
-		threadPoll[t].join();
+		_threadPool[t].join();
 	}
 
 	delete inputFrame;
@@ -48,7 +48,7 @@ bool BiCubicFrameEnhancer::AreFramesLeft()
 
 BiCubicFrameEnhancer::~BiCubicFrameEnhancer()
 {
-	delete[] threadPoll;
+	delete[] _threadPool;
 	delete _nextFrame;
 }
 

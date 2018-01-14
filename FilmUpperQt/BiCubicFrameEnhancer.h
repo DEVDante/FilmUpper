@@ -19,6 +19,6 @@ private:
 	VFHack* _nextFrame;
 	bool _framesLeft = true;
 	inline static int calculateSplain(int a, int b, int c, int d, double ratio);
-	std::thread *threadPoll;
-	int threads = 4;
+	std::thread* _threadPool;
+	int _threads = 4;
 };
