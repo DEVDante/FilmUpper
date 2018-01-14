@@ -18,14 +18,14 @@ VideoFrame* NNFrameEnhancer::ReadNextEnhancedFrame()
 	else
 		_framesLeft = false;
 
-	for(int t = 0; t < threads; ++t)
+	for(int t = 0; t < _threads; ++t)
 	{
-		threadPoll[t] = std::thread(CalculateFramePararel, inputFrame, outputFrame, (_targetQualityInfo->Height / threads) * t, (_targetQualityInfo->Height / threads) * (t + 1),_sourceQualityInfo, _targetQualityInfo);
+		_threadPool[t] = std::thread(CalculateFramePararel, inputFrame, outputFrame, (_targetQualityInfo->Height / _threads) * t, (_targetQualityInfo->Height / _threads) * (t + 1),_sourceQualityInfo, _targetQualityInfo);
 	}
 
-	for (int t = 0; t < threads; ++t)
+	for (int t = 0; t < _threads; ++t)
 	{
-		threadPoll[t].join();
+		_threadPool[t].join();
 	}
 	
 	delete inputFrame;
@@ -68,12 +68,12 @@ NNFrameEnhancer::NNFrameEnhancer(IFrameReader * inputFrameReader, FilmQualityInf
 {
 	_nextFrame = new VFHack;
 	_framePrefetch = std::thread(PrefetchFrame, inputFrameReader, _nextFrame);
-	threads = (std::thread::hardware_concurrency() / 4) + 1;
-	threadPoll = new std::thread[threads];
+	_threads = (std::thread::hardware_concurrency() / 4) + 1;
+	_threadPool = new std::thread[_threads];
 }
 
 NNFrameEnhancer::~NNFrameEnhancer()
 {
-	delete[] threadPoll;
+	delete[] _threadPool;
 	delete _nextFrame;
 }

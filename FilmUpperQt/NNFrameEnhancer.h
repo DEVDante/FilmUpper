@@ -17,6 +17,6 @@ private:
 	std::thread _framePrefetch;
 	VFHack* _nextFrame;
 	bool _framesLeft = true;
-	std::thread *threadPoll;
-	int threads = 4;
+	std::thread* _threadPool;
+	int _threads = 4;
 };

@@ -792,7 +792,9 @@ Uzyskana przez nas prędkość przetwarzania była zgodna z naszymi oczekiwaniam
 
     for(int t = 0; t < threads; ++t)
     {
-        tt[t] = std::thread(CalculateFramePararel, inputFrame, outputFrame,
+        tt[t] = std::thread(CalculateFramePararel, 
+        inputFrame, 
+        outputFrame,
         (_targetQualityInfo->Height / threads) * t, 
         (_targetQualityInfo->Height / threads) * (t + 1),
         _sourceQualityInfo, _targetQualityInfo);
@@ -823,14 +825,8 @@ ustala liczbę wątków i tworzy ich tablicę (thread pool),
     }
 \end{verbatim}
 
-rozpoczyna na każdym z wątków zadanie przetwarzania klatki na odpowiednim zakresie - od \begin{verbatim}
-    (_targetQualityInfo->Height / threads) * t
-\end{verbatim}
-do 
-\begin{verbatim}
-    (_targetQualityInfo->Height / threads) * (t + 1))
-\end{verbatim}
-przy użyciu metody \emph{CalculateFramePararel},
+rozpoczyna na każdym z wątków zadanie przetwarzania klatki na odpowiednim zakresie - od \verb|(_targetQualityInfo->Height / threads) * t|
+do \\\verb|(_targetQualityInfo->Height / threads) * (t + 1))| przy użyciu metody  \\\verb|CalculateFramePararel|,
 
 \begin{verbatim}
     for (int t = 0; t < threads; ++t)
