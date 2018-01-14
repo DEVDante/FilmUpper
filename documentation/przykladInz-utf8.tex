@@ -160,16 +160,10 @@ Interfejs naszej aplikacji zbudowaliśmy w oparciu o zbiór bibliotek i narzędz
 \caption{Główny interfejs programu}
 \label{fig:MainInt}
 \end{figure}
-Interfejs prosi użytkownika o podanie pliku źródłowego oraz pliku docelowego (rysunek \ref{fig:MainInt}). W tym celu może on skorzystać z odpowiednich pól wpisując do nich ścieżki plików, wykonując akcję ,,przeciąg-upuść'' na te pola lub  korzystając z typowego okna wyboru pliku.
-\begin{figure}
-	%% add pic
-\end{figure}
-Po wyborze parametrów obróbki filmu, użytkownik może przejść do procesu przetwarzania pliku klikając w odpowiedni przycisk. Podczas procesu obróbki program stara się wyświetlić aktualny jej postęp.
+Interfejs prosi użytkownika o podanie pliku źródłowego oraz pliku docelowego (rysunek \ref{fig:MainInt}). W tym celu może on skorzystać z odpowiednich pól wpisując do nich ścieżki plików lub  korzystając z typowego okna wyboru pliku.
 
-Po wykonaniu procesu przetwarzania użytkownik ma opcję porównania jakości filmu źródłowego z tym otrzymanym w wyniku działania wybranego algorytmu. W naszej aplikacji odbywa się to poprzez wyświetlenie obu filmów obok siebie w nowym oknie programu.
-\begin{figure}
-	%% add pic
-\end{figure}
+
+Po wyborze parametrów obróbki filmu, użytkownik może przejść do procesu przetwarzania pliku klikając w odpowiedni przycisk. Podczas procesu obróbki program stara się wyświetlić aktualny jej postęp.
 
 Do powiadamiania użytkownika o ewentualnych błędach programu zastosowaliśmy mechanizm \emph{,,sygnałów i slotów''} bibliotek \emph{Qt}. 
 \begin{verbatim}
@@ -884,6 +878,7 @@ Algorytmy zmieniające ilość klatek na sekundę także zwracały wyniki bliski
 \bibitem{InterpolationWiki}Interpolacja w przetwarzaniu danych wielowymiarowych, https://en.wikipedia.org/wiki/Multivariate\_interpolation [dostępne: 11.01.2018]
 \bibitem{BicubicSpline} Cristian Constantin Lalescu, \emph{Two hierarchies of spline interpolations.  Practical algorithms for multivariate higher order splines.}, https://arxiv.org/pdf/0905.3564.pdf [dostępne: 11.01.2018]
 \bibitem{YUVweb} Charles Poynton - Video engineering, http://poynton.ca/Poynton-video-eng.html [dostępne: 11.01.2018]
+\bibitem{QtDoc} Qt 5.10 Documentation, http://doc.qt.io/qt-5/index.html [dostępne: 11.01.2018]
 
 \end{thebibliography}
 \end{document}
