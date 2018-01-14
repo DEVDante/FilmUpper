@@ -198,7 +198,14 @@ void FilmUpperQt::process()
 	{
 		_duration = _controler->getVideoDuration(inTBox->text().toStdString());
 
-		_controler->startProcess(inTBox->text().toStdString(), outTBox->text().toStdString(), frameEnh, fpsEnh, quality);
+		_controler->startProcess(inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);
+
+		QProcess muxProcess(this);
+		QString program = "ffmpeg.exe";
+		QStringList arguments;
+		arguments << "-i" << outTBox->text() << "-i" << "temp.avi" << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << outTBox->text();
+
+		muxProcess.start(program, arguments);
 	}
 	catch (const std::exception& e)
 	{

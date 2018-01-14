@@ -21,6 +21,7 @@
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
+#include <QProcess>
 
 #include "FilmUpperController.h"
 #include "IFrameEnhancerHeader.h"
