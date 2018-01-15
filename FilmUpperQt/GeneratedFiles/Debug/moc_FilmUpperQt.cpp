@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FilmUpperQt_t {
-    QByteArrayData data[24];
-    char stringdata0[257];
+    QByteArrayData data[30];
+    char stringdata0[345];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -54,7 +54,13 @@ QT_MOC_LITERAL(19, 221, 9), // "showError"
 QT_MOC_LITERAL(20, 231, 1), // "s"
 QT_MOC_LITERAL(21, 233, 7), // "process"
 QT_MOC_LITERAL(22, 241, 6), // "lockUI"
-QT_MOC_LITERAL(23, 248, 8) // "unlockUI"
+QT_MOC_LITERAL(23, 248, 8), // "unlockUI"
+QT_MOC_LITERAL(24, 257, 21), // "procesedSecondsUpdate"
+QT_MOC_LITERAL(25, 279, 15), // "secondProcessed"
+QT_MOC_LITERAL(26, 295, 16), // "processCompleted"
+QT_MOC_LITERAL(27, 312, 14), // "errorInProcess"
+QT_MOC_LITERAL(28, 327, 15), // "std::exception*"
+QT_MOC_LITERAL(29, 343, 1) // "e"
 
     },
     "FilmUpperQt\0openedInFile\0\0fname\0fps\0"
@@ -63,7 +69,10 @@ QT_MOC_LITERAL(23, 248, 8) // "unlockUI"
     "openOutputFile\0changeInValues\0"
     "changeOutValues\0changeFpsValues\0"
     "changeRes\0index\0getVideoData\0showAbout\0"
-    "showError\0s\0process\0lockUI\0unlockUI"
+    "showError\0s\0process\0lockUI\0unlockUI\0"
+    "procesedSecondsUpdate\0secondProcessed\0"
+    "processCompleted\0errorInProcess\0"
+    "std::exception*\0e"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,7 +82,7 @@ static const uint qt_meta_data_FilmUpperQt[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   14, // methods
+      20,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -81,25 +90,28 @@ static const uint qt_meta_data_FilmUpperQt[] = {
        5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   99,    2, 0x06 /* Public */,
-       5,    1,  104,    2, 0x06 /* Public */,
-       6,    1,  107,    2, 0x06 /* Public */,
-       8,    0,  110,    2, 0x06 /* Public */,
-       9,    0,  111,    2, 0x06 /* Public */,
+       1,    2,  114,    2, 0x06 /* Public */,
+       5,    1,  119,    2, 0x06 /* Public */,
+       6,    1,  122,    2, 0x06 /* Public */,
+       8,    0,  125,    2, 0x06 /* Public */,
+       9,    0,  126,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      10,    0,  112,    2, 0x08 /* Private */,
-      11,    0,  113,    2, 0x08 /* Private */,
-      12,    1,  114,    2, 0x08 /* Private */,
-      13,    1,  117,    2, 0x08 /* Private */,
-      14,    1,  120,    2, 0x08 /* Private */,
-      15,    1,  123,    2, 0x08 /* Private */,
-      17,    1,  126,    2, 0x08 /* Private */,
-      18,    0,  129,    2, 0x08 /* Private */,
-      19,    1,  130,    2, 0x08 /* Private */,
-      21,    0,  133,    2, 0x08 /* Private */,
-      22,    0,  134,    2, 0x08 /* Private */,
-      23,    0,  135,    2, 0x08 /* Private */,
+      10,    0,  127,    2, 0x08 /* Private */,
+      11,    0,  128,    2, 0x08 /* Private */,
+      12,    1,  129,    2, 0x08 /* Private */,
+      13,    1,  132,    2, 0x08 /* Private */,
+      14,    1,  135,    2, 0x08 /* Private */,
+      15,    1,  138,    2, 0x08 /* Private */,
+      17,    1,  141,    2, 0x08 /* Private */,
+      18,    0,  144,    2, 0x08 /* Private */,
+      19,    1,  145,    2, 0x08 /* Private */,
+      21,    0,  148,    2, 0x08 /* Private */,
+      22,    0,  149,    2, 0x08 /* Private */,
+      23,    0,  150,    2, 0x08 /* Private */,
+      24,    1,  151,    2, 0x08 /* Private */,
+      26,    0,  154,    2, 0x08 /* Private */,
+      27,    1,  155,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::Int,    3,    4,
@@ -121,6 +133,9 @@ static const uint qt_meta_data_FilmUpperQt[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   25,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 28,   29,
 
        0        // eod
 };
@@ -148,6 +163,9 @@ void FilmUpperQt::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 14: _t->process(); break;
         case 15: _t->lockUI(); break;
         case 16: _t->unlockUI(); break;
+        case 17: _t->procesedSecondsUpdate((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: _t->processCompleted(); break;
+        case 19: _t->errorInProcess((*reinterpret_cast< std::exception*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -216,13 +234,13 @@ int FilmUpperQt::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 17)
+        if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 17;
+        _id -= 20;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 17)
+        if (_id < 20)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 17;
+        _id -= 20;
     }
     return _id;
 }
