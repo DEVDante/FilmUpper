@@ -171,6 +171,7 @@ void FilmUpperQt::process()
 	try
 	{
 		_duration = _controler->getVideoDuration(inTBox->text().toStdString());
+		progressBar->setMaximum(_duration);
 
 		auto worker = _controler->startProcess();
 		_processThread = new QThread;
@@ -229,6 +230,7 @@ void FilmUpperQt::processCompleted()
 
 	muxProcess.start(program, arguments);
 	muxProcess.waitForFinished(-1);
+	progressBar->setValue(0);
 	emit processEnded();
 }
 
