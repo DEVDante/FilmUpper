@@ -26,9 +26,6 @@
     <ClCompile Include="FrameReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FilmUpperQt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FilmUpperController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_FilmUpperQt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FilmUpperView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,10 +140,10 @@
   <ItemGroup>
     <CustomBuild Include="FilmUpperQt.ui" />
     <CustomBuild Include="FilmUpperQt.qrc" />
-    <CustomBuild Include="FilmUpperQt.h">
+    <CustomBuild Include="FilmUpperController.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="FilmUpperController.h">
+    <CustomBuild Include="FilmUpperView.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

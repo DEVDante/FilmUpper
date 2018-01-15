@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FilmUpperQtClass</class>
- <widget class="QMainWindow" name="FilmUpperQtClass">
+ <class>FilmUpperViewClass</class>
+ <widget class="QMainWindow" name="FilmUpperViewClass">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -307,7 +307,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="FilmUpperQt.qrc"/>
+  <include location="FilmUpperView.qrc"/>
  </resources>
  <connections/>
 </ui>

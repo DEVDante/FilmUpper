@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
     <Keyword>Qt4VSv1.0</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -21,7 +22,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -72,7 +73,7 @@
   <ItemGroup>
     <ClCompile Include="BiCubicFrameEnhancer.cpp" />
     <ClCompile Include="FilmUpperController.cpp" />
-    <ClCompile Include="FilmUpperQt.cpp" />
+    <ClCompile Include="FilmUpperView.cpp" />
     <ClCompile Include="FrameReader.cpp" />
     <ClCompile Include="FrameWriter.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_FilmUpperController.cpp">
@@ -95,7 +96,7 @@
     <ClCompile Include="NNFrameEnhancer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="FilmUpperQt.h">
+    <CustomBuild Include="FilmUpperView.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing FilmUpperQt.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>

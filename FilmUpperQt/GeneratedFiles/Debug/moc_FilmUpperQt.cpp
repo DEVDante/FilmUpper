@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'FilmUpperQt.h'
+** Meta object code from reading C++ file 'FilmUpperView.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../FilmUpperQt.h"
+#include "../../FilmUpperView.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'FilmUpperQt.h' doesn't include <QObject>."
+#error "The header file 'FilmUpperView.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.9.2. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,18 +20,18 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_FilmUpperQt_t {
+struct qt_meta_stringdata_FilmUpperView_t {
     QByteArrayData data[38];
     char stringdata0[476];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_FilmUpperQt_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_FilmUpperView_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_FilmUpperQt_t qt_meta_stringdata_FilmUpperQt = {
+static const qt_meta_stringdata_FilmUpperView_t qt_meta_stringdata_FilmUpperView = {
     {
-QT_MOC_LITERAL(0, 0, 11), // "FilmUpperQt"
+QT_MOC_LITERAL(0, 0, 11), // "FilmUpperView"
 QT_MOC_LITERAL(1, 12, 12), // "openedInFile"
 QT_MOC_LITERAL(2, 25, 0), // ""
 QT_MOC_LITERAL(3, 26, 5), // "fname"
@@ -87,7 +87,7 @@ QT_MOC_LITERAL(37, 474, 1) // "e"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_FilmUpperQt[] = {
+static const uint qt_meta_data_FilmUpperView[] = {
 
  // content:
        7,       // revision
@@ -149,10 +149,10 @@ static const uint qt_meta_data_FilmUpperQt[] = {
        0        // eod
 };
 
-void FilmUpperQt::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void FilmUpperView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        FilmUpperQt *_t = static_cast<FilmUpperQt *>(_o);
+        FilmUpperView *_t = static_cast<FilmUpperView *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->openedInFile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
@@ -180,43 +180,43 @@ void FilmUpperQt::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (FilmUpperQt::*_t)(QString , int );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperQt::openedInFile)) {
+            typedef void (FilmUpperView::*_t)(QString , int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperView::openedInFile)) {
                 *result = 0;
                 return;
             }
         }
         {
-            typedef void (FilmUpperQt::*_t)(QString );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperQt::openedOutFile)) {
+            typedef void (FilmUpperView::*_t)(QString );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperView::openedOutFile)) {
                 *result = 1;
                 return;
             }
         }
         {
-            typedef void (FilmUpperQt::*_t)(std::string );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperQt::unexpectedError)) {
+            typedef void (FilmUpperView::*_t)(std::string );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperView::unexpectedError)) {
                 *result = 2;
                 return;
             }
         }
         {
-            typedef void (FilmUpperQt::*_t)();
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperQt::processStarted)) {
+            typedef void (FilmUpperView::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperView::processStarted)) {
                 *result = 3;
                 return;
             }
         }
         {
-            typedef void (FilmUpperQt::*_t)();
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperQt::processEnded)) {
+            typedef void (FilmUpperView::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperView::processEnded)) {
                 *result = 4;
                 return;
             }
         }
         {
-            typedef void (FilmUpperQt::*_t)(std::string * , std::string * , IFrameEnhancerHeader * , IFpsEnhancerHeader * , FilmQualityInfo * );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperQt::start)) {
+            typedef void (FilmUpperView::*_t)(std::string * , std::string * , IFrameEnhancerHeader * , IFpsEnhancerHeader * , FilmQualityInfo * );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperView::start)) {
                 *result = 5;
                 return;
             }
@@ -224,26 +224,26 @@ void FilmUpperQt::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     }
 }
 
-const QMetaObject FilmUpperQt::staticMetaObject = {
-    { &QMainWindow::staticMetaObject, qt_meta_stringdata_FilmUpperQt.data,
-      qt_meta_data_FilmUpperQt,  qt_static_metacall, nullptr, nullptr}
+const QMetaObject FilmUpperView::staticMetaObject = {
+    { &QMainWindow::staticMetaObject, qt_meta_stringdata_FilmUpperView.data,
+      qt_meta_data_FilmUpperView,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *FilmUpperQt::metaObject() const
+const QMetaObject *FilmUpperView::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *FilmUpperQt::qt_metacast(const char *_clname)
+void *FilmUpperView::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_FilmUpperQt.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_FilmUpperView.stringdata0))
         return static_cast<void*>(this);
     return QMainWindow::qt_metacast(_clname);
 }
 
-int FilmUpperQt::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int FilmUpperView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -261,40 +261,40 @@ int FilmUpperQt::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void FilmUpperQt::openedInFile(QString _t1, int _t2)
+void FilmUpperView::openedInFile(QString _t1, int _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void FilmUpperQt::openedOutFile(QString _t1)
+void FilmUpperView::openedOutFile(QString _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 
 // SIGNAL 2
-void FilmUpperQt::unexpectedError(std::string _t1)
+void FilmUpperView::unexpectedError(std::string _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 
 // SIGNAL 3
-void FilmUpperQt::processStarted()
+void FilmUpperView::processStarted()
 {
     QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
 }
 
 // SIGNAL 4
-void FilmUpperQt::processEnded()
+void FilmUpperView::processEnded()
 {
     QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
 }
 
 // SIGNAL 5
-void FilmUpperQt::start(std::string * _t1, std::string * _t2, IFrameEnhancerHeader * _t3, IFpsEnhancerHeader * _t4, FilmQualityInfo * _t5)
+void FilmUpperView::start(std::string * _t1, std::string * _t2, IFrameEnhancerHeader * _t3, IFpsEnhancerHeader * _t4, FilmQualityInfo * _t5)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)), const_cast<void*>(reinterpret_cast<const void*>(&_t5)) };
     QMetaObject::activate(this, &staticMetaObject, 5, _a);

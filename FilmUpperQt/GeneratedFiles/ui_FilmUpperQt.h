@@ -30,7 +30,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_FilmUpperQtClass
+class Ui_FilmUpperViewClass
 {
 public:
     QAction *actionO_programie;
@@ -61,20 +61,20 @@ public:
     QMenu *menuInfo;
     QToolBar *mainToolBar;
 
-    void setupUi(QMainWindow *FilmUpperQtClass)
+    void setupUi(QMainWindow *FilmUpperViewClass)
     {
-        if (FilmUpperQtClass->objectName().isEmpty())
-            FilmUpperQtClass->setObjectName(QStringLiteral("FilmUpperQtClass"));
-        FilmUpperQtClass->resize(812, 275);
-        actionO_programie = new QAction(FilmUpperQtClass);
+        if (FilmUpperViewClass->objectName().isEmpty())
+            FilmUpperViewClass->setObjectName(QStringLiteral("FilmUpperViewClass"));
+        FilmUpperViewClass->resize(812, 275);
+        actionO_programie = new QAction(FilmUpperViewClass);
         actionO_programie->setObjectName(QStringLiteral("actionO_programie"));
-        actionOtw_rz_plik_wej_ciowy = new QAction(FilmUpperQtClass);
+        actionOtw_rz_plik_wej_ciowy = new QAction(FilmUpperViewClass);
         actionOtw_rz_plik_wej_ciowy->setObjectName(QStringLiteral("actionOtw_rz_plik_wej_ciowy"));
-        actionOtw_rz_plik_wyj_ciowy = new QAction(FilmUpperQtClass);
+        actionOtw_rz_plik_wyj_ciowy = new QAction(FilmUpperViewClass);
         actionOtw_rz_plik_wyj_ciowy->setObjectName(QStringLiteral("actionOtw_rz_plik_wyj_ciowy"));
-        actionZamknij = new QAction(FilmUpperQtClass);
+        actionZamknij = new QAction(FilmUpperViewClass);
         actionZamknij->setObjectName(QStringLiteral("actionZamknij"));
-        centralWidget = new QWidget(FilmUpperQtClass);
+        centralWidget = new QWidget(FilmUpperViewClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupingFrame = new QFrame(centralWidget);
         groupingFrame->setObjectName(QStringLiteral("groupingFrame"));
@@ -146,18 +146,18 @@ public:
         fpsCBox = new QComboBox(centralWidget);
         fpsCBox->setObjectName(QStringLiteral("fpsCBox"));
         fpsCBox->setGeometry(QRect(20, 160, 351, 22));
-        FilmUpperQtClass->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(FilmUpperQtClass);
+        FilmUpperViewClass->setCentralWidget(centralWidget);
+        menuBar = new QMenuBar(FilmUpperViewClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 812, 21));
         menuPlik = new QMenu(menuBar);
         menuPlik->setObjectName(QStringLiteral("menuPlik"));
         menuInfo = new QMenu(menuBar);
         menuInfo->setObjectName(QStringLiteral("menuInfo"));
-        FilmUpperQtClass->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(FilmUpperQtClass);
+        FilmUpperViewClass->setMenuBar(menuBar);
+        mainToolBar = new QToolBar(FilmUpperViewClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        FilmUpperQtClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        FilmUpperViewClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
 
         menuBar->addAction(menuPlik->menuAction());
         menuBar->addAction(menuInfo->menuAction());
@@ -167,34 +167,34 @@ public:
         menuPlik->addAction(actionZamknij);
         menuInfo->addAction(actionO_programie);
 
-        retranslateUi(FilmUpperQtClass);
+        retranslateUi(FilmUpperViewClass);
 
-        QMetaObject::connectSlotsByName(FilmUpperQtClass);
+        QMetaObject::connectSlotsByName(FilmUpperViewClass);
     } // setupUi
 
-    void retranslateUi(QMainWindow *FilmUpperQtClass)
+    void retranslateUi(QMainWindow *FilmUpperViewClass)
     {
-        FilmUpperQtClass->setWindowTitle(QApplication::translate("FilmUpperQtClass", "FilmUpper", Q_NULLPTR));
-        actionO_programie->setText(QApplication::translate("FilmUpperQtClass", "O programie", Q_NULLPTR));
-        actionOtw_rz_plik_wej_ciowy->setText(QApplication::translate("FilmUpperQtClass", "Otw\303\263rz plik wej\305\233ciowy", Q_NULLPTR));
-        actionOtw_rz_plik_wyj_ciowy->setText(QApplication::translate("FilmUpperQtClass", "Otw\303\263rz plik wyj\305\233ciowy", Q_NULLPTR));
-        actionZamknij->setText(QApplication::translate("FilmUpperQtClass", "Zamknij", Q_NULLPTR));
-        inputButton->setText(QApplication::translate("FilmUpperQtClass", "Plik wej\305\233ciowy", Q_NULLPTR));
-        outputButton->setText(QApplication::translate("FilmUpperQtClass", "Plik wyj\305\233ciowy", Q_NULLPTR));
-        scalingLabel->setText(QApplication::translate("FilmUpperQtClass", "Algorytm skalowania", Q_NULLPTR));
-        fpsLabel->setText(QApplication::translate("FilmUpperQtClass", "Algorytm zwi\304\231kszania il. klatek na sekunde", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("FilmUpperQtClass", "Przetw\303\263rz", Q_NULLPTR));
-        resGBox->setTitle(QApplication::translate("FilmUpperQtClass", "Rozdzielczo\305\233\304\207", Q_NULLPTR));
-        multLabel->setText(QApplication::translate("FilmUpperQtClass", "x", Q_NULLPTR));
-        fpsGBox->setTitle(QApplication::translate("FilmUpperQtClass", "Il. klatek na sekunde", Q_NULLPTR));
-        menuPlik->setTitle(QApplication::translate("FilmUpperQtClass", "Plik", Q_NULLPTR));
-        menuInfo->setTitle(QApplication::translate("FilmUpperQtClass", "Info", Q_NULLPTR));
+        FilmUpperViewClass->setWindowTitle(QApplication::translate("FilmUpperViewClass", "FilmUpper", Q_NULLPTR));
+        actionO_programie->setText(QApplication::translate("FilmUpperViewClass", "O programie", Q_NULLPTR));
+        actionOtw_rz_plik_wej_ciowy->setText(QApplication::translate("FilmUpperViewClass", "Otw\303\263rz plik wej\305\233ciowy", Q_NULLPTR));
+        actionOtw_rz_plik_wyj_ciowy->setText(QApplication::translate("FilmUpperViewClass", "Otw\303\263rz plik wyj\305\233ciowy", Q_NULLPTR));
+        actionZamknij->setText(QApplication::translate("FilmUpperViewClass", "Zamknij", Q_NULLPTR));
+        inputButton->setText(QApplication::translate("FilmUpperViewClass", "Plik wej\305\233ciowy", Q_NULLPTR));
+        outputButton->setText(QApplication::translate("FilmUpperViewClass", "Plik wyj\305\233ciowy", Q_NULLPTR));
+        scalingLabel->setText(QApplication::translate("FilmUpperViewClass", "Algorytm skalowania", Q_NULLPTR));
+        fpsLabel->setText(QApplication::translate("FilmUpperViewClass", "Algorytm zwi\304\231kszania il. klatek na sekunde", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("FilmUpperViewClass", "Przetw\303\263rz", Q_NULLPTR));
+        resGBox->setTitle(QApplication::translate("FilmUpperViewClass", "Rozdzielczo\305\233\304\207", Q_NULLPTR));
+        multLabel->setText(QApplication::translate("FilmUpperViewClass", "x", Q_NULLPTR));
+        fpsGBox->setTitle(QApplication::translate("FilmUpperViewClass", "Il. klatek na sekunde", Q_NULLPTR));
+        menuPlik->setTitle(QApplication::translate("FilmUpperViewClass", "Plik", Q_NULLPTR));
+        menuInfo->setTitle(QApplication::translate("FilmUpperViewClass", "Info", Q_NULLPTR));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class FilmUpperQtClass: public Ui_FilmUpperQtClass {};
+    class FilmUpperViewClass: public Ui_FilmUpperViewClass {};
 } // namespace Ui
 
 QT_END_NAMESPACE

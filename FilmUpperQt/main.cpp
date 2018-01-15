@@ -1,10 +1,10 @@
-#include "FilmUpperQt.h"
+#include "FilmUpperView.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	FilmUpperQt w;
+	FilmUpperView w;
 	w.show();
 	return a.exec();
 }

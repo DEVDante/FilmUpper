@@ -1,4 +1,4 @@
 <RCC>
-    <qresource prefix="FilmUpperQt">
+    <qresource prefix="FilmUpperView">
     </qresource>
 </RCC>
