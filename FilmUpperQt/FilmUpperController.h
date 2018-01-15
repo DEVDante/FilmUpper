@@ -72,6 +72,7 @@ public slots:
 		{
 			emit exceptionInProcess(e);
 		}
+		emit processEnded();
 }
 signals:
 	void secondProcessed(long second);
