@@ -47,20 +47,16 @@ void FilmUpperQt::openOutputFile()
 	emit openedOutFile(filename);
 }
 
-void FilmUpperQt::changeInValues(QString fname)
+void FilmUpperQt::changeInValues(QString fname, int fps)
 {
 	inTBox->setText(fname);
+	fpsSBox->setMinimum(fps);
+	fpsSBox->setValue(fpsSBox->minimum());
 }
 
 void FilmUpperQt::changeOutValues(QString fname)
 {
 	outTBox->setText(fname);
-}
-
-void FilmUpperQt::changeFpsValues(int fps)
-{
-	fpsSBox->setMinimum(fps);
-	fpsSBox->setValue(fpsSBox->minimum());
 }
 
 void FilmUpperQt::changeRes(int index)
@@ -91,11 +87,6 @@ void FilmUpperQt::changeRes(int index)
 
 	widthSBox->setValue(width);
 	heightSBox->setValue(height);
-}
-
-void FilmUpperQt::getVideoData(QString fname)
-{
-
 }
 
 void FilmUpperQt::showAbout()
@@ -223,14 +214,23 @@ void FilmUpperQt::processCompleted()
 	_processThread->quit();
 	_processThread->wait();
 	delete _processThread;
-	QProcess muxProcess(this);
-	QString program = "ffmpeg.exe";
-	QStringList arguments;
-	arguments << "-i" << "temp.avi" << "-i" << inTBox->text() << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << outTBox->text();
 
-	muxProcess.start(program, arguments);
-	muxProcess.waitForFinished(-1);
-	progressBar->setValue(0);
+	QString program = "ffmpeg.exe ";
+	QFileInfo outFInfo(outTBox->text());
+	QString tempOut = outFInfo.path() + "/" + QUuid::createUuid().toString().replace("{", "").replace("}", "").replace("-", "") + "." + outFInfo.suffix();
+
+	QStringList arguments;
+	arguments << "-i" << outTBox->text() << "-i" << inTBox->text() << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << tempOut;
+	QString command = program + arguments.join(" ");
+	QByteArray ba = command.toLatin1();
+	const char *outCommand = ba.data();
+
+	system(outCommand);
+
+	QFile::remove(outTBox->text());
+	QFile::copy(tempOut, outTBox->text());
+	QFile::remove(tempOut);
+
 	emit processEnded();
 }
 

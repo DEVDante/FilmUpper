@@ -25,6 +25,8 @@
 #include <QProcess>
 #include <QFileInfo>
 #include <QUuid>
+#include <QFile>
+#include <stdlib.h>
 
 #include "FilmUpperController.h"
 #include "IFrameEnhancerHeader.h"
@@ -92,11 +94,9 @@ signals:
 private slots:
 	void openInputFile();
 	void openOutputFile();
-	void changeInValues(QString fname);
+	void changeInValues(QString fname, int fps);
 	void changeOutValues(QString fname);
-	void changeFpsValues(int fps);
 	void changeRes(int index);
-	void getVideoData(QString fname);
 	void showAbout();
 	void showError(std::string s);
 	void process();
