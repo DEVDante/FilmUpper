@@ -1,3 +1,23 @@
-﻿  FilmUpperQt.cpp
+﻿  Moc'ing FilmUpperQt.h...
+  Uic'ing FilmUpperQt.ui...
+  Performing Custom Build Tools
+  Rcc'ing FilmUpperQt.qrc...
+RCC : warning : No resources in 'D:\Studia\Inzynierka\FilmUpper\FilmUpperQt\FilmUpperQt.qrc'.
+  
+  BiCubicFrameEnhancer.cpp
+  FilmUpperController.cpp
+  FilmUpperQt.cpp
+  FrameReader.cpp
+  FrameWriter.cpp
+  moc_FilmUpperController.cpp
+  moc_FilmUpperQt.cpp
+  InterlaceFpsEnhancer.cpp
+  InterpolationFpsEnhancer.cpp
+  InterpolationFrameEnhancer.cpp
+  main.cpp
+  MaskFrameEnhancer.cpp
+  NNFrameEnhancer.cpp
+  Generating Code...
+  qrc_FilmUpperQt.cpp
   FilmUpperQt.vcxproj -> D:\Studia\Inzynierka\FilmUpper\x64\Debug\FilmUpperQt.exe
   FilmUpperQt.vcxproj -> D:\Studia\Inzynierka\FilmUpper\x64\Debug\FilmUpperQt.pdb (Full PDB)

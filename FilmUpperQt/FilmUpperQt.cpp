@@ -214,6 +214,7 @@ void FilmUpperQt::processCompleted()
 	_processThread->quit();
 	_processThread->wait();
 	delete _processThread;
+	progressBar->setValue(0);
 
 	QString program = "ffmpeg.exe ";
 	QFileInfo outFInfo(outTBox->text());
