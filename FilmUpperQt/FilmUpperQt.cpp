@@ -172,7 +172,7 @@ void FilmUpperQt::process()
 		connect(worker, &Worker::exceptionInProcess, this, &FilmUpperQt::errorInProcess);
 		connect(this, &FilmUpperQt::start, worker, &Worker::startProcess);
 		_processThread->start();
-		emit start(new std::string(inTBox->text().toStdString()), new std::string("temp.avi"), frameEnh, fpsEnh, quality);
+		emit start(new std::string(inTBox->text().toStdString()), new std::string(outTBox->text().toStdString()), frameEnh, fpsEnh, quality);
 		//&FilmUpperController::startProcess, _controler, inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);
 		//_controler->startProcess(inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);		
 	}
