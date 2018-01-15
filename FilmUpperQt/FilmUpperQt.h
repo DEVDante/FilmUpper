@@ -23,6 +23,10 @@
 #include <QtWidgets/QMessageBox>
 #include <QProcess>
 
+#include <boost\asio.hpp>
+#include <boost\date_time\posix_time/posix_time.hpp>
+#include <boost\bind.hpp>
+
 #include "FilmUpperController.h"
 #include "IFrameEnhancerHeader.h"
 #include "IFpsEnhancerHeader.h"
@@ -70,11 +74,17 @@ public:
 	FilmUpperQt(QWidget *parent = Q_NULLPTR);
 	~FilmUpperQt();
 	void setupText();
+	void processCallback();
 
 private:
 	//Ui::FilmUpperQtClass ui;
 	FilmUpperController* _controler;
 	uint64_t _duration;
+	ProcessInformator* _processInformator;
+	
+	std::thread _processThread;
+	boost::asio::io_service ios;
+	boost::asio::deadline_timer* timer;
 
 signals:
 	void openedInFile(QString fname, int fps);

@@ -8,11 +8,15 @@
 
 #include "TestClassModule.h"
 #include "InterlaceFpsEnhancerHeader.h"
+#include "BiCubicFrameEnhancerHeader.h"
+#include "MaskFrameEnhancerHeader.h"
 
 FilmUpperController::FilmUpperController() {
 	FrameEnhancerHeaders.push_back(new NOPFrameEnhancerHeader());
-	FrameEnhancerHeaders.push_back(new InterpolationFrameEnhancerHeader());
 	FrameEnhancerHeaders.push_back(new NNFrameEnhancerHeader());
+	FrameEnhancerHeaders.push_back(new InterpolationFrameEnhancerHeader());
+	FrameEnhancerHeaders.push_back(new BiCubicFrameEnhancerHeader());
+	FrameEnhancerHeaders.push_back(new MaskFrameEnhancerHeader());
 
 	FpsEnhancerHeaders.push_back(new NOPFpsEnhancerHeader());
 	FpsEnhancerHeaders.push_back(new InterpolationFpsEnhancerHeader());
@@ -25,41 +29,61 @@ FilmUpperController::~FilmUpperController() {
 	
 }
 
-int FilmUpperController::startProcess(std::string fileSourcePath, std::string fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality)
+void FilmUpperController::startProcess(std::string fileSourcePath, std::string fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality, ProcessInformator* inf)
 {
-	FrameReader *frameReader = new FrameReader(fileSourcePath);
-	FrameEnhancerBase* frameEnhancer = frameEnhancerHeader->Enhancer(frameReader, targetQuality);
-	FpsEnhancerBase* fpsEnhancer = fpsEnhancerHeader->GetFpsEnhancer(frameEnhancer, targetQuality);
-	FrameWriter *frameWriter = new FrameWriter(fileTargetPath, "avi", targetQuality);
+	FrameReader *frameReader;
+	FrameEnhancerBase* frameEnhancer;
+	FpsEnhancerBase* fpsEnhancer;
+	FrameWriter *frameWriter;
 
-	double targetFps = targetQuality->FrameRate->getNumericalRate();
-	long seconds = 0;
-	int frames = 0;
-
-	while (fpsEnhancer->AreFramesLeft())
+	try
 	{
-		auto fr = fpsEnhancer->ReadNextFrame();
-		if (fr == nullptr)
-			break;
-		frameWriter->WriteFrame(fr);
+		frameReader = new FrameReader(fileSourcePath);
+		frameEnhancer = frameEnhancerHeader->Enhancer(frameReader, targetQuality);
+		fpsEnhancer = fpsEnhancerHeader->GetFpsEnhancer(frameEnhancer, targetQuality);
+		frameWriter = new FrameWriter(fileTargetPath, "avi", targetQuality);
+	}
+	catch (std::exception* e)
+	{
+		inf->error = e;
+		inf->processCompleted = true;
+		return;
+	}
 
-		++frames;
-		if(frames > targetFps)
+	try {
+		long long frames = 0;
+
+		while (fpsEnhancer->AreFramesLeft())
 		{
-			frames -= targetFps;
-			++seconds;
+			auto fr = fpsEnhancer->ReadNextFrame();
+			if (fr == nullptr)
+				break;
+			frameWriter->WriteFrame(fr);
+
+			++frames;
+			inf->secondsProcesed = frames;
 		}
+	}
+	catch (std::exception* e)
+	{
+		inf->error = e;
+		inf->processCompleted = true;
+		return;
+	}
 
-		//Update gui
-	}	
-
-	delete frameWriter;
-	delete frameEnhancer;
-	delete fpsEnhancer;
-	delete targetQuality;
-	delete frameReader;
-
-	return 0;
+	try {
+		delete frameWriter;
+		delete frameEnhancer;
+		delete fpsEnhancer;
+		delete frameReader;
+	}
+	catch (std::exception* e)
+	{
+		inf->error = e;
+		inf->processCompleted = true;
+		return;
+	}
+	inf->processCompleted = true;
 }
 
 uint64_t FilmUpperController::getVideoDuration(std::string fileName)

@@ -198,25 +198,54 @@ void FilmUpperQt::process()
 	{
 		_duration = _controler->getVideoDuration(inTBox->text().toStdString());
 
-		_controler->startProcess(inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);
+		_processInformator = new ProcessInformator;
+		_processInformator->frameEnh = frameEnh;
+		_processInformator->fpsEnh = fpsEnh;
+		_processInformator->qual = quality;
 
-		QProcess muxProcess(this);
-		QString program = "ffmpeg.exe";
-		QStringList arguments;
-		arguments << "-i" << outTBox->text() << "-i" << "temp.avi" << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << outTBox->text();
-
-		muxProcess.start(program, arguments);
+		_processThread = std::thread(FilmUpperController::startProcess, inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality, _processInformator);
+		//_controler->startProcess(inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality, inf);
+		timer = new boost::asio::deadline_timer(ios, boost::posix_time::millisec(100));
+		timer->async_wait(boost::bind(&FilmUpperQt::processCallback, this));
+		ios.run();		
 	}
 	catch (const std::exception& e)
 	{
 		emit unexpectedError(e.what());
-	}
+	}	
 	emit processEnded();
 
-	delete frameEnh;
-	delete fpsEnh;
-	delete quality;
+	
 }
+
+void FilmUpperQt::processCallback()
+{
+	if(!_processInformator->processCompleted)
+	{
+		progressBar->setValue(_processInformator->secondsProcesed);
+		timer->async_wait(boost::bind(&FilmUpperQt::processCallback, this));
+		return;
+	}
+	_processThread.join();
+	ios.stop();
+	if (_processInformator->error != nullptr)
+		throw _processInformator->error;
+
+	QProcess muxProcess(this);
+	QString program = "ffmpeg.exe";
+	QStringList arguments;
+	arguments << "-i" << "temp.avi" << "-i" << "'" + inTBox->text() + "'" << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << "'" + outTBox->text() + "'";
+
+	muxProcess.start(program, arguments);
+	muxProcess.waitForFinished(-1);
+	delete timer;
+	delete _processInformator->frameEnh;
+	delete _processInformator->fpsEnh;
+	delete _processInformator->qual;
+	delete _processInformator;
+}
+
+
 
 void FilmUpperQt::lockUI()
 {
