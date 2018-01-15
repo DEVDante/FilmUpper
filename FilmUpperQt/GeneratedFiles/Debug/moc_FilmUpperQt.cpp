@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FilmUpperQt_t {
-    QByteArrayData data[31];
-    char stringdata0[351];
+    QByteArrayData data[40];
+    char stringdata0[505];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,31 +42,44 @@ QT_MOC_LITERAL(7, 66, 11), // "std::string"
 QT_MOC_LITERAL(8, 78, 14), // "processStarted"
 QT_MOC_LITERAL(9, 93, 12), // "processEnded"
 QT_MOC_LITERAL(10, 106, 5), // "start"
-QT_MOC_LITERAL(11, 112, 13), // "openInputFile"
-QT_MOC_LITERAL(12, 126, 14), // "openOutputFile"
-QT_MOC_LITERAL(13, 141, 14), // "changeInValues"
-QT_MOC_LITERAL(14, 156, 15), // "changeOutValues"
-QT_MOC_LITERAL(15, 172, 15), // "changeFpsValues"
-QT_MOC_LITERAL(16, 188, 9), // "changeRes"
-QT_MOC_LITERAL(17, 198, 5), // "index"
-QT_MOC_LITERAL(18, 204, 12), // "getVideoData"
-QT_MOC_LITERAL(19, 217, 9), // "showAbout"
-QT_MOC_LITERAL(20, 227, 9), // "showError"
-QT_MOC_LITERAL(21, 237, 1), // "s"
-QT_MOC_LITERAL(22, 239, 7), // "process"
-QT_MOC_LITERAL(23, 247, 6), // "lockUI"
-QT_MOC_LITERAL(24, 254, 8), // "unlockUI"
-QT_MOC_LITERAL(25, 263, 21), // "procesedSecondsUpdate"
-QT_MOC_LITERAL(26, 285, 15), // "secondProcessed"
-QT_MOC_LITERAL(27, 301, 16), // "processCompleted"
-QT_MOC_LITERAL(28, 318, 14), // "errorInProcess"
-QT_MOC_LITERAL(29, 333, 15), // "std::exception*"
-QT_MOC_LITERAL(30, 349, 1) // "e"
+QT_MOC_LITERAL(11, 112, 12), // "std::string*"
+QT_MOC_LITERAL(12, 125, 14), // "fileSourcePath"
+QT_MOC_LITERAL(13, 140, 14), // "fileTargetPath"
+QT_MOC_LITERAL(14, 155, 21), // "IFrameEnhancerHeader*"
+QT_MOC_LITERAL(15, 177, 19), // "frameEnhancerHeader"
+QT_MOC_LITERAL(16, 197, 19), // "IFpsEnhancerHeader*"
+QT_MOC_LITERAL(17, 217, 17), // "fpsEnhancerHeader"
+QT_MOC_LITERAL(18, 235, 16), // "FilmQualityInfo*"
+QT_MOC_LITERAL(19, 252, 13), // "targetQuality"
+QT_MOC_LITERAL(20, 266, 13), // "openInputFile"
+QT_MOC_LITERAL(21, 280, 14), // "openOutputFile"
+QT_MOC_LITERAL(22, 295, 14), // "changeInValues"
+QT_MOC_LITERAL(23, 310, 15), // "changeOutValues"
+QT_MOC_LITERAL(24, 326, 15), // "changeFpsValues"
+QT_MOC_LITERAL(25, 342, 9), // "changeRes"
+QT_MOC_LITERAL(26, 352, 5), // "index"
+QT_MOC_LITERAL(27, 358, 12), // "getVideoData"
+QT_MOC_LITERAL(28, 371, 9), // "showAbout"
+QT_MOC_LITERAL(29, 381, 9), // "showError"
+QT_MOC_LITERAL(30, 391, 1), // "s"
+QT_MOC_LITERAL(31, 393, 7), // "process"
+QT_MOC_LITERAL(32, 401, 6), // "lockUI"
+QT_MOC_LITERAL(33, 408, 8), // "unlockUI"
+QT_MOC_LITERAL(34, 417, 21), // "procesedSecondsUpdate"
+QT_MOC_LITERAL(35, 439, 15), // "secondProcessed"
+QT_MOC_LITERAL(36, 455, 16), // "processCompleted"
+QT_MOC_LITERAL(37, 472, 14), // "errorInProcess"
+QT_MOC_LITERAL(38, 487, 15), // "std::exception*"
+QT_MOC_LITERAL(39, 503, 1) // "e"
 
     },
     "FilmUpperQt\0openedInFile\0\0fname\0fps\0"
     "openedOutFile\0unexpectedError\0std::string\0"
     "processStarted\0processEnded\0start\0"
+    "std::string*\0fileSourcePath\0fileTargetPath\0"
+    "IFrameEnhancerHeader*\0frameEnhancerHeader\0"
+    "IFpsEnhancerHeader*\0fpsEnhancerHeader\0"
+    "FilmQualityInfo*\0targetQuality\0"
     "openInputFile\0openOutputFile\0"
     "changeInValues\0changeOutValues\0"
     "changeFpsValues\0changeRes\0index\0"
@@ -96,24 +109,24 @@ static const uint qt_meta_data_FilmUpperQt[] = {
        6,    1,  127,    2, 0x06 /* Public */,
        8,    0,  130,    2, 0x06 /* Public */,
        9,    0,  131,    2, 0x06 /* Public */,
-      10,    0,  132,    2, 0x06 /* Public */,
+      10,    5,  132,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      11,    0,  133,    2, 0x08 /* Private */,
-      12,    0,  134,    2, 0x08 /* Private */,
-      13,    1,  135,    2, 0x08 /* Private */,
-      14,    1,  138,    2, 0x08 /* Private */,
-      15,    1,  141,    2, 0x08 /* Private */,
-      16,    1,  144,    2, 0x08 /* Private */,
-      18,    1,  147,    2, 0x08 /* Private */,
-      19,    0,  150,    2, 0x08 /* Private */,
-      20,    1,  151,    2, 0x08 /* Private */,
-      22,    0,  154,    2, 0x08 /* Private */,
-      23,    0,  155,    2, 0x08 /* Private */,
-      24,    0,  156,    2, 0x08 /* Private */,
-      25,    1,  157,    2, 0x08 /* Private */,
-      27,    0,  160,    2, 0x08 /* Private */,
-      28,    1,  161,    2, 0x08 /* Private */,
+      20,    0,  143,    2, 0x08 /* Private */,
+      21,    0,  144,    2, 0x08 /* Private */,
+      22,    1,  145,    2, 0x08 /* Private */,
+      23,    1,  148,    2, 0x08 /* Private */,
+      24,    1,  151,    2, 0x08 /* Private */,
+      25,    1,  154,    2, 0x08 /* Private */,
+      27,    1,  157,    2, 0x08 /* Private */,
+      28,    0,  160,    2, 0x08 /* Private */,
+      29,    1,  161,    2, 0x08 /* Private */,
+      31,    0,  164,    2, 0x08 /* Private */,
+      32,    0,  165,    2, 0x08 /* Private */,
+      33,    0,  166,    2, 0x08 /* Private */,
+      34,    1,  167,    2, 0x08 /* Private */,
+      36,    0,  170,    2, 0x08 /* Private */,
+      37,    1,  171,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::Int,    3,    4,
@@ -121,7 +134,7 @@ static const uint qt_meta_data_FilmUpperQt[] = {
     QMetaType::Void, 0x80000000 | 7,    2,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 11, 0x80000000 | 11, 0x80000000 | 14, 0x80000000 | 16, 0x80000000 | 18,   12,   13,   15,   17,   19,
 
  // slots: parameters
     QMetaType::Void,
@@ -129,16 +142,16 @@ static const uint qt_meta_data_FilmUpperQt[] = {
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::Int,    4,
-    QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void, QMetaType::Int,   26,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 7,   21,
+    QMetaType::Void, 0x80000000 | 7,   30,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   26,
+    QMetaType::Void, QMetaType::Int,   35,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 29,   30,
+    QMetaType::Void, 0x80000000 | 38,   39,
 
        0        // eod
 };
@@ -154,7 +167,7 @@ void FilmUpperQt::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2: _t->unexpectedError((*reinterpret_cast< std::string(*)>(_a[1]))); break;
         case 3: _t->processStarted(); break;
         case 4: _t->processEnded(); break;
-        case 5: _t->start(); break;
+        case 5: _t->start((*reinterpret_cast< std::string*(*)>(_a[1])),(*reinterpret_cast< std::string*(*)>(_a[2])),(*reinterpret_cast< IFrameEnhancerHeader*(*)>(_a[3])),(*reinterpret_cast< IFpsEnhancerHeader*(*)>(_a[4])),(*reinterpret_cast< FilmQualityInfo*(*)>(_a[5]))); break;
         case 6: _t->openInputFile(); break;
         case 7: _t->openOutputFile(); break;
         case 8: _t->changeInValues((*reinterpret_cast< QString(*)>(_a[1]))); break;
@@ -211,7 +224,7 @@ void FilmUpperQt::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             }
         }
         {
-            typedef void (FilmUpperQt::*_t)();
+            typedef void (FilmUpperQt::*_t)(std::string * , std::string * , IFrameEnhancerHeader * , IFpsEnhancerHeader * , FilmQualityInfo * );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FilmUpperQt::start)) {
                 *result = 5;
                 return;
@@ -290,9 +303,10 @@ void FilmUpperQt::processEnded()
 }
 
 // SIGNAL 5
-void FilmUpperQt::start()
+void FilmUpperQt::start(std::string * _t1, std::string * _t2, IFrameEnhancerHeader * _t3, IFpsEnhancerHeader * _t4, FilmQualityInfo * _t5)
 {
-    QMetaObject::activate(this, &staticMetaObject, 5, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)), const_cast<void*>(reinterpret_cast<const void*>(&_t5)) };
+    QMetaObject::activate(this, &staticMetaObject, 5, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

@@ -175,12 +175,12 @@ void FilmUpperQt::process()
 		auto worker = _controler->startProcess();
 		_processThread = new QThread;
 		worker->moveToThread(_processThread);
-		connect(worker, SIGNAL(secondProcessed), this, SLOT(procesedSecondsUpdate));
-		connect(worker, SIGNAL(processEnded), this, SLOT(processCompleted));
-		connect(worker, SIGNAL(exceptionInProcess), this, SLOT(errorInProcess));
-		connect(this, SIGNAL(start), worker, SLOT(startProcess));
+		connect(worker, &Worker::secondProcessed, this, &FilmUpperQt::procesedSecondsUpdate);
+		connect(worker, &Worker::processEnded, this, &FilmUpperQt::processCompleted);
+		connect(worker, &Worker::exceptionInProcess, this, &FilmUpperQt::errorInProcess);
+		connect(this, &FilmUpperQt::start, worker, &Worker::startProcess);
 		_processThread->start();
-		emit start();
+		emit start(new std::string(inTBox->text().toStdString()), new std::string("temp.avi"), frameEnh, fpsEnh, quality);
 		//&FilmUpperController::startProcess, _controler, inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);
 		//_controler->startProcess(inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);		
 	}
@@ -219,7 +219,6 @@ void FilmUpperQt::procesedSecondsUpdate(int secondProcessed)
 
 void FilmUpperQt::processCompleted()
 {
-	//_processThread.join();
 	_processThread->quit();
 	_processThread->wait();
 	delete _processThread;

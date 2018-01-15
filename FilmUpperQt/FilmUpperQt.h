@@ -87,7 +87,7 @@ signals:
 	void unexpectedError(std::string);
 	void processStarted();
 	void processEnded();
-	void start();
+	void start(std::string* fileSourcePath, std::string* fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality);
 
 private slots:
 	void openInputFile();

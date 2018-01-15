@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Worker_t {
     QByteArrayData data[18];
-    char stringdata0[247];
+    char stringdata0[248];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,21 +40,21 @@ QT_MOC_LITERAL(5, 44, 18), // "exceptionInProcess"
 QT_MOC_LITERAL(6, 63, 15), // "std::exception*"
 QT_MOC_LITERAL(7, 79, 1), // "e"
 QT_MOC_LITERAL(8, 81, 12), // "startProcess"
-QT_MOC_LITERAL(9, 94, 11), // "std::string"
-QT_MOC_LITERAL(10, 106, 14), // "fileSourcePath"
-QT_MOC_LITERAL(11, 121, 14), // "fileTargetPath"
-QT_MOC_LITERAL(12, 136, 21), // "IFrameEnhancerHeader*"
-QT_MOC_LITERAL(13, 158, 19), // "frameEnhancerHeader"
-QT_MOC_LITERAL(14, 178, 19), // "IFpsEnhancerHeader*"
-QT_MOC_LITERAL(15, 198, 17), // "fpsEnhancerHeader"
-QT_MOC_LITERAL(16, 216, 16), // "FilmQualityInfo*"
-QT_MOC_LITERAL(17, 233, 13) // "targetQuality"
+QT_MOC_LITERAL(9, 94, 12), // "std::string*"
+QT_MOC_LITERAL(10, 107, 14), // "fileSourcePath"
+QT_MOC_LITERAL(11, 122, 14), // "fileTargetPath"
+QT_MOC_LITERAL(12, 137, 21), // "IFrameEnhancerHeader*"
+QT_MOC_LITERAL(13, 159, 19), // "frameEnhancerHeader"
+QT_MOC_LITERAL(14, 179, 19), // "IFpsEnhancerHeader*"
+QT_MOC_LITERAL(15, 199, 17), // "fpsEnhancerHeader"
+QT_MOC_LITERAL(16, 217, 16), // "FilmQualityInfo*"
+QT_MOC_LITERAL(17, 234, 13) // "targetQuality"
 
     },
     "Worker\0secondProcessed\0\0second\0"
     "processEnded\0exceptionInProcess\0"
     "std::exception*\0e\0startProcess\0"
-    "std::string\0fileSourcePath\0fileTargetPath\0"
+    "std::string*\0fileSourcePath\0fileTargetPath\0"
     "IFrameEnhancerHeader*\0frameEnhancerHeader\0"
     "IFpsEnhancerHeader*\0fpsEnhancerHeader\0"
     "FilmQualityInfo*\0targetQuality"
@@ -102,7 +102,7 @@ void Worker::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 0: _t->secondProcessed((*reinterpret_cast< long(*)>(_a[1]))); break;
         case 1: _t->processEnded(); break;
         case 2: _t->exceptionInProcess((*reinterpret_cast< std::exception*(*)>(_a[1]))); break;
-        case 3: _t->startProcess((*reinterpret_cast< std::string(*)>(_a[1])),(*reinterpret_cast< std::string(*)>(_a[2])),(*reinterpret_cast< IFrameEnhancerHeader*(*)>(_a[3])),(*reinterpret_cast< IFpsEnhancerHeader*(*)>(_a[4])),(*reinterpret_cast< FilmQualityInfo*(*)>(_a[5]))); break;
+        case 3: _t->startProcess((*reinterpret_cast< std::string*(*)>(_a[1])),(*reinterpret_cast< std::string*(*)>(_a[2])),(*reinterpret_cast< IFrameEnhancerHeader*(*)>(_a[3])),(*reinterpret_cast< IFpsEnhancerHeader*(*)>(_a[4])),(*reinterpret_cast< FilmQualityInfo*(*)>(_a[5]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

@@ -11,7 +11,7 @@ class Worker: public QObject
 {
 	Q_OBJECT
 public slots:
-	void startProcess(std::string fileSourcePath, std::string fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality)
+	void startProcess(std::string* fileSourcePath, std::string* fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality)
 {
 		FrameReader* frameReader;
 		FrameEnhancerBase* frameEnhancer;
@@ -20,10 +20,10 @@ public slots:
 
 		try
 		{
-			frameReader = new FrameReader(fileSourcePath);
+			frameReader = new FrameReader(*fileSourcePath);
 			frameEnhancer = frameEnhancerHeader->Enhancer(frameReader, targetQuality);
 			fpsEnhancer = fpsEnhancerHeader->GetFpsEnhancer(frameEnhancer, targetQuality);
-			frameWriter = new FrameWriter(fileTargetPath, "avi", targetQuality);
+			frameWriter = new FrameWriter(*fileTargetPath, "avi", targetQuality);
 		}
 		catch (std::exception* e)
 		{
@@ -65,6 +65,8 @@ public slots:
 			delete frameEnhancerHeader;
 			delete fpsEnhancerHeader;
 			delete targetQuality;
+			delete fileSourcePath;
+			delete fileTargetPath;
 		}
 		catch (std::exception* e)
 		{
