@@ -25,9 +25,9 @@ FilmUpperController::~FilmUpperController() {
 	
 }
 
-void FilmUpperController::startProcess(std::string fileSourcePath, std::string fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality)
+Worker* FilmUpperController::startProcess()//std::string fileSourcePath, std::string fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality)
 {
-	FrameReader* frameReader;
+	/*FrameReader* frameReader;
 	FrameEnhancerBase* frameEnhancer;
 	FpsEnhancerBase* fpsEnhancer;
 	FrameWriter* frameWriter;
@@ -41,7 +41,7 @@ void FilmUpperController::startProcess(std::string fileSourcePath, std::string f
 	}
 	catch(std::exception* e)
 	{
-		exceptionInProcess(e);
+		emit exceptionInProcess(e);
 		return;
 	}
 	try {
@@ -61,13 +61,13 @@ void FilmUpperController::startProcess(std::string fileSourcePath, std::string f
 			{
 				frames -= targetFps;
 				++seconds;
-				secondProcessed(seconds);
+				emit secondProcessed(seconds);
 			}
 		}
 	}
 	catch(std::exception* e)
 	{
-		exceptionInProcess(e);
+		emit exceptionInProcess(e);
 	}
 
 	try
@@ -82,8 +82,9 @@ void FilmUpperController::startProcess(std::string fileSourcePath, std::string f
 	}
 	catch (std::exception* e)
 	{
-		exceptionInProcess(e);
-	}
+		emit exceptionInProcess(e);
+	}*/
+	return new Worker;
 }
 
 uint64_t FilmUpperController::getVideoDuration(std::string fileName)

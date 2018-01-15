@@ -172,7 +172,16 @@ void FilmUpperQt::process()
 	{
 		_duration = _controler->getVideoDuration(inTBox->text().toStdString());
 
-		_processThread = std::thread(&FilmUpperController::startProcess, _controler, inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);
+		auto worker = _controler->startProcess();
+		_processThread = new QThread;
+		worker->moveToThread(_processThread);
+		connect(worker, SIGNAL(secondProcessed), this, SLOT(procesedSecondsUpdate));
+		connect(worker, SIGNAL(processEnded), this, SLOT(processCompleted));
+		connect(worker, SIGNAL(exceptionInProcess), this, SLOT(errorInProcess));
+		connect(this, SIGNAL(start), worker, SLOT(startProcess));
+		_processThread->start();
+		emit start();
+		//&FilmUpperController::startProcess, _controler, inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);
 		//_controler->startProcess(inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);		
 	}
 	catch (const std::exception& e)
@@ -210,7 +219,10 @@ void FilmUpperQt::procesedSecondsUpdate(int secondProcessed)
 
 void FilmUpperQt::processCompleted()
 {
-	_processThread.join();
+	//_processThread.join();
+	_processThread->quit();
+	_processThread->wait();
+	delete _processThread;
 	QProcess muxProcess(this);
 	QString program = "ffmpeg.exe";
 	QStringList arguments;
@@ -345,9 +357,9 @@ FilmUpperQt::FilmUpperQt(QWidget *parent)
 	setupText();
 
 	_controler = new FilmUpperController();
-	connect(_controler, SIGNAL(secondProcessed), this, SLOT(procesedSecondsUpdate));
+	/*connect(_controler, SIGNAL(secondProcessed), this, SLOT(procesedSecondsUpdate));
 	connect(_controler, SIGNAL(processEnded), this, SLOT(processCompleted));
-	connect(_controler, SIGNAL(exceptionInProcess), this, SLOT(errorInProcess));
+	connect(_controler, SIGNAL(exceptionInProcess), this, SLOT(errorInProcess));*/
 }
 
 FilmUpperQt::~FilmUpperQt() {

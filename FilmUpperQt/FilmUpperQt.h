@@ -18,6 +18,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QToolBar>
+#include <QThread>
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
@@ -76,7 +77,7 @@ private:
 	FilmUpperController* _controler;
 	uint64_t _duration;
 
-	std::thread _processThread;
+	QThread* _processThread;
 
 signals:
 	void openedInFile(QString fname, int fps);
@@ -84,6 +85,7 @@ signals:
 	void unexpectedError(std::string);
 	void processStarted();
 	void processEnded();
+	void start();
 
 private slots:
 	void openInputFile();
