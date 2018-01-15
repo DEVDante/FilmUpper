@@ -25,41 +25,65 @@ FilmUpperController::~FilmUpperController() {
 	
 }
 
-int FilmUpperController::startProcess(std::string fileSourcePath, std::string fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality)
+void FilmUpperController::startProcess(std::string fileSourcePath, std::string fileTargetPath, IFrameEnhancerHeader* frameEnhancerHeader, IFpsEnhancerHeader* fpsEnhancerHeader, FilmQualityInfo* targetQuality)
 {
-	FrameReader *frameReader = new FrameReader(fileSourcePath);
-	FrameEnhancerBase* frameEnhancer = frameEnhancerHeader->Enhancer(frameReader, targetQuality);
-	FpsEnhancerBase* fpsEnhancer = fpsEnhancerHeader->GetFpsEnhancer(frameEnhancer, targetQuality);
-	FrameWriter *frameWriter = new FrameWriter(fileTargetPath, "avi", targetQuality);
+	FrameReader* frameReader;
+	FrameEnhancerBase* frameEnhancer;
+	FpsEnhancerBase* fpsEnhancer;
+	FrameWriter* frameWriter;
 
-	double targetFps = targetQuality->FrameRate->getNumericalRate();
-	long seconds = 0;
-	int frames = 0;
-
-	while (fpsEnhancer->AreFramesLeft())
+	try
 	{
-		auto fr = fpsEnhancer->ReadNextFrame();
-		if (fr == nullptr)
-			break;
-		frameWriter->WriteFrame(fr);
+		frameReader = new FrameReader(fileSourcePath);
+		frameEnhancer = frameEnhancerHeader->Enhancer(frameReader, targetQuality);
+		fpsEnhancer = fpsEnhancerHeader->GetFpsEnhancer(frameEnhancer, targetQuality);
+		frameWriter = new FrameWriter(fileTargetPath, "avi", targetQuality);
+	}
+	catch(std::exception* e)
+	{
+		exceptionInProcess(e);
+		return;
+	}
+	try {
+		double targetFps = targetQuality->FrameRate->getNumericalRate();
+		long seconds = 0;
+		int frames = 0;
 
-		++frames;
-		if(frames > targetFps)
+		while (fpsEnhancer->AreFramesLeft())
 		{
-			frames -= targetFps;
-			++seconds;
+			auto fr = fpsEnhancer->ReadNextFrame();
+			if (fr == nullptr)
+				break;
+			frameWriter->WriteFrame(fr);
+
+			++frames;
+			if (frames > targetFps)
+			{
+				frames -= targetFps;
+				++seconds;
+				secondProcessed(seconds);
+			}
 		}
+	}
+	catch(std::exception* e)
+	{
+		exceptionInProcess(e);
+	}
 
-		//Update gui
-	}	
-
-	delete frameWriter;
-	delete frameEnhancer;
-	delete fpsEnhancer;
-	delete targetQuality;
-	delete frameReader;
-
-	return 0;
+	try
+	{
+		delete frameWriter;
+		delete frameEnhancer;
+		delete fpsEnhancer;
+		delete frameReader;
+		delete frameEnhancerHeader;
+		delete fpsEnhancerHeader;
+		delete targetQuality;
+	}
+	catch (std::exception* e)
+	{
+		exceptionInProcess(e);
+	}
 }
 
 uint64_t FilmUpperController::getVideoDuration(std::string fileName)

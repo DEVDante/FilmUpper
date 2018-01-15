@@ -1,8 +1,3 @@
-﻿  BiCubicFrameEnhancer.cpp
-  FilmUpperController.cpp
-  InterpolationFrameEnhancer.cpp
-  MaskFrameEnhancer.cpp
-  NNFrameEnhancer.cpp
-  Generating Code...
+﻿  FilmUpperQt.cpp
   FilmUpperQt.vcxproj -> D:\Studia\Inzynierka\FilmUpper\x64\Debug\FilmUpperQt.exe
   FilmUpperQt.vcxproj -> D:\Studia\Inzynierka\FilmUpper\x64\Debug\FilmUpperQt.pdb (Full PDB)

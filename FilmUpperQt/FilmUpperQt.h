@@ -78,6 +78,8 @@ private:
 	FilmUpperController* _controler;
 	uint64_t _duration;
 
+	std::thread _processThread;
+
 signals:
 	void openedInFile(QString fname, int fps);
 	void openedOutFile(QString fname);
@@ -98,5 +100,7 @@ private slots:
 	void process();
 	void lockUI();
 	void unlockUI();
-
+	void procesedSecondsUpdate(int secondProcessed);
+	void processCompleted();
+	void errorInProcess(std::exception* e);
 };

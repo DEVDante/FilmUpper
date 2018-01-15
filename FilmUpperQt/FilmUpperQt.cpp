@@ -172,24 +172,13 @@ void FilmUpperQt::process()
 	{
 		_duration = _controler->getVideoDuration(inTBox->text().toStdString());
 
-		_controler->startProcess(inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);
-
-		QProcess muxProcess(this);
-		QString program = "ffmpeg.exe";
-		QStringList arguments;
-		arguments << "-i" << "temp.avi" << "-i" << inTBox->text() << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << outTBox->text();
-
-		muxProcess.start(program, arguments);
+		_processThread = std::thread(&FilmUpperController::startProcess, _controler, inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);
+		//_controler->startProcess(inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality);		
 	}
 	catch (const std::exception& e)
 	{
 		emit unexpectedError(e.what());
 	}
-	emit processEnded();
-
-	delete frameEnh;
-	delete fpsEnh;
-	delete quality;
 }
 
 void FilmUpperQt::lockUI()
@@ -212,6 +201,29 @@ void FilmUpperQt::unlockUI()
 	processButton->setEnabled(true);
 	resGBox->setEnabled(true);
 	fpsGBox->setEnabled(true);
+}
+
+void FilmUpperQt::procesedSecondsUpdate(int secondProcessed)
+{
+	progressBar->setValue(secondProcessed);
+}
+
+void FilmUpperQt::processCompleted()
+{
+	_processThread.join();
+	QProcess muxProcess(this);
+	QString program = "ffmpeg.exe";
+	QStringList arguments;
+	arguments << "-i" << "temp.avi" << "-i" << inTBox->text() << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << outTBox->text();
+
+	muxProcess.start(program, arguments);
+	muxProcess.waitForFinished(-1);
+	emit processEnded();
+}
+
+void FilmUpperQt::errorInProcess(std::exception * e)
+{
+	emit unexpectedError(e->what());
 }
 
 FilmUpperQt::FilmUpperQt(QWidget *parent)
@@ -333,6 +345,9 @@ FilmUpperQt::FilmUpperQt(QWidget *parent)
 	setupText();
 
 	_controler = new FilmUpperController();
+	connect(_controler, SIGNAL(secondProcessed), this, SLOT(procesedSecondsUpdate));
+	connect(_controler, SIGNAL(processEnded), this, SLOT(processCompleted));
+	connect(_controler, SIGNAL(exceptionInProcess), this, SLOT(errorInProcess));
 }
 
 FilmUpperQt::~FilmUpperQt() {
