@@ -41,32 +41,6 @@ void FilmUpperQt::openInputFile()
 	emit openedInFile(filename, fps);
 }
 
-void FilmUpperQt::openedInFile(QString fname, int fps)
-{
-	changeInValues(fname);
-	changeFpsValues(fps);
-}
-
-void FilmUpperQt::openedOutFile(QString fname)
-{
-	changeOutValues(fname);
-}
-
-void FilmUpperQt::unexpectedError(std::string msg)
-{
-	showError(msg);
-}
-
-void FilmUpperQt::processStarted()
-{
-	lockUI();
-}
-
-void FilmUpperQt::processEnded()
-{
-	unlockUI();
-}
-
 void FilmUpperQt::openOutputFile()
 {
 	QString filename = QFileDialog::getSaveFileName(this, tr("Zapisz plik wideo"), NULL, tr("Pliki wideo (*.mp4 *.avi *.webm)"));
@@ -203,7 +177,7 @@ void FilmUpperQt::process()
 		QProcess muxProcess(this);
 		QString program = "ffmpeg.exe";
 		QStringList arguments;
-		arguments << "-i" << outTBox->text() << "-i" << "temp.avi" << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << outTBox->text();
+		arguments << "-i" << "temp.avi" << "-i" << inTBox->text() << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << outTBox->text();
 
 		muxProcess.start(program, arguments);
 	}
@@ -353,6 +327,7 @@ FilmUpperQt::FilmUpperQt(QWidget *parent)
 	QObject::connect(processButton, &QPushButton::clicked, this, &FilmUpperQt::process);
 	QObject::connect(this, &FilmUpperQt::processStarted, this, &FilmUpperQt::lockUI);
 	QObject::connect(this, &FilmUpperQt::processEnded, this, &FilmUpperQt::unlockUI);
+	QObject::connect(this, &FilmUpperQt::unexpectedError, this, &FilmUpperQt::showError);
 
 
 	setupText();
