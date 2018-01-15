@@ -203,11 +203,13 @@ void FilmUpperQt::process()
 		_processInformator->fpsEnh = fpsEnh;
 		_processInformator->qual = quality;
 
+		if (_processThread.joinable())
+			_processThread.detach();
 		_processThread = std::thread(FilmUpperController::startProcess, inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality, _processInformator);
 		//_controler->startProcess(inTBox->text().toStdString(), "temp.avi", frameEnh, fpsEnh, quality, inf);
-		timer = new boost::asio::deadline_timer(ios, boost::posix_time::millisec(100));
-		timer->async_wait(boost::bind(&FilmUpperQt::processCallback, this));
-		ios.run();		
+		_timer = new QTimer(this);
+		connect(_timer, SIGNAL(timeout()), this, SLOT(processCallback()));
+		_timer->start(100);
 	}
 	catch (const std::exception& e)
 	{
@@ -223,11 +225,10 @@ void FilmUpperQt::processCallback()
 	if(!_processInformator->processCompleted)
 	{
 		progressBar->setValue(_processInformator->secondsProcesed);
-		timer->async_wait(boost::bind(&FilmUpperQt::processCallback, this));
 		return;
 	}
 	_processThread.join();
-	ios.stop();
+	_timer->stop();
 	if (_processInformator->error != nullptr)
 		throw _processInformator->error;
 
@@ -238,7 +239,7 @@ void FilmUpperQt::processCallback()
 
 	muxProcess.start(program, arguments);
 	muxProcess.waitForFinished(-1);
-	delete timer;
+	delete _timer;
 	delete _processInformator->frameEnh;
 	delete _processInformator->fpsEnh;
 	delete _processInformator->qual;
