@@ -6,6 +6,8 @@
 #include <QtCore/qobject.h>
 #include "FrameReader.h"
 #include "FrameWriter.h"
+#include <QtCore/QFileInfo>
+#include <QtCore/QUuid>
 
 class Worker: public QObject
 {
@@ -65,13 +67,35 @@ public slots:
 			delete frameEnhancerHeader;
 			delete fpsEnhancerHeader;
 			delete targetQuality;
-			delete fileSourcePath;
-			delete fileTargetPath;
 		}
 		catch (std::exception* e)
 		{
 			emit exceptionInProcess(e);
 		}
+		try
+		{
+			QString program = "ffmpeg.exe ";
+			QFileInfo outFInfo(tr(fileTargetPath->c_str()));
+			QString tempOut = outFInfo.path() + "/" + QUuid::createUuid().toString().replace("{", "").replace("}", "").replace("-", "") + "." + outFInfo.suffix();
+
+			QStringList arguments;
+			arguments << "-i" << tr(fileTargetPath->c_str()) << "-i" << tr(fileSourcePath->c_str()) << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << tempOut;
+			QString command = program + arguments.join(" ");
+			QByteArray ba = command.toLatin1();
+			const char *outCommand = ba.data();
+
+			system(outCommand);
+
+			QFile::remove(tr(fileTargetPath->c_str()));
+			QFile::copy(tempOut, tr(fileTargetPath->c_str()));
+			QFile::remove(tempOut);
+		}
+		catch (std::exception* e)
+		{
+			emit exceptionInProcess(e);
+		}
+		delete fileSourcePath;
+		delete fileTargetPath;
 		emit processEnded();
 }
 signals:

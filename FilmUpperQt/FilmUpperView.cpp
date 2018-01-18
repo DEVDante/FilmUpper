@@ -36,8 +36,14 @@ void FilmUpperView::openInputFile()
 {
 	QString filename = QFileDialog::getOpenFileName(this, tr("Otw\303\263rz plik wideo"), NULL, tr("Pliki wideo (*.mp4 *.avi *.webm)"));
 	int fps = 1;
-	if (filename != "")
-		fps = _controler->getFrameRate(filename.toStdString());
+	try {
+		if (filename != "")
+			fps = _controler->getFrameRate(filename.toStdString());
+	}
+	catch(std::exception e)
+	{
+		emit unexpectedError(e.what());
+	}
 	emit openedInFile(filename, fps);
 }
 
@@ -157,6 +163,8 @@ void FilmUpperView::process()
 		emit unexpectedError("Nazwa i ścieżka pliku wejściowego nie może byc taka sama jak pliku wyjściowego!");
 		return;
 	}
+	if (quality->FrameRate->num == _controler->getFrameRate(inTBox->text().toStdString()))
+		fpsEnh = new NOPFpsEnhancerHeader();
 
 	emit processStarted();
 	try
@@ -216,21 +224,7 @@ void FilmUpperView::processCompleted()
 	delete _processThread;
 	progressBar->setValue(0);
 
-	QString program = "ffmpeg.exe ";
-	QFileInfo outFInfo(outTBox->text());
-	QString tempOut = outFInfo.path() + "/" + QUuid::createUuid().toString().replace("{", "").replace("}", "").replace("-", "") + "." + outFInfo.suffix();
-
-	QStringList arguments;
-	arguments << "-i" << outTBox->text() << "-i" << inTBox->text() << "-c copy -map 0:v:0 -map 1:a:0 -shortest" << tempOut;
-	QString command = program + arguments.join(" ");
-	QByteArray ba = command.toLatin1();
-	const char *outCommand = ba.data();
-
-	system(outCommand);
-
-	QFile::remove(outTBox->text());
-	QFile::copy(tempOut, outTBox->text());
-	QFile::remove(tempOut);
+	
 
 	emit processEnded();
 }
@@ -287,9 +281,11 @@ FilmUpperView::FilmUpperView(QWidget *parent)
 	resGBox->setGeometry(QRect(389, 100, 181, 91));
 	widthSBox = new QSpinBox(resGBox);
 	widthSBox->setGeometry(QRect(10, 20, 71, 22));
+	widthSBox->setMinimum(1);
 	widthSBox->setMaximum(9999);
 	heightSBox = new QSpinBox(resGBox);
 	heightSBox->setGeometry(QRect(100, 20, 71, 22));
+	heightSBox->setMinimum(1);
 	heightSBox->setMaximum(9999);
 	multLabel = new QLabel(resGBox);
 	multLabel->setGeometry(QRect(88, 21, 16, 16));

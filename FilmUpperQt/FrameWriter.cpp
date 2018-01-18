@@ -44,7 +44,7 @@ FrameWriter::FrameWriter( std::string filename, std::string format_name, FilmQua
 	codecParam->width = info->Width;
 	codecParam->height = info->Height;
 	codecParam->format = codec->pix_fmts[0];
-	codecParam->bit_rate = 20000000;
+	codecParam->bit_rate = 50000000;
 	codecCTX = avcodec_alloc_context3(codec);
 	codecCTX->time_base.den = info->FrameRate->den;
 	codecCTX->time_base.num = info->FrameRate->num;

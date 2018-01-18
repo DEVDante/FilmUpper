@@ -38,6 +38,7 @@
 #include "InterpolationFrameEnhancerHeader.h"
 #include "MaskFrameEnhancerHeader.h"
 #include "NNFrameEnhancerHeader.h"
+#include "NOPFpsEnhancerHeader.h"
 
 class FilmUpperView : public QMainWindow
 {
